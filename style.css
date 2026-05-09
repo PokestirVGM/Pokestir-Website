@@ -47,13 +47,13 @@ body { -ms-overflow-style: none; scrollbar-width: none; }
   padding: 9px 10px; border: 1px solid transparent; border-radius: 12px;
 }
 .site-nav__links {
-  flex: 0 1 560px; margin-left: auto; min-width: 0;
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;
+  flex: 0 0 auto; margin-left: auto;
+  display: grid; grid-template-columns: repeat(4, auto); gap: 5px;
 }
 .site-nav__links a {
-  box-sizing: border-box; min-width: 0; color: var(--text); text-align: center;
-  text-decoration: none; font-weight: 700; font-size: 14px; line-height: 1;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  box-sizing: border-box; color: var(--text); text-align: center;
+  text-decoration: none; font-weight: 700; font-size: 15px; line-height: 1;
+  white-space: nowrap;
   padding: 9px 12px; border-radius: 12px; border: 1px solid transparent;
   transition: background-color .2s ease, border-color .2s ease, color .2s ease;
 }
