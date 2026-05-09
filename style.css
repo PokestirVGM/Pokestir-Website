@@ -23,8 +23,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-body::-webkit-scrollbar { display: none; }
-body { -ms-overflow-style: none; scrollbar-width: none; }
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 9px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.14); border-radius: 9999px; border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: rgba(16,177,255,.45); }
+html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); }
 
 /* ── Accessibility utilities ── */
 .skip-link { position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
@@ -70,9 +74,8 @@ body { -ms-overflow-style: none; scrollbar-width: none; }
 }
 
 /* ── Keyframe animations ── */
-@keyframes slidebar   { 0% { background-position: 0% 0; }   100% { background-position: 200% 0; } }
-@keyframes floaty     { 0% { transform: translateY(0px) rotate(0.5deg) scale(1.00); }  100% { transform: translateY(6px) rotate(-0.5deg) scale(1.01); } }
-@keyframes bleedFloat { 0% { transform: translateY(-2px) scale(1.00); } 100% { transform: translateY(2px) scale(1.06); } }
+@keyframes slidebar { 0% { background-position: 0% 0; }   100% { background-position: 200% 0; } }
+@keyframes floaty   { 0% { transform: translateY(0px) rotate(0.5deg) scale(1.00); }  100% { transform: translateY(6px) rotate(-0.5deg) scale(1.01); } }
 
 /* ── Footer ── */
 .site-footer {

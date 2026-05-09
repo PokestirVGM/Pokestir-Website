@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="description" content="Pokestir's composer profile, commission details, and VGM album player."/>
   <meta name="theme-color" content="#0b0f19"/>
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Pokestir" />
+  <meta property="og:title" content="Pokestir — Home" />
+  <meta property="og:description" content="Pokestir's composer profile, commission details, and VGM album player." />
+  <meta property="og:url" content="https://www.pokestir.com/" />
+  <meta property="og:image" content="https://yt3.ggpht.com/2uHcmF7V9ObFjjOwj6rTFV0E54up9zuLS4wXhhG0Jkl25W7XIL3SDykmYsUsaQFs4iNvDIBbbmU=s600-c-k-c0x00ffffff-no-rj-rp-mo" />
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:height" content="600" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@pokestir" />
+  <meta name="twitter:creator" content="@pokestir" />
+  <link rel="canonical" href="https://www.pokestir.com/" />
   <title>Pokestir &mdash; Home</title>
 
   <!-- Fonts -->
@@ -105,30 +117,6 @@
       clip-path: inset(0 round calc(var(--radius) + 4px));
     }
 
-    .about .glow{
-      /* container only: very subtle, no direct background */
-      pointer-events:none; position:absolute; inset:0; z-index:0; opacity:1;
-      will-change: transform, opacity; filter: none; mix-blend-mode: screen;
-    }
-    /* Subtle liquid layers that "bleed" into the panel near the cursor */
-    .about .glow::before,
-    .about .glow::after{
-      content:""; position:absolute; inset:-6%; pointer-events:none; will-change: transform, opacity;
-      transform: scale(0.98); opacity:0; filter: blur(22px) saturate(115%);
-      transition: opacity 1.9s ease-out .25s, transform 3.6s ease-out;
-      mix-blend-mode: screen;
-    }
-    /* Blue layer */
-    .about .glow::before{
-      background: radial-gradient(340px 280px at calc(var(--x,-999)*1px) calc(var(--y,-999)*1px), rgba(16,177,255,.12) 0%, rgba(16,177,255,.06) 34%, rgba(16,177,255,0) 70%);
-    }
-    /* Red layer, slightly offset to feel fluid */
-    .about .glow::after{
-      background: radial-gradient(420px 340px at calc((var(--x,-999) + 26)*1px) calc((var(--y,-999) + 36)*1px), rgba(254,14,14,.10) 0%, rgba(254,14,14,.05) 30%, rgba(254,14,14,0) 72%);
-    }
-    .about:hover .glow::before{ opacity:.16; transform: scale(1.07); animation: bleedFloat 16s ease-in-out infinite alternate; }
-    .about:hover .glow::after{  opacity:.12; transform: scale(1.10); animation: bleedFloat 18s ease-in-out infinite alternate; }
-
     .agrid{ position:relative; z-index:1; display:grid; grid-template-columns: 1.25fr .95fr; gap:28px; padding:22px }
     @media (max-width:900px){ .agrid{ grid-template-columns:1fr; padding:16px } }
 
@@ -220,8 +208,6 @@
     .footer{ text-align:center; color:var(--muted); font-size:12px; margin-top:6px }
     .embed-note{ margin-bottom:20px }
 
-    /* Disable About hover glow entirely */
-    .about .glow, .about .glow::before, .about .glow::after{ display:none !important; }
     /* Compact contact list + link color */
     .comm .note a, .comm .note a:visited{ color:#fff; text-decoration:underline; }
     .contact-lines{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:4px }
@@ -258,8 +244,6 @@
     </header>
 
     <section class="card about" aria-label="About / Commissions">
-      <div class="glow" aria-hidden="true"></div>
-
       <div class="agrid">
         <!-- Left column -->
         <div>
