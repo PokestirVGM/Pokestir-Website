@@ -18,6 +18,36 @@ const TRACKS = [
   {
     title: "Power Surge",
     src: "audio/Power%20Surge.mp3",
-    tags: ["Original Composition"]
+    tags: ["Original Composition", "VGM"]
+  },
+  {
+    title: "Unithor (Indie Cross)",
+    src: "audio/Indie%20Cross%20-%20Unithor.mp3",
+    tags: ["Original Composition", "Score"]
+  },
+  {
+    title: "Is It Worth It (Indie Cross)",
+    src: "audio/Indie%20Cross%20-%20Is%20It%20Worth%20It.mp3",
+    tags: ["Original Composition", "Score"]
+  },
+  {
+    title: "Cult of Despair (Indie Cross)",
+    src: "audio/Indie%20Cross%20-%20Cult%20of%20Despair.mp3",
+    tags: ["Original Composition", "Score"]
+  },
+  {
+    title: "The Ancestral Divide",
+    src: "audio/The%20Ancestral%20Divide.mp3",
+    tags: ["Original Composition", "VGM"]
+  },
+  {
+    title: "A Mystic Waltz",
+    src: "audio/A%20Mystic%20Waltz.mp3",
+    tags: ["Original Composition", "VGM"]
+  },
+  {
+    title: "Canubelle Park (Waga Tamashii)",
+    src: "audio/Canubelle%20Park.mp3",
+    tags: ["Original Composition", "VGM"]
   },
 ];

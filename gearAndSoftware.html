@@ -50,9 +50,10 @@
 
     /* Tag bars */
     .pillbar{ display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 14px }
-    .pill{ padding:8px 12px; border-radius:9999px; border:1px solid rgba(255,255,255,.18); background: linear-gradient(180deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.02) 100%), var(--panel); color:var(--text); cursor:pointer; font-size:14px }
-    .pill[data-active="true"]{ outline:2px solid var(--ring) }
-    .pill:focus-visible{ outline:3px solid var(--ring); outline-offset:2px }
+    .pill{ padding:5px 13px; border-radius:999px; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.05); color:var(--muted); cursor:pointer; font-size:13px; font-weight:600; transition: background .15s ease, color .15s ease, border-color .15s ease; }
+    .pill:hover{ background:rgba(255,255,255,.10); color:var(--text); }
+    .pill[data-active="true"]{ background:var(--ring); color:#001827; border-color:rgba(255,255,255,.35); outline:none; }
+    .pill:focus-visible{ outline:2px solid var(--ring); outline-offset:2px; }
 
     /* Cards grid */
     .grid{ display:grid; grid-template-columns: 1fr 1fr; gap:14px }
