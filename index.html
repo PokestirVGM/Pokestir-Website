@@ -11,24 +11,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 
   <style>
-    :root{
-      --bg:#0b0f19;             /* page background */
-      --panel:#0f172a;          /* card base */
-      --text:#e5e7eb;           /* primary text */
-      --muted:#94a3b8;          /* secondary text */
-      --ring:#10B1FF;           /* accent / focus */
-      --radius:22px;
-      --shadow:0 12px 40px rgba(2,6,23,.35);
-      --font: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
-    }
-
-    html,body{height:100%}
-    body{
-      margin:0; color:var(--text); background:var(--bg); font-family:var(--font);
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      /* Subtle vignette + texture */
+    body {
       background-image:
         radial-gradient(1200px 800px at 10% -10%, rgba(16,177,255,.08), transparent 60%),
         radial-gradient(1200px 900px at 110% 10%, rgba(255,131,39,.06), transparent 60%),
@@ -96,7 +82,7 @@
     .album.selected{ outline:2px solid var(--ring); outline-offset:2px }
 
     /* =========================
-       ABOUT / COMMISSIONS (your card with small tweaks)
+       ABOUT / COMMISSIONS
        ========================= */
     .about{
       /* keep rounded corners and clip children/pseudos on all devices */
@@ -118,7 +104,6 @@
       -webkit-clip-path: inset(0 round calc(var(--radius) + 4px));
       clip-path: inset(0 round calc(var(--radius) + 4px));
     }
-    @keyframes slidebar { 0%{background-position:0% 0} 100%{background-position:200% 0} }
 
     .about .glow{
       /* container only: very subtle, no direct background */
@@ -210,7 +195,6 @@
         radial-gradient(240px 220px at 60% 90%, rgba(255,131,39,.30), rgba(244,63,94,0) 70%);
       animation: floaty 12s ease-in-out infinite alternate;
     }
-    @keyframes floaty{ 0% { transform: translateY(0px) rotate(0.5deg) scale(1.00) } 100%{ transform: translateY(6px) rotate(-0.5deg) scale(1.01) } }
     .frame{
       position:relative; border-radius:9999px; overflow:hidden; box-shadow:var(--shadow);
       background: linear-gradient(180deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.05) 100%), #111827;
@@ -235,9 +219,12 @@
     /* Footnote */
     .footer{ text-align:center; color:var(--muted); font-size:12px; margin-top:6px }
     .embed-note{ margin-bottom:20px }
-    .site-footer{ text-align:center; color:var(--muted); font-size:12px; padding:18px 0 28px; border-top:1px solid rgba(255,255,255,.06); margin-top:24px }
-    .skip-link{ position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden }
-    .skip-link:focus{ left:14px; top:14px; width:auto; height:auto; padding:10px 12px; z-index:100; border-radius:12px; background:var(--panel); color:var(--text); outline:3px solid var(--ring) }
+
+    /* Disable About hover glow entirely */
+    .about .glow, .about .glow::before, .about .glow::after{ display:none !important; }
+    /* Compact contact list + link color */
+    .comm .note a, .comm .note a:visited{ color:#fff; text-decoration:underline; }
+    .contact-lines{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:4px }
 
     /* A11y + responsive polish */
     @media (max-width: 640px){
@@ -247,45 +234,7 @@
       .agrid{ gap:16px }
       .portrait{ max-width:min(78vw, 360px); margin-inline:auto }
     }
-    @media (prefers-reduced-motion: reduce){
-      .album, .album::before, .about .glow, .ring { transition:none; animation:none }
-      .about:hover .glow{ opacity:0 }
-    }
-    /* Hide inner scrollbars (keeps parent Sites scroll clean) */
-    body::-webkit-scrollbar { display:none }
-    body{ -ms-overflow-style:none; scrollbar-width:none }
-  @keyframes bleedFloat{ 0%{ transform: translateY(-2px) scale(1.00) } 100%{ transform: translateY(2px) scale(1.06) } }
-  /* Disable About hover glow entirely */
-  .about .glow, .about .glow::before, .about .glow::after{ display:none !important; }
-  /* Compact contact list + link color */
-  .comm .note a, .comm .note a:visited{ color:#fff; text-decoration:underline; }
-  .contact-lines{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:4px }
-  .site-nav{
-    width:100%; box-sizing:border-box; border-bottom:1px solid rgba(255,255,255,.14);
-    background:linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.03) 100%), rgba(15,23,42,.84);
-    box-shadow:0 10px 30px rgba(2,6,23,.22);
-  }
-  .site-nav__inner{
-    max-width:1120px; margin:0 auto; padding:10px 18px;
-    display:flex; align-items:center; justify-content:space-between; gap:14px; box-sizing:border-box;
-  }
-  .site-nav__brand{ flex:0 0 auto; color:#fff; font-family:"Lato", var(--font); font-weight:800; letter-spacing:.2px; line-height:1; text-decoration:none; padding:9px 10px; border:1px solid transparent; border-radius:12px; }
-  .site-nav__links{ flex:0 1 560px; margin-left:auto; min-width:0; display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:8px; }
-  .site-nav__links a{
-    box-sizing:border-box; min-width:0; color:var(--text); text-align:center; text-decoration:none; font-weight:700; font-size:14px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding:9px 12px; border-radius:12px;
-    border:1px solid transparent; transition:background-color .2s ease, border-color .2s ease, color .2s ease;
-  }
-  .site-nav__brand:hover, .site-nav__links a:hover{ border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.06); }
-  .site-nav__brand:focus-visible,
-  .site-nav__links a:focus-visible{ outline:3px solid var(--ring); outline-offset:2px; }
-  .site-nav__links a[aria-current="page"]{ color:#001827; background:var(--ring); border-color:rgba(255,255,255,.35); }
-  @media (max-width:640px){
-    .site-nav__inner{ padding:10px 14px; align-items:stretch; flex-direction:column; gap:8px; }
-    .site-nav__brand{ width:100%; text-align:center; }
-    .site-nav__links{ width:100%; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); }
-    .site-nav__links a{ text-align:center; }
-  }
-</style>
+  </style>
 </head>
 <body>
   <!-- nav-v2-static -->
@@ -293,7 +242,7 @@
     <div class="site-nav__inner">
       <a class="site-nav__brand" href="index.html">Pokestir</a>
       <div class="site-nav__links">
-        <a href="index.html" aria-current="page">Home</a>
+        <a href="index.html">Home</a>
         <a href="gearAndSoftware.html">Gear</a>
         <a href="usage_terms_claims.html">Usage/Credit</a>
         <a href="links.html">Links</a>
@@ -314,7 +263,7 @@
       <div class="agrid">
         <!-- Left column -->
         <div>
-          <h1 class="heading">Nicholas “Pokestir”</h1>
+          <h1 class="heading">Nicholas "Pokestir"</h1>
 
           <div class="tabs" role="tablist" aria-label="About and Commissions">
             <button id="tabAbout" class="btn active" role="tab" aria-selected="true" aria-controls="bioView" type="button">About</button>
@@ -371,7 +320,7 @@
 
         <!-- Commissions view: Terms -->
         <aside id="rightTerms" class="termswrap" hidden aria-label="Terms & Conditions">
-          <div class="terms"> 
+          <div class="terms">
             <h3>TERMS &amp; CONDITIONS — By commissioning music, you agree to these terms.</h3>
             <ul>
               <li>Payments through PayPal</li>
@@ -514,5 +463,6 @@
     setTab('about');
 
 </script>
+  <script src="nav.js" defer></script>
 </body>
 </html>

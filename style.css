@@ -1,0 +1,90 @@
+/* Shared styles — Pokestir Website */
+
+/* ── Custom properties ── */
+:root {
+  --bg: #0b0f19;
+  --panel: #0f172a;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --ring: #10B1FF;
+  --radius: 22px;
+  --shadow: 0 12px 40px rgba(2,6,23,.35);
+  --font: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* ── Global reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  color: var(--text);
+  background: var(--bg);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body::-webkit-scrollbar { display: none; }
+body { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Accessibility utilities ── */
+.skip-link { position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+.skip-link:focus { left: 14px; top: 14px; width: auto; height: auto; padding: 10px 12px; z-index: 100; border-radius: 12px; background: var(--panel); color: var(--text); outline: 3px solid var(--ring); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* ── Navigation ── */
+.site-nav {
+  width: 100%; box-sizing: border-box; border-bottom: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.03) 100%), rgba(15,23,42,.84);
+  box-shadow: 0 10px 30px rgba(2,6,23,.22);
+}
+.site-nav__inner {
+  max-width: 1120px; margin: 0 auto; padding: 10px 18px;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px; box-sizing: border-box;
+}
+.site-nav__brand {
+  flex: 0 0 auto; color: #fff; font-family: "Lato", var(--font); font-weight: 800;
+  letter-spacing: .2px; line-height: 1; text-decoration: none;
+  padding: 9px 10px; border: 1px solid transparent; border-radius: 12px;
+}
+.site-nav__links {
+  flex: 0 1 560px; margin-left: auto; min-width: 0;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;
+}
+.site-nav__links a {
+  box-sizing: border-box; min-width: 0; color: var(--text); text-align: center;
+  text-decoration: none; font-weight: 700; font-size: 14px; line-height: 1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  padding: 9px 12px; border-radius: 12px; border: 1px solid transparent;
+  transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+.site-nav__brand:hover,
+.site-nav__links a:hover { border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.06); }
+.site-nav__brand:focus-visible,
+.site-nav__links a:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+.site-nav__links a[aria-current="page"] { color: #001827; background: var(--ring); border-color: rgba(255,255,255,.35); }
+@media (max-width: 640px) {
+  .site-nav__inner { padding: 10px 14px; align-items: stretch; flex-direction: column; gap: 8px; }
+  .site-nav__brand { width: 100%; text-align: center; }
+  .site-nav__links { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .site-nav__links a { text-align: center; }
+}
+
+/* ── Keyframe animations ── */
+@keyframes slidebar   { 0% { background-position: 0% 0; }   100% { background-position: 200% 0; } }
+@keyframes floaty     { 0% { transform: translateY(0px) rotate(0.5deg) scale(1.00); }  100% { transform: translateY(6px) rotate(-0.5deg) scale(1.01); } }
+@keyframes bleedFloat { 0% { transform: translateY(-2px) scale(1.00); } 100% { transform: translateY(2px) scale(1.06); } }
+
+/* ── Footer ── */
+.site-footer {
+  text-align: center; color: var(--muted); font-size: 12px;
+  padding: 18px 0 28px; border-top: 1px solid rgba(255,255,255,.06); margin-top: 24px;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -9,22 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
-    :root{
-      --bg: #0b0f19;
-      --panel: #0f172a;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --ring: #10B1FF;      /* main accent / focus */
-      --radius: 22px;
-      --shadow: 0 12px 40px rgba(2,6,23,.35);
-      --font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
-    }
-
-    * { box-sizing: border-box }
-    html, body { height: 100% }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); }
-
     .wrap{ max-width:1120px; margin:0 auto; padding:26px 18px 88px }
     @media (max-width:640px){ .wrap{ padding:18px 14px 64px } }
 
@@ -33,7 +19,6 @@
 
     /* Controls bar */
     .controls{ position:sticky; top:0; z-index:50; backdrop-filter: blur(8px) saturate(130%); background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 100%), rgba(15,23,42,.55); border-bottom:1px solid rgba(255,255,255,.12); }
-    /* Reduced a column since category dropdown is gone */
     .controls-inner{ max-width:1120px; margin:0 auto; padding:12px 18px; display:grid; grid-template-columns: 1.4fr .8fr .8fr auto; gap:10px }
     @media (max-width:900px){ .controls-inner{ grid-template-columns: 1fr; gap:8px } }
 
@@ -73,9 +58,6 @@
 
     /* Animated gradient accent bar */
     .card::before{ content:""; position:absolute; left:0; right:0; top:0; height:4px; background: linear-gradient(90deg,#0A6E9E,#10B1FF,#FF8327,#FE0E0E,#10B1FF,#0A6E9E); background-size:200% 100%; animation: slidebar 9s linear infinite }
-    @keyframes slidebar{ 0%{ background-position:0% 0 } 100%{ background-position:200% 0 } }
-
-    /* Pointer glow removed */
 
     .card-inner{ display:grid; grid-template-columns: 1fr auto; gap:8px; padding:16px 16px 14px }
     .title{ font-weight:700; letter-spacing:.2px }
@@ -88,50 +70,18 @@
     .toolbar{ display:flex; gap:8px; align-items:center; justify-content:flex-end; padding:8px 16px 14px }
 
     .footer-note{ color:var(--muted); font-size:12px; margin-top:14px }
-    .site-footer{ color:var(--muted); font-size:12px; text-align:center; margin-top:28px; padding-top:16px; border-top:1px solid rgba(255,255,255,.12) }
+    .site-footer{ margin-top:28px; padding-top:16px; padding-bottom:0; border-top-color:rgba(255,255,255,.12); }
     .control-actions{ display:flex; gap:8px; justify-content:flex-end }
     .filter-label{ margin:8px 2px 2px }
 
     .date-added{ margin-left:auto; font-size:12px; color:var(--muted); white-space:nowrap; }
 
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      .btn, .card{ transition:none }
-      .card::before{ animation:none }
-      .card .glow{ display:none }
-    }
-select{ background-position:right 18px center; padding-right:44px }
-/* Heading bar with right-aligned Sort */
-.headingbar{ display:flex; align-items:center; justify-content:space-between; gap:12px }
-.sort-top select{ min-width:210px }
-.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0 }
-@media (max-width:640px){ .headingbar{ flex-direction:column; align-items:stretch; gap:10px } .sort-top select{ width:100% } }
-.site-nav{
-  width:100%; box-sizing:border-box; border-bottom:1px solid rgba(255,255,255,.14);
-  background:linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.03) 100%), rgba(15,23,42,.84);
-  box-shadow:0 10px 30px rgba(2,6,23,.22);
-}
-.site-nav__inner{
-  max-width:1120px; margin:0 auto; padding:10px 18px;
-  display:flex; align-items:center; justify-content:space-between; gap:14px; box-sizing:border-box;
-}
-.site-nav__brand{ flex:0 0 auto; color:#fff; font-family:"Lato", var(--font); font-weight:800; letter-spacing:.2px; line-height:1; text-decoration:none; padding:9px 10px; border:1px solid transparent; border-radius:12px; }
-.site-nav__links{ flex:0 1 560px; margin-left:auto; min-width:0; display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:8px; }
-.site-nav__links a{
-  box-sizing:border-box; min-width:0; color:var(--text); text-align:center; text-decoration:none; font-weight:700; font-size:14px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding:9px 12px; border-radius:12px;
-  border:1px solid transparent; transition:background-color .2s ease, border-color .2s ease, color .2s ease;
-}
-.site-nav__brand:hover, .site-nav__links a:hover{ border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.06); }
-.site-nav__brand:focus-visible,
-.site-nav__links a:focus-visible{ outline:3px solid var(--ring); outline-offset:2px; }
-.site-nav__links a[aria-current="page"]{ color:#001827; background:var(--ring); border-color:rgba(255,255,255,.35); }
-@media (max-width:640px){
-  .site-nav__inner{ padding:10px 14px; align-items:stretch; flex-direction:column; gap:8px; }
-  .site-nav__brand{ width:100%; text-align:center; }
-  .site-nav__links{ width:100%; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); }
-  .site-nav__links a{ text-align:center; }
-}
-</style>
+    select{ background-position:right 18px center; padding-right:44px }
+    /* Heading bar with right-aligned Sort */
+    .headingbar{ display:flex; align-items:center; justify-content:space-between; gap:12px }
+    .sort-top select{ min-width:210px }
+    @media (max-width:640px){ .headingbar{ flex-direction:column; align-items:stretch; gap:10px } .sort-top select{ width:100% } }
+  </style>
 </head>
 <body>
   <!-- nav-v2-static -->
@@ -140,7 +90,7 @@ select{ background-position:right 18px center; padding-right:44px }
       <a class="site-nav__brand" href="index.html">Pokestir</a>
       <div class="site-nav__links">
         <a href="index.html">Home</a>
-        <a href="gearAndSoftware.html" aria-current="page">Gear</a>
+        <a href="gearAndSoftware.html">Gear</a>
         <a href="usage_terms_claims.html">Usage/Credit</a>
         <a href="links.html">Links</a>
       </div>
@@ -168,7 +118,7 @@ select{ background-position:right 18px center; padding-right:44px }
   <main class="wrap" role="main">
     <div class="headingbar">
       <h1 class="heading">Gear, Libraries &amp; Tools <span class="muted" id="count"></span></h1>
-      
+
     </div>
 
     <!-- NEW: Category pills (default = All categories when none selected) -->
@@ -331,12 +281,8 @@ select{ background-position:right 18px center; padding-right:44px }
         const pair = splitVendorAndName(product);
 
         const subtags = subsRaw ? subsRaw.split(/[;|,]/).map(s => s.trim()).filter(Boolean) : [];
-        const enrichedSubtags = subtags.slice();
-        if(product.toLowerCase().includes("musio") && !enrichedSubtags.includes("Date: 5/4/2023")){
-          enrichedSubtags.push("Date: 5/4/2023");
-        }
 
-        items.push(buildDerived({ product, vendor: pair.vendor, name: pair.name, tag, description, subtags: enrichedSubtags, date }));
+        items.push(buildDerived({ product, vendor: pair.vendor, name: pair.name, tag, description, subtags, date }));
       }
       return items;
     }
@@ -349,7 +295,7 @@ select{ background-position:right 18px center; padding-right:44px }
           if(text.trim()) return text;
         }
       } catch (err) {
-        console.warn("Could not fetch remote CSV, trying local file.", err);
+        // Remote CSV unavailable; local fallback will be used.
       }
 
       return document.getElementById("db-csv").textContent.trim();
@@ -524,6 +470,11 @@ select{ background-position:right 18px center; padding-right:44px }
     async function init(){
       const csvText = await loadCSVText();
       DB = parseCSV(csvText);
+      if(DB.length === 0){
+        grid.innerHTML = '<p style="color:var(--muted);padding:16px 0;">Unable to load gear data. Please check your connection and refresh the page.</p>';
+        countEl.textContent = '';
+        return;
+      }
       buildVendorOptions();
       buildCategoryPills();
       buildSubtags();
@@ -532,5 +483,6 @@ select{ background-position:right 18px center; padding-right:44px }
 
     init();
   </script>
+  <script src="nav.js" defer></script>
 </body>
 </html>

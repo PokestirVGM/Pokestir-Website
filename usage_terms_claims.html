@@ -10,25 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
-    :root{
-      --bg: #0b0f19;
-      --panel: #0f172a;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --ring: #10B1FF;      /* main accent / focus */
-      --radius: 22px;
-      --shadow: 0 12px 40px rgba(2,6,23,.35);
-      --font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
-    }
-
-    * { box-sizing: border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0; background: var(--bg); color: var(--text); font-family: var(--font);
-      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-    }
-
     .wrap{ max-width:1120px; margin:0 auto; padding:26px 20px 88px; }
 
     header.hero{ position:relative; margin:12px 0 24px; }
@@ -69,7 +52,6 @@
       background: linear-gradient(90deg, #0A6E9E, #10B1FF, #FF8327, #FE0E0E, #10B1FF, #0A6E9E);
       background-size:200% 100%; animation: slidebar 9s linear infinite;
     }
-    @keyframes slidebar { 0% {background-position:0% 0} 100% {background-position:200% 0} }
 
     .card .inner{ padding:18px 18px 20px; }
     .section-title{ font-family:'Lato', var(--font); font-weight:700; font-size:22px; margin:6px 0 10px; }
@@ -123,55 +105,26 @@
     .spacer{ height:10px; }
     .mono{ font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
 
-    /* Underlined link utility  */
-.link-underline{
-  color: var(--text);                  /* forces white */
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-thickness: 1.5px;
-}
-.link-underline:visited{ color: var(--text); }  /* stay white after visit */
-.link-underline:hover{ opacity: .9; }           /* subtle hover */
-.link-underline:focus-visible{
-  outline: 3px solid var(--ring);
-  outline-offset: 2px;
-  border-radius: 3px;
-}
+    /* Underlined link utility */
+    .link-underline{
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1.5px;
+    }
+    .link-underline:visited{ color: var(--text); }
+    .link-underline:hover{ opacity: .9; }
+    .link-underline:focus-visible{
+      outline: 3px solid var(--ring);
+      outline-offset: 2px;
+      border-radius: 3px;
+    }
 
     /* Footer */
-    .site-footer{ margin-top:34px; padding-top:16px; color:var(--muted); font-size:12px; text-align:center; border-top:1px solid rgba(255,255,255,.16); }
+    .site-footer{ margin-top:34px; padding-top:16px; padding-bottom:0; border-top-color:rgba(255,255,255,.16); }
 
     @media (max-width: 900px){ .cols{ grid-template-columns:1fr; } }
     @media (max-width: 640px){ .wrap{ padding:18px 14px 64px; } }
-
-    @media (prefers-reduced-motion: reduce){
-      *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
-    }
-    .site-nav{
-      width:100%; box-sizing:border-box; border-bottom:1px solid rgba(255,255,255,.14);
-      background:linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.03) 100%), rgba(15,23,42,.84);
-      box-shadow:0 10px 30px rgba(2,6,23,.22);
-    }
-    .site-nav__inner{
-      max-width:1120px; margin:0 auto; padding:10px 18px;
-      display:flex; align-items:center; justify-content:space-between; gap:14px; box-sizing:border-box;
-    }
-    .site-nav__brand{ flex:0 0 auto; color:#fff; font-family:"Lato", var(--font); font-weight:800; letter-spacing:.2px; line-height:1; text-decoration:none; padding:9px 10px; border:1px solid transparent; border-radius:12px; }
-    .site-nav__links{ flex:0 1 560px; margin-left:auto; min-width:0; display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:8px; }
-    .site-nav__links a{
-      box-sizing:border-box; min-width:0; color:var(--text); text-align:center; text-decoration:none; font-weight:700; font-size:14px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding:9px 12px; border-radius:12px;
-      border:1px solid transparent; transition:background-color .2s ease, border-color .2s ease, color .2s ease;
-    }
-    .site-nav__brand:hover, .site-nav__links a:hover{ border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.06); }
-    .site-nav__brand:focus-visible,
-    .site-nav__links a:focus-visible{ outline:3px solid var(--ring); outline-offset:2px; }
-    .site-nav__links a[aria-current="page"]{ color:#001827; background:var(--ring); border-color:rgba(255,255,255,.35); }
-    @media (max-width:640px){
-      .site-nav__inner{ padding:10px 14px; align-items:stretch; flex-direction:column; gap:8px; }
-      .site-nav__brand{ width:100%; text-align:center; }
-      .site-nav__links{ width:100%; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); }
-      .site-nav__links a{ text-align:center; }
-    }
   </style>
 </head>
 <body>
@@ -182,7 +135,7 @@
       <div class="site-nav__links">
         <a href="index.html">Home</a>
         <a href="gearAndSoftware.html">Gear</a>
-        <a href="usage_terms_claims.html" aria-current="page">Usage/Credit</a>
+        <a href="usage_terms_claims.html">Usage/Credit</a>
         <a href="links.html">Links</a>
       </div>
     </div>
@@ -218,7 +171,7 @@
           <ul class="list">
             <li>Credit must be <strong>visible</strong> (on-screen) or in the video description.</li>
             <li><strong>No reuploads</strong> of my music.</li>
-            <li>Don’t use the music in a broader <strong>project</strong> (games, apps, albums, releases) without my permission.</li>
+            <li>Don't use the music in a broader <strong>project</strong> (games, apps, albums, releases) without my permission.</li>
             <li>Covers/arrangements are licensed via mechanical licenses. YouTube may auto-flag due to melody matching.</li>
           </ul>
         </div>
@@ -228,7 +181,7 @@
         <div class="inner">
           <h2 id="covers" class="section-title">Incorrect Content ID claims</h2>
           <p class="muted">I legally license my covers through my label. Claims you see like <span class="mono">Materia Music Publishing</span> or <span class="mono">FUGA</span> are automated Content ID matches and NOT manual claims.</p>
-          <p class="muted">Even if you didn’t use my recording, YouTube can match shared game melodies. That’s how the system works right now unfortunately. Please dispute it!</p>
+          <p class="muted">Even if you didn't use my recording, YouTube can match shared game melodies. That's how the system works right now unfortunately. Please dispute it!</p>
           <!-- New line with underlined hyperlink -->
           <p class="muted">Another cover artist made a fantastic video explaining this in more detail — check it out <a href="https://youtu.be/gTk8PeCI-wc?si=sBElKXIzH9dgSRRH" class="link-underline" target="_blank" rel="noopener">here</a>.</p>
           <div class="spacer"></div>
@@ -238,7 +191,7 @@
             <div class="grid-2">
               <div>
                 <h3 class="section-title faq-title">Is a claim a strike?</h3>
-                <p class="muted">No—Content ID claims affect monetization, not your channel status. They’re automated.</p>
+                <p class="muted">No—Content ID claims affect monetization, not your channel status. They're automated.</p>
               </div>
               <div>
                 <h3 class="section-title faq-title">Why did it match my video?</h3>
@@ -254,7 +207,7 @@
         <div class="inner">
           <h2 id="claims" class="section-title">Steps if you received a claim:</h2>
           <ul class="list">
-            <li><strong>Check the claim text.</strong> Does it cite <em>Materia Music Publishing</em>, <em>FUGA</em>, or one of my cover tracks? That’s my distributor handling licensed covers.</li>
+            <li><strong>Check the claim text.</strong> Does it cite <em>Materia Music Publishing</em>, <em>FUGA</em>, or one of my cover tracks? That's my distributor handling licensed covers.</li>
             <li><strong>Dispute the claim</strong> in YouTube Studio. Use this statement:</li>
           </ul>
           <div class="codebox" id="disputeText">
@@ -262,15 +215,15 @@
           </div>
           <ul class="list">
             <li><strong>Wait 5–7 days.</strong> Most claims lift automatically. Monetization resumes and held revenue returns.</li>
-            <li><strong>Optional:</strong> Use YouTube Studio’s tools to remove matched audio if needed.</li>
+            <li><strong>Optional:</strong> Use YouTube Studio's tools to remove matched audio if needed.</li>
           </ul>
 
           <details>
             <summary>Still stuck after a week?</summary>
             <div class="spacer"></div>
-            <p class="muted">If it’s a Materia Collective release/claim, contact them here:</p>
+            <p class="muted">If it's a Materia Collective release/claim, contact them here:</p>
             <p><a class="btn" href="https://materiamusicpub.com/contact/" target="_blank" rel="noopener">Materia Music Publishing — Contact</a></p>
-            <p class="small muted">Note: I can’t remove third-party claims that aren’t mine.</p>
+            <p class="small muted">Note: I can't remove third-party claims that aren't mine.</p>
           </details>
         </div>
       </article>
@@ -278,5 +231,6 @@
 
     <footer class="site-footer" role="contentinfo">Copyright &copy; 2026 Pokestir. All rights reserved.</footer>
   </main>
+  <script src="nav.js" defer></script>
 </body>
 </html>
