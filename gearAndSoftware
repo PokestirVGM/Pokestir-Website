@@ -1,0 +1,499 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A searchable catalog of Pokestir's music gear, sample libraries, synths, and tools." />
+  <meta name="theme-color" content="#0b0f19" />
+  <title>Pokestir &mdash; Gear &amp; Libraries</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b0f19;
+      --panel: #0f172a;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --ring: #10B1FF;      /* main accent / focus */
+      --radius: 22px;
+      --shadow: 0 12px 40px rgba(2,6,23,.35);
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+    }
+
+    * { box-sizing: border-box }
+    html, body { height: 100% }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); }
+
+    .wrap{ max-width:1120px; margin:0 auto; padding:26px 18px 88px }
+    @media (max-width:640px){ .wrap{ padding:18px 14px 64px } }
+
+    .heading{ font-family: "Lato", var(--font); font-weight:800; font-size:28px; letter-spacing:.2px; display:flex; align-items:center; gap:10px; margin:0 0 26px }
+    .muted{ color:var(--muted) }
+
+    /* Controls bar */
+    .controls{ position:sticky; top:0; z-index:50; backdrop-filter: blur(8px) saturate(130%); background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 100%), rgba(15,23,42,.55); border-bottom:1px solid rgba(255,255,255,.12); }
+    /* Reduced a column since category dropdown is gone */
+    .controls-inner{ max-width:1120px; margin:0 auto; padding:12px 18px; display:grid; grid-template-columns: 1.4fr .8fr .8fr auto; gap:10px }
+    @media (max-width:900px){ .controls-inner{ grid-template-columns: 1fr; gap:8px } }
+
+    .search{ position:relative }
+    .search input{ width:100%; padding:12px 14px 12px 40px; border-radius:14px; background: linear-gradient(180deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.03) 100%), var(--panel); color:var(--text); border:1px solid rgba(255,255,255,.16); outline:none }
+    .search input::placeholder{ color:var(--muted) }
+    .search svg{ position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:.8 }
+
+    select, .btn{ padding:11px 16px; border-radius:14px; border:1px solid rgba(255,255,255,.22); background: linear-gradient(180deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.02) 100%), var(--panel); color:var(--text) }
+    .btn{ cursor:pointer; transition: transform .08s ease, filter .2s ease }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05) }
+    .btn:active{ outline:2px solid var(--ring); background:linear-gradient(180deg, rgba(16,177,255,.25), rgba(16,177,255,.1)), var(--panel) }
+    .btn[aria-pressed="true"]{ outline:2px solid var(--ring) }
+    .btn-clear{ background: transparent; border-color: rgba(255,255,255,.14); color: var(--muted) }
+
+    .section-title{ font-family:"Lato"; font-weight:800; font-size:28px; margin:22px 0 14px }
+
+    /* Tag bars */
+    .pillbar{ display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 14px }
+    .pill{ padding:8px 12px; border-radius:9999px; border:1px solid rgba(255,255,255,.18); background: linear-gradient(180deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.02) 100%), var(--panel); color:var(--text); cursor:pointer; font-size:14px }
+    .pill[data-active="true"]{ outline:2px solid var(--ring) }
+    .pill:focus-visible{ outline:3px solid var(--ring); outline-offset:2px }
+
+    /* Cards grid */
+    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap:14px }
+    @media (max-width:900px){ .grid{ grid-template-columns: 1fr } }
+
+    .card{ position:relative; overflow:hidden; border-radius: calc(var(--radius) + 4px); background:
+      linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.04) 100%),
+      linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 120%),
+      var(--panel);
+      border:1px solid rgba(255,255,255,.16); box-shadow: var(--shadow);
+    }
+    @supports (backdrop-filter: blur(10px)){
+      .card{ backdrop-filter: blur(10px) saturate(130%) }
+    }
+
+    /* Animated gradient accent bar */
+    .card::before{ content:""; position:absolute; left:0; right:0; top:0; height:4px; background: linear-gradient(90deg,#0A6E9E,#10B1FF,#FF8327,#FE0E0E,#10B1FF,#0A6E9E); background-size:200% 100%; animation: slidebar 9s linear infinite }
+    @keyframes slidebar{ 0%{ background-position:0% 0 } 100%{ background-position:200% 0 } }
+
+    /* Pointer glow removed */
+
+    .card-inner{ display:grid; grid-template-columns: 1fr auto; gap:8px; padding:16px 16px 14px }
+    .title{ font-weight:700; letter-spacing:.2px }
+    .vendor{ font-size:12px; color:var(--muted) }
+
+    .meta{ display:flex; gap:8px; flex-wrap:wrap; align-items:center }
+    .tag{ font-size:12px; color:var(--text); border:1px solid rgba(255,255,255,.18); padding:6px 10px; border-radius:9999px; background: linear-gradient(180deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,.02) 100%), var(--panel) }
+    .desc{ color:var(--muted); font-size:14px; line-height:1.65; padding:0 16px 16px }
+
+    .toolbar{ display:flex; gap:8px; align-items:center; justify-content:flex-end; padding:8px 16px 14px }
+
+    .footer-note{ color:var(--muted); font-size:12px; margin-top:14px }
+    .site-footer{ color:var(--muted); font-size:12px; text-align:center; margin-top:28px; padding-top:16px; border-top:1px solid rgba(255,255,255,.12) }
+    .control-actions{ display:flex; gap:8px; justify-content:flex-end }
+    .filter-label{ margin:8px 2px 2px }
+
+    .date-added{ margin-left:auto; font-size:12px; color:var(--muted); white-space:nowrap; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .btn, .card{ transition:none }
+      .card::before{ animation:none }
+      .card .glow{ display:none }
+    }
+select{ background-position:right 18px center; padding-right:44px }
+/* Heading bar with right-aligned Sort */
+.headingbar{ display:flex; align-items:center; justify-content:space-between; gap:12px }
+.sort-top select{ min-width:210px }
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0 }
+@media (max-width:640px){ .headingbar{ flex-direction:column; align-items:stretch; gap:10px } .sort-top select{ width:100% } }
+</style>
+</head>
+<body>
+  <div class="controls">
+    <div class="controls-inner">
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.6"/></svg>
+        <input id="q" type="search" placeholder="Search product, vendor, or notes... (e.g., 'Strings', 'Reverb', 'Komplete')" aria-label="Search" />
+      </div>
+      <!-- Category dropdown removed -->
+      <select id="vendor" aria-label="Vendor"></select>
+      <select id="sortTop" aria-label="Sort by">
+        <option value="recent" selected>Date Added (Newest)</option>
+        <option value="oldest">Date Added (Oldest)</option>
+        <option value="name">Name A-Z</option>
+      </select>
+      <div class="control-actions">
+        <button class="btn btn-clear" id="clear">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap" role="main">
+    <div class="headingbar">
+      <h1 class="heading">Gear, Libraries &amp; Tools <span class="muted" id="count"></span></h1>
+      
+    </div>
+
+    <!-- NEW: Category pills (default = All categories when none selected) -->
+    <div id="categoriesWrap">
+      <div class="muted filter-label">Categories</div>
+      <div class="pillbar" id="catpills"></div>
+    </div>
+
+    <div id="subtagsWrap">
+      <div class="muted filter-label">Tags</div>
+      <div class="pillbar" id="subtags"></div>
+    </div>
+
+    <div class="grid" id="grid" role="list"></div>
+
+    <div class="footer-note">Tip: Filter by category first to reveal context-specific sub-tags (e.g., Strings, Reverb, etc.).</div>
+    <footer class="site-footer" role="contentinfo">Copyright &copy; 2026 Pokestir. All rights reserved.</footer>
+  </main>
+
+  <!-- ===================== DATA ===================== -->
+  <!-- Paste libraries.csv -->
+  <!-- Product,Tag,Description,Subtags,Date -->
+  <script id="db-csv" type="text/plain">Product,Tag,Description,Subtags,Date</script>
+
+  <script>
+    const CATEGORY_SUBTAGS = {
+      "Sample Library": ["Bass","Brass","Choir/Voices","Guitar","Harp","Keys/Pianos","Multi-instrument","Orchestral","Percussion/Drums","Strings","Textures/Atmospheres","Woodwinds","World/Ethnic"],
+      "Effect Plugin": ["Amp Suite","Channel Strip","Compressor","Delay","EQ","Limiter","Mastering Suite","Metering/Analysis","Other Effects","Reverb","Saturation/Distortion"],
+      "Synth": ["Analog/VA","Bass","Drums","Modular/Builder","Organ/Keys","Other Synth","Sampler/Workstation","Wavetable/Hybrid"],
+      "Gear": ["Accessories","Audio Interface","DAW","Headphones","Microphone","MIDI Keyboard","Studio Monitors","Workstation"]
+    };
+
+    const collator = new Intl.Collator(undefined, { sensitivity: "base" });
+    const compareText = (a, b) => collator.compare(a || "", b || "");
+
+    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTkBRxc5kxRlyGe9UtVNynslzpIB8_KoQwuFBpUgGQn7ph3vFGOiKlazdo3wNBdniUGXnokF_d86myl/pub?output=csv";
+    const state = { q: "", category: "", vendor: "", sort: "recent", subtags: new Set() };
+
+    const qEl = document.getElementById("q");
+    const vendorSel = document.getElementById("vendor");
+    const sortTop = document.getElementById("sortTop");
+    const subtagsEl = document.getElementById("subtags");
+    const catpillsEl = document.getElementById("catpills");
+    const grid = document.getElementById("grid");
+    const countEl = document.getElementById("count");
+    const subtagsWrapEl = document.getElementById("subtagsWrap");
+
+    let DB = [];
+
+    function escapeHTML(s){
+      return (s || "").replace(/[&<>\"']/g, m => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", "\"":"&quot;", "'":"&#39;" }[m]));
+    }
+
+    function toMs(dateText){
+      if(!dateText) return 0;
+      const s = String(dateText).trim();
+      const parts = s.split("/");
+      if(parts.length === 3){
+        const mm = parseInt(parts[0], 10);
+        const dd = parseInt(parts[1], 10);
+        const yy = parseInt(parts[2], 10);
+        if(!Number.isNaN(mm) && !Number.isNaN(dd) && !Number.isNaN(yy)){
+          const y = yy < 100 ? (2000 + yy) : yy;
+          return new Date(y, mm - 1, dd).getTime() || 0;
+        }
+      }
+      const t = Date.parse(s);
+      return Number.isNaN(t) ? 0 : t;
+    }
+
+    function parseCSVRows(text){
+      const rows = [];
+      let row = [];
+      let field = "";
+      let inQuotes = false;
+
+      for(let i = 0; i < text.length; i++){
+        const ch = text[i];
+
+        if(ch === "\""){
+          if(inQuotes && text[i + 1] === "\""){
+            field += "\"";
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+          continue;
+        }
+
+        if(ch === "," && !inQuotes){
+          row.push(field);
+          field = "";
+          continue;
+        }
+
+        if((ch === "\n" || ch === "\r") && !inQuotes){
+          if(ch === "\r" && text[i + 1] === "\n") i++;
+          row.push(field);
+          if(row.some(cell => String(cell).trim() !== "")) rows.push(row);
+          row = [];
+          field = "";
+          continue;
+        }
+
+        field += ch;
+      }
+
+      if(field.length || row.length){
+        row.push(field);
+        if(row.some(cell => String(cell).trim() !== "")) rows.push(row);
+      }
+
+      return rows;
+    }
+
+    function splitVendorAndName(product){
+      const match = String(product).match(/^(.*?)\s(?:–|-)\s(.+)$/);
+      if(!match) return { vendor: "", name: String(product).trim() };
+      return { vendor: match[1].trim(), name: match[2].trim() };
+    }
+
+    function buildDerived(item){
+      const loweredSubtags = item.subtags.map(s => s.toLowerCase());
+      return {
+        ...item,
+        dateMs: toMs(item.date),
+        sortedSubtags: item.subtags.slice().sort(compareText),
+        subtagsLowerSet: new Set(loweredSubtags),
+        searchHaystack: (item.product + " " + item.vendor + " " + item.name + " " + item.description + " " + item.subtags.join(" ")).toLowerCase()
+      };
+    }
+
+    function parseCSV(text){
+      const rows = parseCSVRows(text);
+      if(!rows.length) return [];
+
+      const header = rows[0].map(h => String(h).trim());
+      const idx = {
+        product: header.findIndex(h => /product/i.test(h)),
+        tag: header.findIndex(h => /^tag$/i.test(h)),
+        desc: header.findIndex(h => /description/i.test(h)),
+        subs: header.findIndex(h => /^subtags$/i.test(h)),
+        date: header.findIndex(h => /^date$/i.test(h))
+      };
+
+      const items = [];
+      for(let i = 1; i < rows.length; i++){
+        const cols = rows[i];
+        const first = String(cols[0] || "").trim().toLowerCase();
+        const second = String(cols[1] || "").trim().toLowerCase();
+        if(first === "product" && second === "tag") continue;
+
+        const product = String(cols[idx.product] || "").trim();
+        if(!product) continue;
+
+        const tag = String(cols[idx.tag] || "").trim();
+        const description = String(cols[idx.desc] || "").trim();
+        const subsRaw = idx.subs >= 0 ? String(cols[idx.subs] || "").trim() : "";
+        const date = idx.date >= 0 ? String(cols[idx.date] || "").trim() : "";
+        const pair = splitVendorAndName(product);
+
+        const subtags = subsRaw ? subsRaw.split(/[;|,]/).map(s => s.trim()).filter(Boolean) : [];
+        const enrichedSubtags = subtags.slice();
+        if(product.toLowerCase().includes("musio") && !enrichedSubtags.includes("Date: 5/4/2023")){
+          enrichedSubtags.push("Date: 5/4/2023");
+        }
+
+        items.push(buildDerived({ product, vendor: pair.vendor, name: pair.name, tag, description, subtags: enrichedSubtags, date }));
+      }
+      return items;
+    }
+
+    async function loadCSVText(){
+      try{
+        const res = await fetch(CSV_URL);
+        if(res.ok){
+          const text = await res.text();
+          if(text.trim()) return text;
+        }
+      } catch (err) {
+        console.warn("Could not fetch remote CSV, trying local file.", err);
+      }
+
+      return document.getElementById("db-csv").textContent.trim();
+    }
+
+    function debounce(fn, waitMs){
+      let timerId = 0;
+      return (...args) => {
+        clearTimeout(timerId);
+        timerId = setTimeout(() => fn(...args), waitMs);
+      };
+    }
+
+    function buildVendorOptions(){
+      const vendorSet = new Set();
+      DB.forEach(item => { if(item.vendor) vendorSet.add(item.vendor); });
+      const vendors = Array.from(vendorSet).sort(compareText);
+
+      const frag = document.createDocumentFragment();
+      const defaultOpt = document.createElement("option");
+      defaultOpt.value = "";
+      defaultOpt.textContent = "All Vendors";
+      frag.appendChild(defaultOpt);
+
+      for(const vendor of vendors){
+        const opt = document.createElement("option");
+        opt.value = vendor;
+        opt.textContent = vendor;
+        frag.appendChild(opt);
+      }
+
+      vendorSel.replaceChildren(frag);
+      vendorSel.value = state.vendor;
+    }
+
+    function buildCategoryPills(){
+      const frag = document.createDocumentFragment();
+      for(const category of Object.keys(CATEGORY_SUBTAGS)){
+        const btn = document.createElement("button");
+        btn.className = "pill";
+        btn.type = "button";
+        btn.textContent = category;
+        btn.dataset.active = String(state.category === category);
+        btn.setAttribute("aria-pressed", String(state.category === category));
+        btn.addEventListener("click", () => {
+          state.category = state.category === category ? "" : category;
+          state.subtags.clear();
+          buildCategoryPills();
+          buildSubtags();
+          render();
+        });
+        frag.appendChild(btn);
+      }
+      catpillsEl.replaceChildren(frag);
+    }
+
+    function buildSubtags(){
+      const list = CATEGORY_SUBTAGS[state.category] || [];
+      const frag = document.createDocumentFragment();
+
+      for(const tag of list){
+        const btn = document.createElement("button");
+        btn.className = "pill";
+        btn.type = "button";
+        btn.textContent = tag;
+        btn.dataset.active = String(state.subtags.has(tag));
+        btn.setAttribute("aria-pressed", String(state.subtags.has(tag)));
+        btn.addEventListener("click", () => {
+          if(state.subtags.has(tag)) state.subtags.delete(tag);
+          else state.subtags.add(tag);
+          btn.dataset.active = String(state.subtags.has(tag));
+          btn.setAttribute("aria-pressed", String(state.subtags.has(tag)));
+          render();
+        });
+        frag.appendChild(btn);
+      }
+
+      subtagsEl.replaceChildren(frag);
+      subtagsWrapEl.style.display = list.length ? "block" : "none";
+    }
+
+    function compareByName(a, b){
+      return compareText(a.name, b.name) || compareText(a.vendor, b.vendor) || compareText(a.product, b.product);
+    }
+
+    const SORTERS = {
+      recent: (a, b) => (b.dateMs - a.dateMs) || compareByName(a, b),
+      oldest: (a, b) => (a.dateMs - b.dateMs) || compareByName(a, b),
+      name: (a, b) => compareByName(a, b)
+    };
+
+    function match(item){
+      if(state.category && item.tag !== state.category) return false;
+      if(state.vendor && item.vendor !== state.vendor) return false;
+
+      if(state.subtags.size){
+        for(const selected of state.subtags){
+          if(!item.subtagsLowerSet.has(selected.toLowerCase())) return false;
+        }
+      }
+
+      if(state.q && !item.searchHaystack.includes(state.q)) return false;
+      return true;
+    }
+
+    function card(item){
+      const el = document.createElement("article");
+      el.className = "card";
+      el.setAttribute("role", "listitem");
+
+      const tags = item.sortedSubtags;
+      const dateHTML = item.date ? `<span class="date-added">Date Added: ${escapeHTML(item.date)}</span>` : "";
+
+      el.innerHTML = `
+        <div class="card-inner">
+          <div>
+            <div class="title">${escapeHTML(item.name)}</div>
+            <div class="vendor">${escapeHTML(item.vendor)} • ${escapeHTML(item.tag)}</div>
+          </div>
+          <div class="meta">
+            ${tags.slice(0, 4).map(s => `<span class="tag">${escapeHTML(s)}</span>`).join("")}
+          </div>
+        </div>
+        ${item.description ? `<div class="desc">${escapeHTML(item.description)}</div>` : ""}
+        <div class="toolbar">
+          ${tags.slice(4).map(s => `<span class="tag">${escapeHTML(s)}</span>`).join("")}
+          ${dateHTML}
+        </div>`;
+
+      return el;
+    }
+
+    function render(){
+      const sorter = SORTERS[state.sort] || SORTERS.recent;
+      const list = DB.filter(match).sort(sorter);
+
+      countEl.textContent = `• ${list.length} items`;
+
+      const frag = document.createDocumentFragment();
+      for(const item of list) frag.appendChild(card(item));
+      grid.replaceChildren(frag);
+    }
+
+    const onSearchInput = debounce(() => {
+      state.q = qEl.value.trim().toLowerCase();
+      render();
+    }, 200);
+
+    qEl.addEventListener("input", onSearchInput);
+    vendorSel.addEventListener("change", () => {
+      state.vendor = vendorSel.value;
+      render();
+    });
+    sortTop.addEventListener("change", () => {
+      state.sort = sortTop.value;
+      render();
+    });
+
+    document.getElementById("clear").addEventListener("click", () => {
+      state.q = "";
+      state.category = "";
+      state.vendor = "";
+      state.subtags.clear();
+      qEl.value = "";
+      vendorSel.value = "";
+      sortTop.value = state.sort;
+      buildCategoryPills();
+      buildSubtags();
+      render();
+    });
+
+    async function init(){
+      const csvText = await loadCSVText();
+      DB = parseCSV(csvText);
+      buildVendorOptions();
+      buildCategoryPills();
+      buildSubtags();
+      render();
+    }
+
+    init();
+  </script>
+</body>
+</html>

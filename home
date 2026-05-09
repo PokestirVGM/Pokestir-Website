@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Pokestir's composer profile, commission details, and VGM album player."/>
+  <meta name="theme-color" content="#0b0f19"/>
+  <title>Pokestir &mdash; Home</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0f19;             /* page background */
+      --panel:#0f172a;          /* card base */
+      --text:#e5e7eb;           /* primary text */
+      --muted:#94a3b8;          /* secondary text */
+      --ring:#10B1FF;           /* accent / focus */
+      --radius:22px;
+      --shadow:0 12px 40px rgba(2,6,23,.35);
+      --font: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text); background:var(--bg); font-family:var(--font);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      /* Subtle vignette + texture */
+      background-image:
+        radial-gradient(1200px 800px at 10% -10%, rgba(16,177,255,.08), transparent 60%),
+        radial-gradient(1200px 900px at 110% 10%, rgba(255,131,39,.06), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+      background-attachment: fixed;
+    }
+
+    .wrap{ max-width:1120px; margin:0 auto; padding:26px 18px 88px; display:grid; gap:28px }
+
+    /* Section titles */
+    .section-title{
+      display:flex; align-items:center; gap:10px;
+      font-family:"Lato", var(--font); font-size:28px; font-weight:800; letter-spacing:.2px; color:#fff;
+      margin:4px 2px 6px;
+    }
+    .section-sub{ color:var(--muted); font-size:14px; margin-bottom:8px }
+
+    /* =========================
+       CARD (shared styling)
+       ========================= */
+    .card{
+      position:relative; overflow:hidden; isolation:isolate;
+      border-radius:calc(var(--radius) + 4px);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.04) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 120%),
+        var(--panel);
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:var(--shadow);
+    }
+    @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .card{ backdrop-filter: blur(10px) saturate(130%); -webkit-backdrop-filter: blur(10px) saturate(130%); }
+    }
+
+    /* =========================
+       MUSIC / SPOTIFY
+       ========================= */
+    .player-embed{ width:100%; height:392px; border:0; display:block }
+
+    .albums{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); padding:16px }
+    .album{
+      --tint:hsl(213 55% 36%);
+      position:relative; overflow:hidden; isolation:isolate; cursor:pointer;
+      display:grid; align-items:center; gap:8px;
+      padding:14px; border-radius:var(--radius); color:#fff;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.05) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 120%),
+        var(--tint);
+      border:1px solid rgba(255,255,255,.20); box-shadow:var(--shadow);
+      transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
+    }
+    @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .album{ backdrop-filter: blur(8px) saturate(130%); -webkit-backdrop-filter: blur(8px) saturate(130%); }
+    }
+    .album:hover{ transform:translateY(-1px); }
+    .album::after{
+      content:""; position:absolute; left:0; right:0; top:0; height:46%; z-index:0;
+      background:linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 100%);
+      mix-blend-mode:screen; opacity:.55
+    }
+    .ainfo{ position:relative; z-index:1; display:grid; gap:4px }
+    .aname{ font-weight:800; letter-spacing:.2px; line-height:1.2 }
+    .ameta{ font-size:12px; opacity:.9 }
+    .album.selected{ outline:2px solid var(--ring); outline-offset:2px }
+
+    /* =========================
+       ABOUT / COMMISSIONS (your card with small tweaks)
+       ========================= */
+    .about{
+      /* keep rounded corners and clip children/pseudos on all devices */
+      border-radius: calc(var(--radius) + 4px);
+      overflow: hidden;
+    }
+    .about::after{
+      content:""; position:absolute; left:0; right:0; top:0; height:4px; z-index:2; pointer-events:none;
+      background: linear-gradient(90deg,
+        #0A6E9E 0%,
+        #10B1FF 22%,
+        #FF8327 48%,
+        #FE0E0E 62%,
+        #10B1FF 80%,
+        #0A6E9E 100%);
+      background-repeat: repeat-x; background-size: 200% 100%; opacity:.95; animation: slidebar 9s linear infinite;
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+      -webkit-clip-path: inset(0 round calc(var(--radius) + 4px));
+      clip-path: inset(0 round calc(var(--radius) + 4px));
+    }
+    @keyframes slidebar { 0%{background-position:0% 0} 100%{background-position:200% 0} }
+
+    .about .glow{
+      /* container only: very subtle, no direct background */
+      pointer-events:none; position:absolute; inset:0; z-index:0; opacity:1;
+      will-change: transform, opacity; filter: none; mix-blend-mode: screen;
+    }
+    /* Subtle liquid layers that "bleed" into the panel near the cursor */
+    .about .glow::before,
+    .about .glow::after{
+      content:""; position:absolute; inset:-6%; pointer-events:none; will-change: transform, opacity;
+      transform: scale(0.98); opacity:0; filter: blur(22px) saturate(115%);
+      transition: opacity 1.9s ease-out .25s, transform 3.6s ease-out;
+      mix-blend-mode: screen;
+    }
+    /* Blue layer */
+    .about .glow::before{
+      background: radial-gradient(340px 280px at calc(var(--x,-999)*1px) calc(var(--y,-999)*1px), rgba(16,177,255,.12) 0%, rgba(16,177,255,.06) 34%, rgba(16,177,255,0) 70%);
+    }
+    /* Red layer, slightly offset to feel fluid */
+    .about .glow::after{
+      background: radial-gradient(420px 340px at calc((var(--x,-999) + 26)*1px) calc((var(--y,-999) + 36)*1px), rgba(254,14,14,.10) 0%, rgba(254,14,14,.05) 30%, rgba(254,14,14,0) 72%);
+    }
+    .about:hover .glow::before{ opacity:.16; transform: scale(1.07); animation: bleedFloat 16s ease-in-out infinite alternate; }
+    .about:hover .glow::after{  opacity:.12; transform: scale(1.10); animation: bleedFloat 18s ease-in-out infinite alternate; }
+
+    .agrid{ position:relative; z-index:1; display:grid; grid-template-columns: 1.25fr .95fr; gap:28px; padding:22px }
+    @media (max-width:900px){ .agrid{ grid-template-columns:1fr; padding:16px } }
+
+    .heading{
+      display:flex; align-items:center; gap:10px; color:#fff;
+      font-family:"Lato", var(--font); font-size:28px; font-weight:800; letter-spacing:.2px;
+      margin:2px 0 10px;
+    }
+    .lead{ color:#e5e7eb; font-size:16px; line-height:1.7 }
+
+    .tabs{ display:flex; gap:10px; margin:8px 0 14px; flex-wrap:wrap }
+    .btn{
+      appearance:none; border:1px solid rgba(255,255,255,.22);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.04) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.16) 130%),
+        hsl(222 45% 18%);
+      color:#fff; padding:11px 16px; border-radius:14px; font-weight:700; letter-spacing:.2px;
+      font-size:15px; cursor:pointer; text-decoration:none; display:inline-block;
+      transition: transform .08s ease, filter .2s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn.active{
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.04) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 130%),
+        var(--ring);
+      border-color: rgba(255,255,255,.35); outline:2px solid var(--ring); outline-offset:2px;
+    }
+
+    .comm{ display:grid; gap:16px; color:#e5e7eb; }
+    .comm .note{
+      font-size:14px; color:#e5e7eb;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.05) 100%),
+        var(--panel);
+      border:1px solid rgba(255,255,255,.18); padding:10px 12px; border-radius:24px;
+    }
+    .packs{ display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:12px }
+    .pack{
+      position:relative; overflow:hidden; border-radius:var(--radius); padding:14px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.05) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 120%),
+        hsl(213 55% 36%);
+      border:1px solid rgba(255,255,255,.20); box-shadow:var(--shadow); transition: transform .08s ease;
+    }
+    .pack::after{
+      content:""; position:absolute; left:0; right:0; top:0; height:46%; z-index:0;
+      background:linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 100%);
+      mix-blend-mode:screen; opacity:.55
+    }
+    .pack:hover{ transform:translateY(-1px); }
+    .pack h3{ position:relative; z-index:1; margin:0 0 6px; color:#fff; font-size:15px; letter-spacing:.2em; text-transform:uppercase }
+    .pack .desc{ position:relative; z-index:1; font-size:14px; opacity:.95 }
+    .pack .price{ position:relative; z-index:1; margin-top:8px; font-weight:800; color:#fff }
+
+    .portrait{ position:relative; align-self:center; justify-self:center; width:100%; max-width:380px }
+    .ring{
+      position:absolute; inset:-18px; border-radius:9999px; z-index:0; opacity:.9; filter: blur(8px);
+      background:
+        radial-gradient(120px 140px at 20% 15%, rgba(10,110,158,.35), rgba(239,68,68,0) 60%),
+        radial-gradient(200px 200px at 80% 20%, rgba(16,177,255,.28), rgba(37,99,235,0) 70%),
+        radial-gradient(240px 220px at 60% 90%, rgba(255,131,39,.30), rgba(244,63,94,0) 70%);
+      animation: floaty 12s ease-in-out infinite alternate;
+    }
+    @keyframes floaty{ 0% { transform: translateY(0px) rotate(0.5deg) scale(1.00) } 100%{ transform: translateY(6px) rotate(-0.5deg) scale(1.01) } }
+    .frame{
+      position:relative; border-radius:9999px; overflow:hidden; box-shadow:var(--shadow);
+      background: linear-gradient(180deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.05) 100%), #111827;
+      border:1px solid rgba(255,255,255,.24); aspect-ratio:1/1; transform: translateZ(0);
+    }
+    .frame img{ display:block; width:100%; height:100%; object-fit:cover; aspect-ratio:1/1; filter: saturate(1.05) contrast(1.02) }
+
+    .termswrap{
+      position:relative; align-self:stretch; border-radius:24px; padding:18px; color:#e5e7eb;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.05) 100%),
+        var(--panel);
+      border:1px solid rgba(255,255,255,.18); overflow:hidden;
+    }
+    .termswrap::before,
+    .termswrap::after{ content:none; }
+    .terms{ position:relative; z-index:1 }
+    .terms h3{ margin:0 0 10px; color:#fff; font-size:14px; letter-spacing:.16em; text-transform:uppercase }
+    .terms ul{ margin:10px 0 0 18px; padding:0 }
+    .terms li{ margin:6px 0 }
+
+    /* Footnote */
+    .footer{ text-align:center; color:var(--muted); font-size:12px; margin-top:6px }
+    .embed-note{ margin-bottom:20px }
+    .site-footer{ text-align:center; color:var(--muted); font-size:12px; padding:18px 0 28px; border-top:1px solid rgba(255,255,255,.06); margin-top:24px }
+    .skip-link{ position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden }
+    .skip-link:focus{ left:14px; top:14px; width:auto; height:auto; padding:10px 12px; z-index:100; border-radius:12px; background:var(--panel); color:var(--text); outline:3px solid var(--ring) }
+
+    /* A11y + responsive polish */
+    @media (max-width: 640px){
+      .wrap{ padding: 20px 14px 60px }
+      .section-title{ font-size: clamp(22px, 6.2vw, 28px) }
+      .albums{ grid-template-columns:1fr }
+      .agrid{ gap:16px }
+      .portrait{ max-width:min(78vw, 360px); margin-inline:auto }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .album, .album::before, .about .glow, .ring { transition:none; animation:none }
+      .about:hover .glow{ opacity:0 }
+    }
+    /* Hide inner scrollbars (keeps parent Sites scroll clean) */
+    body::-webkit-scrollbar { display:none }
+    body{ -ms-overflow-style:none; scrollbar-width:none }
+  @keyframes bleedFloat{ 0%{ transform: translateY(-2px) scale(1.00) } 100%{ transform: translateY(2px) scale(1.06) } }
+  /* Disable About hover glow entirely */
+  .about .glow, .about .glow::before, .about .glow::after{ display:none !important; }
+  /* Compact contact list + link color */
+  .comm .note a, .comm .note a:visited{ color:#fff; text-decoration:underline; }
+  .contact-lines{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:4px }
+</style>
+</head>
+<body>
+  <a href="#music" class="skip-link">Skip to Music</a>
+<main class="wrap" role="main">
+    <!-- ABOUT / COMMISSIONS FIRST -->
+    <header id="about">
+      <div class="section-title">About</div>
+      <p class="section-sub">Get to know me!</p>
+    </header>
+
+    <section class="card about" aria-label="About / Commissions">
+      <div class="glow" aria-hidden="true"></div>
+
+      <div class="agrid">
+        <!-- Left column -->
+        <div>
+          <h1 class="heading">Nicholas “Pokestir”</h1>
+
+          <div class="tabs" role="tablist" aria-label="About and Commissions">
+            <button id="tabAbout" class="btn active" role="tab" aria-selected="true" aria-controls="bioView" type="button">About</button>
+            <button id="tabComms" class="btn" role="tab" aria-selected="false" aria-controls="commView" type="button">Commissions</button>
+          </div>
+
+          <!-- ABOUT VIEW -->
+          <div id="bioView" role="tabpanel" aria-labelledby="tabAbout">
+            <p class="lead">
+              Nicholas, known as Pokestir, is a composer and arranger based in New York with seven years of experience in digital music production. Specializing in video game music, he has built an extensive collection of arrangements featured on his YouTube channel and streaming platforms.
+            </p>
+            <p class="lead">
+              His work blends modern production techniques with a deep respect for the original game soundtracks, resulting in arrangements that resonate with both nostalgic fans and new listeners. In addition to arrangements, he also creates original music for games and animations and actively collaborates with fellow musicians and content creators.
+            </p>
+          </div>
+
+          <!-- COMMISSIONS VIEW -->
+          <div id="commView" role="tabpanel" aria-labelledby="tabComms" hidden>
+            <div class="comm">
+              <div class="note">
+  <div>You can reach me for commissions through any of the following methods:</div>
+  <ul class="contact-lines">
+    <li>Discord: <span>pokestir</span></li>
+    <li>Twitter/X: <a href="https://x.com/pokestir" target="_blank" rel="noopener">@pokestir</a></li>
+    <li>Email: <span id="contactEmail">contact@pokestir.com</span></li>
+  </ul>
+</div>
+
+              <div class="packs">
+                <div class="pack" data-pack="standard">
+                  <h3>STANDARD</h3>
+                  <div class="desc">Original music for games, videos &amp; streams<br>Music arrangement</div>
+                </div>
+
+                <div class="pack" data-pack="short">
+                  <h3>SHORT &lt;30 Seconds</h3>
+                  <div class="desc">Intro music<br>Fanfares</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column switches per view -->
+        <!-- About view: portrait -->
+        <div id="rightAbout" class="portrait">
+          <div class="ring" aria-hidden="true"></div>
+          <figure class="frame" aria-label="Artist portrait">
+            <img
+              src="https://yt3.ggpht.com/2uHcmF7V9ObFjjOwj6rTFV0E54up9zuLS4wXhhG0Jkl25W7XIL3SDykmYsUsaQFs4iNvDIBbbmU=s600-c-k-c0x00ffffff-no-rj-rp-mo"
+              alt="Portrait of Pokestir" width="600" height="600" loading="eager" decoding="async">
+          </figure>
+        </div>
+
+        <!-- Commissions view: Terms -->
+        <aside id="rightTerms" class="termswrap" hidden aria-label="Terms & Conditions">
+          <div class="terms"> 
+            <h3>TERMS &amp; CONDITIONS — By commissioning music, you agree to these terms.</h3>
+            <ul>
+              <li>Payments through PayPal</li>
+              <li>May be divided in up to four</li>
+              <li>One payment must be completed initially</li>
+              <li>No refunds for completed work</li>
+              <li>Major revisions may result in additional cost</li>
+              <li>Provide information regarding intended use</li>
+              <li>Reselling is strictly prohibited</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- MUSIC AFTER -->
+    <header>
+      <div class="section-title">VGM Albums</div>
+      <p class="section-sub">Select a release to start playing.</p>
+    </header>
+
+    <section id="music" class="card" aria-label="Spotify Player">
+      <iframe id="spotifyEmbed" class="player-embed"
+              loading="lazy"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              src="about:blank" title="Spotify Embed"></iframe>
+
+      <div aria-label="Release Grid">
+        <div id="albums" class="albums"></div>
+      </div>
+      <div class="footer embed-note">Spotify embeds may require cookies enabled.</div>
+    </section>
+    <footer class="site-footer" role="contentinfo">Copyright &copy; 2026 Pokestir. All rights reserved.</footer>
+  </main>
+
+  <script>
+    /* =========================
+       MUSIC: Manual Spotify list
+       ========================= */
+    const releases = [
+      // Most recent → oldest | monthYear format consistent (e.g., "May 2025")
+      { name:'Battle Themes Collection: Pokémon, Vol. 3',                           type:'album', id:'2SFMCYyUkiHXWGS3IywUo5', monthYear:'March 2026' },
+      { name:'Hyrule Okeanos (Music from "The Legend of Zelda: The Wind Waker")',    type:'album', id:'5wFdEgKLebHECAqxKTv2Rg', monthYear:'October 2025' },
+      { name:'Sill Bird (Music from "Chrono Trigger")',                              type:'album', id:'3a6OmKsFbb9tAj3qM9sXdn', monthYear:'September 2025' },
+      { name:'Hyrule Tempus (Music from "The Legend of Zelda: Ocarina of Time")',    type:'album', id:'3jAmav8EAGMrv8p8YenzPL', monthYear:'September 2025' },
+      { name:'World Themes Collection: Pokémon, Vol. 5',                            type:'album', id:'2KMBQ9PrRVWoc7abiNO7oN', monthYear:'August 2025' },
+      { name:'Super Mario Classics Collection',                                      type:'album', id:'7C8mazhT2QhgUWds54vRKn', monthYear:'August 2025' },
+      { name:'Mii Channels Collection',                                              type:'album', id:'5Yyrx0CTPHrPv5DBloEsmw', monthYear:'May 2025' },
+      { name:'Alola Adventures',                                                     type:'album', id:'4UTytdnpTZ95LHw9u5uRce', monthYear:'Sep 2024' },
+      { name:'World Themes Collection: Pokémon, Vol. 4',                            type:'album', id:'4V9EV0LocVpADhN3YD3mjI', monthYear:'May 2024' },
+      { name:'Kalos Towns & Cities Collection',                                      type:'album', id:'4UFVXeicDN4Zl9y2pLIOCR', monthYear:'Nov 2023' },
+      { name:'Battle Themes Collection: Pokémon, Vol. 2',                           type:'album', id:'1TYyDGLSOmHEsSPSxOPGOP', monthYear:'Nov 2023' },
+      { name:'Battle Themes Collection: Pokémon, Vol. 1',                           type:'album', id:'7e4x3VdWtWoAJD46JPfo5j', monthYear:'Sep 2022' },
+      { name:'World Themes Collection — Pokémon, Vol. 3',                           type:'album', id:'1cn4hO4bLen8ybLB4Xdoph', monthYear:'Aug 2022' },
+      { name:'World Themes Collection — Pokémon, Vol. 2',                           type:'album', id:'0VVcplKK4JRHlQFFIaEeze', monthYear:'Jan 2022' },
+      { name:'World Themes Collection: Pokémon, Vol. 1',                            type:'album', id:'2ikzlVg14ieFr39MujeVVC', monthYear:'Aug 2021' },
+    ];
+
+    const albumsEl = document.getElementById('albums');
+    const embedEl  = document.getElementById('spotifyEmbed');
+
+    function embedSrc(item){
+      return item.type === 'track'
+        ? `https://open.spotify.com/embed/track/${item.id}`
+        : `https://open.spotify.com/embed/album/${item.id}`;
+    }
+
+    function setActive(item, tile){
+      embedEl.src = embedSrc(item);
+      embedEl.style.height = item.type === 'track' ? '232px' : '392px';
+      for (const el of albumsEl.querySelectorAll('.album')) el.classList.remove('selected');
+      if (tile) tile.classList.add('selected');
+      else {
+        const found = albumsEl.querySelector(`[data-id="${item.id}"]`);
+        if (found) found.classList.add('selected');
+      }
+    }
+
+    function makeTile(item, idx){
+      const div = document.createElement('div');
+      div.className = 'album';
+      div.dataset.id = item.id;
+      div.innerHTML = `
+        <div class="ainfo">
+          <div class="aname">${item.name || 'Loading…'}</div>
+          ${item.monthYear ? `<div class="ameta">${item.monthYear}</div>` : ''}
+        </div>
+      `;
+
+      div.addEventListener('click', () => setActive(item, div));
+      div.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(item, div); }
+      });
+      div.setAttribute('role', 'button');
+      div.setAttribute('tabindex', '0');
+      return div;
+    }
+
+    releases.forEach((it, i) => albumsEl.appendChild(makeTile(it, i)));
+    if (releases[0]) setActive(releases[0]);
+
+    /* =========================
+       ABOUT/COMMISSIONS TABS
+       ========================= */
+    const tabAbout   = document.getElementById('tabAbout');
+    const tabComms   = document.getElementById('tabComms');
+    const bioView    = document.getElementById('bioView');
+    const commView   = document.getElementById('commView');
+    const rightAbout = document.getElementById('rightAbout');
+    const rightTerms = document.getElementById('rightTerms');
+
+    function setTab(which){
+      const isAbout = which === 'about';
+      if (tabAbout && tabComms){
+        tabAbout.classList.toggle('active', isAbout);
+        tabComms.classList.toggle('active', !isAbout);
+        tabAbout.setAttribute('aria-selected', String(isAbout));
+        tabComms.setAttribute('aria-selected', String(!isAbout));
+      }
+      if (bioView)  bioView.hidden  = !isAbout;
+      if (commView) commView.hidden =  isAbout;
+      if (rightAbout) rightAbout.hidden = !isAbout;
+      if (rightTerms) rightTerms.hidden =  isAbout;
+    }
+
+    document.addEventListener('click', (e)=>{
+      const btn = e.target.closest('#tabAbout, #tabComms');
+      if (!btn) return;
+      e.preventDefault();
+      setTab(btn.id === 'tabAbout' ? 'about' : 'comms');
+    });
+
+    document.addEventListener('keydown', (e)=>{
+      if (e.target === tabAbout || e.target === tabComms){
+        if (e.key === 'ArrowRight'){ e.preventDefault(); setTab('comms'); }
+        if (e.key === 'ArrowLeft'){  e.preventDefault(); setTab('about'); }
+      }
+    });
+
+    setTab('about');
+
+</script>
+</body>
+</html>
