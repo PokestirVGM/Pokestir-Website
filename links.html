@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0b0f19" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Pokestir" />
-  <meta property="og:title" content="Pokestir — Links" />
+  <meta property="og:title" content="Pokestir - Links" />
   <meta property="og:description" content="Official Pokestir music, social, and support links." />
   <meta property="og:url" content="https://www.pokestir.com/links.html" />
   <meta property="og:image" content="images/logo%204k.png" />
@@ -24,22 +24,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    body{ background: var(--bg); }
-
     /* Container */
     .wrap{ max-width:1120px; margin:0 auto; padding:26px 22px 88px; display:grid; gap:26px; }
 
     /* Headings */
     .section-title{ font-family:"Lato", var(--font); font-weight:800; font-size:28px; letter-spacing:.2px; margin:10px 2px 14px; }
 
-    /* Card */
-    .card{ position:relative; isolation:isolate; border-radius: calc(var(--radius) + 4px); padding:18px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.04) 100%),
-        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 120%),
-        var(--panel);
-      border:1px solid rgba(255,255,255,.16);
-      overflow:hidden; background-clip: padding-box; }
+    /* Card — base from style.css; add padding for this page's layout */
+    .card{ padding:18px; background-clip: padding-box; }
     /* Links grid */
     .links{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-top:18px; }
 
@@ -85,10 +77,6 @@
     @media (max-width:640px){ .wrap{ padding:18px 14px 64px; } }
     @media (max-width:420px){ .btn{ grid-template-columns: 28px 1fr; row-gap:4px; } }
 
-    /* Backdrop effect when supported */
-    @supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)){
-      .card{ backdrop-filter: blur(10px) saturate(130%); -webkit-backdrop-filter: blur(10px) saturate(130%); }
-    }
   </style>
 </head>
 <body>
