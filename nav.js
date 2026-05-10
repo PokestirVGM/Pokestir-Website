@@ -12,6 +12,21 @@
 
   var toggle = document.querySelector('.site-nav__toggle');
   var menu = document.getElementById('site-nav-links');
+  var siteNav = document.querySelector('.site-nav');
+
+  function updateMenuTop() {
+    if (menu && siteNav) {
+      if (window.innerWidth <= 640) {
+        menu.style.top = siteNav.offsetHeight + 'px';
+      } else {
+        menu.style.top = '';
+      }
+    }
+  }
+  updateMenuTop();
+  window.addEventListener('resize', updateMenuTop);
+  if (siteNav) new ResizeObserver(updateMenuTop).observe(siteNav);
+
   if (toggle && menu) {
     toggle.addEventListener('click', function () {
       var open = menu.classList.toggle('is-open');
