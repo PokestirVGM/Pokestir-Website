@@ -10,7 +10,7 @@
   <meta property="og:title" content="Pokestir — Links" />
   <meta property="og:description" content="Official Pokestir music, social, and support links." />
   <meta property="og:url" content="https://www.pokestir.com/links.html" />
-  <meta property="og:image" content="https://yt3.ggpht.com/2uHcmF7V9ObFjjOwj6rTFV0E54up9zuLS4wXhhG0Jkl25W7XIL3SDykmYsUsaQFs4iNvDIBbbmU=s600-c-k-c0x00ffffff-no-rj-rp-mo" />
+  <meta property="og:image" content="images/logo%204k.png" />
   <meta property="og:image:width" content="600" />
   <meta property="og:image:height" content="600" />
   <meta name="twitter:card" content="summary" />
@@ -24,12 +24,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    body{
-      background:
-        radial-gradient(1200px 800px at 20% -10%, rgba(16,177,255,.10), transparent 60%),
-        radial-gradient(900px 600px at 120% 10%, rgba(254,14,14,.06), transparent 55%),
-        var(--bg);
-    }
+    body{ background: var(--bg); }
 
     /* Container */
     .wrap{ max-width:1120px; margin:0 auto; padding:26px 22px 88px; display:grid; gap:26px; }
@@ -38,19 +33,18 @@
     .section-title{ font-family:"Lato", var(--font); font-weight:800; font-size:28px; letter-spacing:.2px; margin:10px 2px 14px; }
 
     /* Card */
-    .card{ position:relative; isolation:isolate; border-radius: calc(var(--radius) + 4px); padding:18px; box-shadow: var(--shadow);
+    .card{ position:relative; isolation:isolate; border-radius: calc(var(--radius) + 4px); padding:18px;
       background:
         linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.04) 100%),
         linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 120%),
         var(--panel);
       border:1px solid rgba(255,255,255,.16);
       overflow:hidden; background-clip: padding-box; }
-    .card::before{ content:""; position:absolute; left:0; right:0; top:0; height:4px; z-index:1; pointer-events:none; opacity:.95; border-top-left-radius: inherit; border-top-right-radius: inherit; background: linear-gradient(90deg,#0A6E9E,#10B1FF,#FF8327,#FE0E0E,#10B1FF,#0A6E9E); background-size:200% 100%; animation: slidebar 9s linear infinite; }
     /* Links grid */
     .links{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-top:18px; }
 
     /* Button tile */
-    .btn{ position:relative; display:grid; grid-template-columns: 1fr 24px; align-items:center; gap:12px; width:100%;
+    .btn{ position:relative; display:grid; grid-template-columns: 32px 1fr; align-items:center; gap:12px; width:100%;
       padding:11px 16px; border-radius:14px; text-decoration:none; font-weight:700; letter-spacing:.2px;
       border:1px solid rgba(255,255,255,.22);
       background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%);
@@ -62,8 +56,9 @@
     .title{ font-size:16px; color:#fff; }
     .meta{ font-size:12px; color:rgba(255,255,255,.88); }
 
-    .ext{ width:20px; height:20px; display:inline-grid; place-items:center; }
-    .ext svg{ width:20px; height:20px; display:block; fill:#fff; }
+    .ext{ width:24px; height:24px; display:inline-grid; place-items:center; }
+    .ext svg{ width:24px; height:24px; display:block; fill:#fff; }
+    .ext img{ width:24px; height:24px; display:block; }
 
     /* Platform tints */
     .yt      { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #ff0000; }
@@ -88,7 +83,7 @@
     /* Responsive */
     @media (max-width:900px){ .links{ grid-template-columns: 1fr; } }
     @media (max-width:640px){ .wrap{ padding:18px 14px 64px; } }
-    @media (max-width:420px){ .btn{ grid-template-columns: 1fr 20px; row-gap:4px; } }
+    @media (max-width:420px){ .btn{ grid-template-columns: 28px 1fr; row-gap:4px; } }
 
     /* Backdrop effect when supported */
     @supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)){
@@ -100,8 +95,9 @@
   <!-- nav-v2-static -->
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
-      <a class="site-nav__brand" href="index.html">Pokestir</a>
-      <div class="site-nav__links">
+      <a class="site-nav__brand" href="index.html"><img src="images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links">&#9776;</button>
+      <div class="site-nav__links" id="site-nav-links">
         <a href="index.html">Home</a>
         <a href="gearAndSoftware.html">Gear</a>
         <a href="usage_terms_claims.html">Usage/Credit</a>
@@ -116,32 +112,32 @@
       <h2 id="music-title" class="section-title">Music Streaming Platforms</h2>
       <nav class="links" aria-label="Music platforms">
         <a class="btn yt" href="https://www.youtube.com/pokestir" target="_blank" rel="noopener noreferrer" aria-label="YouTube — opens in a new tab">
+          <span class="ext" aria-hidden="true"><img src="https://cdn.simpleicons.org/youtube/fff" width="24" height="24" alt=""></span>
           <div class="text"><div class="title">YouTube</div><div class="meta">youtube.com/pokestir</div></div>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 4h6v6h-2V7.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V4Z"/></svg></span>
         </a>
         <a class="btn bandcamp" href="https://pokestir.bandcamp.com/" target="_blank" rel="noopener noreferrer" aria-label="Bandcamp — opens in a new tab">
+          <span class="ext" aria-hidden="true"><img src="https://cdn.simpleicons.org/bandcamp/fff" width="24" height="24" alt=""></span>
           <div class="text"><div class="title">Bandcamp</div><div class="meta">pokestir.bandcamp.com</div></div>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6h-2V7.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V4Z"/></svg></span>
         </a>
         <a class="btn spotify" href="https://open.spotify.com/artist/3O0lydxUWthTMN8WjCUqZc" target="_blank" rel="noopener noreferrer" aria-label="Spotify — opens in a new tab">
+          <span class="ext" aria-hidden="true"><img src="https://cdn.simpleicons.org/spotify/fff" width="24" height="24" alt=""></span>
           <div class="text"><div class="title">Spotify</div><div class="meta">open.spotify.com</div></div>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6h-2V7.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V4Z"/></svg></span>
         </a>
         <a class="btn apple" href="https://music.apple.com/us/artist/pokestir/1515709909" target="_blank" rel="noopener noreferrer" aria-label="Apple Music — opens in a new tab">
+          <span class="ext" aria-hidden="true"><img src="https://cdn.simpleicons.org/applemusic/fff" width="24" height="24" alt=""></span>
           <div class="text"><div class="title">Apple Music</div><div class="meta">music.apple.com</div></div>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6h-2V7.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V4Z"/></svg></span>
         </a>
         <a class="btn amazon" href="https://music.amazon.com/artists/B089B27TGY/pokestir" target="_blank" rel="noopener noreferrer" aria-label="Amazon Music — opens in a new tab">
+          <span class="ext" aria-hidden="true"><img src="https://api.iconify.design/simple-icons:amazonmusic.svg?color=white" width="24" height="24" alt=""></span>
           <div class="text"><div class="title">Amazon Music</div><div class="meta">music.amazon.com</div></div>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6h-2V7.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V4Z"/></svg></span>
         </a>
         <a class="btn tidal" href="https://tidal.com/browse/artist/19791087" target="_blank" rel="noopener noreferrer" aria-label="TIDAL — opens in a new tab">
+          <span class="ext" aria-hidden="true"><img src="https://cdn.simpleicons.org/tidal/fff" width="24" height="24" alt=""></span>
           <div class="text"><div class="title">TIDAL</div><div class="meta">tidal.com</div></div>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6h-2V7.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V4Z"/></svg></span>
         </a>
         <a class="btn deezer" href="https://www.deezer.com/us/artist/96092082" target="_blank" rel="noopener noreferrer" aria-label="Deezer — opens in a new tab">
+          <span class="ext" aria-hidden="true"><img src="https://cdn.simpleicons.org/deezer/fff" width="24" height="24" alt=""></span>
           <div class="text"><div class="title">Deezer</div><div class="meta">deezer.com</div></div>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6h-2V7.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V4Z"/></svg></span>
         </a>
       </nav>
     </section>
@@ -151,20 +147,20 @@
       <h2 id="socials-title" class="section-title">Socials</h2>
       <nav class="links" aria-label="Social links">
         <a class="btn x" href="https://x.com/pokestir" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter — opens in a new tab">
+          <span class="ext" aria-hidden="true"><img src="https://cdn.simpleicons.org/x/fff" width="24" height="24" alt=""></span>
           <div class="text"><div class="title">X / Twitter</div><div class="meta">x.com/pokestir</div></div>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6h-2V7.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V4Z"/></svg></span>
         </a>
         <a class="btn bsky" href="https://bsky.app/profile/pokestir.com" target="_blank" rel="noopener noreferrer" aria-label="Bluesky — opens in a new tab">
+          <span class="ext" aria-hidden="true"><img src="https://cdn.simpleicons.org/bluesky/fff" width="24" height="24" alt=""></span>
           <div class="text"><div class="title">Bluesky</div><div class="meta">bsky.app/pokestir.com</div></div>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6h-2V7.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V4Z"/></svg></span>
         </a>
         <a class="btn instagram" href="https://www.instagram.com/pokestir_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram — opens in a new tab">
+          <span class="ext" aria-hidden="true"><img src="https://cdn.simpleicons.org/instagram/fff" width="24" height="24" alt=""></span>
           <div class="text"><div class="title">Instagram</div><div class="meta">instagram.com/pokestir_</div></div>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6h-2V7.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V4Z"/></svg></span>
         </a>
         <a class="btn discord" href="https://discord.com/invite/7CGg9Tk" target="_blank" rel="noopener noreferrer" aria-label="Discord — opens in a new tab">
+          <span class="ext" aria-hidden="true"><img src="https://cdn.simpleicons.org/discord/fff" width="24" height="24" alt=""></span>
           <div class="text"><div class="title">Discord</div><div class="meta">discord.com/invite/7CGg9Tk</div></div>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6h-2V7.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V4Z"/></svg></span>
         </a>
       </nav>
     </section>
@@ -174,12 +170,12 @@
       <h2 id="support-title" class="section-title">Support</h2>
       <nav class="links" aria-label="Support links">
         <a class="btn patreon" href="https://www.patreon.com/c/pokestir" target="_blank" rel="noopener noreferrer" aria-label="Patreon — opens in a new tab">
+          <span class="ext" aria-hidden="true"><img src="https://cdn.simpleicons.org/patreon/fff" width="24" height="24" alt=""></span>
           <div class="text"><div class="title">Patreon</div><div class="meta">patreon.com/c/pokestir</div></div>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6h-2V7.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V4Z"/></svg></span>
         </a>
         <a class="btn kofi" href="https://ko-fi.com/pokestir" target="_blank" rel="noopener noreferrer" aria-label="Ko&#8209;fi — opens in a new tab">
+          <span class="ext" aria-hidden="true"><img src="https://cdn.simpleicons.org/kofi/fff" width="24" height="24" alt=""></span>
           <div class="text"><div class="title">Ko&#8209;fi</div><div class="meta">ko-fi.com/pokestir</div></div>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6h-2V7.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V4Z"/></svg></span>
         </a>
       </nav>
     </section>

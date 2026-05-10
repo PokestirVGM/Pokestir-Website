@@ -50,4 +50,34 @@ const TRACKS = [
     src: "audio/Canubelle%20Park.mp3",
     tags: ["Original Composition", "VGM"]
   },
+  {
+    title: "Battle Theme (Arcanimals)",
+    src: "audio/Battle%20Theme%20-%20Arcanimals.mp3",
+    tags: ["Original Composition", "VGM"]
+  },
+  {
+    title: "In the Usual Room",
+    src: "audio/In%20the%20Usual%20Room.mp3",
+    tags: ["Original Composition", "VGM"]
+  },
+  {
+    title: "Pacific Blue",
+    src: "audio/Pacific%20Blue.mp3",
+    tags: ["Original Composition", "VGM"]
+  },
+  {
+    title: "Quantum Nightscape",
+    src: "audio/Quantum%20Nightscape.mp3",
+    tags: ["Original Composition", "VGM"]
+  },
+  {
+    title: "Sapphire Reverie",
+    src: "audio/Sapphire%20Reverie.mp3",
+    tags: ["Original Composition", "VGM"]
+  },
+  {
+    title: "The Grand Archives",
+    src: "audio/The%20Grand%20Archives.mp3",
+    tags: ["Original Composition", "VGM"]
+  },
 ];
