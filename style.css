@@ -126,6 +126,15 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   }
 }
 
+/* ── Inset panel (darker nested card, no accent bar) ── */
+.card-inset {
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.12);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.03) 0%, rgba(255,255,255,0) 100%),
+    rgba(2,6,23,.32);
+}
+
 /* ── Accent bar (top of every .card) ── */
 .card::before {
   content: ""; position: absolute; left: 0; top: 0; right: 0; height: 4px;

@@ -67,7 +67,7 @@
     .btn:focus-visible{ outline:3px solid var(--ring); outline-offset:2px; }
 
     /* Codebox */
-    .codebox{ position:relative; border:1px solid rgba(255,255,255,.16); border-radius:16px; padding:14px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; background: rgba(2,6,23,.35); }
+    .codebox{ position:relative; padding:14px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
     .small{ font-size:12px; }
 
     /* Lists */
@@ -89,7 +89,7 @@
     }
 
     /* details/summary for FAQs */
-    details{ border:1px solid rgba(255,255,255,.16); border-radius:16px; padding:12px 14px; background:rgba(2,6,23,.28); }
+    details{ padding:12px 14px; }
     summary{ cursor:pointer; font-weight:700; font-family:'Lato', var(--font); }
     details + details{ margin-top:10px; }
 
@@ -149,11 +149,11 @@
           <p class="muted">Place this on-screen or in your description:</p>
 
           <div class="two-up">
-            <div class="codebox" id="creditText">
+            <div class="codebox card-inset" id="creditText">
               Music by Pokestir: https://www.pokestir.com/links
             </div>
             <p class="muted">You can also link my YouTube channel instead of the site:</p>
-            <div class="codebox" id="creditText2">
+            <div class="codebox card-inset" id="creditText2">
               https://www.youtube.com/@pokestir
             </div>
           </div>
@@ -180,7 +180,7 @@
           <!-- New line with underlined hyperlink -->
           <p class="muted">Another cover artist made a fantastic video explaining this in more detail — check it out <a href="https://youtu.be/gTk8PeCI-wc?si=sBElKXIzH9dgSRRH" class="link-underline" target="_blank" rel="noopener">here</a>.</p>
           <div class="spacer"></div>
-          <details>
+          <details class="card-inset">
             <summary>FAQ</summary>
             <div class="spacer"></div>
             <div class="grid-2">
@@ -205,7 +205,7 @@
             <li><strong>Check the claim text.</strong> Does it cite <em>Materia Music Publishing</em>, <em>FUGA</em>, or one of my cover tracks? That's my distributor handling licensed covers.</li>
             <li><strong>Dispute the claim</strong> in YouTube Studio. Use this statement:</li>
           </ul>
-          <div class="codebox" id="disputeText">
+          <div class="codebox card-inset" id="disputeText">
             "No audio from the claimed recording is present; the match is incorrect."
           </div>
           <ul class="list">
@@ -213,7 +213,7 @@
             <li><strong>Optional:</strong> Use YouTube Studio's tools to remove matched audio if needed.</li>
           </ul>
 
-          <details>
+          <details class="card-inset">
             <summary>Still stuck after a week?</summary>
             <div class="spacer"></div>
             <p class="muted">If it's a Materia Collective release/claim, contact them here:</p>
