@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -10,7 +10,7 @@
   <meta property="og:title" content="Pokestir - Music Usage &amp; Credit" />
   <meta property="og:description" content="Pokestir music usage, credit, and Content ID dispute guidance." />
   <meta property="og:url" content="https://www.pokestir.com/usage_terms_claims.html" />
-  <meta property="og:image" content="images/logo%204k.png" />
+  <meta property="og:image" content="images/logo-4k.png" />
   <meta property="og:image:width" content="600" />
   <meta property="og:image:height" content="600" />
   <meta name="twitter:card" content="summary" />
@@ -23,105 +23,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <style>
-    .wrap{ max-width:1120px; margin:0 auto; padding:26px 20px 88px; }
-
-    header.hero{ position:relative; margin:12px 0 24px; }
-    .heading{ font-family: 'Lato', var(--font); font-weight:800; font-size:28px; letter-spacing:.2px; margin:0 0 8px; }
-    .lead{ color:var(--muted); font-size:16px; line-height:1.65; margin:0; }
-
-    /* Pills */
-    .pills{ display:flex; flex-wrap:wrap; gap:10px; margin:16px 0 0; }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; font-size:14px; color:var(--text);
-      border-radius:999px; border:1px solid rgba(255,255,255,.18);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.04) 100%),
-        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 120%);
-      background-color: var(--panel);
-      backdrop-filter: saturate(130%) blur(8px);
-      white-space:nowrap;
-    }
-
-    /* Grid */
-    .cols{ display:grid; grid-template-columns: 1.25fr .95fr; gap:20px; }
-
-    /* Card — base from style.css */
-    .card .inner{ padding:18px 18px 20px; }
-    .section-title{ font-family:'Lato', var(--font); font-weight:700; font-size:22px; margin:6px 0 10px; }
-    .muted{ color:var(--muted); }
-
-    /* Buttons */
-    .btn{
-      display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none;
-      padding:11px 16px; border-radius:14px; font-size:14px; color:var(--text);
-      border:1px solid rgba(255,255,255,.22);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.03) 100%),
-        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 120%);
-      background-color: var(--panel);
-      transition: transform .08s ease, filter .2s ease;
-    }
-    .btn:hover{ transform: translateY(-1px); filter:brightness(1.05); }
-    .btn:active{ outline:2px solid var(--ring); background: var(--ring); color:#00243a; }
-    .btn:focus-visible{ outline:3px solid var(--ring); outline-offset:2px; }
-
-    /* Codebox */
-    .codebox{ position:relative; padding:14px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
-    .small{ font-size:12px; }
-
-    /* Lists */
-    .list{ margin:10px 0 0; padding-left:18px; line-height:1.7; }
-    .list li{ margin:6px 0; }
-
-    /* Steps */
-    .steps{ counter-reset: step; display:flex; flex-direction:column; gap:12px; margin:12px 0 0; }
-    .step{ position:relative; padding-left:44px; }
-    .step::before{
-      counter-increment: step; content: counter(step);
-      position:absolute; left:0; top:2px; width:28px; height:28px; display:grid; place-items:center;
-      border-radius:9999px; border:1px solid rgba(255,255,255,.22);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.04) 100%),
-        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 120%);
-      background-color: var(--panel);
-      font-weight:700; font-family:'Lato', var(--font); color:var(--text);
-    }
-
-    /* details/summary for FAQs */
-    details{ padding:12px 14px; }
-    summary{ cursor:pointer; font-weight:700; font-family:'Lato', var(--font); }
-    details + details{ margin-top:10px; }
-
-    /* Utility */
-    .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-    .faq-title{ font-size:18px; }
-    .spacer{ height:10px; }
-    .mono{ font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
-
-    /* Underlined link utility */
-    .link-underline{
-      color: var(--text);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      text-decoration-thickness: 1.5px;
-    }
-    .link-underline:visited{ color: var(--text); }
-    .link-underline:hover{ opacity: .9; }
-    .link-underline:focus-visible{
-      outline: 3px solid var(--ring);
-      outline-offset: 2px;
-      border-radius: 3px;
-    }
-
-    /* Footer */
-    .site-footer{ margin-top:34px; padding-top:16px; padding-bottom:0; border-top-color:rgba(255,255,255,.16); }
-
-    @media (max-width: 900px){ .cols{ grid-template-columns:1fr; } }
-    @media (max-width: 640px){ .wrap{ padding:18px 14px 64px; } }
-  </style>
+  <link rel="icon" href="images/icon.png">
+  <link rel="stylesheet" href="terms.css">
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
   <!-- nav-v2-static -->
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
@@ -135,7 +41,7 @@
       </div>
     </div>
   </nav>
-  <main class="wrap" role="main">
+  <main class="wrap" role="main" id="main">
     <header class="hero">
       <h1 class="heading">Music Usage & Credit</h1>
       <p class="lead">Free to use as background <strong>with visible credit</strong>. No reuploads. Ask permission for projects. If YouTube flags a cover, follow the steps below.</p>

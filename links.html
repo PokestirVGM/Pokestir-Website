@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -10,7 +10,7 @@
   <meta property="og:title" content="Pokestir - Links" />
   <meta property="og:description" content="Official Pokestir music, social, and support links." />
   <meta property="og:url" content="https://www.pokestir.com/links.html" />
-  <meta property="og:image" content="images/logo%204k.png" />
+  <meta property="og:image" content="images/logo-4k.png" />
   <meta property="og:image:width" content="600" />
   <meta property="og:image:height" content="600" />
   <meta name="twitter:card" content="summary" />
@@ -23,63 +23,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Container */
-    .wrap{ max-width:1120px; margin:0 auto; padding:26px 22px 88px; display:grid; gap:26px; }
-
-    /* Headings */
-    .section-title{ font-family:"Lato", var(--font); font-weight:800; font-size:28px; letter-spacing:.2px; margin:10px 2px 14px; }
-
-    /* Card — base from style.css; add padding for this page's layout */
-    .card{ padding:18px; background-clip: padding-box; }
-    /* Links grid */
-    .links{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-top:18px; }
-
-    /* Button tile */
-    .btn{ position:relative; display:grid; grid-template-columns: 32px 1fr; align-items:center; gap:12px; width:100%;
-      padding:11px 16px; border-radius:14px; text-decoration:none; font-weight:700; letter-spacing:.2px;
-      border:1px solid rgba(255,255,255,.22);
-      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%);
-      overflow:hidden; transition: transform .08s ease, filter .2s ease, box-shadow .2s ease; }
-    .btn:hover{ transform:translateY(-1px); filter:brightness(1.05); box-shadow:0 10px 28px rgba(2,6,23,.45); }
-    .btn:active{ outline:2px solid var(--ring); outline-offset:2px; transform:translateY(0); }
-    .btn:focus-visible{ outline:3px solid var(--ring); outline-offset:2px; }
-    .text{ display:grid; gap:3px; }
-    .title{ font-size:16px; color:#fff; }
-    .meta{ font-size:12px; color:rgba(255,255,255,.88); }
-
-    .ext{ width:24px; height:24px; display:inline-grid; place-items:center; }
-    .ext svg{ width:24px; height:24px; display:block; fill:#fff; }
-    .ext img{ width:24px; height:24px; display:block; }
-
-    /* Platform tints */
-    .yt      { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #ff0000; }
-    .bandcamp{ background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #1ea0c3; }
-    .spotify { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #1db954; }
-    .apple   { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #fa2d48; }
-    .amazon  { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #5a2dff; }
-    .tidal   { background: linear-gradient(180deg, rgba(255,255,255,.04) 0%, rgba(0,0,0,.10) 100%), #0b0b0b; }
-    .deezer  { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #0ec7f7; color:#0b1220; }
-
-    .x       { background: linear-gradient(180deg, rgba(255,255,255,.04) 0%, rgba(0,0,0,.10) 100%), #000; }
-    .bsky    { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #1185fe; }
-    .instagram{ background-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 100%), linear-gradient(45deg,#f58529,#f56040,#f77737,#e1306c,#c13584,#833ab4,#515bd4); }
-    .discord { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #5865f2; }
-
-    .patreon { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #ff424d; }
-    .kofi    { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #00b9fe; color:#0b1220; }
-
-    /* Footer */
-    .site-footer{ margin-top:-6px; padding:0; border-top:none; }
-
-    /* Responsive */
-    @media (max-width:900px){ .links{ grid-template-columns: 1fr; } }
-    @media (max-width:640px){ .wrap{ padding:18px 14px 64px; } }
-    @media (max-width:420px){ .btn{ grid-template-columns: 28px 1fr; row-gap:4px; } }
-
-  </style>
+  <link rel="icon" href="images/icon.png">
+  <link rel="stylesheet" href="links.css">
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
   <!-- nav-v2-static -->
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
@@ -93,7 +41,7 @@
       </div>
     </div>
   </nav>
-  <main class="wrap" role="main">
+  <main class="wrap" role="main" id="main">
     <h1 class="sr-only">Pokestir Links</h1>
     <!-- MUSIC STREAMING PLATFORMS -->
     <section class="card" aria-labelledby="music-title">
