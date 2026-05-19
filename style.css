@@ -5,6 +5,7 @@
   --bg: #0b0f19;
   --panel: #0f172a;
   --text: #e5e7eb;
+  --white: #fff;
   --muted: #94a3b8;
   --ring: #10B1FF;
   --radius: 22px;
@@ -52,7 +53,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   display: flex; align-items: center; justify-content: space-between; gap: 14px; box-sizing: border-box;
 }
 .site-nav__brand {
-  flex: 0 0 auto; color: #fff; font-family: "Lato", var(--font); font-weight: 800;
+  flex: 0 0 auto; color: var(--white); font-family: "Lato", var(--font); font-weight: 800;
   letter-spacing: .2px; line-height: 1; text-decoration: none;
   padding: 9px 10px; border: 1px solid transparent; border-radius: 12px;
 }
@@ -80,9 +81,10 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   .site-nav__inner { padding: 10px 14px; }
   .site-nav__toggle {
     display: flex; align-items: center; justify-content: center;
-    margin-left: auto; padding: 8px 10px;
+    margin-left: auto; padding: 10px 12px;
+    min-width: 44px; min-height: 44px;
     background: transparent; border: 1px solid rgba(255,255,255,.18); border-radius: 12px;
-    color: #fff; font-size: 20px; cursor: pointer; line-height: 1;
+    color: var(--white); font-size: 20px; cursor: pointer; line-height: 1;
   }
   .site-nav__toggle:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
   .site-nav__links {

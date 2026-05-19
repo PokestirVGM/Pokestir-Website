@@ -1,7 +1,7 @@
-.wrap{ max-width:1120px; margin:0 auto; padding:26px 20px 88px; }
+.wrap{ max-width:1120px; margin:0 auto; padding:26px 18px 88px; }
 
 header.hero{ position:relative; margin:12px 0 24px; }
-.heading{ font-family: 'Lato', var(--font); font-weight:800; font-size:28px; letter-spacing:.2px; margin:0 0 8px; }
+.heading{ font-family: "Lato", var(--font); font-weight:800; font-size:28px; letter-spacing:.2px; margin:0 0 8px; }
 .lead{ color:var(--muted); font-size:16px; line-height:1.65; margin:0; }
 
 /* Pills */
@@ -22,7 +22,7 @@ header.hero{ position:relative; margin:12px 0 24px; }
 
 /* Card — base from style.css */
 .card .inner{ padding:18px 18px 20px; }
-.section-title{ font-family:'Lato', var(--font); font-weight:700; font-size:22px; margin:6px 0 10px; }
+.section-title{ font-family:"Lato", var(--font); font-weight:700; font-size:22px; margin:6px 0 10px; }
 .muted{ color:var(--muted); }
 
 /* Buttons */
@@ -37,11 +37,11 @@ header.hero{ position:relative; margin:12px 0 24px; }
   transition: transform .08s ease, filter .2s ease;
 }
 .btn:hover{ transform: translateY(-1px); filter:brightness(1.05); }
-.btn:active{ outline:2px solid var(--ring); background: var(--ring); color:#00243a; }
+.btn:active{ outline:2px solid var(--ring); background: var(--ring); color:#001827; }
 .btn:focus-visible{ outline:3px solid var(--ring); outline-offset:2px; }
 
 /* Codebox */
-.codebox{ position:relative; padding:14px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+.codebox{ position:relative; padding:14px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; overflow-wrap:anywhere; word-break:break-word; }
 .small{ font-size:12px; }
 
 /* Lists */
@@ -59,12 +59,12 @@ header.hero{ position:relative; margin:12px 0 24px; }
     linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.04) 100%),
     linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 120%);
   background-color: var(--panel);
-  font-weight:700; font-family:'Lato', var(--font); color:var(--text);
+  font-weight:700; font-family:"Lato", var(--font); color:var(--text);
 }
 
 /* details/summary for FAQs */
 details{ padding:12px 14px; }
-summary{ cursor:pointer; font-weight:700; font-family:'Lato', var(--font); }
+summary{ cursor:pointer; font-weight:700; font-family:"Lato", var(--font); }
 details + details{ margin-top:10px; }
 
 /* Utility */
@@ -92,4 +92,9 @@ details + details{ margin-top:10px; }
 .site-footer{ margin-top:34px; padding-top:16px; padding-bottom:0; border-top-color:rgba(255,255,255,.16); }
 
 @media (max-width: 900px){ .cols{ grid-template-columns:1fr; } }
-@media (max-width: 640px){ .wrap{ padding:18px 14px 64px; } }
+@media (max-width: 640px){
+  .wrap{ padding:18px 14px 64px; }
+  .grid-2{ grid-template-columns:1fr; gap:8px; }
+  .step{ padding-left:38px; }
+  .step::before{ width:24px; height:24px; top:3px; font-size:14px; }
+}

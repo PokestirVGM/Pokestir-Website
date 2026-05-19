@@ -1,4 +1,13 @@
-﻿    /* =========================
+﻿(function () {
+    'use strict';
+
+    function escapeHTML(s) {
+      return (s == null ? '' : String(s)).replace(/[&<>"']/g, m => ({
+        '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+      }[m]));
+    }
+
+    /* =========================
        MUSIC: Manual Spotify list
        ========================= */
     const releases = [
@@ -10,14 +19,14 @@
       { name:'World Themes Collection: Pokémon, Vol. 5',                            type:'album', id:'2KMBQ9PrRVWoc7abiNO7oN', monthYear:'August 2025' },
       { name:'Super Mario Classics Collection',                                      type:'album', id:'7C8mazhT2QhgUWds54vRKn', monthYear:'August 2025' },
       { name:'Mii Channels Collection',                                              type:'album', id:'5Yyrx0CTPHrPv5DBloEsmw', monthYear:'May 2025' },
-      { name:'Alola Adventures',                                                     type:'album', id:'4UTytdnpTZ95LHw9u5uRce', monthYear:'Sep 2024' },
+      { name:'Alola Adventures',                                                     type:'album', id:'4UTytdnpTZ95LHw9u5uRce', monthYear:'September 2024' },
       { name:'World Themes Collection: Pokémon, Vol. 4',                            type:'album', id:'4V9EV0LocVpADhN3YD3mjI', monthYear:'May 2024' },
-      { name:'Kalos Towns & Cities Collection',                                      type:'album', id:'4UFVXeicDN4Zl9y2pLIOCR', monthYear:'Nov 2023' },
-      { name:'Battle Themes Collection: Pokémon, Vol. 2',                           type:'album', id:'1TYyDGLSOmHEsSPSxOPGOP', monthYear:'Nov 2023' },
-      { name:'Battle Themes Collection: Pokémon, Vol. 1',                           type:'album', id:'7e4x3VdWtWoAJD46JPfo5j', monthYear:'Sep 2022' },
-      { name:'World Themes Collection — Pokémon, Vol. 3',                           type:'album', id:'1cn4hO4bLen8ybLB4Xdoph', monthYear:'Aug 2022' },
-      { name:'World Themes Collection — Pokémon, Vol. 2',                           type:'album', id:'0VVcplKK4JRHlQFFIaEeze', monthYear:'Jan 2022' },
-      { name:'World Themes Collection: Pokémon, Vol. 1',                            type:'album', id:'2ikzlVg14ieFr39MujeVVC', monthYear:'Aug 2021' },
+      { name:'Kalos Towns & Cities Collection',                                      type:'album', id:'4UFVXeicDN4Zl9y2pLIOCR', monthYear:'November 2023' },
+      { name:'Battle Themes Collection: Pokémon, Vol. 2',                           type:'album', id:'1TYyDGLSOmHEsSPSxOPGOP', monthYear:'November 2023' },
+      { name:'Battle Themes Collection: Pokémon, Vol. 1',                           type:'album', id:'7e4x3VdWtWoAJD46JPfo5j', monthYear:'September 2022' },
+      { name:'World Themes Collection: Pokémon, Vol. 3',                            type:'album', id:'1cn4hO4bLen8ybLB4Xdoph', monthYear:'August 2022' },
+      { name:'World Themes Collection: Pokémon, Vol. 2',                            type:'album', id:'0VVcplKK4JRHlQFFIaEeze', monthYear:'January 2022' },
+      { name:'World Themes Collection: Pokémon, Vol. 1',                            type:'album', id:'2ikzlVg14ieFr39MujeVVC', monthYear:'August 2021' },
     ];
 
     const albumsEl = document.getElementById('albums');
@@ -62,8 +71,8 @@
       div.dataset.id = item.id;
       div.innerHTML = `
         <div class="ainfo">
-          <div class="aname">${item.name || 'Loading…'}</div>
-          ${item.monthYear ? `<div class="ameta">${item.monthYear}</div>` : ''}
+          <div class="aname">${escapeHTML(item.name) || 'Loading…'}</div>
+          ${item.monthYear ? `<div class="ameta">${escapeHTML(item.monthYear)}</div>` : ''}
         </div>
       `;
 
@@ -201,10 +210,10 @@
           li.setAttribute('tabindex', '0');
           li.innerHTML = `
             <div class="mw-item-info">
-              <div class="mw-item-title">${track.title}</div>
-              <div class="mw-item-meta">${track.tags.join(' · ')}</div>
+              <div class="mw-item-title">${escapeHTML(track.title)}</div>
+              <div class="mw-item-meta">${escapeHTML(track.tags.join(' · '))}</div>
             </div>
-            ${track.duration ? `<span class="mw-item-dur">${track.duration}</span>` : ''}
+            ${track.duration ? `<span class="mw-item-dur">${escapeHTML(track.duration)}</span>` : ''}
           `;
           li.addEventListener('click', () => play(idx));
           li.addEventListener('keydown', e => {
@@ -219,9 +228,9 @@
         if (!track) return;
         currentIdx = idx;
         audio.src = track.src;
-        audio.play();
+        audio.play().catch(() => {});
         titleEl.textContent = track.title;
-        ptagsEl.innerHTML = track.tags.map(t => `<span class="mw-ptag">${t}</span>`).join('');
+        ptagsEl.innerHTML = track.tags.map(t => `<span class="mw-ptag">${escapeHTML(t)}</span>`).join('');
         seekEl.value = 0;
         seekEl.style.setProperty('--pct', '0%');
         curEl.textContent = '0:00';
@@ -270,7 +279,7 @@
           if (filtered.length) play(TRACKS.indexOf(filtered[0]));
           return;
         }
-        audio.paused ? audio.play() : audio.pause();
+        audio.paused ? audio.play().catch(() => {}) : audio.pause();
       });
 
       prevBtn.addEventListener('click', () => {
@@ -306,3 +315,5 @@
       window.addEventListener('resize', update, { passive: true });
       update();
     });
+
+}());

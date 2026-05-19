@@ -18,6 +18,27 @@
   <meta name="twitter:creator" content="@pokestir" />
   <link rel="canonical" href="https://www.pokestir.com/" />
   <title>Pokestir - Home</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "Pokestir",
+    "url": "https://www.pokestir.com/",
+    "image": "https://www.pokestir.com/images/logo-4k.png",
+    "sameAs": [
+      "https://www.youtube.com/pokestir",
+      "https://pokestir.bandcamp.com/",
+      "https://open.spotify.com/artist/3O0lydxUWthTMN8WjCUqZc",
+      "https://music.apple.com/us/artist/pokestir/1515709909",
+      "https://music.amazon.com/artists/B089B27TGY/pokestir",
+      "https://tidal.com/browse/artist/19791087",
+      "https://www.deezer.com/us/artist/96092082",
+      "https://x.com/pokestir",
+      "https://bsky.app/profile/pokestir.com",
+      "https://www.instagram.com/pokestir_/"
+    ]
+  }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,8 +64,8 @@
       </div>
     </div>
   </nav>
-  <a href="#music" class="skip-link">Skip to Music</a>
-<main class="wrap" role="main">
+  <a href="#main" class="skip-link">Skip to content</a>
+<main class="wrap" role="main" id="main">
     <!-- ABOUT / COMMISSIONS FIRST -->
     <header id="about">
       <h1 class="section-title">Pokestir</h1>
@@ -101,9 +122,10 @@
         <!-- About view: portrait -->
         <div id="rightAbout" class="portrait">
           <figure class="frame" aria-label="Artist portrait">
-            <img
-              src="images/logo-4k.png"
-              alt="Portrait of Pokestir" width="600" height="600" loading="eager" decoding="async">
+            <picture>
+              <source type="image/webp" srcset="images/logo.webp 1x, images/logo@2x.webp 2x">
+              <img src="images/logo-4k.png" alt="Portrait of Pokestir" width="600" height="600" decoding="async">
+            </picture>
           </figure>
         </div>
 
@@ -126,7 +148,7 @@
     </section>
 
     <header id="mywork-header">
-      <div class="section-title">My Work</div>
+      <h2 class="section-title">My Work</h2>
       <p class="section-sub">A selection from my portfolio. Click a track to play.</p>
     </header>
 
@@ -153,7 +175,7 @@
     </section>
 
     <header id="music-header">
-      <div class="section-title">VGM Albums</div>
+      <h2 class="section-title">VGM Albums</h2>
       <p class="section-sub">Select a release to start playing.</p>
     </header>
 

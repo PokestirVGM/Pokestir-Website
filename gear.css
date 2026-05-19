@@ -21,7 +21,7 @@ select, .btn{ padding:11px 16px; border-radius:14px; border:1px solid rgba(255,2
 .btn[aria-pressed="true"]{ outline:2px solid var(--ring) }
 .btn-clear{ background: transparent; border-color: rgba(255,255,255,.14); color: var(--muted) }
 
-.section-title{ font-family:"Lato"; font-weight:800; font-size:28px; margin:22px 0 14px }
+.section-title{ font-family:"Lato", var(--font); font-weight:800; font-size:28px; margin:22px 0 14px }
 
 /* Tag bars */
 .pillbar{ display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 14px }
@@ -72,4 +72,8 @@ select{
   .sort-top select{ width:100% }
   .controls{ position:static }
   .controls-inner{ padding:10px 14px }
+  .search input::placeholder{ font-size:13px }
+  .pill{ padding:7px 14px; font-size:14px }
+  .card-inner{ grid-template-columns:1fr; gap:4px; padding:14px }
+  .date-added{ margin-left:0; margin-top:4px }
 }
