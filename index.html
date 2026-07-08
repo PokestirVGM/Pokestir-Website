@@ -1,22 +1,22 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="description" content="Pokestir's composer profile, commission details, and VGM album player."/>
-  <meta name="theme-color" content="#0b0f19"/>
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Pokestir" />
-  <meta property="og:title" content="Pokestir - Home" />
-  <meta property="og:description" content="Pokestir's composer profile, commission details, and VGM album player." />
-  <meta property="og:url" content="https://www.pokestir.com/" />
-  <meta property="og:image" content="https://www.pokestir.com/images/logo-4k.png" />
-  <meta property="og:image:width" content="3000" />
-  <meta property="og:image:height" content="3000" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@pokestir" />
-  <meta name="twitter:creator" content="@pokestir" />
-  <link rel="canonical" href="https://www.pokestir.com/" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pokestir's composer profile, commission details, and VGM album player.">
+  <meta name="theme-color" content="#0b0f19">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pokestir">
+  <meta property="og:title" content="Pokestir - Home">
+  <meta property="og:description" content="Pokestir's composer profile, commission details, and VGM album player.">
+  <meta property="og:url" content="https://www.pokestir.com/">
+  <meta property="og:image" content="https://www.pokestir.com/images/logo-4k.png">
+  <meta property="og:image:width" content="3000">
+  <meta property="og:image:height" content="3000">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@pokestir">
+  <meta name="twitter:creator" content="@pokestir">
+  <link rel="canonical" href="https://www.pokestir.com/">
   <title>Pokestir - Home</title>
   <script type="application/ld+json">
   {
@@ -39,23 +39,22 @@
     ]
   }
   </script>
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="index.css">
   <link rel="icon" href="images/icon.png">
   <script src="tracks.js" defer></script>
-
-  <link rel="stylesheet" href="index.css">
+  <script src="player.js" defer></script>
+  <script src="nav.js" defer></script>
 </head>
 <body>
-  <!-- nav-v2-static -->
+  <a href="#main" class="skip-link">Skip to content</a>
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
       <a class="site-nav__brand" href="index.html"><img src="images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
-      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links">&#9776;</button>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="index.html">Home</a>
         <a href="gearAndSoftware.html">Software & Gear</a>
@@ -64,15 +63,15 @@
       </div>
     </div>
   </nav>
-  <a href="#main" class="skip-link">Skip to content</a>
-<main class="wrap" role="main" id="main">
-    <!-- ABOUT / COMMISSIONS FIRST -->
+
+  <main class="wrap" role="main" id="main">
+    <!-- ABOUT / COMMISSIONS -->
     <header id="about">
-      <h1 class="section-title">Pokestir</h1>
+      <h1 class="page-title">Pokestir</h1>
       <p class="section-sub">Music Composer, Arranger &amp; Producer</p>
     </header>
 
-    <section class="card about" aria-label="About / Commissions">
+    <section class="card" aria-label="About / Commissions">
       <div class="agrid">
         <!-- Left column -->
         <div>
@@ -81,7 +80,6 @@
             <button id="tabComms" class="btn" role="tab" aria-selected="false" aria-controls="commView" type="button">Commissions</button>
           </div>
 
-          <!-- ABOUT VIEW -->
           <div id="bioView" role="tabpanel" aria-labelledby="tabAbout">
             <p class="lead">
               Nicholas, known as Pokestir, is a composer and arranger based in New York with 8 years of experience in music production. Specializing in video game music, he has built an extensive collection of arrangements featured on his YouTube channel and streaming platforms.
@@ -91,7 +89,6 @@
             </p>
           </div>
 
-          <!-- COMMISSIONS VIEW -->
           <div id="commView" role="tabpanel" aria-labelledby="tabComms" hidden>
             <div class="comm">
               <div class="note">
@@ -99,7 +96,7 @@
                 <ul class="contact-lines">
                   <li>Discord: <span>pokestir</span></li>
                   <li>Twitter/X: <a href="https://x.com/pokestir" target="_blank" rel="noopener">@pokestir</a></li>
-                  <li>Email: <span id="contactEmail">contact@pokestir.com</span></li>
+                  <li>Email: <span>contact@pokestir.com</span></li>
                 </ul>
               </div>
 
@@ -118,8 +115,7 @@
           </div>
         </div>
 
-        <!-- Right column switches per view -->
-        <!-- About view: portrait -->
+        <!-- Right column: portrait on About, terms on Commissions -->
         <div id="rightAbout" class="portrait">
           <figure class="frame" aria-label="Artist portrait">
             <picture>
@@ -129,7 +125,6 @@
           </figure>
         </div>
 
-        <!-- Commissions view: Terms -->
         <aside id="rightTerms" class="termswrap card-inset" hidden aria-label="Terms & Conditions">
           <div class="terms">
             <h3>TERMS &amp; CONDITIONS — By commissioning music, you agree to these terms.</h3>
@@ -147,12 +142,13 @@
       </div>
     </section>
 
+    <!-- MY WORK -->
     <header id="mywork-header">
-      <h2 class="section-title">My Work</h2>
+      <h2 class="page-title">My Work</h2>
       <p class="section-sub">A selection from my portfolio. Click a track to play.</p>
     </header>
 
-    <section class="card mw-card" id="mywork" aria-label="Music Player">
+    <section class="card" id="mywork" aria-label="Music Player">
       <div class="mw-player">
         <div class="mw-info">
           <div class="mw-title" id="mwTitle">Select a track to begin</div>
@@ -174,8 +170,9 @@
       <audio id="mwAudio" preload="metadata"></audio>
     </section>
 
+    <!-- VGM ALBUMS -->
     <header id="music-header">
-      <h2 class="section-title">VGM Albums</h2>
+      <h2 class="page-title">VGM Albums</h2>
       <p class="section-sub">Select a release to start playing.</p>
     </header>
 
@@ -193,8 +190,6 @@
     <footer class="site-footer" role="contentinfo">Copyright &copy; 2026 Pokestir. All rights reserved.</footer>
   </main>
 
-    <script src="player.js" defer></script>
-  <script src="nav.js" defer></script>
   <nav class="scroll-dots" aria-label="Page sections">
     <a class="scroll-dot" href="#about" aria-label="About" data-label="About"></a>
     <a class="scroll-dot" href="#mywork-header" aria-label="My Work" data-label="My Work"></a>

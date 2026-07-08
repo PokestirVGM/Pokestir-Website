@@ -4,7 +4,6 @@
 // Fields:
 //   title    — display name shown in the player and list (required)
 //   src      — path to the MP3 relative to the site root, e.g. "audio/my-track.mp3" (required)
-//   cover    — path to cover image, e.g. "audio/covers/my-track.jpg" (optional)
 //   duration — display string shown in the list before audio loads, e.g. "3:42" (optional)
 //   tags     — array of strings; mix freely across any categories you like
 //

@@ -1,37 +1,38 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A searchable catalog of Pokestir's music gear, sample libraries, synths, and tools." />
-  <meta name="theme-color" content="#0b0f19" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Pokestir" />
-  <meta property="og:title" content="Pokestir - Software &amp; Gear" />
-  <meta property="og:description" content="A searchable catalog of Pokestir's music gear, sample libraries, synths, and tools." />
-  <meta property="og:url" content="https://www.pokestir.com/gearAndSoftware.html" />
-  <meta property="og:image" content="https://www.pokestir.com/images/logo-4k.png" />
-  <meta property="og:image:width" content="3000" />
-  <meta property="og:image:height" content="3000" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@pokestir" />
-  <meta name="twitter:creator" content="@pokestir" />
-  <link rel="canonical" href="https://www.pokestir.com/gearAndSoftware.html" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A searchable catalog of Pokestir's music gear, sample libraries, synths, and tools.">
+  <meta name="theme-color" content="#0b0f19">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pokestir">
+  <meta property="og:title" content="Pokestir - Software &amp; Gear">
+  <meta property="og:description" content="A searchable catalog of Pokestir's music gear, sample libraries, synths, and tools.">
+  <meta property="og:url" content="https://www.pokestir.com/gearAndSoftware.html">
+  <meta property="og:image" content="https://www.pokestir.com/images/logo-4k.png">
+  <meta property="og:image:width" content="3000">
+  <meta property="og:image:height" content="3000">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@pokestir">
+  <meta name="twitter:creator" content="@pokestir">
+  <link rel="canonical" href="https://www.pokestir.com/gearAndSoftware.html">
   <title>Pokestir - Software &amp; Gear</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="images/icon.png">
   <link rel="stylesheet" href="gear.css">
+  <link rel="icon" href="images/icon.png">
+  <script src="gear.js" defer></script>
+  <script src="nav.js" defer></script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
-  <!-- nav-v2-static -->
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
       <a class="site-nav__brand" href="index.html"><img src="images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
-      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links">&#9776;</button>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="index.html">Home</a>
         <a href="gearAndSoftware.html">Software & Gear</a>
@@ -40,32 +41,24 @@
       </div>
     </div>
   </nav>
-  <div class="controls">
-    <div class="controls-inner">
+
+  <main class="wrap" role="main" id="main">
+    <h1 class="page-title">Gear, Libraries &amp; Tools <span class="muted" id="count"></span></h1>
+
+    <div class="controls">
       <div class="search">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.6"/></svg>
-        <input id="q" type="search" placeholder="Search product, vendor, or notes... (e.g., 'Strings', 'Reverb', 'Komplete')" aria-label="Search" />
+        <input id="q" type="search" placeholder="Search products, vendors, notes&#8230;" aria-label="Search">
       </div>
-      <!-- Category dropdown removed -->
       <select id="vendor" aria-label="Vendor"></select>
       <select id="sortTop" aria-label="Sort by">
         <option value="recent" selected>Date Added (Newest)</option>
         <option value="oldest">Date Added (Oldest)</option>
         <option value="name">Name A-Z</option>
       </select>
-      <div class="control-actions">
-        <button class="btn btn-clear" id="clear">Clear</button>
-      </div>
-    </div>
-  </div>
-
-  <main class="wrap" role="main" id="main">
-    <div class="headingbar">
-      <h1 class="heading">Gear, Libraries &amp; Tools <span class="muted" id="count"></span></h1>
-
+      <button class="btn btn-clear" id="clear" type="button">Clear</button>
     </div>
 
-    <!-- NEW: Category pills (default = All categories when none selected) -->
     <div id="categoriesWrap">
       <div class="muted filter-label">Categories</div>
       <div class="pillbar" id="catpills"></div>
@@ -78,12 +71,8 @@
 
     <div class="grid" id="grid" role="list"></div>
 
-    <div class="footer-note">Tip: Filter by category first to reveal context-specific sub-tags (e.g., Strings, Reverb, etc.).</div>
+    <div class="footer-note">Select a category to filter by specific tags.</div>
     <footer class="site-footer" role="contentinfo">Copyright &copy; 2026 Pokestir. All rights reserved.</footer>
   </main>
-
-
-    <script src="gear.js" defer></script>
-  <script src="nav.js" defer></script>
 </body>
 </html>

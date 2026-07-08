@@ -1,52 +1,58 @@
 (function () {
   'use strict';
-  const path = window.location.pathname;
-  let page = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
-  if (page === '' || page === '/') page = 'index.html';
-  document.querySelectorAll('.site-nav__links a').forEach(function (a) {
-    a.removeAttribute('aria-current');
-    if ((a.getAttribute('href') || '') === page) {
-      a.setAttribute('aria-current', 'page');
-    }
+
+  // Highlight the current page in the nav.
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.site-nav__links a').forEach((a) => {
+    if (a.getAttribute('href') === page) a.setAttribute('aria-current', 'page');
   });
 
+  const siteNav = document.querySelector('.site-nav');
   const toggle = document.querySelector('.site-nav__toggle');
   const menu = document.getElementById('site-nav-links');
-  const siteNav = document.querySelector('.site-nav');
+  if (!siteNav || !toggle || !menu) return;
+
+  // Expose the measured nav height as --nav-h so CSS can position elements
+  // directly below it (mobile dropdown menu, sticky filter bars).
+  function setNavHeight() {
+    document.documentElement.style.setProperty('--nav-h', siteNav.offsetHeight + 'px');
+  }
+  setNavHeight();
+  new ResizeObserver(setNavHeight).observe(siteNav);
 
   // On mobile, move the menu element outside <nav> so its backdrop-filter
   // can see the full viewport rather than being clipped by the nav's own
-  // backdrop root stacking context.
-  if (menu && siteNav && window.matchMedia('(max-width: 640px)').matches) {
-    siteNav.insertAdjacentElement('afterend', menu);
+  // backdrop root stacking context. Move it back when the viewport widens.
+  const mobile = window.matchMedia('(max-width: 640px)');
+  const menuHome = menu.parentElement;
+  function placeMenu() {
+    if (mobile.matches) siteNav.insertAdjacentElement('afterend', menu);
+    else menuHome.appendChild(menu);
+  }
+  placeMenu();
+  mobile.addEventListener('change', placeMenu);
+
+  function setOpen(open) {
+    menu.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
   }
 
-  function updateMenuTop() {
-    if (menu && siteNav) {
-      if (window.innerWidth <= 640) {
-        menu.style.top = siteNav.offsetHeight + 'px';
-      } else {
-        menu.style.top = '';
-      }
+  toggle.addEventListener('click', () => {
+    setOpen(!menu.classList.contains('is-open'));
+  });
+
+  // Close when clicking outside both the nav bar and the (possibly detached) menu.
+  document.addEventListener('click', (e) => {
+    if (menu.classList.contains('is-open') && !e.target.closest('.site-nav') && !menu.contains(e.target)) {
+      setOpen(false);
     }
-  }
-  updateMenuTop();
-  window.addEventListener('resize', updateMenuTop);
-  if (siteNav) new ResizeObserver(updateMenuTop).observe(siteNav);
+  });
 
-  if (toggle && menu) {
-    toggle.addEventListener('click', function () {
-      const open = menu.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-    });
-    document.addEventListener('click', function (e) {
-      // Close when clicking outside both the nav bar and the (now-detached) menu
-      if (!e.target.closest('.site-nav') && !menu.contains(e.target) && menu.classList.contains('is-open')) {
-        menu.classList.remove('is-open');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Open navigation');
-      }
-    });
-  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
 }());
