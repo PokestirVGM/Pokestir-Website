@@ -5,8 +5,41 @@
 
 /* ── Search / filter controls ── */
 .controls {
-  display: grid; grid-template-columns: 1fr auto auto auto; gap: 10px;
+  display: grid; grid-template-columns: 1fr auto auto auto auto; gap: 10px;
   margin: 0 0 10px;
+}
+
+/* Favorites-only toggle — a checkbox styled to match .btn's footprint */
+.fav-toggle {
+  display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
+  padding: 11px 16px; border-radius: var(--radius-md);
+  border: 1px solid var(--line-strong); background: var(--surface);
+  color: var(--text); font-size: 14px; font-weight: 700; letter-spacing: .2px;
+  white-space: nowrap; user-select: none;
+  transition: border-color .15s ease, background .15s ease;
+}
+.fav-toggle:hover { border-color: var(--line-bright); }
+.fav-toggle input {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.fav-toggle__box {
+  flex: 0 0 auto; width: 17px; height: 17px; border-radius: 5px;
+  border: 1px solid var(--line-strong); background: rgba(255,255,255,.05);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background .15s ease, border-color .15s ease;
+}
+.fav-toggle__box::after {
+  content: ""; width: 8px; height: 5px;
+  border-left: 2px solid var(--on-ring); border-bottom: 2px solid var(--on-ring);
+  transform: rotate(-45deg) translate(1px, -1px); opacity: 0;
+}
+.fav-toggle input:checked + .fav-toggle__box {
+  background: var(--ring); border-color: var(--line-bright);
+}
+.fav-toggle input:checked + .fav-toggle__box::after { opacity: 1; }
+.fav-toggle input:focus-visible + .fav-toggle__box {
+  outline: 2px solid var(--ring); outline-offset: 2px;
 }
 
 .search { position: relative; }

@@ -14,11 +14,12 @@
   const collator = new Intl.Collator(undefined, { sensitivity: "base" });
   const compareText = (a, b) => collator.compare(a || "", b || "");
 
-  const state = { q: "", category: "", vendor: "", sort: "recent", subtags: new Set() };
+  const state = { q: "", category: "", vendor: "", sort: "recent", subtags: new Set(), favOnly: false };
 
   const qEl = document.getElementById("q");
   const vendorSel = document.getElementById("vendor");
   const sortTop = document.getElementById("sortTop");
+  const favOnlyEl = document.getElementById("favOnly");
   const subtagsEl = document.getElementById("subtags");
   const catpillsEl = document.getElementById("catpills");
   const grid = document.getElementById("grid");
@@ -255,6 +256,7 @@
   };
 
   function match(item) {
+    if (state.favOnly && !item.favorite) return false;
     if (state.category && item.tag !== state.category) return false;
     if (state.vendor && item.vendor !== state.vendor) return false;
 
@@ -354,14 +356,20 @@
     state.sort = sortTop.value;
     render();
   });
+  favOnlyEl.addEventListener("change", () => {
+    state.favOnly = favOnlyEl.checked;
+    render();
+  });
 
   document.getElementById("clear").addEventListener("click", () => {
     state.q = "";
     state.category = "";
     state.vendor = "";
+    state.favOnly = false;
     state.subtags.clear();
     qEl.value = "";
     vendorSel.value = "";
+    favOnlyEl.checked = false;
     buildCategoryPills();
     buildSubtags();
     render();
