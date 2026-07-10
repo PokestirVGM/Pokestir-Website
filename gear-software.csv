@@ -1,390 +1,387 @@
-Product,Tag,Description,Subtags,Date
-Image-Line — FL Studio All Plugins Edition,Gear,Favorite DAW for piano roll & shortcuts,DAW,01/09/2019
-Voxengo — Span,Effect Plugin,Frequency spectrum analysis,Metering/Analysis,1/24/2019
-Ample Sound — Cloudrum,Sample Library,,Percussion/Drums,1/11/2020
-Spitfire Audio — Acoustic Shadows — Lea Bertucci,Sample Library,,Textures/Atmospheres,4/16/2020
-Spitfire Audio — Originals Cinematic Percussion,Sample Library,,Percussion/Drums,4/30/2020
-Spitfire Audio — Originals Felt Piano,Sample Library,,Keys/Pianos,5/3/2020
-Spitfire Audio — Bernard Herrmann Composer Toolkit,Sample Library,"Unique combos; great perc & strings",Strings;Percussion/Drums;Textures/Atmospheres,5/7/2020
-Spitfire Audio — BBC Symphony Orchestra Core,Sample Library,,Orchestral,5/26/2020
-Spitfire Audio — Studio Orchestra Professional Bundle,Sample Library,Dryer intimate sound; very versatile,Orchestral;Strings;Brass;Woodwinds,5/31/2020
-Spitfire Audio — Studio Brass Professional,Sample Library,,Brass;Orchestral,5/31/2020
-Waves — Bass Slapper,Sample Library,,Bass,6/26/2020
-Spitfire Audio — BBC Symphony Orchestra Professional,Sample Library,"Shines at quiet dynamics; has the best glock!",Orchestral;Percussion/Drums;Strings;Woodwinds,7/29/2020
-8Dio — Century Brass Solo Horn,Sample Library,,Brass,8/28/2020
-8Dio — Century Brass Ensemble & Solo,Sample Library,Loud cinematic brass when needed,Brass,8/28/2020
-Spitfire Audio — Originals Cinematic Soft Piano,Sample Library,,Keys/Pianos,9/22/2020
-Spitfire Audio — Studio Woodwinds Professional,Sample Library,,Woodwinds;Orchestral,9/22/2020
-8Dio — Century Brass Solo Trumpet,Sample Library,,Brass,9/28/2020
-Impact Soundworks — Mega Brass,Sample Library,,Brass,10/1/2020
-Impact Soundworks — Super Audio Cart,Sample Library,,Keys/Pianos;Textures/Atmospheres,10/1/2020
-8Dio — Century Brass Ensemble Trumpets,Sample Library,,Brass,11/6/2020
-8Dio — Century Brass Ensemble Horns,Sample Library,,Brass,11/6/2020
-8Dio — Century Brass Ensemble Trombones,Sample Library,,Brass,11/6/2020
-8Dio — Fire Trumpet,Sample Library,,Brass,11/7/2020
-8Dio — Fire Saxophone,Sample Library,,Woodwinds,11/7/2020
-Performance Samples — Oceania,Sample Library,Powerful choir; easy to use,Choir/Voices,11/10/2020
-8Dio — Wind Chimes,Sample Library,,Percussion/Drums,11/10/2020
-8Dio — Century Brass Solo Trombone,Sample Library,,Brass,11/18/2020
-Spitfire Audio — Studio Strings Professional,Sample Library,,Strings;Orchestral,11/25/2020
-Spitfire Audio — Ricotti Mallets,Sample Library,Layers well with BBC mallets,Percussion/Drums,11/25/2020
-Spitfire Audio — Spitfire Harp,Sample Library,One of the best harps; great layered,Harp,11/25/2020
-Spitfire Audio — Orchestral Swarm,Sample Library,Excellent for textures and motion,Textures/Atmospheres;Orchestral,11/25/2020
-Spitfire Audio — Aperture Orchestra,Sample Library,,Orchestral;Textures/Atmospheres,11/25/2020
-HAVE Instruments — Omnidrums,Sample Library,,Percussion/Drums,12/3/2020
-HAVE Instruments — Toys,Sample Library,,Percussion/Drums,12/5/2020
-Spitfire Audio — Originals Drumline,Sample Library,,Percussion/Drums,12/18/2020
-iZotope — Elements Suite,Effect Plugin,,Other Effects,12/19/2020
-Steven Slate — Steven Slate Drums 5.5,Sample Library,Great out of the box,Percussion/Drums,12/24/2020
-Native Instruments — Komplete 13 Select,Sample Library,,Multi-instrument,12/24/2020
-Orchestral Tools — Berlin Woodwinds,Sample Library,,Woodwinds;Orchestral,1/1/2021
-MOTU — M2 (Audio Interface),Gear,Fantastic value; strong headphone amp,Audio Interface,1/11/2021
-Audio Ollie — Taste,Sample Library,,Textures/Atmospheres,1/14/2021
-Audio Imperia — Areia Lite,Sample Library,,Strings;Orchestral,1/18/2021
-8Dio — Century Brass Solo Tuba,Sample Library,,Brass,2/11/2021
-Aaron Venture — Infinite Brass,Sample Library,"Outstanding, versatile, and powerful brass",Brass;Orchestral,3/25/2021
-Cinesamples — Taylor Davis Violin,Sample Library,Versatile solo violin,Strings,4/9/2021
-Cinesamples — Tina Guo Acoustic Cello,Sample Library,Expressive emotional cello,Strings,4/10/2021
-Aaron Venture — Infinite Woodwinds,Sample Library,Very versatile woodwinds,Woodwinds;Orchestral,5/9/2021
-Native Instruments — Symphony Series: Woodwind Ensemble,Sample Library,,Woodwinds;Orchestral,6/1/2021
-Native Instruments — TRK-01,Synth,,Drums;Bass,6/1/2021
-Native Instruments — Super 8,Synth,,Analog/VA,6/1/2021
-Native Instruments — Skanner XT,Synth,,Wavetable/Hybrid,6/1/2021
-Native Instruments — Symphony Series: String Ensemble,Sample Library,,Strings;Orchestral,6/1/2021
-Native Instruments — Symphony Series: Brass Ensemble,Sample Library,,Brass;Orchestral,6/1/2021
-Native Instruments — Retro Machines MK2,Synth,,Analog/VA,6/1/2021
-Native Instruments — Rounds,Synth,,Wavetable/Hybrid,6/1/2021
-Native Instruments — Symphony Series: Woodwind Solo,Sample Library,,Woodwinds;Orchestral,6/1/2021
-Native Instruments — Symphony Series: Brass Solo,Sample Library,,Brass;Orchestral,6/1/2021
-Native Instruments — Komplete Kontrol,Synth,,Other Synth,6/1/2021
-Native Instruments — Reaktor Spark,Synth,,Wavetable/Hybrid,6/1/2021
-Native Instruments — Session Bassist — Prime Bass,Sample Library,,Bass,6/1/2021
-Native Instruments — Scarbee Rickenbacker Bass,Sample Library,,Bass,6/1/2021
-Native Instruments — Scarbee Pre-Bass (Amped),Sample Library,,Bass,6/1/2021
-Native Instruments — Scarbee MM-Bass (Amped),Sample Library,,Bass,6/1/2021
-Native Instruments — Reaktor 6,Synth,,Modular/Builder,6/1/2021
-Native Instruments — Scarbee Jay-Bass,Sample Library,,Bass,6/1/2021
-Native Instruments — Battery 4,Synth,,Drums,6/1/2021
-Native Instruments — Flesh,Synth,,Wavetable/Hybrid,6/1/2021
-Native Instruments — Polyplex,Synth,,Drums,6/1/2021
-Native Instruments — BX_Oberhausen,Synth,,Analog/VA,6/1/2021
-Native Instruments — Blocks Prime,Synth,,Modular/Builder,6/1/2021
-Native Instruments — FM8,Synth,,Wavetable/Hybrid,6/1/2021
-Native Instruments — Form,Synth,,Wavetable/Hybrid,6/1/2021
-Native Instruments — Knifonium,Synth,,Analog/VA,6/1/2021
-Native Instruments — Kontour,Synth,,Wavetable/Hybrid,6/1/2021
-Native Instruments — Massive,Synth,,Wavetable/Hybrid,6/1/2021
-Native Instruments — Massive X,Synth,,Wavetable/Hybrid,6/1/2021
-Native Instruments — Monark,Synth,,Analog/VA,6/1/2021
-Native Instruments — Playbox,Synth,,Wavetable/Hybrid,6/1/2021
-Native Instruments — Razor,Synth,,Wavetable/Hybrid,6/1/2021
-Native Instruments — Reaktor Prism,Synth,,Wavetable/Hybrid,6/1/2021
-Native Instruments — Symphony Series: Percussion,Sample Library,,Percussion/Drums;Orchestral,6/1/2021
-Native Instruments — Amati Viola,Sample Library,,Strings,6/1/2021
-Native Instruments — Mallet Flux,Sample Library,,Percussion/Drums;Textures/Atmospheres,6/1/2021
-Native Instruments — Stradivari Cello,Sample Library,,Strings,6/1/2021
-Native Instruments — Alicia's Keys,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — Noire,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — Piano Colors,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — The Gentleman,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — The Giant,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — The Grandeur,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — The Maverick,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — Una Corda,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — George Duke Soul Treasures,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — Spotlight Series: West Africa,Sample Library,,World/Ethnic,6/1/2021
-Native Instruments — Treasures,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — Scarbee Clavinet/Pianet,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — Scarbee Mark 1,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — Vintage Organs,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — Abbey Road Vintage Drummer,Sample Library,,Percussion/Drums,6/1/2021
-Native Instruments — Abbey Road 50s Drummer,Sample Library,,Percussion/Drums,6/1/2021
-Native Instruments — Abbey Road 60s Drummer,Sample Library,,Percussion/Drums,6/1/2021
-Native Instruments — Abbey Road 70s Drummer,Sample Library,,Percussion/Drums,6/1/2021
-Native Instruments — Abbey Road 80s Drummer,Sample Library,,Percussion/Drums,6/1/2021
-Native Instruments — Abbey Road Modern Drummer,Sample Library,,Percussion/Drums,6/1/2021
-Native Instruments — Scarbee A-200,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — Guarneri Violin,Sample Library,,Strings,6/1/2021
-Native Instruments — Spotlight Series: Middle East,Sample Library,,World/Ethnic,6/1/2021
-Native Instruments — Spotlight Series: East Asia,Sample Library,,World/Ethnic,6/1/2021
-Native Instruments — Stradivari Violin,Sample Library,,Strings,6/1/2021
-Native Instruments — Choir: Omnia,Sample Library,,Choir/Voices,6/1/2021
-Native Instruments — Action Strikes,Sample Library,,Percussion/Drums,6/1/2021
-Native Instruments — Action Strings 2,Sample Library,,Strings;Orchestral,6/1/2021
-Native Instruments — Arkhis,Sample Library,,Textures/Atmospheres,6/1/2021
-Native Instruments — Ashlight,Sample Library,,Textures/Atmospheres,6/1/2021
-Native Instruments — Damage,Sample Library,,Percussion/Drums,6/1/2021
-Native Instruments — Emotive Strings,Sample Library,,Strings,6/1/2021
-Native Instruments — Kinetic Metal,Sample Library,,Textures/Atmospheres,6/1/2021
-Native Instruments — Spotlight Series: India,Sample Library,,World/Ethnic,6/1/2021
-Native Instruments — Kinetic Toys,Sample Library,,Textures/Atmospheres,6/1/2021
-Native Instruments — Session Guitarist: Electric Mint,Sample Library,,Guitar,6/1/2021
-Native Instruments — Mysteria,Sample Library,,Choir/Voices;Textures/Atmospheres,6/1/2021
-Native Instruments — Pharlight,Sample Library,,Choir/Voices;Textures/Atmospheres,6/1/2021
-Native Instruments — Rise & Hit,Sample Library,,Percussion/Drums;Textures/Atmospheres,6/1/2021
-Native Instruments — Sequis,Sample Library,,Textures/Atmospheres,6/1/2021
-Native Instruments — Straylight,Sample Library,,Textures/Atmospheres,6/1/2021
-Native Instruments — Thrill,Sample Library,,Textures/Atmospheres,6/1/2021
-Native Instruments — Spotlight Series: Balinese Gamelan,Sample Library,,World/Ethnic,6/1/2021
-Native Instruments — Spotlight Series: Cuba,Sample Library,,World/Ethnic,6/1/2021
-Native Instruments — Lores,Sample Library,,Textures/Atmospheres;World/Ethnic,6/1/2021
-Native Instruments — Session Guitarist: Electric Sunburst Deluxe,Sample Library,,Guitar,6/1/2021
-Native Instruments — Studio Drummer,Sample Library,,Percussion/Drums,6/1/2021
-Native Instruments — Session Guitarist: Picked Acoustic,Sample Library,,Guitar,6/1/2021
-Native Instruments — Drumlab,Sample Library,,Percussion/Drums,6/1/2021
-Native Instruments — Komplete 13 Ultimate (Upgrade),Sample Library,,Multi-instrument,6/1/2021
-Native Instruments — Modular Icons,Sample Library,,Textures/Atmospheres,6/1/2021
-Native Instruments — Soul Sessions,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — Stacks,Sample Library,,Textures/Atmospheres,6/1/2021
-Native Instruments — Session Guitarist: Electric Vintage,Sample Library,,Guitar,6/1/2021
-Native Instruments — Ignition Keys,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — Hybrid Keys,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — Glaze,Sample Library,,Choir/Voices,6/1/2021
-Native Instruments — Ethereal Earth,Sample Library,,Textures/Atmospheres,6/1/2021
-Native Instruments — Lo-Fi Glow,Sample Library,,Keys/Pianos;Textures/Atmospheres,6/1/2021
-Native Instruments — Empire Breaks,Sample Library,,Percussion/Drums,6/1/2021
-Native Instruments — Cloud Supply,Sample Library,,Textures/Atmospheres;Keys/Pianos,6/1/2021
-Native Instruments — Butch Vig Drums,Sample Library,,Percussion/Drums,6/1/2021
-Native Instruments — Analog Dreams,Sample Library,,Textures/Atmospheres,6/1/2021
-Native Instruments — 40s Very Own Keys,Sample Library,,Keys/Pianos,6/1/2021
-Native Instruments — 40s Very Own Drums,Sample Library,,Percussion/Drums,6/1/2021
-Native Instruments — Session Strings Pro 2,Sample Library,,Strings,6/1/2021
-Native Instruments — Session Horns Pro,Sample Library,,Brass,6/1/2021
-Native Instruments — Session Guitarist: Strummed Acoustic 2,Sample Library,,Guitar,6/1/2021
-Native Instruments — Session Guitarist: Strummed Acoustic,Sample Library,,Guitar,6/1/2021
-Native Instruments — Session Guitarist: Picked Nylon,Sample Library,,Guitar,6/1/2021
-Native Instruments — Deft Lines,Sample Library,,Bass,6/1/2021
-Native Instruments — Melted Vibes,Sample Library,,Keys/Pianos;Textures/Atmospheres,6/1/2021
-ProjectSAM — Adaptive Runs,Sample Library,Great orchestral runs!,Woodwinds;Strings,6/19/2021
-Audio Imperia — Areia,Sample Library,,Strings;Orchestral,8/8/2021
-8Dio — Century Brass Solo Flugelhorn,Sample Library,,Brass,10/16/2021
-8Dio — Century Brass Solo Bass Trombone,Sample Library,,Brass,10/16/2021
-ProjectSAM — True Strike 1,Sample Library,,Percussion/Drums,10/19/2021
-ProjectSAM — True Strike,Sample Library,Fantastic orchestral percussion,Percussion/Drums,10/19/2021
-Audio Imperia — Solo,Sample Library,Expressive soloists,Strings;Brass;Woodwinds,11/19/2021
-Wavesfactory — Le Parisien,Sample Library,,Keys/Pianos,11/26/2021
-Steinberg — HALion 6,Synth,Great for layering; sample manipulator,Sampler/Workstation,11/26/2021
-Spectrasonics — Keyscape,Sample Library,Amazing keys incl. Rhodes & Celesta,Keys/Pianos,11/27/2021
-Orchestral Tools — LA Sessions,Sample Library,Individual instruments,Guitar;Bass;Drums;Keys/Pianos,1/1/2022
-Orchestral Tools — Phoenix Orchestra,Sample Library,Individual instruments,Orchestral,1/1/2022
-Orchestral Tools — Modus — Jeff Russo,Sample Library,,Textures/Atmospheres,1/1/2022
-Orchestral Tools — Metropolis Ark 4,Sample Library,Individual instruments,Orchestral;Strings;Brass;Percussion/Drums,1/1/2022
-Orchestral Tools — Berlin Percussion,Sample Library,Individual instruments,Percussion/Drums,1/1/2022
-Musical Sampling — PLCK,Sample Library,,Percussion/Drums,3/16/2022
-iZotope — Neutron 4,Effect Plugin,,Channel Strip;EQ;Compressor,6/5/2022
-Yamaha — HS5 (Monitors),Gear,Brutally honest since 2022,Studio Monitors,6/19/2022
-iZotope — Music Production Suite 5,Effect Plugin,,Mastering Suite;Other Effects,7/1/2022
-iZotope — Ozone 11 Advanced,Effect Plugin,"Comprehensive mastering suite with AI-powered tools like Clarity, Stem Focus, and Vocal Balance.",Mastering Suite,7/1/2022
-iZotope — Nectar 4 Advanced,Effect Plugin,"Vocal production suite with Auto-Level, Voices, Backer, and Vocal Assistant.",Vocal Processing,7/1/2022
-Native Instruments — Guitar Rig 7 Pro,Effect Plugin,"Amp and effects playground with 100+ presets, new amps, pedals, and lo-fi modules.",Amp Simulation;Guitar Effects,7/1/2022
-iZotope — RX 10 Standard,Effect Plugin,Industry-standard audio repair with noise reduction and restoration tools.,Audio Repair,7/1/2022
-iZotope — Neoverb,Effect Plugin,AI-assisted reverb with smart blending and easy spatial design.,Reverb,7/1/2022
-iZotope — Tonal Balance Control 2,Effect Plugin,Tonal spectrum metering and control for balanced mixes and masters.,Metering;Mixing Tools,7/1/2022
-iZotope — Insight 2,Effect Plugin,"Comprehensive metering suite for mixing, mastering, and post.",Metering Suite,7/1/2022
-iZotope — VocalSynth 2,Effect Plugin,"Creative vocal effects including vocoder, talkbox, and harmonizing modules.",Vocal Effects,7/1/2022
-iZotope — Audiolens,Effect Plugin,Track referencing tool for comparing audio from streaming platforms.,Referencing,7/1/2022
-iZotope — Exponential Audio Symphony 3D,Effect Plugin,Immersive reverb designed for cinematic and surround scoring.,Immersive Reverb,7/1/2022
-iZotope — Exponential Audio Stratus 3D,Effect Plugin,"Clean, transparent immersive reverb for post and broadcast.",Immersive Reverb,7/1/2022
-iZotope — Brainworx Creative Mixing Set,Effect Plugin,"Bundle of delay, low-end, filter, distortion, and tonal tools.",Creative Mixing Suite,7/1/2022
-Cinesamples — Session Drummer,Sample Library,,Percussion/Drums,7/2/2022
-IsoAcoustics — Aperta Isolation Stands,Gear,Reduces vibrations; better speaker position,Accessories,7/6/2022
-Massdrop x Sennheiser — HD 6XX (Headphones),Gear,Daily drivers; pristine mids,Headphones,7/14/2022
-Spitfire Audio — Originals Epic Choir,Sample Library,,Choir/Voices,7/21/2022
-Native Instruments — Komplete 14 Collector's Edition (Upgrade),Sample Library,,Multi-instrument,9/22/2022
-8Dio — Intimate Studio Strings,Sample Library,,Strings,11/9/2022
-Orchestral Tools — Metropolis Ark 5,Sample Library,Individual instruments,Orchestral;Strings;Brass;Percussion/Drums,1/1/2023
-Heavyocity — Damage 2,Sample Library,My go-to cinematic percussion since 2023,Percussion/Drums,2/6/2023
-Cinesamples — Apocalyptica (Musio),Sample Library,,Strings,5/4/2023
-Cinesamples — Dulcimer & Zither (Musio),Sample Library,,Strings,5/4/2023
-Cinesamples — Collision Impact Designer (Musio),Sample Library,,Percussion/Drums;Textures/Atmospheres,5/4/2023
-Cinesamples — Tina Guo Cello (Musio),Sample Library,,Strings,5/4/2023
-Cinesamples — Handbells (Musio),Sample Library,,Percussion/Drums,5/4/2023
-Cinesamples — Hardanger Fiddle (Musio),Sample Library,,Strings,5/4/2023
-Cinesamples — Quatre Session Strings (Musio),Sample Library,,Strings,5/4/2023
-Cinesamples — Randy's Prepared Piano (Musio),Sample Library,,Keys/Pianos,5/4/2023
-Cinesamples — Mister Roger's Celeste (Musio),Sample Library,,Keys/Pianos,5/4/2023
-Cinesamples — Village Mallets (Musio),Sample Library,,Percussion/Drums,5/4/2023
-Cinesamples — Gina Luciani Cinema Flutes (Musio),Sample Library,,Woodwinds,5/4/2023
-Cinesamples — African Marimba (Musio),Sample Library,,Percussion/Drums;World/Ethnic,5/4/2023
-Cinesamples — Drums of War 3 (Musio),Sample Library,,Percussion/Drums,5/4/2023
-Cinesamples — O: Forbes Pipe Organ (Musio),Sample Library,,Keys/Pianos,5/4/2023
-Cinesamples — CineBrass Core (Musio),Sample Library,,Brass;Orchestral,5/4/2023
-Cinesamples — CineBrass Pro (Musio),Sample Library,,Brass;Orchestral,5/4/2023
-Cinesamples — Industry Brass Core (Musio),Sample Library,,Brass,5/4/2023
-Cinesamples — Industry Brass Pro (Musio),Sample Library,,Brass,5/4/2023
-Cinesamples — CineStrings Pro (Musio),Sample Library,,Strings;Orchestral,5/4/2023
-Cinesamples — CineStrings Solo (Musio),Sample Library,,Strings,5/4/2023
-Cinesamples — CineWinds Core (Musio),Sample Library,,Woodwinds;Orchestral,5/4/2023
-Cinesamples — Voxos (Musio),Sample Library,,Choir/Voices,5/4/2023
-Cinesamples — CineWinds Pro (Musio),Sample Library,,Woodwinds;Orchestral,5/4/2023
-Cinesamples — CineHarps (Musio),Sample Library,,Harp,5/4/2023
-Cinesamples — CinePiano (Musio),Sample Library,,Keys/Pianos,5/4/2023
-Cinesamples — CineHarpsichord (Musio),Sample Library,,Keys/Pianos,5/4/2023
-Cinesamples — Drums of War 1 (Musio),Sample Library,,Percussion/Drums,5/4/2023
-Cinesamples — Drums of War 2 (Musio),Sample Library,,Percussion/Drums,5/4/2023
-Cinesamples — Piano In Blue (Musio),Sample Library,,Keys/Pianos,5/4/2023
-Cinesamples — Randy's Celeste (Musio),Sample Library,,Keys/Pianos,5/4/2023
-Cinesamples — CinePerc (Musio),Sample Library,,Percussion/Drums,5/4/2023
-Cinesamples — CineStrings Core (Musio),Sample Library,,Strings;Orchestral,5/4/2023
-Cinesamples — Drum Machines (Musio),Sample Library,,Percussion/Drums,5/4/2023
-Cinesamples — Musio (Lifetime License),Sample Library,Great value; used in most projects,Multi-instrument;Orchestral;Strings;Brass;Woodwinds;Percussion/Drums;Keys/Pianos;World/Ethnic;Textures/Atmospheres,5/4/2023
-Cinesamples — Vintage Synth Museum (Musio),Sample Library,,Textures/Atmospheres,5/4/2023
-Soundpaint — 2001 PICCOLO SHIRE,Sample Library,,Woodwinds,5/27/2023
-Musical Sampling — Austin Saxes,Sample Library,Best sax library I own,Woodwinds,7/31/2023
-Soundpaint — STEEL DRUM,Sample Library,,Percussion/Drums;World/Ethnic,8/25/2023
-Soundpaint — TUBULAR BELLS ENSEMBLE,Sample Library,,Percussion/Drums,8/25/2023
-Spectrasonics — Omnisphere,Synth,Iconic synth; always there when needed,Wavetable/Hybrid,9/4/2023
-Audio Ollie — Nashville Scoring Strings,Sample Library,Passionate legatos; great for layering,Strings,10/21/2023
-Soundpaint — OLIVER CODD 12 STRING,Sample Library,,Guitar,11/4/2023
-8Dio — 72 Studio Percussions,Sample Library,,Percussion/Drums,11/14/2023
-8Dio — Bottles,Sample Library,,Percussion/Drums,11/14/2023
-8Dio — Studio Vintage Hammond Organ,Sample Library,,Keys/Pianos,11/14/2023
-Toontrack — EZDrummer 3,Sample Library,Favorite drum library: easy + customizable,Percussion/Drums,11/20/2023
-Rode — NT1 (Microphone),Gear,Detailed and neutral mic,Microphone,12/1/2023
-Musical Sampling — Sasaki Trumpet,Sample Library,,Brass,12/17/2023
-Orchestral Tools — Metropolis Ark 3,Sample Library,Individual instruments,Orchestral;Strings;Brass;Percussion/Drums,12/22/2023
-Orchestral Tools — Metropolis Ark 1,Sample Library,Individual instruments,Orchestral;Strings;Brass;Percussion/Drums,12/22/2023
-iZotope — Music Production Suite 6 Upgrade,Effect Plugin,Awesome mixing tools! Ozone 11 Advanced for mastering,Mastering Suite;EQ;Compressor;Limiter;Other Effects,3/17/2024
-Spitfire Audio — Symphony Orchestra,Sample Library,Reliable and consistent; strong winds & perc,Orchestral;Woodwinds;Percussion/Drums;Strings,5/23/2024
-Spitfire Audio — Spitfire Chamber Strings Essentials,Sample Library,,Strings;Orchestral,5/29/2024
-Spitfire Audio — Chamber Strings,Sample Library,"One of my favorite string libraries; Crisp, clean small sections with AIR Studios sound",Strings;Orchestral,5/29/2024
-Audio Modeling — SWAM Violin,Sample Library,,Strings,6/3/2024
-Orchestral Tools — Beaufort,Sample Library,,Textures/Atmospheres,7/22/2024
-Cinematic Studio Series — Cinematic Studio Strings,Sample Library,Workhorse strings since mid-2024,Strings;Orchestral,7/27/2024
-Orchestral Tools — Andea,Sample Library,Individual instruments,World/Ethnic,7/28/2024
-Acoustic Samples — VHorns Brass Section,Sample Library,Super realistic; layers with Infinite Brass,Brass,7/31/2024
-Spitfire Audio — Spitfire Chamber Strings (Upgrade),Sample Library,,Strings;Orchestral,8/2/2024
-iZotope — Trash,Effect Plugin,,Saturation/Distortion,8/6/2024
-Acoustic Samples — VHorns Saxophones,Sample Library,,Woodwinds,8/12/2024
-Spitfire Audio — Originals Cimbalom,Sample Library,,Percussion/Drums;World/Ethnic,8/31/2024
-Native Instruments — Komplete Kontrol S61 MK2 (MIDI Keyboard),Gear,DAW controls work seamlessly with FL; great keybed,MIDI Keyboard,9/16/2024
-Native Instruments — Komplete 15 Collector's Edition,Sample Library,Bundle I use on almost every track,Multi-instrument;Orchestral;Strings;Brass;Woodwinds;Keys/Pianos;Guitar;Bass;Percussion/Drums;World/Ethnic;Textures/Atmospheres,9/23/2024
-Native Instruments — Kontakt 8,Synth,,Sampler/Workstation,9/23/2024
-Native Instruments — Kithara,Sample Library,"A cinematic collection of guitars and plucked string instruments transformed with creative performance techniques and lush sound design.",Guitar;Textures/Atmospheres,9/23/2024
-Native Instruments — Fables,Sample Library,"Weave stories through sound with an immersive cinematic ensemble library for scoring and production.",Orchestral;Textures/Atmospheres;Multi-instrument,9/23/2024
-Native Instruments — Action Woodwinds,Sample Library,"The true-to-life sound of a full orchestral woodwind ensemble with a vast range of phrases and articulations.",Woodwinds;Orchestral,9/23/2024
-Native Instruments — Conflux,Sample Library,"A sci-fi oriented instrument for blending organic and synthetic sounds, bringing real-time wavetable and frequency modulation into Kontakt.",Textures/Atmospheres;Multi-instrument,9/23/2024
-Native Instruments — Scene: Saffron,Sample Library,"A cinematic instrument for crafting evolving textures and atmospheres from woodwinds, synths, strings, and beyond.",Textures/Atmospheres;Multi-instrument,9/23/2024
-Native Instruments — Schema: Dark,Sample Library,"Create dark, driving patterns and pulses from four layers of acoustic, synthetic, and organic loops.",Percussion/Drums;Textures/Atmospheres,9/23/2024
-Native Instruments — Schema: Light,Sample Library,Craft lush melodic patterns and evolving textures from over 320 shapeable sound sources.,Textures/Atmospheres;Multi-instrument,9/23/2024
-Native Instruments — Vocal Colors,Sample Library,An expressive vocal engine that infuses the emotion of the human voice with inventive modulation features.,Choir/Voices;Textures/Atmospheres,9/23/2024
-Native Instruments — Valves Pro,Sample Library,"Soft and evolving trombone, flugelhorn, French Horn, tuba, and euphonium sounds, with an expanded library of articulations.",Brass;Orchestral,9/23/2024
-Native Instruments — Action Strings 2,Sample Library,"The dramatic sound of a full string orchestra blending realism with creative control, with over 31 GB of dynamic phrases.",Strings;Orchestral,9/23/2024
-Native Instruments — Choir: Omnia,Sample Library,"The passionate sound of a 40-piece vocal ensemble at their most expressive. Take control of soprano, alto, tenor, and bass sections, and build phrases and melodies with 16 syllables in multiple articulations.",Choir/Voices;Orchestral,9/23/2024
-Native Instruments — Lores,Sample Library,"An eclectic collection of organic instruments expressed through hand-played articulations, for evolving tones and textures that tell a story.",World/Ethnic;Textures/Atmospheres;Multi-instrument,9/23/2024
-Native Instruments — Piano Colors,Sample Library,Inspiring instrument exploring the limits of a grand piano's sonic capabilities with state-of-the-art modulation features.,Keys/Pianos;Textures/Atmospheres,9/23/2024
-Native Instruments — Arkhis,Sample Library,Specialized instrument for creating screen-ready cinematic atmospheres and underscores with a streamlined layering engine.,Textures/Atmospheres;Multi-instrument,9/23/2024
-Native Instruments — Ashlight,Sample Library,,Textures/Atmospheres,9/23/2024
-Native Instruments — Alicia's Electric Keys,Sample Library,,Keys/Pianos,9/23/2024
-Native Instruments — Session Guitarist Acoustic Sunburst Deluxe,Sample Library,,Guitar,9/23/2024
-Native Instruments — Session Bassist Icon Bass,Sample Library,,Bass,9/23/2024
-Native Instruments — Session Bassist Upright Bass,Sample Library,,Bass,9/23/2024
-Native Instruments — Session Ukulele,Sample Library,"The bright and uplifting tones of ukulele and charango, with over 380 playable patterns.",Guitar,9/23/2024
-Native Instruments — Spotlight Collection: Ireland,Sample Library,"The genuine sound of 11 traditional Irish instruments, brought to life with a range of scales and patterns.",World/Ethnic,9/23/2024
-Native Instruments — Electric Keys Diamond,Sample Library,"The sounds of a rare 1967 electric piano, renowned for its sparkling finish and unique tone.",Keys/Pianos,9/23/2024
-Electric Keys — Phoenix,Sample Library,The unmistakable sound of one of the most versatile and sought-after electric pianos from the early 70s.,Keys/Pianos,9/23/2024
-Native Instruments — Nacht,Sample Library,"Step into the nocturnal world of techno with fierce leads, thumping basses, atmospheric pads, and beyond.",Percussion/Drums;Textures/Atmospheres,9/23/2024
-Native Instruments — Session Percussionist,Sample Library,An intuitive drum and percussion library with over 2000 customizable patterns and an advanced step sequencer.,Percussion/Drums,9/23/2024
-Spitfire Audio — Originals Jangle Box Piano,Sample Library,,Keys/Pianos,10/17/2024
-IK Multimedia — Total Studio 4,Sample Library,"Fantastic bundle, great effects, and more",Multi-instrument,11/14/2024
-IK Multimedia — MODO DRUM 1.5,Synth,Physically modeled drums,Drums,11/14/2024
-IK Multimedia — Hammond B-3X,Synth,Tonewheel organ with Leslie,Organ/Keys,11/14/2024
-IK Multimedia — Syntronik 2 MAX v2 (34 synths),Synth,34 classic synth instruments,Analog/VA;Wavetable/Hybrid;Other Synth,11/14/2024
-IK Multimedia — SampleTank 4 MAX v2,Sample Library,Complete SampleTank engine + library + 64 expansions,Multi-instrument;Strings;Brass;Woodwinds;Keys/Pianos;Guitar;Bass;Percussion/Drums;World/Ethnic;Textures/Atmospheres,11/14/2024
-IK Multimedia — Miroslav Philharmonik 2,Sample Library,Orchestral workstation included with IK Multimedia Total Studio 4 Bundle. I don't use it!,Orchestral;Strings;Brass;Woodwinds;Percussion/Drums;Choir/Voices,11/14/2024
-IK Multimedia — AmpliTube 5 MAX v2,Effect Plugin,Entire AT5 collection + expansions,Amp Suite;EQ;Compressor;Reverb;Delay;Saturation/Distortion;Other Effects,11/14/2024
-IK Multimedia — AmpliTube TONEX MAX,Effect Plugin,AI rig capture + ToneNET,Amp Suite;Other Effects,11/14/2024
-IK Multimedia — MixBox,Effect Plugin,500-series style modular FX,EQ;Compressor;Reverb;Delay;Saturation/Distortion;Channel Strip;Other Effects,11/14/2024
-IK Multimedia — T-RackS 5 MAX v2,Effect Plugin,53 mastering/mixing modules,EQ;Compressor;Limiter;Reverb;Saturation/Distortion;Metering/Analysis;Mastering Suite;Other Effects,11/14/2024
-IK Multimedia — Mastering Console,Effect Plugin,"Standalone mastering suite with analog quality, waveform editing, metadata tools, and ARC integration.",Mastering Suite,11/14/2024
-IK Multimedia — T-RackS 6 Plug-in,Effect Plugin,DAW-integrated version of Mastering Console with 63 modules for mixing and mastering.,Mixing;Mastering Suite,11/14/2024
-IK Multimedia — Prism Reverb,Effect Plugin,Creative shimmer reverb for evolving textures and sound design.,Reverb,11/14/2024
-IK Multimedia — Lurssen Mastering EQ,Effect Plugin,Stereo tube EQ with warm analog character for mastering.,EQ;Mastering,11/14/2024
-IK Multimedia — Triad Chorus,Effect Plugin,Enhanced rack-style chorus with triple modulation options.,Chorus,11/14/2024
-IK Multimedia — Master Match X,Effect Plugin,AI-assisted mastering tool that matches reference tracks instantly.,Mastering Assistant,11/14/2024
-IK Multimedia — Channel Strip X,Effect Plugin,"Advanced channel strip with EQ, de-essing, dynamics, and transient shaping.",Channel Strip,11/14/2024
-IK Multimedia — Bass ONE,Effect Plugin,"Low-end processor for thick, precise, and powerful bass management.",Bass Processor,11/14/2024
-IK Multimedia — LO-FI Punch,Effect Plugin,"Harmonics and dynamics processor for warmth, grit, and texture.",Saturation;Dynamics,11/14/2024
-IK Multimedia — Dual Spring,Effect Plugin,Flexible spring reverb with adjustable parameters and analog tone.,Reverb,11/14/2024
-IK Multimedia — Delay Lab,Effect Plugin,"Versatile delay for adding space, movement, and dimension.",Delay,11/14/2024
-IK Multimedia — Quad Saturator,Effect Plugin,4-band saturation processor with multiple saturation types per band.,Saturation,11/14/2024
-IK Multimedia — Filter Fusion,Effect Plugin,Multi-filter processor with step sequencer and modulation joystick.,Filter,11/14/2024
-IK Multimedia — The Farm Stone Room,Effect Plugin,Reverb modeled after the iconic Farm studio stone room.,Reverb,11/14/2024
-IK Multimedia — Joe Chiccarelli Vocal Strip,Effect Plugin,Vocal strip designed with Grammy-winning engineer Joe Chiccarelli.,Channel Strip;Vocal Processing,11/14/2024
-IK Multimedia — FAME Studio Reverb,Effect Plugin,Reverb based on the legendary FAME Studios acoustic spaces.,Reverb,11/14/2024
-IK Multimedia — TASCAM 388,Effect Plugin,Emulation of TASCAM's classic 8-track mixer/recorder.,Tape;Channel Strip,11/14/2024
-IK Multimedia — TASCAM PORTA ONE,Effect Plugin,Portable multitrack cassette recorder emulation.,Tape;Lo-Fi,11/14/2024
-IK Multimedia — TEAC A-3340S,Effect Plugin,Emulation of TEAC's vintage reel-to-reel tape machine.,Tape,11/14/2024
-IK Multimedia — TEAC A-6100 MKII,Effect Plugin,High-fidelity reel-to-reel tape machine emulation.,Tape,11/14/2024
-IK Multimedia — Comprexxor,Effect Plugin,Flexible compressor inspired by classic analog designs.,Compressor,11/14/2024
-IK Multimedia — Space Delay,Effect Plugin,Tape delay emulation with vintage warmth and character.,Delay,11/14/2024
-IK Multimedia — Sunset Sound Studio Reverb,Effect Plugin,Reverb from the legendary Sunset Sound studios.,Reverb,11/14/2024
-IK Multimedia — Tape Machine 24,Effect Plugin,Analog tape machine emulation for warmth and saturation.,Tape,11/14/2024
-IK Multimedia — Tape Machine 80,Effect Plugin,Classic tape emulation with rich analog tone.,Tape,11/14/2024
-IK Multimedia — Tape Machine 99,Effect Plugin,Vintage tape recorder emulation with distinctive color.,Tape,11/14/2024
-IK Multimedia — Tape Machine 440,Effect Plugin,Analog tape deck emulation for authentic saturation.,Tape,11/14/2024
-IK Multimedia — T-RackS Leslie,Effect Plugin,Authentic rotary speaker emulation with full Leslie tone.,Modulation;Amp Effect,11/14/2024
-IK Multimedia — Dyna-Mu,Effect Plugin,Tube compressor emulation with musical warmth and punch.,Compressor,11/14/2024
-IK Multimedia — EQual,Effect Plugin,High-quality linear-phase digital equalizer.,EQ,11/14/2024
-IK Multimedia — ONE,Effect Plugin,All-in-one mixing and mastering processor.,Multi-Effect,11/14/2024
-IK Multimedia — Metering,Effect Plugin,Comprehensive loudness and spectrum metering tools.,Metering,11/14/2024
-IK Multimedia — Saturator X,Effect Plugin,Versatile saturation plugin with multiple modes.,Saturation,11/14/2024
-IK Multimedia — Mic Room,Effect Plugin,Microphone modeler for emulating classic mics.,Mic Modeling,11/14/2024
-IK Multimedia — Stealth Limiter,Effect Plugin,Transparent limiter with maximum loudness control.,Limiter,11/14/2024
-IK Multimedia — EQ PA,Effect Plugin,Classic analog EQ emulation.,EQ,11/14/2024
-IK Multimedia — EQ PB,Effect Plugin,Vintage-style equalizer for tonal shaping.,EQ,11/14/2024
-IK Multimedia — EQ PG,Effect Plugin,Analog-modeled EQ for precise sculpting.,EQ,11/14/2024
-IK Multimedia — EQ 73,Effect Plugin,Neve-style EQ with warm character.,EQ,11/14/2024
-IK Multimedia — EQ 81,Effect Plugin,Classic analog EQ with smooth tonal shaping.,EQ,11/14/2024
-IK Multimedia — Master EQ 432,Effect Plugin,High-end mastering EQ with surgical precision.,EQ;Mastering,11/14/2024
-IK Multimedia — Precision Comp/Limiter,Effect Plugin,Transparent compressor/limiter for subtle dynamics control.,Compressor;Limiter,11/14/2024
-IK Multimedia — Bus Compressor,Effect Plugin,Classic SSL-style bus compressor.,Compressor,11/14/2024
-IK Multimedia — White Channel,Effect Plugin,Analog-modeled channel strip with EQ and dynamics.,Channel Strip,11/14/2024
-IK Multimedia — Tape Echo,Effect Plugin,Vintage tape echo emulation.,Delay,11/14/2024
-IK Multimedia — British Channel,Effect Plugin,Console strip inspired by British analog desks.,Channel Strip,11/14/2024
-IK Multimedia — Black 76 Limiting Amplifier,Effect Plugin,1176-style fast compressor emulation.,Compressor,11/14/2024
-IK Multimedia — White 2A Leveling Amplifier,Effect Plugin,LA-2A optical compressor emulation.,Compressor,11/14/2024
-IK Multimedia — Vintage Tube Compressor/Limiter 670,Effect Plugin,Fairchild 670-style compressor with rich analog tone.,Compressor,11/14/2024
-IK Multimedia — Quad Comp,Effect Plugin,4-band compressor with flexible control.,Compressor;Multiband,11/14/2024
-IK Multimedia — Quad Lim,Effect Plugin,4-band limiter for transparent loudness control.,Limiter;Multiband,11/14/2024
-IK Multimedia — Quad Image,Effect Plugin,Multiband stereo imager for widening or narrowing mixes.,Stereo Imaging,11/14/2024
-IK Multimedia — De-esser,Effect Plugin,Sibilance control tool for vocals and instruments.,De-esser,11/14/2024
-IK Multimedia — EQP-1A Vintage Tube Program Equalizer,Effect Plugin,Classic Pultec-style tube EQ emulation.,EQ,11/14/2024
-IK Multimedia — Opto Compressor,Effect Plugin,Smooth optical compressor for natural dynamics.,Compressor,11/14/2024
-IK Multimedia — Brickwall Limiter,Effect Plugin,Limiter for maximum peak control and loudness.,Limiter,11/14/2024
-IK Multimedia — Linear Phase Equalizer,Effect Plugin,Transparent linear-phase EQ for mastering.,EQ;Mastering,11/14/2024
-IK Multimedia — Classic T-RackS Compressor,Effect Plugin,Analog-style compressor with smooth character.,Compressor,11/14/2024
-IK Multimedia — Classic T-RackS Multiband Limiter,Effect Plugin,Multiband limiter for transparent mastering.,Limiter;Multiband,11/14/2024
-IK Multimedia — Classic T-RackS Clipper,Effect Plugin,Hard clipper for loudness and harmonics.,Clipper,11/14/2024
-IK Multimedia — Classic T-RackS Equalizer,Effect Plugin,Classic analog EQ for tonal shaping.,EQ,11/14/2024
-IK Multimedia — CSR Plate Reverb,Effect Plugin,Plate reverb emulation for lush depth.,Reverb,11/14/2024
-IK Multimedia — CSR Hall Reverb,Effect Plugin,Hall reverb for natural spaciousness.,Reverb,11/14/2024
-IK Multimedia — CSR Room Reverb,Effect Plugin,"Room reverb for intimate, realistic spaces.",Reverb,11/14/2024
-IK Multimedia — CSR Inverse Reverb,Effect Plugin,Creative inverse reverb for unique effects.,Reverb,11/14/2024
-IK Multimedia — SampleTron 2,Sample Library,Mellotron-inspired instruments,Keys/Pianos;Textures/Atmospheres,11/14/2024
-IK Multimedia — MODO BASS 2,Synth,Physically modeled bass,Bass,11/14/2024
-Audio Ollie — LA Modern Percussion,Sample Library,,Percussion/Drums,11/16/2024
-Cinematic Studio Series — Cinematic Studio Woodwinds,Sample Library,Workhorse woodwinds since mid-2024,Woodwinds;Orchestral,11/20/2024
-Cinematic Studio Series — Cinematic Studio Piano,Sample Library,,Keys/Pianos,11/20/2024
-Slate Digital — Fresh Air,Effect Plugin,Great saturation for very high end,Saturation/Distortion,11/24/2024
-8Dio — Studio Sopranos,Sample Library,,Choir/Voices,11/22/2024
-8Dio — Adagio 2.0,Sample Library,,Strings,11/26/2024
-8Dio — CAGE Bundle,Sample Library,,Percussion/Drums;Textures/Atmospheres,11/30/2024
-Spitfire Audio — AIR Studio Reverb,Effect Plugin,My favorite convolution reverb plugin ever made! Air Studio's sound is unmatched.,Reverb,1/19/2025
-Spitfire Audio — Spitfire Symphony Orchestra Extras,Sample Library,,Orchestral,2/6/2025
-Gaming PC,Gear,AMD Ryzen 9 9950X; 96GB RAM; RTX 5070 ti 16gb; MAG B650 TOMAHAWK,Workstation,2/15/2025
-Xfer Records — Serum 2,Synth,Powerful sound design,Wavetable/Hybrid,3/18/2025
-FXpansion — BFD3,Sample Library,,Percussion/Drums,6/14/2025
-UVI — Glass Orchestra,Sample Library,,Textures/Atmospheres,7/14/2025
-UVI — Falcon,Synth,,Sampler/Workstation,7/14/2025
-Spitfire Audio — Eric Whitacre Choir,Sample Library,,Choir/Voices,7/15/2025
-EastWest — Stormdrum 3,Sample Library,,Percussion/Drums,8/3/2025
-Spitfire Audio — Eric Whitacre Contrast,Sample Library,,Choir/Voices,9/19/2025
-Spitfire Audio — Albion IV Uist,Sample Library,,Orchestral,9/20/2025
-Spectrasonics — Omnisphere 3 Upgrade,Synth,AMAZING update to the best synth on the market with over 30k patches. You likely hear this in any song of mine that contains synths.,Wavetable/Hybrid,10/21/2025
-EastWest — Hollywood Fantasy Orchestra,Sample Library,,World/Ethnic;Multi-instrument;Orchestral,4/6/2026
-Apple — MacBook Pro (M5 Pro),Gear,M5 Pro chip; 64GB RAM; my main machine,Workstation,6/1/2026
-Steinberg — Cubase 15 Pro,Gear,DAW I've been using since June 2026,DAW,6/1/2026
-Ample Sound — Ample Metal Eclipse,Sample Library,My main heavy/metal electric guitar,Guitar,6/16/2025
-Ample Sound — Ample Bass J,Sample Library,My main bass guitar,Bass,6/16/2025
-Ample Sound — Ample Guitar SC,Sample Library,My main clean electric guitar,Guitar,6/16/2025
+Product,Tag,Description,Subtags,Date,Favorite
+Image-Line — FL Studio All Plugins Edition,Gear,Favorite DAW for piano roll & shortcuts,DAW,01/09/2019,TRUE
+Voxengo — Span,Effect Plugin,Frequency spectrum analysis,Metering/Analysis,1/24/2019,FALSE
+Ample Sound — Cloudrum,Sample Library,,Percussion/Drums,1/11/2020,FALSE
+Spitfire Audio — Acoustic Shadows — Lea Bertucci,Sample Library,,Textures/Atmospheres,4/16/2020,FALSE
+Spitfire Audio — Originals Cinematic Percussion,Sample Library,,Percussion/Drums,4/30/2020,FALSE
+Spitfire Audio — Originals Felt Piano,Sample Library,,Keys/Pianos,5/3/2020,FALSE
+Spitfire Audio — Bernard Herrmann Composer Toolkit,Sample Library,Unique combos; great perc & strings,Strings;Percussion/Drums;Textures/Atmospheres,5/7/2020,FALSE
+Spitfire Audio — BBC Symphony Orchestra Core,Sample Library,,Orchestral,5/26/2020,FALSE
+Spitfire Audio — Studio Orchestra Professional Bundle,Sample Library,Dryer intimate sound; very versatile,Orchestral;Strings;Brass;Woodwinds,5/31/2020,FALSE
+Spitfire Audio — Studio Brass Professional,Sample Library,,Brass;Orchestral,5/31/2020,FALSE
+Waves — Bass Slapper,Sample Library,,Bass,6/26/2020,FALSE
+Spitfire Audio — BBC Symphony Orchestra Professional,Sample Library,Shines at quiet dynamics; has the best glock!,Orchestral;Percussion/Drums;Strings;Woodwinds,7/29/2020,FALSE
+8Dio — Century Brass Solo Horn,Sample Library,,Brass,8/28/2020,FALSE
+8Dio — Century Brass Ensemble & Solo,Sample Library,Loud cinematic brass when needed,Brass,8/28/2020,FALSE
+Spitfire Audio — Originals Cinematic Soft Piano,Sample Library,,Keys/Pianos,9/22/2020,FALSE
+Spitfire Audio — Studio Woodwinds Professional,Sample Library,,Woodwinds;Orchestral,9/22/2020,FALSE
+8Dio — Century Brass Solo Trumpet,Sample Library,,Brass,9/28/2020,FALSE
+Impact Soundworks — Mega Brass,Sample Library,,Brass,10/1/2020,FALSE
+Impact Soundworks — Super Audio Cart,Sample Library,,Keys/Pianos;Textures/Atmospheres,10/1/2020,FALSE
+8Dio — Century Brass Ensemble Trumpets,Sample Library,,Brass,11/6/2020,FALSE
+8Dio — Century Brass Ensemble Horns,Sample Library,,Brass,11/6/2020,FALSE
+8Dio — Century Brass Ensemble Trombones,Sample Library,,Brass,11/6/2020,FALSE
+8Dio — Fire Trumpet,Sample Library,,Brass,11/7/2020,FALSE
+8Dio — Fire Saxophone,Sample Library,,Woodwinds,11/7/2020,FALSE
+Performance Samples — Oceania,Sample Library,Powerful choir; easy to use,Choir/Voices,11/10/2020,TRUE
+8Dio — Wind Chimes,Sample Library,,Percussion/Drums,11/10/2020,FALSE
+8Dio — Century Brass Solo Trombone,Sample Library,,Brass,11/18/2020,FALSE
+Spitfire Audio — Studio Strings Professional,Sample Library,,Strings;Orchestral,11/25/2020,FALSE
+Spitfire Audio — Ricotti Mallets,Sample Library,Layers well with BBC mallets,Percussion/Drums,11/25/2020,FALSE
+Spitfire Audio — Spitfire Harp,Sample Library,One of the best harps; great layered,Harp,11/25/2020,FALSE
+Spitfire Audio — Orchestral Swarm,Sample Library,Excellent for textures and motion,Textures/Atmospheres;Orchestral,11/25/2020,FALSE
+Spitfire Audio — Aperture Orchestra,Sample Library,,Orchestral;Textures/Atmospheres,11/25/2020,FALSE
+HAVE Instruments — Omnidrums,Sample Library,,Percussion/Drums,12/3/2020,FALSE
+HAVE Instruments — Toys,Sample Library,,Percussion/Drums,12/5/2020,FALSE
+Spitfire Audio — Originals Drumline,Sample Library,,Percussion/Drums,12/18/2020,FALSE
+iZotope — Elements Suite,Effect Plugin,,Other Effects,12/19/2020,FALSE
+Steven Slate — Steven Slate Drums 5.5,Sample Library,Great out of the box,Percussion/Drums,12/24/2020,FALSE
+Native Instruments — Komplete 13 Select,Sample Library,,Multi-instrument,12/24/2020,FALSE
+Orchestral Tools — Berlin Woodwinds,Sample Library,,Woodwinds;Orchestral,1/1/2021,FALSE
+MOTU — M2 (Audio Interface),Gear,Fantastic value; strong headphone amp,Audio Interface,1/11/2021,TRUE
+Audio Ollie — Taste,Sample Library,,Textures/Atmospheres,1/14/2021,FALSE
+Audio Imperia — Areia Lite,Sample Library,,Strings;Orchestral,1/18/2021,FALSE
+8Dio — Century Brass Solo Tuba,Sample Library,,Brass,2/11/2021,FALSE
+Aaron Venture — Infinite Brass,Sample Library,"Outstanding, versatile, and powerful brass",Brass;Orchestral,3/25/2021,TRUE
+Cinesamples — Taylor Davis Violin,Sample Library,Versatile solo violin,Strings,4/9/2021,FALSE
+Cinesamples — Tina Guo Acoustic Cello,Sample Library,Expressive emotional cello,Strings,4/10/2021,FALSE
+Aaron Venture — Infinite Woodwinds,Sample Library,Very versatile woodwinds,Woodwinds;Orchestral,5/9/2021,FALSE
+Native Instruments — Symphony Series: Woodwind Ensemble,Sample Library,,Woodwinds;Orchestral,6/1/2021,FALSE
+Native Instruments — TRK-01,Synth,,Drums;Bass,6/1/2021,FALSE
+Native Instruments — Super 8,Synth,,Analog/VA,6/1/2021,FALSE
+Native Instruments — Skanner XT,Synth,,Wavetable/Hybrid,6/1/2021,FALSE
+Native Instruments — Symphony Series: String Ensemble,Sample Library,,Strings;Orchestral,6/1/2021,FALSE
+Native Instruments — Symphony Series: Brass Ensemble,Sample Library,,Brass;Orchestral,6/1/2021,FALSE
+Native Instruments — Retro Machines MK2,Synth,,Analog/VA,6/1/2021,FALSE
+Native Instruments — Rounds,Synth,,Wavetable/Hybrid,6/1/2021,FALSE
+Native Instruments — Symphony Series: Woodwind Solo,Sample Library,,Woodwinds;Orchestral,6/1/2021,FALSE
+Native Instruments — Symphony Series: Brass Solo,Sample Library,,Brass;Orchestral,6/1/2021,FALSE
+Native Instruments — Komplete Kontrol,Synth,,Other Synth,6/1/2021,FALSE
+Native Instruments — Reaktor Spark,Synth,,Wavetable/Hybrid,6/1/2021,FALSE
+Native Instruments — Session Bassist — Prime Bass,Sample Library,,Bass,6/1/2021,FALSE
+Native Instruments — Scarbee Rickenbacker Bass,Sample Library,,Bass,6/1/2021,FALSE
+Native Instruments — Scarbee Pre-Bass (Amped),Sample Library,,Bass,6/1/2021,FALSE
+Native Instruments — Scarbee MM-Bass (Amped),Sample Library,,Bass,6/1/2021,FALSE
+Native Instruments — Reaktor 6,Synth,,Modular/Builder,6/1/2021,FALSE
+Native Instruments — Scarbee Jay-Bass,Sample Library,,Bass,6/1/2021,FALSE
+Native Instruments — Battery 4,Synth,,Drums,6/1/2021,TRUE
+Native Instruments — Flesh,Synth,,Wavetable/Hybrid,6/1/2021,FALSE
+Native Instruments — Polyplex,Synth,,Drums,6/1/2021,FALSE
+Native Instruments — BX_Oberhausen,Synth,,Analog/VA,6/1/2021,FALSE
+Native Instruments — Blocks Prime,Synth,,Modular/Builder,6/1/2021,FALSE
+Native Instruments — FM8,Synth,,Wavetable/Hybrid,6/1/2021,FALSE
+Native Instruments — Form,Synth,,Wavetable/Hybrid,6/1/2021,FALSE
+Native Instruments — Knifonium,Synth,,Analog/VA,6/1/2021,FALSE
+Native Instruments — Kontour,Synth,,Wavetable/Hybrid,6/1/2021,FALSE
+Native Instruments — Massive,Synth,,Wavetable/Hybrid,6/1/2021,TRUE
+Native Instruments — Massive X,Synth,,Wavetable/Hybrid,6/1/2021,TRUE
+Native Instruments — Monark,Synth,,Analog/VA,6/1/2021,FALSE
+Native Instruments — Playbox,Synth,,Wavetable/Hybrid,6/1/2021,FALSE
+Native Instruments — Razor,Synth,,Wavetable/Hybrid,6/1/2021,FALSE
+Native Instruments — Reaktor Prism,Synth,,Wavetable/Hybrid,6/1/2021,FALSE
+Native Instruments — Symphony Series: Percussion,Sample Library,,Percussion/Drums;Orchestral,6/1/2021,FALSE
+Native Instruments — Amati Viola,Sample Library,,Strings,6/1/2021,FALSE
+Native Instruments — Mallet Flux,Sample Library,,Percussion/Drums;Textures/Atmospheres,6/1/2021,FALSE
+Native Instruments — Stradivari Cello,Sample Library,,Strings,6/1/2021,FALSE
+Native Instruments — Alicia's Keys,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — Noire,Sample Library,,Keys/Pianos,6/1/2021,TRUE
+Native Instruments — Piano Colors,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — The Gentleman,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — The Giant,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — The Grandeur,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — The Maverick,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — Una Corda,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — George Duke Soul Treasures,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — Spotlight Series: West Africa,Sample Library,,World/Ethnic,6/1/2021,FALSE
+Native Instruments — Treasures,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — Scarbee Clavinet/Pianet,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — Scarbee Mark 1,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — Vintage Organs,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — Abbey Road Vintage Drummer,Sample Library,,Percussion/Drums,6/1/2021,FALSE
+Native Instruments — Abbey Road 50s Drummer,Sample Library,,Percussion/Drums,6/1/2021,FALSE
+Native Instruments — Abbey Road 60s Drummer,Sample Library,,Percussion/Drums,6/1/2021,FALSE
+Native Instruments — Abbey Road 70s Drummer,Sample Library,,Percussion/Drums,6/1/2021,FALSE
+Native Instruments — Abbey Road 80s Drummer,Sample Library,,Percussion/Drums,6/1/2021,FALSE
+Native Instruments — Abbey Road Modern Drummer,Sample Library,,Percussion/Drums,6/1/2021,FALSE
+Native Instruments — Scarbee A-200,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — Guarneri Violin,Sample Library,,Strings,6/1/2021,FALSE
+Native Instruments — Spotlight Series: Middle East,Sample Library,,World/Ethnic,6/1/2021,TRUE
+Native Instruments — Spotlight Series: East Asia,Sample Library,,World/Ethnic,6/1/2021,TRUE
+Native Instruments — Stradivari Violin,Sample Library,,Strings,6/1/2021,FALSE
+Native Instruments — Choir: Omnia,Sample Library,,Choir/Voices,6/1/2021,TRUE
+Native Instruments — Action Strikes,Sample Library,,Percussion/Drums,6/1/2021,FALSE
+Native Instruments — Action Strings 2,Sample Library,,Strings;Orchestral,6/1/2021,TRUE
+Native Instruments — Arkhis,Sample Library,,Textures/Atmospheres,6/1/2021,TRUE
+Native Instruments — Ashlight,Sample Library,,Textures/Atmospheres,6/1/2021,TRUE
+Native Instruments — Damage,Sample Library,,Percussion/Drums,6/1/2021,TRUE
+Native Instruments — Emotive Strings,Sample Library,,Strings,6/1/2021,FALSE
+Native Instruments — Kinetic Metal,Sample Library,,Textures/Atmospheres,6/1/2021,FALSE
+Native Instruments — Spotlight Series: India,Sample Library,,World/Ethnic,6/1/2021,TRUE
+Native Instruments — Kinetic Toys,Sample Library,,Textures/Atmospheres,6/1/2021,FALSE
+Native Instruments — Session Guitarist: Electric Mint,Sample Library,,Guitar,6/1/2021,TRUE
+Native Instruments — Mysteria,Sample Library,,Choir/Voices;Textures/Atmospheres,6/1/2021,FALSE
+Native Instruments — Pharlight,Sample Library,,Choir/Voices;Textures/Atmospheres,6/1/2021,FALSE
+Native Instruments — Rise & Hit,Sample Library,,Percussion/Drums;Textures/Atmospheres,6/1/2021,FALSE
+Native Instruments — Sequis,Sample Library,,Textures/Atmospheres,6/1/2021,FALSE
+Native Instruments — Straylight,Sample Library,,Textures/Atmospheres,6/1/2021,TRUE
+Native Instruments — Thrill,Sample Library,,Textures/Atmospheres,6/1/2021,FALSE
+Native Instruments — Spotlight Series: Balinese Gamelan,Sample Library,,World/Ethnic,6/1/2021,FALSE
+Native Instruments — Spotlight Series: Cuba,Sample Library,,World/Ethnic,6/1/2021,TRUE
+Native Instruments — Lores,Sample Library,,Textures/Atmospheres;World/Ethnic,6/1/2021,TRUE
+Native Instruments — Session Guitarist: Electric Sunburst Deluxe,Sample Library,,Guitar,6/1/2021,FALSE
+Native Instruments — Studio Drummer,Sample Library,,Percussion/Drums,6/1/2021,FALSE
+Native Instruments — Session Guitarist: Picked Acoustic,Sample Library,,Guitar,6/1/2021,TRUE
+Native Instruments — Drumlab,Sample Library,,Percussion/Drums,6/1/2021,FALSE
+Native Instruments — Komplete 13 Ultimate (Upgrade),Sample Library,,Multi-instrument,6/1/2021,FALSE
+Native Instruments — Modular Icons,Sample Library,,Textures/Atmospheres,6/1/2021,FALSE
+Native Instruments — Soul Sessions,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — Stacks,Sample Library,,Textures/Atmospheres,6/1/2021,FALSE
+Native Instruments — Session Guitarist: Electric Vintage,Sample Library,,Guitar,6/1/2021,TRUE
+Native Instruments — Ignition Keys,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — Hybrid Keys,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — Glaze,Sample Library,,Choir/Voices,6/1/2021,FALSE
+Native Instruments — Ethereal Earth,Sample Library,,Textures/Atmospheres,6/1/2021,FALSE
+Native Instruments — Lo-Fi Glow,Sample Library,,Keys/Pianos;Textures/Atmospheres,6/1/2021,FALSE
+Native Instruments — Empire Breaks,Sample Library,,Percussion/Drums,6/1/2021,FALSE
+Native Instruments — Cloud Supply,Sample Library,,Textures/Atmospheres;Keys/Pianos,6/1/2021,FALSE
+Native Instruments — Butch Vig Drums,Sample Library,,Percussion/Drums,6/1/2021,FALSE
+Native Instruments — Analog Dreams,Sample Library,,Textures/Atmospheres,6/1/2021,FALSE
+Native Instruments — 40s Very Own Keys,Sample Library,,Keys/Pianos,6/1/2021,FALSE
+Native Instruments — 40s Very Own Drums,Sample Library,,Percussion/Drums,6/1/2021,FALSE
+Native Instruments — Session Strings Pro 2,Sample Library,,Strings,6/1/2021,FALSE
+Native Instruments — Session Horns Pro,Sample Library,,Brass,6/1/2021,FALSE
+Native Instruments — Session Guitarist: Strummed Acoustic 2,Sample Library,,Guitar,6/1/2021,TRUE
+Native Instruments — Session Guitarist: Strummed Acoustic,Sample Library,,Guitar,6/1/2021,TRUE
+Native Instruments — Session Guitarist: Picked Nylon,Sample Library,,Guitar,6/1/2021,TRUE
+Native Instruments — Deft Lines,Sample Library,,Bass,6/1/2021,FALSE
+Native Instruments — Melted Vibes,Sample Library,,Keys/Pianos;Textures/Atmospheres,6/1/2021,FALSE
+ProjectSAM — Adaptive Runs,Sample Library,Great orchestral runs!,Woodwinds;Strings,6/19/2021,TRUE
+Audio Imperia — Areia,Sample Library,,Strings;Orchestral,8/8/2021,FALSE
+8Dio — Century Brass Solo Flugelhorn,Sample Library,,Brass,10/16/2021,FALSE
+8Dio — Century Brass Solo Bass Trombone,Sample Library,,Brass,10/16/2021,FALSE
+ProjectSAM — True Strike,Sample Library,Fantastic orchestral percussion,Percussion/Drums,10/19/2021,FALSE
+Audio Imperia — Solo,Sample Library,Expressive soloists,Strings;Brass;Woodwinds,11/19/2021,TRUE
+Wavesfactory — Le Parisien,Sample Library,,Keys/Pianos,11/26/2021,FALSE
+Steinberg — HALion 6,Synth,Great for layering; sample manipulator,Sampler/Workstation,11/26/2021,TRUE
+Spectrasonics — Keyscape,Sample Library,Amazing keys incl. Rhodes & Celesta,Keys/Pianos,11/27/2021,TRUE
+Orchestral Tools — LA Sessions,Sample Library,Individual instruments,Guitar;Bass;Drums;Keys/Pianos,1/1/2022,FALSE
+Orchestral Tools — Phoenix Orchestra,Sample Library,Individual instruments,Orchestral,1/1/2022,FALSE
+Orchestral Tools — Modus — Jeff Russo,Sample Library,,Textures/Atmospheres,1/1/2022,FALSE
+Orchestral Tools — Metropolis Ark 4,Sample Library,Individual instruments,Orchestral;Strings;Brass;Percussion/Drums,1/1/2022,FALSE
+Orchestral Tools — Berlin Percussion,Sample Library,Individual instruments,Percussion/Drums,1/1/2022,TRUE
+Musical Sampling — PLCK,Sample Library,,Percussion/Drums,3/16/2022,FALSE
+iZotope — Neutron 4,Effect Plugin,,Channel Strip;EQ;Compressor,6/5/2022,TRUE
+Yamaha — HS5 (Monitors),Gear,Brutally honest since 2022,Studio Monitors,6/19/2022,TRUE
+iZotope — Music Production Suite 5,Effect Plugin,,Mastering Suite;Other Effects,7/1/2022,TRUE
+iZotope — Ozone 11 Advanced,Effect Plugin,"Comprehensive mastering suite with AI-powered tools like Clarity, Stem Focus, and Vocal Balance.",Mastering Suite,7/1/2022,TRUE
+iZotope — Nectar 4 Advanced,Effect Plugin,"Vocal production suite with Auto-Level, Voices, Backer, and Vocal Assistant.",Vocal Processing,7/1/2022,FALSE
+Native Instruments — Guitar Rig 7 Pro,Effect Plugin,"Amp and effects playground with 100+ presets, new amps, pedals, and lo-fi modules.",Amp Simulation;Guitar Effects,7/1/2022,FALSE
+iZotope — RX 10 Standard,Effect Plugin,Industry-standard audio repair with noise reduction and restoration tools.,Audio Repair,7/1/2022,TRUE
+iZotope — Neoverb,Effect Plugin,AI-assisted reverb with smart blending and easy spatial design.,Reverb,7/1/2022,FALSE
+iZotope — Tonal Balance Control 2,Effect Plugin,Tonal spectrum metering and control for balanced mixes and masters.,Metering;Mixing Tools,7/1/2022,FALSE
+iZotope — Insight 2,Effect Plugin,"Comprehensive metering suite for mixing, mastering, and post.",Metering Suite,7/1/2022,FALSE
+iZotope — VocalSynth 2,Effect Plugin,"Creative vocal effects including vocoder, talkbox, and harmonizing modules.",Vocal Effects,7/1/2022,FALSE
+iZotope — Audiolens,Effect Plugin,Track referencing tool for comparing audio from streaming platforms.,Referencing,7/1/2022,FALSE
+iZotope — Exponential Audio Symphony 3D,Effect Plugin,Immersive reverb designed for cinematic and surround scoring.,Immersive Reverb,7/1/2022,FALSE
+iZotope — Exponential Audio Stratus 3D,Effect Plugin,"Clean, transparent immersive reverb for post and broadcast.",Immersive Reverb,7/1/2022,FALSE
+iZotope — Brainworx Creative Mixing Set,Effect Plugin,"Bundle of delay, low-end, filter, distortion, and tonal tools.",Creative Mixing Suite,7/1/2022,FALSE
+Cinesamples — Session Drummer,Sample Library,,Percussion/Drums,7/2/2022,FALSE
+IsoAcoustics — Aperta Isolation Stands,Gear,Reduces vibrations; better speaker position,Accessories,7/6/2022,FALSE
+Massdrop x Sennheiser — HD 6XX (Headphones),Gear,Daily drivers; pristine mids,Headphones,7/14/2022,FALSE
+Spitfire Audio — Originals Epic Choir,Sample Library,,Choir/Voices,7/21/2022,FALSE
+Native Instruments — Komplete 14 Collector's Edition (Upgrade),Sample Library,,Multi-instrument,9/22/2022,FALSE
+8Dio — Intimate Studio Strings,Sample Library,,Strings,11/9/2022,FALSE
+Orchestral Tools — Metropolis Ark 5,Sample Library,Individual instruments,Orchestral;Strings;Brass;Percussion/Drums,1/1/2023,FALSE
+Heavyocity — Damage 2,Sample Library,My go-to cinematic percussion since 2023,Percussion/Drums,2/6/2023,TRUE
+Cinesamples — Apocalyptica (Musio),Sample Library,,Strings,5/4/2023,FALSE
+Cinesamples — Dulcimer & Zither (Musio),Sample Library,,Strings,5/4/2023,FALSE
+Cinesamples — Collision Impact Designer (Musio),Sample Library,,Percussion/Drums;Textures/Atmospheres,5/4/2023,FALSE
+Cinesamples — Tina Guo Cello (Musio),Sample Library,,Strings,5/4/2023,TRUE
+Cinesamples — Handbells (Musio),Sample Library,,Percussion/Drums,5/4/2023,FALSE
+Cinesamples — Hardanger Fiddle (Musio),Sample Library,,Strings,5/4/2023,FALSE
+Cinesamples — Quatre Session Strings (Musio),Sample Library,,Strings,5/4/2023,FALSE
+Cinesamples — Randy's Prepared Piano (Musio),Sample Library,,Keys/Pianos,5/4/2023,FALSE
+Cinesamples — Mister Roger's Celeste (Musio),Sample Library,,Keys/Pianos,5/4/2023,FALSE
+Cinesamples — Village Mallets (Musio),Sample Library,,Percussion/Drums,5/4/2023,FALSE
+Cinesamples — Gina Luciani Cinema Flutes (Musio),Sample Library,,Woodwinds,5/4/2023,FALSE
+Cinesamples — African Marimba (Musio),Sample Library,,Percussion/Drums;World/Ethnic,5/4/2023,FALSE
+Cinesamples — Drums of War 3 (Musio),Sample Library,,Percussion/Drums,5/4/2023,FALSE
+Cinesamples — O: Forbes Pipe Organ (Musio),Sample Library,,Keys/Pianos,5/4/2023,FALSE
+Cinesamples — CineBrass Core (Musio),Sample Library,,Brass;Orchestral,5/4/2023,TRUE
+Cinesamples — CineBrass Pro (Musio),Sample Library,,Brass;Orchestral,5/4/2023,TRUE
+Cinesamples — Industry Brass Core (Musio),Sample Library,,Brass,5/4/2023,FALSE
+Cinesamples — Industry Brass Pro (Musio),Sample Library,,Brass,5/4/2023,FALSE
+Cinesamples — CineStrings Pro (Musio),Sample Library,,Strings;Orchestral,5/4/2023,FALSE
+Cinesamples — CineStrings Solo (Musio),Sample Library,,Strings,5/4/2023,FALSE
+Cinesamples — CineWinds Core (Musio),Sample Library,,Woodwinds;Orchestral,5/4/2023,FALSE
+Cinesamples — Voxos (Musio),Sample Library,,Choir/Voices,5/4/2023,FALSE
+Cinesamples — CineWinds Pro (Musio),Sample Library,,Woodwinds;Orchestral,5/4/2023,FALSE
+Cinesamples — CineHarps (Musio),Sample Library,,Harp,5/4/2023,TRUE
+Cinesamples — CinePiano (Musio),Sample Library,,Keys/Pianos,5/4/2023,FALSE
+Cinesamples — CineHarpsichord (Musio),Sample Library,,Keys/Pianos,5/4/2023,FALSE
+Cinesamples — Drums of War 1 (Musio),Sample Library,,Percussion/Drums,5/4/2023,FALSE
+Cinesamples — Drums of War 2 (Musio),Sample Library,,Percussion/Drums,5/4/2023,FALSE
+Cinesamples — Piano In Blue (Musio),Sample Library,,Keys/Pianos,5/4/2023,TRUE
+Cinesamples — Randy's Celeste (Musio),Sample Library,,Keys/Pianos,5/4/2023,FALSE
+Cinesamples — CinePerc (Musio),Sample Library,,Percussion/Drums,5/4/2023,FALSE
+Cinesamples — CineStrings Core (Musio),Sample Library,,Strings;Orchestral,5/4/2023,FALSE
+Cinesamples — Drum Machines (Musio),Sample Library,,Percussion/Drums,5/4/2023,FALSE
+Cinesamples — Musio (Lifetime License),Sample Library,Great value; used in most projects,Multi-instrument;Orchestral;Strings;Brass;Woodwinds;Percussion/Drums;Keys/Pianos;World/Ethnic;Textures/Atmospheres,5/4/2023,TRUE
+Cinesamples — Vintage Synth Museum (Musio),Sample Library,,Textures/Atmospheres,5/4/2023,FALSE
+Soundpaint — 2001 PICCOLO SHIRE,Sample Library,,Woodwinds,5/27/2023,FALSE
+Musical Sampling — Austin Saxes,Sample Library,Best sax library I own,Woodwinds,7/31/2023,TRUE
+Soundpaint — STEEL DRUM,Sample Library,,Percussion/Drums;World/Ethnic,8/25/2023,FALSE
+Soundpaint — TUBULAR BELLS ENSEMBLE,Sample Library,,Percussion/Drums,8/25/2023,FALSE
+Spectrasonics — Omnisphere,Synth,Iconic synth; always there when needed,Wavetable/Hybrid,9/4/2023,TRUE
+Audio Ollie — Nashville Scoring Strings,Sample Library,Passionate legatos; great for layering,Strings,10/21/2023,TRUE
+Soundpaint — OLIVER CODD 12 STRING,Sample Library,,Guitar,11/4/2023,FALSE
+8Dio — 72 Studio Percussions,Sample Library,,Percussion/Drums,11/14/2023,FALSE
+8Dio — Bottles,Sample Library,,Percussion/Drums,11/14/2023,FALSE
+8Dio — Studio Vintage Hammond Organ,Sample Library,,Keys/Pianos,11/14/2023,FALSE
+Toontrack — EZDrummer 3,Sample Library,Favorite drum library: easy + customizable,Percussion/Drums,11/20/2023,TRUE
+Rode — NT1 (Microphone),Gear,Detailed and neutral mic,Microphone,12/1/2023,TRUE
+Musical Sampling — Sasaki Trumpet,Sample Library,,Brass,12/17/2023,TRUE
+Orchestral Tools — Metropolis Ark 3,Sample Library,Individual instruments,Orchestral;Strings;Brass;Percussion/Drums,12/22/2023,FALSE
+Orchestral Tools — Metropolis Ark 1,Sample Library,Individual instruments,Orchestral;Strings;Brass;Percussion/Drums,12/22/2023,FALSE
+iZotope — Music Production Suite 6 Upgrade,Effect Plugin,Awesome mixing tools! Ozone 11 Advanced for mastering,Mastering Suite;EQ;Compressor;Limiter;Other Effects,3/17/2024,TRUE
+Spitfire Audio — Symphony Orchestra,Sample Library,Reliable and consistent; strong winds & perc,Orchestral;Woodwinds;Percussion/Drums;Strings,5/23/2024,TRUE
+Spitfire Audio — Chamber Strings,Sample Library,"One of my favorite string libraries; Crisp, clean small sections with AIR Studios sound",Strings;Orchestral,5/29/2024,TRUE
+Audio Modeling — SWAM Violin,Sample Library,,Strings,6/3/2024,TRUE
+Orchestral Tools — Beaufort,Sample Library,,Textures/Atmospheres,7/22/2024,TRUE
+Cinematic Studio Series — Cinematic Studio Strings,Sample Library,Workhorse strings since mid-2024,Strings;Orchestral,7/27/2024,TRUE
+Orchestral Tools — Andea,Sample Library,Individual instruments,World/Ethnic,7/28/2024,FALSE
+Acoustic Samples — VHorns Brass Section,Sample Library,Super realistic; layers with Infinite Brass,Brass,7/31/2024,TRUE
+iZotope — Trash,Effect Plugin,,Saturation/Distortion,8/6/2024,TRUE
+Acoustic Samples — VHorns Saxophones,Sample Library,,Woodwinds,8/12/2024,TRUE
+Spitfire Audio — Originals Cimbalom,Sample Library,,Percussion/Drums;World/Ethnic,8/31/2024,FALSE
+Native Instruments — Komplete Kontrol S61 MK2 (MIDI Keyboard),Gear,DAW controls work seamlessly with FL; great keybed,MIDI Keyboard,9/16/2024,TRUE
+Native Instruments — Komplete 15 Collector's Edition,Sample Library,Bundle I use on almost every track,Multi-instrument;Orchestral;Strings;Brass;Woodwinds;Keys/Pianos;Guitar;Bass;Percussion/Drums;World/Ethnic;Textures/Atmospheres,9/23/2024,TRUE
+Native Instruments — Kontakt 8,Synth,,Sampler/Workstation,9/23/2024,TRUE
+Native Instruments — Kithara,Sample Library,A cinematic collection of guitars and plucked string instruments transformed with creative performance techniques and lush sound design.,Guitar;Textures/Atmospheres,9/23/2024,FALSE
+Native Instruments — Fables,Sample Library,Weave stories through sound with an immersive cinematic ensemble library for scoring and production.,Orchestral;Textures/Atmospheres;Multi-instrument,9/23/2024,FALSE
+Native Instruments — Action Woodwinds,Sample Library,The true-to-life sound of a full orchestral woodwind ensemble with a vast range of phrases and articulations.,Woodwinds;Orchestral,9/23/2024,FALSE
+Native Instruments — Conflux,Sample Library,"A sci-fi oriented instrument for blending organic and synthetic sounds, bringing real-time wavetable and frequency modulation into Kontakt.",Textures/Atmospheres;Multi-instrument,9/23/2024,FALSE
+Native Instruments — Scene: Saffron,Sample Library,"A cinematic instrument for crafting evolving textures and atmospheres from woodwinds, synths, strings, and beyond.",Textures/Atmospheres;Multi-instrument,9/23/2024,FALSE
+Native Instruments — Schema: Dark,Sample Library,"Create dark, driving patterns and pulses from four layers of acoustic, synthetic, and organic loops.",Percussion/Drums;Textures/Atmospheres,9/23/2024,FALSE
+Native Instruments — Schema: Light,Sample Library,Craft lush melodic patterns and evolving textures from over 320 shapeable sound sources.,Textures/Atmospheres;Multi-instrument,9/23/2024,FALSE
+Native Instruments — Vocal Colors,Sample Library,An expressive vocal engine that infuses the emotion of the human voice with inventive modulation features.,Choir/Voices;Textures/Atmospheres,9/23/2024,FALSE
+Native Instruments — Valves Pro,Sample Library,"Soft and evolving trombone, flugelhorn, French Horn, tuba, and euphonium sounds, with an expanded library of articulations.",Brass;Orchestral,9/23/2024,FALSE
+Native Instruments — Action Strings 2,Sample Library,"The dramatic sound of a full string orchestra blending realism with creative control, with over 31 GB of dynamic phrases.",Strings;Orchestral,9/23/2024,FALSE
+Native Instruments — Choir: Omnia,Sample Library,"The passionate sound of a 40-piece vocal ensemble at their most expressive. Take control of soprano, alto, tenor, and bass sections, and build phrases and melodies with 16 syllables in multiple articulations.",Choir/Voices;Orchestral,9/23/2024,FALSE
+Native Instruments — Lores,Sample Library,"An eclectic collection of organic instruments expressed through hand-played articulations, for evolving tones and textures that tell a story.",World/Ethnic;Textures/Atmospheres;Multi-instrument,9/23/2024,FALSE
+Native Instruments — Piano Colors,Sample Library,Inspiring instrument exploring the limits of a grand piano's sonic capabilities with state-of-the-art modulation features.,Keys/Pianos;Textures/Atmospheres,9/23/2024,FALSE
+Native Instruments — Arkhis,Sample Library,Specialized instrument for creating screen-ready cinematic atmospheres and underscores with a streamlined layering engine.,Textures/Atmospheres;Multi-instrument,9/23/2024,FALSE
+Native Instruments — Ashlight,Sample Library,,Textures/Atmospheres,9/23/2024,TRUE
+Native Instruments — Alicia's Electric Keys,Sample Library,,Keys/Pianos,9/23/2024,FALSE
+Native Instruments — Session Guitarist Acoustic Sunburst Deluxe,Sample Library,,Guitar,9/23/2024,TRUE
+Native Instruments — Session Bassist Icon Bass,Sample Library,,Bass,9/23/2024,TRUE
+Native Instruments — Session Bassist Upright Bass,Sample Library,,Bass,9/23/2024,TRUE
+Native Instruments — Session Ukulele,Sample Library,"The bright and uplifting tones of ukulele and charango, with over 380 playable patterns.",Guitar,9/23/2024,TRUE
+Native Instruments — Spotlight Collection: Ireland,Sample Library,"The genuine sound of 11 traditional Irish instruments, brought to life with a range of scales and patterns.",World/Ethnic,9/23/2024,TRUE
+Native Instruments — Electric Keys Diamond,Sample Library,"The sounds of a rare 1967 electric piano, renowned for its sparkling finish and unique tone.",Keys/Pianos,9/23/2024,FALSE
+Electric Keys — Phoenix,Sample Library,The unmistakable sound of one of the most versatile and sought-after electric pianos from the early 70s.,Keys/Pianos,9/23/2024,FALSE
+Native Instruments — Nacht,Sample Library,"Step into the nocturnal world of techno with fierce leads, thumping basses, atmospheric pads, and beyond.",Percussion/Drums;Textures/Atmospheres,9/23/2024,FALSE
+Native Instruments — Session Percussionist,Sample Library,An intuitive drum and percussion library with over 2000 customizable patterns and an advanced step sequencer.,Percussion/Drums,9/23/2024,TRUE
+Spitfire Audio — Originals Jangle Box Piano,Sample Library,,Keys/Pianos,10/17/2024,FALSE
+IK Multimedia — Total Studio 4,Sample Library,"Fantastic bundle, great effects, and more",Multi-instrument,11/14/2024,FALSE
+IK Multimedia — MODO DRUM 1.5,Synth,Physically modeled drums,Drums,11/14/2024,FALSE
+IK Multimedia — Hammond B-3X,Synth,Tonewheel organ with Leslie,Organ/Keys,11/14/2024,TRUE
+IK Multimedia — Syntronik 2 MAX v2 (34 synths),Synth,34 classic synth instruments,Analog/VA;Wavetable/Hybrid;Other Synth,11/14/2024,FALSE
+IK Multimedia — SampleTank 4 MAX v2,Sample Library,Complete SampleTank engine + library + 64 expansions,Multi-instrument;Strings;Brass;Woodwinds;Keys/Pianos;Guitar;Bass;Percussion/Drums;World/Ethnic;Textures/Atmospheres,11/14/2024,FALSE
+IK Multimedia — Miroslav Philharmonik 2,Sample Library,Orchestral workstation included with IK Multimedia Total Studio 4 Bundle. I don't use it!,Orchestral;Strings;Brass;Woodwinds;Percussion/Drums;Choir/Voices,11/14/2024,FALSE
+IK Multimedia — AmpliTube 5 MAX v2,Effect Plugin,Entire AT5 collection + expansions,Amp Suite;EQ;Compressor;Reverb;Delay;Saturation/Distortion;Other Effects,11/14/2024,TRUE
+IK Multimedia — AmpliTube TONEX MAX,Effect Plugin,AI rig capture + ToneNET,Amp Suite;Other Effects,11/14/2024,TRUE
+IK Multimedia — MixBox,Effect Plugin,500-series style modular FX,EQ;Compressor;Reverb;Delay;Saturation/Distortion;Channel Strip;Other Effects,11/14/2024,FALSE
+IK Multimedia — T-RackS 5 MAX v2,Effect Plugin,53 mastering/mixing modules,EQ;Compressor;Limiter;Reverb;Saturation/Distortion;Metering/Analysis;Mastering Suite;Other Effects,11/14/2024,TRUE
+IK Multimedia — Mastering Console,Effect Plugin,"Standalone mastering suite with analog quality, waveform editing, metadata tools, and ARC integration.",Mastering Suite,11/14/2024,FALSE
+IK Multimedia — T-RackS 6 Plug-in,Effect Plugin,DAW-integrated version of Mastering Console with 63 modules for mixing and mastering.,Mixing;Mastering Suite,11/14/2024,TRUE
+IK Multimedia — Prism Reverb,Effect Plugin,Creative shimmer reverb for evolving textures and sound design.,Reverb,11/14/2024,FALSE
+IK Multimedia — Lurssen Mastering EQ,Effect Plugin,Stereo tube EQ with warm analog character for mastering.,EQ;Mastering,11/14/2024,FALSE
+IK Multimedia — Triad Chorus,Effect Plugin,Enhanced rack-style chorus with triple modulation options.,Chorus,11/14/2024,FALSE
+IK Multimedia — Master Match X,Effect Plugin,AI-assisted mastering tool that matches reference tracks instantly.,Mastering Assistant,11/14/2024,FALSE
+IK Multimedia — Channel Strip X,Effect Plugin,"Advanced channel strip with EQ, de-essing, dynamics, and transient shaping.",Channel Strip,11/14/2024,FALSE
+IK Multimedia — Bass ONE,Effect Plugin,"Low-end processor for thick, precise, and powerful bass management.",Bass Processor,11/14/2024,FALSE
+IK Multimedia — LO-FI Punch,Effect Plugin,"Harmonics and dynamics processor for warmth, grit, and texture.",Saturation;Dynamics,11/14/2024,FALSE
+IK Multimedia — Dual Spring,Effect Plugin,Flexible spring reverb with adjustable parameters and analog tone.,Reverb,11/14/2024,FALSE
+IK Multimedia — Delay Lab,Effect Plugin,"Versatile delay for adding space, movement, and dimension.",Delay,11/14/2024,FALSE
+IK Multimedia — Quad Saturator,Effect Plugin,4-band saturation processor with multiple saturation types per band.,Saturation,11/14/2024,FALSE
+IK Multimedia — Filter Fusion,Effect Plugin,Multi-filter processor with step sequencer and modulation joystick.,Filter,11/14/2024,FALSE
+IK Multimedia — The Farm Stone Room,Effect Plugin,Reverb modeled after the iconic Farm studio stone room.,Reverb,11/14/2024,FALSE
+IK Multimedia — Joe Chiccarelli Vocal Strip,Effect Plugin,Vocal strip designed with Grammy-winning engineer Joe Chiccarelli.,Channel Strip;Vocal Processing,11/14/2024,FALSE
+IK Multimedia — FAME Studio Reverb,Effect Plugin,Reverb based on the legendary FAME Studios acoustic spaces.,Reverb,11/14/2024,FALSE
+IK Multimedia — TASCAM 388,Effect Plugin,Emulation of TASCAM's classic 8-track mixer/recorder.,Tape;Channel Strip,11/14/2024,FALSE
+IK Multimedia — TASCAM PORTA ONE,Effect Plugin,Portable multitrack cassette recorder emulation.,Tape;Lo-Fi,11/14/2024,FALSE
+IK Multimedia — TEAC A-3340S,Effect Plugin,Emulation of TEAC's vintage reel-to-reel tape machine.,Tape,11/14/2024,FALSE
+IK Multimedia — TEAC A-6100 MKII,Effect Plugin,High-fidelity reel-to-reel tape machine emulation.,Tape,11/14/2024,FALSE
+IK Multimedia — Comprexxor,Effect Plugin,Flexible compressor inspired by classic analog designs.,Compressor,11/14/2024,FALSE
+IK Multimedia — Space Delay,Effect Plugin,Tape delay emulation with vintage warmth and character.,Delay,11/14/2024,FALSE
+IK Multimedia — Sunset Sound Studio Reverb,Effect Plugin,Reverb from the legendary Sunset Sound studios.,Reverb,11/14/2024,FALSE
+IK Multimedia — Tape Machine 24,Effect Plugin,Analog tape machine emulation for warmth and saturation.,Tape,11/14/2024,FALSE
+IK Multimedia — Tape Machine 80,Effect Plugin,Classic tape emulation with rich analog tone.,Tape,11/14/2024,FALSE
+IK Multimedia — Tape Machine 99,Effect Plugin,Vintage tape recorder emulation with distinctive color.,Tape,11/14/2024,FALSE
+IK Multimedia — Tape Machine 440,Effect Plugin,Analog tape deck emulation for authentic saturation.,Tape,11/14/2024,FALSE
+IK Multimedia — T-RackS Leslie,Effect Plugin,Authentic rotary speaker emulation with full Leslie tone.,Modulation;Amp Effect,11/14/2024,FALSE
+IK Multimedia — Dyna-Mu,Effect Plugin,Tube compressor emulation with musical warmth and punch.,Compressor,11/14/2024,FALSE
+IK Multimedia — EQual,Effect Plugin,High-quality linear-phase digital equalizer.,EQ,11/14/2024,FALSE
+IK Multimedia — ONE,Effect Plugin,All-in-one mixing and mastering processor.,Multi-Effect,11/14/2024,FALSE
+IK Multimedia — Metering,Effect Plugin,Comprehensive loudness and spectrum metering tools.,Metering,11/14/2024,FALSE
+IK Multimedia — Saturator X,Effect Plugin,Versatile saturation plugin with multiple modes.,Saturation,11/14/2024,FALSE
+IK Multimedia — Mic Room,Effect Plugin,Microphone modeler for emulating classic mics.,Mic Modeling,11/14/2024,FALSE
+IK Multimedia — Stealth Limiter,Effect Plugin,Transparent limiter with maximum loudness control.,Limiter,11/14/2024,FALSE
+IK Multimedia — EQ PA,Effect Plugin,Classic analog EQ emulation.,EQ,11/14/2024,FALSE
+IK Multimedia — EQ PB,Effect Plugin,Vintage-style equalizer for tonal shaping.,EQ,11/14/2024,FALSE
+IK Multimedia — EQ PG,Effect Plugin,Analog-modeled EQ for precise sculpting.,EQ,11/14/2024,FALSE
+IK Multimedia — EQ 73,Effect Plugin,Neve-style EQ with warm character.,EQ,11/14/2024,FALSE
+IK Multimedia — EQ 81,Effect Plugin,Classic analog EQ with smooth tonal shaping.,EQ,11/14/2024,FALSE
+IK Multimedia — Master EQ 432,Effect Plugin,High-end mastering EQ with surgical precision.,EQ;Mastering,11/14/2024,FALSE
+IK Multimedia — Precision Comp/Limiter,Effect Plugin,Transparent compressor/limiter for subtle dynamics control.,Compressor;Limiter,11/14/2024,FALSE
+IK Multimedia — Bus Compressor,Effect Plugin,Classic SSL-style bus compressor.,Compressor,11/14/2024,FALSE
+IK Multimedia — White Channel,Effect Plugin,Analog-modeled channel strip with EQ and dynamics.,Channel Strip,11/14/2024,FALSE
+IK Multimedia — Tape Echo,Effect Plugin,Vintage tape echo emulation.,Delay,11/14/2024,FALSE
+IK Multimedia — British Channel,Effect Plugin,Console strip inspired by British analog desks.,Channel Strip,11/14/2024,FALSE
+IK Multimedia — Black 76 Limiting Amplifier,Effect Plugin,1176-style fast compressor emulation.,Compressor,11/14/2024,FALSE
+IK Multimedia — White 2A Leveling Amplifier,Effect Plugin,LA-2A optical compressor emulation.,Compressor,11/14/2024,FALSE
+IK Multimedia — Vintage Tube Compressor/Limiter 670,Effect Plugin,Fairchild 670-style compressor with rich analog tone.,Compressor,11/14/2024,FALSE
+IK Multimedia — Quad Comp,Effect Plugin,4-band compressor with flexible control.,Compressor;Multiband,11/14/2024,FALSE
+IK Multimedia — Quad Lim,Effect Plugin,4-band limiter for transparent loudness control.,Limiter;Multiband,11/14/2024,FALSE
+IK Multimedia — Quad Image,Effect Plugin,Multiband stereo imager for widening or narrowing mixes.,Stereo Imaging,11/14/2024,FALSE
+IK Multimedia — De-esser,Effect Plugin,Sibilance control tool for vocals and instruments.,De-esser,11/14/2024,FALSE
+IK Multimedia — EQP-1A Vintage Tube Program Equalizer,Effect Plugin,Classic Pultec-style tube EQ emulation.,EQ,11/14/2024,FALSE
+IK Multimedia — Opto Compressor,Effect Plugin,Smooth optical compressor for natural dynamics.,Compressor,11/14/2024,FALSE
+IK Multimedia — Brickwall Limiter,Effect Plugin,Limiter for maximum peak control and loudness.,Limiter,11/14/2024,FALSE
+IK Multimedia — Linear Phase Equalizer,Effect Plugin,Transparent linear-phase EQ for mastering.,EQ;Mastering,11/14/2024,FALSE
+IK Multimedia — Classic T-RackS Compressor,Effect Plugin,Analog-style compressor with smooth character.,Compressor,11/14/2024,FALSE
+IK Multimedia — Classic T-RackS Multiband Limiter,Effect Plugin,Multiband limiter for transparent mastering.,Limiter;Multiband,11/14/2024,FALSE
+IK Multimedia — Classic T-RackS Clipper,Effect Plugin,Hard clipper for loudness and harmonics.,Clipper,11/14/2024,FALSE
+IK Multimedia — Classic T-RackS Equalizer,Effect Plugin,Classic analog EQ for tonal shaping.,EQ,11/14/2024,FALSE
+IK Multimedia — CSR Plate Reverb,Effect Plugin,Plate reverb emulation for lush depth.,Reverb,11/14/2024,FALSE
+IK Multimedia — CSR Hall Reverb,Effect Plugin,Hall reverb for natural spaciousness.,Reverb,11/14/2024,FALSE
+IK Multimedia — CSR Room Reverb,Effect Plugin,"Room reverb for intimate, realistic spaces.",Reverb,11/14/2024,FALSE
+IK Multimedia — CSR Inverse Reverb,Effect Plugin,Creative inverse reverb for unique effects.,Reverb,11/14/2024,FALSE
+IK Multimedia — SampleTron 2,Sample Library,Mellotron-inspired instruments,Keys/Pianos;Textures/Atmospheres,11/14/2024,FALSE
+IK Multimedia — MODO BASS 2,Synth,Physically modeled bass,Bass,11/14/2024,FALSE
+Audio Ollie — LA Modern Percussion,Sample Library,,Percussion/Drums,11/16/2024,TRUE
+Cinematic Studio Series — Cinematic Studio Woodwinds,Sample Library,Workhorse woodwinds since mid-2024,Woodwinds;Orchestral,11/20/2024,FALSE
+Cinematic Studio Series — Cinematic Studio Piano,Sample Library,,Keys/Pianos,11/20/2024,FALSE
+Slate Digital — Fresh Air,Effect Plugin,Great saturation for very high end,Saturation/Distortion,11/24/2024,FALSE
+8Dio — Studio Sopranos,Sample Library,,Choir/Voices,11/22/2024,FALSE
+8Dio — Adagio 2.0,Sample Library,,Strings,11/26/2024,FALSE
+8Dio — CAGE Bundle,Sample Library,,Percussion/Drums;Textures/Atmospheres,11/30/2024,FALSE
+Spitfire Audio — AIR Studio Reverb,Effect Plugin,My favorite convolution reverb plugin ever made! Air Studio's sound is unmatched.,Reverb,1/19/2025,TRUE
+Spitfire Audio — Spitfire Symphony Orchestra Extras,Sample Library,,Orchestral,2/6/2025,TRUE
+Gaming PC,Gear,AMD Ryzen 9 9950X; 96GB RAM; RTX 5070 ti 16gb; MAG B650 TOMAHAWK,Workstation,2/15/2025,TRUE
+Xfer Records — Serum 2,Synth,Powerful sound design,Wavetable/Hybrid,3/18/2025,FALSE
+FXpansion — BFD3,Sample Library,,Percussion/Drums,6/14/2025,FALSE
+UVI — Glass Orchestra,Sample Library,,Textures/Atmospheres,7/14/2025,TRUE
+UVI — Falcon,Synth,,Sampler/Workstation,7/14/2025,TRUE
+Spitfire Audio — Eric Whitacre Choir,Sample Library,,Choir/Voices,7/15/2025,TRUE
+EastWest — Stormdrum 3,Sample Library,,Percussion/Drums,8/3/2025,TRUE
+Spitfire Audio — Eric Whitacre Contrast,Sample Library,,Choir/Voices,9/19/2025,TRUE
+Spitfire Audio — Albion IV Uist,Sample Library,,Orchestral,9/20/2025,FALSE
+Spectrasonics — Omnisphere 3 Upgrade,Synth,AMAZING update to the best synth on the market with over 30k patches. You likely hear this in any song of mine that contains synths.,Wavetable/Hybrid,10/21/2025,TRUE
+EastWest — Hollywood Fantasy Orchestra,Sample Library,,World/Ethnic;Multi-instrument;Orchestral,4/6/2026,TRUE
+Apple — MacBook Pro (M5 Pro),Gear,M5 Pro chip; 64GB RAM; my main machine,Workstation,6/1/2026,TRUE
+Steinberg — Cubase 15 Pro,Gear,DAW I've been using since June 2026,DAW,6/1/2026,TRUE
+Ample Sound — Ample Metal Eclipse,Sample Library,My main heavy/metal electric guitar,Guitar,6/16/2025,TRUE
+Ample Sound — Ample Bass J,Sample Library,My main bass guitar,Bass,6/16/2025,TRUE
+Ample Sound — Ample Guitar SC,Sample Library,My main clean electric guitar,Guitar,6/16/2025,TRUE

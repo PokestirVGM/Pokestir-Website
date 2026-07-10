@@ -132,7 +132,8 @@
       tag: header.findIndex((h) => /^tag$/i.test(h)),
       desc: header.findIndex((h) => /description/i.test(h)),
       subs: header.findIndex((h) => /^subtags$/i.test(h)),
-      date: header.findIndex((h) => /^date$/i.test(h))
+      date: header.findIndex((h) => /^date$/i.test(h)),
+      favorite: header.findIndex((h) => /^favorite$/i.test(h))
     };
 
     const items = [];
@@ -149,11 +150,12 @@
       const description = String(cols[idx.desc] || "").trim();
       const subsRaw = idx.subs >= 0 ? String(cols[idx.subs] || "").trim() : "";
       const date = idx.date >= 0 ? String(cols[idx.date] || "").trim() : "";
+      const favorite = idx.favorite >= 0 ? /^(true|yes|1)$/i.test(String(cols[idx.favorite] || "").trim()) : false;
       const pair = splitVendorAndName(product);
 
       const subtags = subsRaw ? subsRaw.split(/[;|,]/).map((s) => s.trim()).filter(Boolean) : [];
 
-      items.push(buildDerived({ product, vendor: pair.vendor, name: pair.name, tag, description, subtags, date }));
+      items.push(buildDerived({ product, vendor: pair.vendor, name: pair.name, tag, description, subtags, date, favorite }));
     }
     return items;
   }
@@ -268,7 +270,7 @@
 
   function card(item) {
     const el = document.createElement("article");
-    el.className = "card";
+    el.className = item.favorite ? "card is-favorite" : "card";
     el.setAttribute("role", "listitem");
 
     const source = [item.vendor, item.tag].filter(Boolean).map(escapeHTML).join(" &bull; ");

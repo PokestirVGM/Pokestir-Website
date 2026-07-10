@@ -47,6 +47,11 @@ select {
    bottom so equal-height grid rows look deliberate. */
 .grid .card { display: flex; flex-direction: column; border-color: var(--line); }
 .grid .card::before { display: none; }
+
+/* Favorites get the site's signature animated gradient border back */
+.grid .card.is-favorite { border-color: transparent; }
+.grid .card.is-favorite::before { display: block; }
+
 .grid-msg { color: var(--muted); padding: 16px 0; grid-column: 1 / -1; }
 
 .card-head { padding: 14px 16px 0; }

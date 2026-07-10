@@ -5,3 +5,6 @@
 # Editor
 .vscode/
 .idea/
+
+# Local AI project memory
+AGENTS.md
