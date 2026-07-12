@@ -527,13 +527,69 @@
     });
   }
 
-  function renderNotFound() {
+  /* ---- "Did you mean" for unknown slugs ----
+     Two complementary similarity measures, take the best of either:
+     - edit distance catches typos (shurey-hill -> shurrey-hill);
+     - hyphen-token overlap catches longer/reworded addresses, including any
+       pre-rename slug, whose tokens contain the current short slug's tokens.
+     257 slugs is small enough to brute-force score on every miss. */
+  function editDistance(a, b) {
+    let prev2 = null;
+    let prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+    for (let i = 1; i <= a.length; i++) {
+      const row = [i];
+      for (let j = 1; j <= b.length; j++) {
+        let v = Math.min(prev[j] + 1, row[j - 1] + 1,
+          prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+          v = Math.min(v, prev2[j - 2] + 1); // transposition
+        }
+        row.push(v);
+      }
+      prev2 = prev;
+      prev = row;
+    }
+    return prev[b.length];
+  }
+
+  function slugSimilarity(q, slug) {
+    if (q === slug) return 1;
+    const charSim = 1 - editDistance(q, slug) / Math.max(q.length, slug.length);
+    const A = new Set(q.split('-').filter(Boolean));
+    const B = new Set(slug.split('-').filter(Boolean));
+    let inter = 0;
+    for (const t of A) if (B.has(t)) inter++;
+    const dice = 2 * inter / (A.size + B.size);
+    const containment = inter / Math.min(A.size, B.size);
+    return Math.max(charSim, dice, containment * 0.9);
+  }
+
+  function suggestReleases(q, limit) {
+    const norm = String(q).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    if (!norm) return [];
+    return DB
+      .map((rel) => ({ rel, score: slugSimilarity(norm, rel.slug) }))
+      .filter((s) => s.score >= 0.5)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit)
+      .map((s) => s.rel);
+  }
+
+  function renderNotFound(slug) {
+    const hits = suggestReleases(slug, 3);
+    const suggest = hits.length ? `
+          <div class="nf-suggest">
+            <div class="nf-label">Did you mean:</div>
+            <ul class="nf-list">
+              ${hits.map((rel) => `<li><a href="?r=${encodeURIComponent(rel.slug)}">${escapeHTML(rel.title)}</a></li>`).join('')}
+            </ul>
+          </div>` : '';
     detailView.innerHTML = `
       <a class="back-link" href="./">&larr; All Releases</a>
       <section class="card detail-head">
         <div class="info">
           <h1 class="d-title">Release not found</h1>
-          <p class="d-desc">There's no release at this address. It may have been renamed or removed.</p>
+          <p class="d-desc">There's no release at this address. It may have been renamed or removed.</p>${suggest}
         </div>
       </section>`;
   }
@@ -545,7 +601,7 @@
     const rel = DB.find((r) => r.slug === slug);
     if (!rel) {
       document.title = 'Pokestir - Releases';
-      renderNotFound();
+      renderNotFound(slug);
       return;
     }
 

@@ -7,6 +7,8 @@
 /* ── Section headers ── */
 .page-title { margin: 4px 2px 6px; }
 .section-sub { color: var(--muted); font-size: 14px; margin: 2px 2px 8px; }
+.section-sub a { color: var(--white); text-decoration: underline; }
+.section-sub a:hover { text-decoration: none; }
 
 /* =========================
    ABOUT / COMMISSIONS

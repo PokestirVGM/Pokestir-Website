@@ -184,7 +184,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "shurrey-hill-from-tales-of-the-abyss",
+    slug: "shurrey-hill",
     title: "Shurrey Hill (From \"Tales of the Abyss\")",
     subtitle: "",
     type: "Single",
@@ -212,7 +212,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "castle-theme-from-new-super-mario-bros-arr-for-orchestra-by-pokestir",
+    slug: "castle-theme-new-super-mario-bros",
     title: "Castle Theme (From \"New Super Mario Bros.\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -240,7 +240,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-113-from-pokemon-ruby-sapphire-jazz-arrangement",
+    slug: "route-113",
     title: "Route 113 (From \"Pokémon Ruby & Sapphire\") (Jazz Arrangement)",
     subtitle: "",
     type: "Single",
@@ -268,7 +268,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "aspertia-city-from-pokemon-black-2-white-2",
+    slug: "aspertia-city",
     title: "Aspertia City (From \"Pokémon Black 2 & White 2\")",
     subtitle: "",
     type: "Single",
@@ -296,7 +296,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-3-from-pokemon-red-blue-arr-for-orchestra-by-pokestir",
+    slug: "route-3",
     title: "Route 3 (From \"Pokémon Red & Blue\") (Arr. for Orchestra by Pokestir)",
     subtitle: "",
     type: "Single",
@@ -324,7 +324,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "rustboro-city-from-pokemon-ruby-sapphire-jazz-arrangement",
+    slug: "rustboro-city",
     title: "Rustboro City (From \"Pokémon Ruby & Sapphire\") (Jazz Arrangement)",
     subtitle: "",
     type: "Single",
@@ -352,7 +352,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "saturos-battle-from-golden-sun",
+    slug: "saturos-battle",
     title: "Saturos Battle (From \"Golden Sun\")",
     subtitle: "",
     type: "Single",
@@ -380,7 +380,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "hyrule-castle-from-the-legend-of-zelda-a-link-to-the-past-arr-for-orchestra-by-pokestir",
+    slug: "hyrule-castle",
     title: "Hyrule Castle (From \"The Legend of Zelda: A Link to the Past\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -408,7 +408,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "ground-theme-from-new-super-mario-bros",
+    slug: "ground-theme-new-super-mario-bros",
     title: "Ground Theme (From \"New Super Mario Bros\")",
     subtitle: "",
     type: "Single",
@@ -436,7 +436,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "the-third-sanctuary-from-deltarune",
+    slug: "the-third-sanctuary",
     title: "The Third Sanctuary (From \"DELTARUNE\")",
     subtitle: "",
     type: "Single",
@@ -493,7 +493,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-cheren-bianca-from-pokemon-black-white-jazz-arrangement",
+    slug: "battle-cheren-bianca",
     title: "Battle! Cheren/Bianca (From \"Pokémon Black & White\") (Jazz Arrangement)",
     subtitle: "",
     type: "Single",
@@ -549,7 +549,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "snowpoint-city-from-pokemon-diamond-pearl-arr-for-orchestra-by-pokestir",
+    slug: "snowpoint-city",
     title: "Snowpoint City (From \"Pokémon Diamond & Pearl\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -577,7 +577,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "snowy-mountain-from-super-mario-bros-wonder-arr-for-orchestra-by-pokestir",
+    slug: "snowy-mountain",
     title: "Snowy-Mountain (from “Super Mario Bros. Wonder”) [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -605,7 +605,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "dark-sanctuary-from-deltarune-arr-for-orchestra-by-pokestir",
+    slug: "dark-sanctuary",
     title: "Dark Sanctuary (From \"Deltarune\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -633,7 +633,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "main-theme-from-streetpass-mii-plaza",
+    slug: "main-theme-streetpass-mii-plaza",
     title: "Main Theme (From \"StreetPass Mii Plaza\")",
     subtitle: "",
     type: "Single",
@@ -661,7 +661,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-gym-leader-from-pokemon-red-blue",
+    slug: "battle-gym-leader-red-blue",
     title: "Battle! Gym Leader (From \"Pokémon Red & Blue\")",
     subtitle: "",
     type: "Single",
@@ -689,7 +689,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "stow-on-side-from-pokemon-sword-shield-jazz-fusion-arrangement",
+    slug: "stow-on-side",
     title: "Stow-on-Side (From \"Pokémon Sword & Shield\") (Jazz Fusion Arrangement)",
     subtitle: "",
     type: "Single",
@@ -756,7 +756,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "waltz-of-the-boos-from-super-mario-galaxy-electronic-arrangement",
+    slug: "waltz-of-the-boos",
     title: "Waltz of the Boos (from \"Super Mario Galaxy\") (Electronic Arrangement)",
     subtitle: "",
     type: "Single",
@@ -784,7 +784,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "hearthome-city-from-pokemon-diamond-pearl-jazz-arrangement",
+    slug: "hearthome-city",
     title: "Hearthome City (from \"Pokémon Diamond & Pearl\") (Jazz Arrangement)",
     subtitle: "",
     type: "Single",
@@ -812,7 +812,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-104-from-pokemon-ruby-sapphire-arr-for-orchestra-by-pokestir",
+    slug: "route-104",
     title: "Route 104 (From \"Pokémon Ruby & Sapphire) [Arr. For Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -840,7 +840,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-colress-from-pokemon-black-2-white-2-jazz-fusion-arrangement",
+    slug: "battle-colress",
     title: "Battle! Colress (From \"Pokémon Black 2 & White 2\") (Jazz Fusion Arrangement)",
     subtitle: "",
     type: "Single",
@@ -868,7 +868,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "world-themes-collection-pokemon-vol-5",
+    slug: "world-themes-vol-5",
     title: "World Themes Collection: Pokémon, Vol. 5",
     subtitle: "",
     type: "Album",
@@ -918,7 +918,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-with-magus-from-chrono-trigger",
+    slug: "battle-with-magus",
     title: "Battle with Magus (From \"Chrono Trigger\")",
     subtitle: "",
     type: "Single",
@@ -946,7 +946,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "super-mario-classics-collection",
+    slug: "super-mario-classics",
     title: "Super Mario Classics Collection",
     subtitle: "",
     type: "Album",
@@ -991,7 +991,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "credits-from-the-legend-of-zelda-ocarina-of-time",
+    slug: "credits-ocarina-of-time",
     title: "Credits (From \"The Legend of Zelda: Ocarina of Time\")",
     subtitle: "",
     type: "Single",
@@ -1019,7 +1019,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "world-themes-collection-pokemon-vol-4",
+    slug: "world-themes-vol-4",
     title: "World Themes Collection: Pokémon, Vol. 4",
     subtitle: "",
     type: "Album",
@@ -1069,7 +1069,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "hyrule-field-from-the-legend-of-zelda-ocarina-of-time-arr-for-orchestra-by-pokestir",
+    slug: "hyrule-field",
     title: "Hyrule Field (From \"The Legend of Zelda: Ocarina of Time\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -1097,7 +1097,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-themes-collection-pokemon-vol-2",
+    slug: "battle-themes-vol-2",
     title: "Battle Themes Collection: Pokémon, Vol. 2",
     subtitle: "",
     type: "Album",
@@ -1138,7 +1138,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-champion-cynthia-from-pokemon-diamond-pearl-modern-arrangement",
+    slug: "battle-champion-cynthia",
     title: "Battle! (Champion Cynthia) (from \"Pokémon Diamond & Pearl\") (Modern Arrangement)",
     subtitle: "",
     type: "Single",
@@ -1166,7 +1166,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-themes-collection-pokemon-vol-1",
+    slug: "battle-themes-vol-1",
     title: "Battle Themes Collection: Pokémon, Vol. 1",
     subtitle: "",
     type: "Album",
@@ -1207,7 +1207,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "undella-town-summer-from-pokemon-black-white-modern-arrangement",
+    slug: "undella-town-summer",
     title: "Undella Town - Summer (from \"Pokémon Black & White\") (Modern Arrangement)",
     subtitle: "",
     type: "Single",
@@ -1235,7 +1235,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "world-themes-collection-pokemon-vol-3",
+    slug: "world-themes-vol-3",
     title: "World Themes Collection - Pokémon, Vol. 3",
     subtitle: "",
     type: "Album",
@@ -1286,7 +1286,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "mt-chimney-from-pokemon-ruby-sapphire-arr-for-orchestra-by-pokestir",
+    slug: "mt-chimney",
     title: "Mt. Chimney (From \"Pokémon Ruby & Sapphire\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -1314,7 +1314,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "world-themes-collection-pokemon-vol-2",
+    slug: "world-themes-vol-2",
     title: "World Themes Collection - Pokémon, Vol. 2",
     subtitle: "",
     type: "Album",
@@ -1363,7 +1363,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "south-province-from-pokemon-scarlet-violet-arr-for-orchestra-by-pokestir",
+    slug: "south-province",
     title: "South Province (From \"Pokémon Scarlet & Violet\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -1391,7 +1391,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "world-themes-collection-pokemon-vol-1",
+    slug: "world-themes-vol-1",
     title: "World Themes Collection: Pokémon, Vol. 1",
     subtitle: "",
     type: "Album",
@@ -1470,7 +1470,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "palace-from-super-mario-bros-wonder-arr-for-orchestra-by-pokestir",
+    slug: "palace-super-mario-bros-wonder",
     title: "Palace (From “Super Mario Bros. Wonder”) [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -1526,7 +1526,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "castle-from-dragon-quest-vi-arr-for-orchestra-by-pokestir",
+    slug: "castle-dragon-quest-vi",
     title: "Castle (From “Dragon Quest VI”) [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -1554,7 +1554,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "wii-channels-collection",
+    slug: "wii-channels",
     title: "Wii Channels Collection",
     subtitle: "Music from \"Wii Channels\"",
     type: "Album",
@@ -1591,7 +1591,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-wild-pokemon-from-pokemon-ruby-sapphire-modern-arrangement",
+    slug: "battle-wild-pokemon-ruby-sapphire",
     title: "Battle! (Wild Pokémon) [From “Pokémon Ruby & Sapphire”] (Modern Arrangement)",
     subtitle: "",
     type: "Single",
@@ -1619,7 +1619,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "indie-cross-episode-2-selections-original-score",
+    slug: "indie-cross-episode-2",
     title: "Indie Cross: Episode 2 – Selections (Original Score)",
     subtitle: "",
     type: "Single",
@@ -1649,7 +1649,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "snowman-from-earthbound-arr-for-orchestra-by-pokestir-and-crystalvgm",
+    slug: "snowman",
     title: "Snowman (From \"Earthbound\") [Arr. for Orchestra by Pokestir and CrystalVGM]",
     subtitle: "",
     type: "Single",
@@ -1677,7 +1677,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-18-from-pokemon-x-y-arr-for-orchestra-by-pokestir",
+    slug: "route-18",
     title: "Route 18 (From \"Pokemon X & Y\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -1705,7 +1705,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "ruins-from-undertale-arr-for-orchestra-by-pokestir",
+    slug: "ruins-undertale",
     title: "Ruins (From \"Undertale\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -1733,7 +1733,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "summer-nature-s-crescendo-from-stardew-valley-arrangement",
+    slug: "summer-natures-crescendo",
     title: "Summer - Nature's Crescendo [from “Stardew Valley”] (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -1761,7 +1761,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "relic-song-from-pokemon-black-white-arrangement",
+    slug: "relic-song",
     title: "Relic Song (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -1789,7 +1789,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "valor-lakefront-jazz-arrangement-from-pokemon-diamond-pearl",
+    slug: "valor-lakefront",
     title: "Valor Lakefront (Jazz Arrangement) [from \"Pokémon Diamond & Pearl\"]",
     subtitle: "",
     type: "Single",
@@ -1817,7 +1817,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "boss-battle-2-from-chrono-trigger-arr-for-orchestra-by-pokestir",
+    slug: "boss-battle-2-chrono-trigger",
     title: "Boss Battle 2 (From \"CHRONO TRIGGER\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -1845,7 +1845,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "kalos-region-theme-from-pokemon-x-y-arr-for-orchestra-by-pokestir",
+    slug: "kalos-region-theme",
     title: "Kalos Region Theme (From \"Pokemon X & Y\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
     type: "Single",
@@ -1873,7 +1873,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "sootopolis-city-from-pokemon-ruby-sapphire",
+    slug: "sootopolis-city",
     title: "Sootopolis City (From \"Pokemon Ruby & Sapphire\")",
     subtitle: "",
     type: "Single",
@@ -1901,7 +1901,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "a-brief-moment-orchestral-arrangement-from-pokemon-scarlet-violet",
+    slug: "a-brief-moment",
     title: "A Brief Moment (Orchestral Arrangement) [from \"Pokémon Scarlet & Violet\"]",
     subtitle: "",
     type: "Single",
@@ -1929,7 +1929,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "the-decisive-battle-arrangement-from-final-fantasy-vi",
+    slug: "the-decisive-battle",
     title: "The Decisive Battle (Arrangement) [from \"FINAL FANTASY VI\"]",
     subtitle: "",
     type: "Single",
@@ -1957,7 +1957,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "tour-vancouver-velocity-arrangement-from-mario-kart-8-deluxe",
+    slug: "tour-vancouver-velocity",
     title: "Tour Vancouver Velocity (Arrangement) [from \"Mario Kart 8 Deluxe\"]",
     subtitle: "",
     type: "Single",
@@ -1985,7 +1985,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "warp-room-arrangement-from-crash-bandicoot-2-n-tranced",
+    slug: "warp-room-crash-bandicoot-2-n-tranced",
     title: "Warp Room [Arrangement] (from \"Crash Bandicoot 2: N-Tranced\")",
     subtitle: "",
     type: "Single",
@@ -2013,7 +2013,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "boss-battle-from-the-legend-of-zelda-ocarina-of-time-orchestral-arrangement",
+    slug: "boss-battle-ocarina-of-time",
     title: "Boss Battle (From \"The Legend of Zelda: Ocarina of Time\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2069,7 +2069,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "delfino-plaza-from-super-mario-sunshine-arrangement",
+    slug: "delfino-plaza",
     title: "Delfino Plaza (From \"Super Mario Sunshine\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2097,7 +2097,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "freezy-flake-galaxy-from-super-mario-galaxy-2-arrangement",
+    slug: "freezy-flake-galaxy",
     title: "Freezy Flake Galaxy (From \"Super Mario Galaxy 2\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2125,7 +2125,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-30-from-pokemon-gold-silver-orchestral-arrangement",
+    slug: "route-30-gold-silver",
     title: "Route 30 (From \"Pokémon Gold & Silver\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2153,7 +2153,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-225-from-pokemon-diamond-pearl-synth-pop-remix",
+    slug: "route-225",
     title: "Route 225 (From \"Pokémon Diamond & Pearl\") (Synth-Pop Remix)",
     subtitle: "",
     type: "Single",
@@ -2181,7 +2181,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "jubilife-city-from-pokemon-diamond-pearl-arrangement",
+    slug: "jubilife-city",
     title: "Jubilife City (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2209,7 +2209,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "reversal-mountain-from-pokemon-white-2-arrangement",
+    slug: "reversal-mountain",
     title: "Reversal Mountain (From \"Pokémon White 2\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2265,7 +2265,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "guardia-millennial-fair-from-chrono-trigger-arrangement",
+    slug: "guardia-millennial-fair",
     title: "Guardia Millennial Fair (From \"Chrono Trigger\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2293,7 +2293,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "mad-monster-mansion-from-banjo-kazooie-orchestral-arrangement",
+    slug: "mad-monster-mansion",
     title: "Mad Monster Mansion (From \"Banjo Kazooie\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2321,7 +2321,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "looker-s-theme-from-pokemon-platinum-arrangement",
+    slug: "lookers-theme",
     title: "Looker's Theme (From \"Pokémon Platinum\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2349,7 +2349,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "bob-omb-battlefield-from-super-mario-64-arrangement",
+    slug: "bob-omb-battlefield",
     title: "Bob-omb Battlefield (From \"Super Mario 64\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2423,7 +2423,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-228-from-pokemon-diamond-pearl-arrangement",
+    slug: "route-228",
     title: "Route 228 (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2451,7 +2451,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "middle-boss-battle-from-the-legend-of-zelda-ocarina-of-time-arrangement",
+    slug: "middle-boss-battle-ocarina-of-time",
     title: "Middle Boss Battle (From \"The Legend of Zelda: Ocarina of Time\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2479,7 +2479,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "birth-of-a-god-from-final-fantasy-vii-cinematic-arrangement",
+    slug: "birth-of-a-god",
     title: "Birth of a God (From \"Final Fantasy VII\") (Cinematic Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2507,7 +2507,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-2-from-chrono-trigger-arrangement",
+    slug: "battle-2-chrono-trigger",
     title: "Battle 2 (From \"Chrono Trigger\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2535,7 +2535,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-elite-four-from-pokemon-x-y-arrangement",
+    slug: "battle-elite-four-x-y",
     title: "Battle! Elite Four (From \"Pokémon X & Y\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2563,7 +2563,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "main-theme-from-chrono-trigger-orchestral-arrangement",
+    slug: "main-theme-chrono-trigger",
     title: "Main Theme (From \"Chrono Trigger\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2591,7 +2591,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "kokiri-forest-from-the-legend-of-zelda-ocarina-of-time-arrangement",
+    slug: "kokiri-forest",
     title: "Kokiri Forest (From \"The Legend of Zelda: Ocarina of Time\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2619,7 +2619,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-22-from-pokemon-black-2-white-2-arrangement",
+    slug: "route-22",
     title: "Route 22 (From \"Pokémon Black 2 & White 2\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2647,7 +2647,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-111-from-pokemon-ruby-sapphire-arrangement",
+    slug: "route-111",
     title: "Route 111 (From \"Pokémon Ruby & Sapphire\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2675,7 +2675,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "dire-dire-docks-from-super-mario-64-arrangement",
+    slug: "dire-dire-docks",
     title: "Dire, Dire Docks (From \"Super Mario 64\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2703,7 +2703,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "surf-from-pokemon-diamond-pearl-arrangement",
+    slug: "surf-diamond-pearl",
     title: "Surf (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2731,7 +2731,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-champion-iris-from-pokemon-black-2-white-2-arrangement",
+    slug: "battle-champion-iris",
     title: "Battle! Champion Iris (From \"Pokémon Black 2 & White 2\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2759,7 +2759,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "cortex-strikes-back-hub-from-crash-bandicoot-2-arrangement",
+    slug: "cortex-strikes-back-hub",
     title: "Cortex Strikes Back Hub (From \"Crash Bandicoot 2\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2787,7 +2787,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "icirrus-city-from-pokemon-black-white-arrangement",
+    slug: "icirrus-city",
     title: "Icirrus City (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2815,7 +2815,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "calling-from-heaven-from-castlevania-bloodlines-arrangement",
+    slug: "calling-from-heaven",
     title: "Calling from Heaven (From \"Castlevania Bloodlines\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2843,7 +2843,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "santalune-forest-from-pokemon-x-y-arrangement",
+    slug: "santalune-forest",
     title: "Santalune Forest (From \"Pokémon X & Y\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2871,7 +2871,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "bicycle-from-pokemon-black-white-arrangement",
+    slug: "bicycle-black-white",
     title: "Bicycle (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2899,7 +2899,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-champion-from-pokemon-gold-silver-cinematic-arrangement",
+    slug: "battle-champion-gold-silver",
     title: "Battle! Champion (From \"Pokémon Gold & Silver\") (Cinematic Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2927,7 +2927,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "entralink-from-pokemon-black-white-arrangement",
+    slug: "entralink",
     title: "Entralink (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2955,7 +2955,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-1-from-chrono-trigger-arrangement",
+    slug: "battle-1-chrono-trigger",
     title: "Battle 1 (From \"Chrono Trigger\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -2983,7 +2983,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "waga-tamashii-my-very-soul-vol-1-original-game-soundtrack",
+    slug: "waga-tamashii-vol-1",
     title: "Waga Tamashii: My Very Soul, Vol. 1 (Original Game Soundtrack)",
     subtitle: "",
     type: "Album",
@@ -3045,7 +3045,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "nacrene-city-from-pokemon-black-white-arrangement",
+    slug: "nacrene-city",
     title: "Nacrene City (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3073,7 +3073,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "chocobo-jam-from-final-fantasy-x-arrangement",
+    slug: "chocobo-jam",
     title: "Chocobo Jam (From \"Final Fantasy X\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3101,7 +3101,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "snowdin-town-from-undertale-arrangement",
+    slug: "snowdin-town",
     title: "Snowdin Town (From \"Undertale\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3129,7 +3129,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "bowser-s-road-from-super-mario-64-orchestral-arrangement",
+    slug: "bowsers-road",
     title: "Bowser's Road (From \"Super Mario 64\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3157,7 +3157,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "introduction-from-pokemon-diamond-pearl-orchestral-arrangement",
+    slug: "introduction-diamond-pearl",
     title: "Introduction (From \"Pokémon Diamond & Pearl\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3185,7 +3185,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "kalos-towns-cities-collection",
+    slug: "kalos-towns-cities",
     title: "Kalos Towns & Cities Collection",
     subtitle: "Music from \"Pokémon X & Y\"",
     type: "Album",
@@ -3226,7 +3226,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "overworld-from-the-legend-of-zelda-arrangement",
+    slug: "overworld-zelda",
     title: "Overworld (From \"The Legend of Zelda\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3254,7 +3254,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-rival-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "battle-rival-heartgold-soulsilver",
     title: "Battle! Rival (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3282,7 +3282,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "title-theme-from-the-legend-of-zelda-ocarina-of-time-arrangement",
+    slug: "title-theme-ocarina-of-time",
     title: "Title Theme (From \"The Legend of Zelda: Ocarina of Time\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3310,7 +3310,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "lacunosa-town-from-pokemon-black-white-arrangement",
+    slug: "lacunosa-town",
     title: "Lacunosa Town (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3338,7 +3338,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "lost-woods-from-the-legend-of-zelda-ocarina-of-time-arrangement",
+    slug: "lost-woods",
     title: "Lost Woods (From \"The Legend of Zelda: Ocarina of Time\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3366,7 +3366,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "gerudo-valley-from-the-legend-of-zelda-ocarina-of-time-arrangement",
+    slug: "gerudo-valley",
     title: "Gerudo Valley (From \"The Legend of Zelda: Ocarina of Time\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3394,7 +3394,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-201-from-pokemon-diamond-pearl-arrangement",
+    slug: "route-201",
     title: "Route 201 (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3450,7 +3450,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-120-from-pokemon-ruby-sapphire-orchestral-arrangement",
+    slug: "route-120",
     title: "Route 120 (From \"Pokémon Ruby & Sapphire\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3478,7 +3478,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "the-forest-of-hope-from-pikmin-1-arrangement",
+    slug: "the-forest-of-hope",
     title: "The Forest of Hope (From \"Pikmin 1\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3506,7 +3506,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "cianwood-city-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "cianwood-city",
     title: "Cianwood City (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3534,7 +3534,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "dingodile-from-crash-bandicoot-3-warped-arrangement",
+    slug: "dingodile",
     title: "Dingodile (From \"Crash Bandicoot 3: Warped\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3562,7 +3562,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "lake-of-rage-from-pokemon-heartgold-soulsilver-orchestral-arrangement",
+    slug: "lake-of-rage",
     title: "Lake of Rage (From \"Pokémon HeartGold & SoulSilver\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3590,7 +3590,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-rival-from-pokemon-diamond-pearl-arrangement",
+    slug: "battle-rival-diamond-pearl",
     title: "Battle! Rival (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3618,7 +3618,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "danganronpa-v3-from-danganronpa-v3-killing-harmony-arrangement",
+    slug: "danganronpa-v3",
     title: "DANGANRONPA V3 (From \"Danganronpa V3: Killing Harmony\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3646,7 +3646,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "mistralton-city-from-pokemon-black-and-white-arrangement",
+    slug: "mistralton-city",
     title: "Mistralton City (From \"Pokemon Black and White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3674,7 +3674,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "mt-coronet-from-pokemon-diamond-pearl-arrangement",
+    slug: "mt-coronet",
     title: "Mt. Coronet (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3702,7 +3702,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "opelucid-city-from-pokemon-white-arrangement",
+    slug: "opelucid-city",
     title: "Opelucid City (From \"Pokémon White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3730,7 +3730,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "fortress-from-super-mario-world-cinematic-arrangement",
+    slug: "fortress-super-mario-world",
     title: "Fortress (From \"Super Mario World\") (Cinematic Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3758,7 +3758,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-dialga-palkia-from-pokemon-diamond-pearl-cinematic-arrangement",
+    slug: "battle-dialga-palkia",
     title: "Battle! Dialga & Palkia (From \"Pokémon Diamond & Pearl\") (Cinematic Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3786,7 +3786,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "warp-room-from-crash-bandicoot-3-warped-arrangement",
+    slug: "warp-room-crash-bandicoot-3-warped",
     title: "Warp Room (From \"Crash Bandicoot 3: Warped\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3814,7 +3814,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-gym-leader-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "battle-gym-leader-heartgold-soulsilver",
     title: "Battle! Gym Leader (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3842,7 +3842,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-203-from-pokemon-diamond-pearl-arrangement",
+    slug: "route-203",
     title: "Route 203 (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3870,7 +3870,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "dark-impetus-from-kingdom-hearts-birth-by-sleep-arrangement",
+    slug: "dark-impetus",
     title: "Dark Impetus (From \"Kingdom Hearts Birth by Sleep\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3898,7 +3898,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "opening-movie-title-screen-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "opening-movie-title-screen-heartgold-soulsilver",
     title: "Opening Movie & Title Screen (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3927,7 +3927,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "princess-zelda-from-the-legend-of-zelda-ocarina-of-time-orchestral-arrangement",
+    slug: "princess-zelda",
     title: "Princess Zelda (From \"The Legend of Zelda: Ocarina of Time\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3955,7 +3955,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-19-from-pokemon-black-2-white-2-arrangement",
+    slug: "route-19",
     title: "Route 19 (From \"Pokémon Black 2 & White 2\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -3983,7 +3983,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "unova-route-1-from-pokemon-black-white-arrangement",
+    slug: "unova-route-1",
     title: "Unova Route 1 (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4011,7 +4011,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-johto-trainer-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "battle-johto-trainer",
     title: "Battle! Johto Trainer (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4039,7 +4039,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "overworld-from-super-mario-world-arrangement",
+    slug: "overworld-super-mario-world",
     title: "Overworld (From \"Super Mario World\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4067,7 +4067,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-10-from-pokemon-black-white-2023-arrangement",
+    slug: "route-10-2023",
     title: "Route 10 (From \"Pokémon Black & White\") (2023 Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4095,7 +4095,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "title-screen-from-super-mario-world-orchestral-arrangement",
+    slug: "title-screen-super-mario-world",
     title: "Title Screen (From \"Super Mario World\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4123,7 +4123,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "nuvema-town-from-pokemon-black-white-arrangement",
+    slug: "nuvema-town",
     title: "Nuvema Town (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4151,7 +4151,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-champion-from-pokemon-black-white-arrangement",
+    slug: "battle-champion-black-white",
     title: "Battle! (Champion) (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4179,7 +4179,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-trainer-battle-from-pokemon-red-blue-arrangement",
+    slug: "battle-trainer-battle-red-blue",
     title: "Battle! Trainer Battle (From \"Pokémon Red & Blue\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4207,7 +4207,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "sunyshore-city-from-pokemon-diamond-pearl-arrangement",
+    slug: "sunyshore-city",
     title: "Sunyshore City (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4263,7 +4263,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "castelia-city-from-pokemon-black-white-arrangement",
+    slug: "castelia-city",
     title: "Castelia City (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4291,7 +4291,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-26-from-pokemon-heartgold-soulsilver-orchestral-arrangement",
+    slug: "route-26",
     title: "Route 26 (From \"Pokémon HeartGold & SoulSilver\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4319,7 +4319,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-steven-from-pokemon-ruby-sapphire-arrangement",
+    slug: "battle-steven",
     title: "Battle! Steven (From \"Pokémon Ruby & Sapphire\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4347,7 +4347,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-12-from-pokemon-black-white-orchestral-arrangement",
+    slug: "route-12",
     title: "Route 12 (From \"Pokémon Black & White\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4375,7 +4375,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "bicycle-theme-from-pokemon-diamond-pearl-arrangement",
+    slug: "bicycle-theme-diamond-pearl",
     title: "Bicycle Theme (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4403,7 +4403,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "johto-wild-battle-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "johto-wild-battle",
     title: "Johto Wild Battle (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4431,7 +4431,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "oldale-town-from-pokemon-ruby-sapphire-arrangement",
+    slug: "oldale-town",
     title: "Oldale Town (From \"Pokémon Ruby & Sapphire\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4459,7 +4459,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "lavender-town-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "lavender-town",
     title: "Lavender Town (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4487,7 +4487,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-trainer-battle-from-pokemon-black-white-arrangement",
+    slug: "battle-trainer-battle-black-white",
     title: "Battle! (Trainer Battle) (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4515,7 +4515,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "solaceon-town-from-pokemon-diamond-pearl-arrangement",
+    slug: "solaceon-town",
     title: "Solaceon Town (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4543,7 +4543,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "olivine-lighthouse-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "olivine-lighthouse",
     title: "Olivine Lighthouse (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4571,7 +4571,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "anxious-heart-from-final-fantasy-vii-arrangement",
+    slug: "anxious-heart",
     title: "Anxious Heart (From \"Final Fantasy VII\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4599,7 +4599,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-gym-leader-from-pokemon-black-white-arrangement",
+    slug: "battle-gym-leader-black-white",
     title: "Battle! Gym Leader (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4627,7 +4627,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-119-from-pokemon-ruby-sapphire-arrangement",
+    slug: "route-119",
     title: "Route 119 (From \"Pokémon Ruby & Sapphire\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4655,7 +4655,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "galactic-eterna-building-from-pokemon-diamond-pearl-arrangement",
+    slug: "galactic-eterna-building",
     title: "Galactic Eterna Building (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4683,7 +4683,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "airship-theme-from-super-mario-bros-3-arrangement",
+    slug: "airship-theme-super-mario-bros-3",
     title: "Airship Theme (From \"Super Mario Bros 3\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4711,7 +4711,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-team-galactic-commander-from-pokemon-diamond-pearl-arrangement",
+    slug: "battle-team-galactic-commander",
     title: "Battle! (Team Galactic Commander) (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4739,7 +4739,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "violet-city-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "violet-city",
     title: "Violet City (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4767,7 +4767,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "team-rocket-hq-from-pokemon-heartgold-soulsilver-orchestral-arrangement",
+    slug: "team-rocket-hq",
     title: "Team Rocket HQ (From \"Pokémon HeartGold & SoulSilver\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4795,7 +4795,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-giratina-from-pokemon-platinum-arrangement",
+    slug: "battle-giratina",
     title: "Battle! Giratina (From \"Pokémon Platinum\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4823,7 +4823,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "athletic-theme-from-yoshi-s-island-arrangement",
+    slug: "athletic-theme-yoshis-island",
     title: "Athletic Theme (From \"Yoshi's Island\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4851,7 +4851,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "boss-battle-1-from-chrono-trigger-orchestral-arrangement",
+    slug: "boss-battle-1-chrono-trigger",
     title: "Boss Battle 1 (From \"Chrono Trigger\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4879,7 +4879,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-210-from-pokemon-diamond-pearl-orchestral-arrangement",
+    slug: "route-210",
     title: "Route 210 (From \"Pokémon Diamond & Pearl\") (Orchestral Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4907,7 +4907,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "swimming-from-super-mario-world-arrangement",
+    slug: "swimming-super-mario-world",
     title: "Swimming (From \"Super Mario World\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4935,7 +4935,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "opelucid-city-black-from-pokemon-black-white-arrangement",
+    slug: "opelucid-city-black",
     title: "Opelucid City (Black) (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4963,7 +4963,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "beware-the-forest-s-mushrooms-from-super-mario-rpg-arrangement",
+    slug: "beware-the-forests-mushrooms",
     title: "Beware the Forest's Mushrooms (From “Super Mario RPG”) (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -4991,7 +4991,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-elite-four-from-pokemon-ruby-sapphire-arrangement",
+    slug: "battle-elite-four-ruby-sapphire",
     title: "Battle! (Elite Four) (From \"Pokémon Ruby & Sapphire\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5019,7 +5019,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "the-highwind-takes-to-the-skies-from-final-fantasy-vii-arrangement",
+    slug: "the-highwind-takes-to-the-skies",
     title: "The Highwind Takes to the Skies (From \"Final Fantasy VII\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5047,7 +5047,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "driftveil-city-from-pokemon-black-white-2022-arrangement",
+    slug: "driftveil-city-2022",
     title: "Driftveil City (From \"Pokémon Black & White\") (2022 Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5075,7 +5075,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "veilstone-city-day-from-pokemon-diamond-pearl-arrangement",
+    slug: "veilstone-city-day",
     title: "Veilstone City (Day) (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5103,7 +5103,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "bonetrousle-from-undertale-arrangement",
+    slug: "bonetrousle",
     title: "Bonetrousle (From \"Undertale\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5131,7 +5131,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "musical-theater-from-pokemon-black-white-arrangement",
+    slug: "musical-theater",
     title: "Musical Theater (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5159,7 +5159,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "game-corner-from-pokemon-diamond-pearl-arrangement",
+    slug: "game-corner-diamond-pearl",
     title: "Game Corner (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5187,7 +5187,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "embracing-one-s-duty-from-pokemon-black-white",
+    slug: "embracing-ones-duty",
     title: "Embracing One's Duty (From \"Pokémon Black & White\")",
     subtitle: "",
     type: "Single",
@@ -5215,7 +5215,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "secret-of-the-forest-from-chrono-trigger-arrangement",
+    slug: "secret-of-the-forest",
     title: "Secret of the Forest (From \"Chrono Trigger\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5243,7 +5243,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "victory-road-from-pokemon-black-white-arrangement",
+    slug: "victory-road-black-white",
     title: "Victory Road (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5271,7 +5271,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "oreburgh-mine-from-pokemon-diamond-pearl-arrangement",
+    slug: "oreburgh-mine",
     title: "Oreburgh Mine (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5299,7 +5299,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "ryme-city-from-pokemon-detective-pikachu-arrangement",
+    slug: "ryme-city",
     title: "Ryme City (From \"Pokémon Detective Pikachu\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5327,7 +5327,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "challenging-a-battle-competition-from-pokemon-black-white-arrangement",
+    slug: "challenging-a-battle-competition",
     title: "Challenging a Battle Competition (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5355,7 +5355,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "dreamyard-from-pokemon-black-white",
+    slug: "dreamyard",
     title: "Dreamyard (From \"Pokémon Black & White\")",
     subtitle: "",
     type: "Single",
@@ -5383,7 +5383,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "song-of-storms-from-the-legend-of-zelda-ocarina-of-time-arrangement",
+    slug: "song-of-storms",
     title: "Song of Storms (From \"The Legend of Zelda: Ocarina of Time\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5411,7 +5411,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "viridian-city-from-pokemon-heartgold-soulsilver",
+    slug: "viridian-city",
     title: "Viridian City (From \"Pokémon HeartGold & SoulSilver\")",
     subtitle: "",
     type: "Single",
@@ -5439,7 +5439,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-subway-trainer-from-pokemon-black-white-arrangement",
+    slug: "battle-subway-trainer",
     title: "Battle! (Subway Trainer) (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5467,7 +5467,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "gear-station-from-pokemon-black-white-arrangement",
+    slug: "gear-station",
     title: "Gear Station (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5495,7 +5495,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-lake-guardians-from-pokemon-diamond-and-pearl",
+    slug: "battle-lake-guardians",
     title: "Battle! Lake Guardians (From \"Pokémon Diamond and Pearl\")",
     subtitle: "",
     type: "Single",
@@ -5523,7 +5523,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "eterna-city-night-from-pokemon-diamond-pearl-arrangement",
+    slug: "eterna-city-night",
     title: "Eterna City (Night) (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5551,7 +5551,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-brendan-may-from-pokemon-ruby-sapphire-arrangement",
+    slug: "battle-brendan-may",
     title: "Battle! (Brendan/May) (From \"Pokémon Ruby & Sapphire\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5579,7 +5579,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-225-day-from-pokemon-diamond-pearl-arrangement",
+    slug: "route-225-day",
     title: "Route 225 (Day) (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5607,7 +5607,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "the-underground-from-pokemon-diamond-pearl-arrangement",
+    slug: "the-underground",
     title: "The Underground (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5635,7 +5635,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "coronation-day-from-pokemon-black-white-arrangement",
+    slug: "coronation-day",
     title: "Coronation Day (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5663,7 +5663,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-gym-leader-from-pokemon-ruby-sapphire-arrangement",
+    slug: "battle-gym-leader-ruby-sapphire",
     title: "Battle! (Gym Leader) (From \"Pokémon Ruby & Sapphire\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5691,7 +5691,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "musical-pokemon-party-from-pokemon-black-white-arrangement",
+    slug: "musical-pokemon-party",
     title: "Musical: Pokémon Party (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5719,7 +5719,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "in-the-final-from-mario-luigi-bowser-s-inside-story-arrangement",
+    slug: "in-the-final",
     title: "In The Final (From \"Mario & Luigi: Bowser's Inside Story\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5747,7 +5747,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "team-galactic-hq-from-pokemon-diamond-pearl-arrangement",
+    slug: "team-galactic-hq",
     title: "Team Galactic HQ (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5775,7 +5775,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "azalea-town-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "azalea-town",
     title: "Azalea Town (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5803,7 +5803,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "cycling-from-pokemon-red-blue-arrangement",
+    slug: "cycling-red-blue",
     title: "Cycling (From \"Pokémon Red & Blue\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5831,7 +5831,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "snow-mountain-from-super-mario-64-arrangement",
+    slug: "snow-mountain",
     title: "Snow Mountain (From \"Super Mario 64\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5859,7 +5859,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "walrus-cove-from-diddy-kong-racing-arrangement",
+    slug: "walrus-cove",
     title: "Walrus Cove (From \"Diddy Kong Racing\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5887,7 +5887,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "floccesy-town-from-pokemon-black-2-white-2-arrangement",
+    slug: "floccesy-town",
     title: "Floccesy Town (From \"Pokémon Black 2 & White 2\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5915,7 +5915,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-216-day-from-pokemon-diamond-pearl-arrangement",
+    slug: "route-216-day",
     title: "Route 216 (Day) (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5943,7 +5943,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-team-plasma-from-pokemon-black-white-arrangement",
+    slug: "battle-team-plasma",
     title: "Battle! (Team Plasma) (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5971,7 +5971,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "hoenn-victory-road-from-pokemon-ruby-sapphire-arrangement",
+    slug: "hoenn-victory-road",
     title: "Hoenn Victory Road (From \"Pokémon Ruby & Sapphire\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -5999,7 +5999,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-38-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "route-38",
     title: "Route 38 (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6027,7 +6027,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "underground-theme-from-yoshis-island-arrangement",
+    slug: "underground-theme-yoshis-island",
     title: "Underground Theme (From \"Yoshi’s Island\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6055,7 +6055,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-4-autumn-from-pokemon-black-white-arrangement",
+    slug: "route-4-autumn",
     title: "Route 4 (Autumn) (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6083,7 +6083,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "title-screen-from-pokemon-black-white-arrangement",
+    slug: "title-screen-black-white",
     title: "Title Screen (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6111,7 +6111,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-209-night-from-pokemon-diamond-pearl-arrangement",
+    slug: "route-209-night",
     title: "Route 209 (Night) (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6139,7 +6139,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "stark-mountain-from-pokemon-diamond-pearl-arrangement",
+    slug: "stark-mountain",
     title: "Stark Mountain (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6167,7 +6167,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "the-pokemon-league-from-pokemon-black-white-arrangement",
+    slug: "the-pokemon-league",
     title: "The Pokémon League (From “Pokémon Black & White”) (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6195,7 +6195,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-trainer-battle-from-pokemon-diamond-pearl-arrangement",
+    slug: "battle-trainer-battle-diamond-pearl",
     title: "Battle! (Trainer Battle) [From \"Pokémon Diamond & Pearl\"] (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6223,7 +6223,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "nimbasa-city-from-pokemon-black-white-arrangement",
+    slug: "nimbasa-city",
     title: "Nimbasa City (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6251,7 +6251,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "goldenrod-game-corner-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "goldenrod-game-corner",
     title: "Goldenrod Game Corner (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6279,7 +6279,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "pokeathlon-finals-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "pokeathlon-finals",
     title: "Pokéathlon: Finals! (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6307,7 +6307,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "spamton-from-deltarune-arrangement",
+    slug: "spamton",
     title: "Spamton (From \"Deltarune\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6335,7 +6335,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "musical-meloettaaa-from-pokemon-black-2-white-2-arrangement",
+    slug: "musical-meloettaaa",
     title: "Musical \"MELOETTAAA!!!\" (From \"Pokémon Black 2 & White 2\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6363,7 +6363,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-22-spring-summer-from-pokemon-black-2-white-2-arrangement",
+    slug: "route-22-spring-summer",
     title: "Route 22 (Spring/Summer) (From \"Pokémon Black 2 & White 2\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6391,7 +6391,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-elite-four-from-pokemon-diamond-pearl-arrangement",
+    slug: "battle-elite-four-diamond-pearl",
     title: "Battle! (Elite Four) (From “Pokémon Diamond & Pearl”) (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6419,7 +6419,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-2-autumn-from-pokemon-black-white-arrangement",
+    slug: "route-2-autumn",
     title: "Route 2 (Autumn) [From \"Pokémon Black & White\"] (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6447,7 +6447,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "the-frozen-city-from-pokemon-black-2-white-2-arrangement",
+    slug: "the-frozen-city",
     title: "The Frozen City (From \"Pokémon Black 2 & White 2\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6475,7 +6475,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-legendary-pokemon-from-pokemon-black-white-arrangement",
+    slug: "battle-legendary-pokemon-black-white",
     title: "Battle! (Legendary Pokémon) (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6503,7 +6503,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-trainer-battlekanto-version-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "battle-trainer-battle-kanto-version",
     title: "Battle! (Trainer Battle—Kanto Version) (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6531,7 +6531,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "bicycle-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "bicycle-heartgold-soulsilver",
     title: "Bicycle (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6559,7 +6559,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "eusine-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "eusine",
     title: "Eusine (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6587,7 +6587,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "n-s-castle-from-pokemon-black-white-arrangement",
+    slug: "ns-castle",
     title: "N's Castle (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6615,7 +6615,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "relic-castle-from-pokemon-black-white-arrangement",
+    slug: "relic-castle",
     title: "Relic Castle (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6643,7 +6643,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "castle-fortress-from-yoshi-s-island-arrangement",
+    slug: "castle-fortress",
     title: "Castle & Fortress (From \"Yoshi's Island\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6671,7 +6671,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "eterna-city-day-from-pokemon-diamond-pearl-arrangement",
+    slug: "eterna-city-day",
     title: "Eterna City (Day) (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6699,7 +6699,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "may-the-hunt-begin-from-khymern-hunters",
+    slug: "may-the-hunt-begin",
     title: "May The Hunt Begin! (From \"Khymern Hunters\")",
     subtitle: "",
     type: "Single",
@@ -6727,7 +6727,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "corridors-of-time-from-chrono-trigger-arrangement",
+    slug: "corridors-of-time",
     title: "Corridors of Time (From \"Chrono Trigger\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6755,7 +6755,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "crazy-dave-intro-theme-from-plants-vs-zombies-arrangement",
+    slug: "crazy-dave-intro-theme",
     title: "Crazy Dave (Intro Theme) (From \"Plants vs. Zombies\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6783,7 +6783,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "dragonspiral-tower-from-pokemon-black-white-arrangement",
+    slug: "dragonspiral-tower",
     title: "Dragonspiral Tower (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6811,7 +6811,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "freezeezy-peak-from-banjo-kazooie-arrangement",
+    slug: "freezeezy-peak",
     title: "Freezeezy Peak (From \"Banjo-Kazooie\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6839,7 +6839,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "goldenrod-city-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "goldenrod-city",
     title: "Goldenrod City (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6867,7 +6867,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "n-s-farewell-ending-music-from-pokemon-black-white-arrangement",
+    slug: "ns-farewell-ending",
     title: "N's Farewell & Ending (Music from \"Pokémon Black & White\") [Arrangement]",
     subtitle: "",
     type: "Single",
@@ -6896,7 +6896,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-10-from-pokemon-black-white-arrangement",
+    slug: "route-10",
     title: "Route 10 (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6924,7 +6924,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "treasure-trove-cove-from-banjo-kazooie-arrangement",
+    slug: "treasure-trove-cove",
     title: "Treasure Trove Cove (From \"Banjo-Kazooie\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6952,7 +6952,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-gym-leader-from-pokemon-diamond-pearl-arrangement",
+    slug: "battle-gym-leader-diamond-pearl",
     title: "Battle! (Gym Leader) (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -6980,7 +6980,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "chargestone-cave-from-pokemon-black-white-arrangement",
+    slug: "chargestone-cave",
     title: "Chargestone Cave (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7008,7 +7008,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "flower-garden-from-yoshi-s-island-arrangement",
+    slug: "flower-garden",
     title: "Flower Garden (From \"Yoshi's Island\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7036,7 +7036,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "gate-from-pokemon-black-white-arrangement",
+    slug: "gate-black-white",
     title: "Gate (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7064,7 +7064,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "pokemon-center-from-pokemon-black-white-arrangement",
+    slug: "pokemon-center-black-white",
     title: "Pokémon Center (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7092,7 +7092,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-205-day-from-pokemon-diamond-pearl-arrangement",
+    slug: "route-205-day",
     title: "Route 205 (Day) (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7120,7 +7120,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-209-day-from-pokemon-diamond-pearl-arrangement",
+    slug: "route-209-day",
     title: "Route 209 (Day) (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7148,7 +7148,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-30-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "route-30-heartgold-soulsilver",
     title: "Route 30 (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7176,7 +7176,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "route-34-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "route-34",
     title: "Route 34 (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7204,7 +7204,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "sandgem-town-day-from-pokemon-diamond-pearl-arrangement",
+    slug: "sandgem-town-day",
     title: "Sandgem Town (Day) (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7232,7 +7232,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "spear-pillar-from-pokemon-diamond-pearl-arrangement",
+    slug: "spear-pillar",
     title: "Spear Pillar (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7260,7 +7260,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "spiral-mountain-from-banjo-kazooie-arrangement",
+    slug: "spiral-mountain",
     title: "Spiral Mountain (From \"Banjo-Kazooie\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7288,7 +7288,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "the-moon-from-ducktales-arrangement",
+    slug: "the-moon",
     title: "The Moon (From \"DuckTales\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7316,7 +7316,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "victory-lies-before-you-from-pokemon-black-white-arrangement",
+    slug: "victory-lies-before-you",
     title: "Victory Lies Before You! (From \"Pokémon Black & White\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7344,7 +7344,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-team-rocket-from-pokemon-heartgold-soulsilver-arrangement",
+    slug: "battle-team-rocket",
     title: "Battle! (Team Rocket) (From \"Pokémon HeartGold & SoulSilver\") (Arrangement)",
     subtitle: "",
     type: "Single",
@@ -7400,7 +7400,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "quiverdancer-the-rise-of-a-dancing-spirit",
+    slug: "quiverdancer",
     title: "QuiverDancer - The Rise of a Dancing Spirit",
     subtitle: "",
     type: "Album",
@@ -7436,7 +7436,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "battle-rocket-executives-from-pokemon-heartgold-soulsilver",
+    slug: "battle-rocket-executives",
     title: "Battle! (Rocket Executives) (From \"Pokémon HeartGold & SoulSilver\")",
     subtitle: "",
     type: "Single",
@@ -7464,7 +7464,7 @@ const RELEASES = [
     ]
   },
   {
-    slug: "canalave-city-from-pokemon-diamond-pearl",
+    slug: "canalave-city",
     title: "Canalave City (From \"Pokémon Diamond & Pearl\")",
     subtitle: "",
     type: "Single",

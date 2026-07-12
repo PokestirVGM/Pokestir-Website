@@ -157,6 +157,13 @@ select {
 .d-from-note { font-size: 12px; color: var(--muted); opacity: .85; margin-top: 2px; }
 .d-desc { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 10px 0 0; }
 
+/* "Did you mean" suggestions on the not-found view */
+.nf-suggest { margin-top: 14px; }
+.nf-label { color: var(--muted); font-size: 13px; }
+.nf-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; justify-items: start; }
+.nf-suggest a { color: var(--white); font-size: 14px; font-weight: 700; text-decoration: none; }
+.nf-suggest a:hover { text-decoration: underline; }
+
 /* ── Platform links — brand-tinted tiles, same treatment as the Links page ── */
 .plat-links {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
