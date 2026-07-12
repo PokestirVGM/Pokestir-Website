@@ -1,10 +1,17 @@
 (function () {
   'use strict';
 
-  // Highlight the current page in the nav.
-  const page = window.location.pathname.split('/').pop() || 'index.html';
+  // Highlight the current page in the nav. Top-level pages are flat files
+  // compared by filename; the Releases archive lives in its own folder, so
+  // any path under /releases/ highlights the Releases link instead.
+  const path = window.location.pathname;
+  const onReleases = /\/releases\/(index\.html)?$/.test(path);
+  const page = path.split('/').pop() || 'index.html';
   document.querySelectorAll('.site-nav__links a').forEach((a) => {
-    if (a.getAttribute('href') === page) a.setAttribute('aria-current', 'page');
+    const href = a.getAttribute('href');
+    const linksToReleases = /releases\/(index\.html)?$/.test(href);
+    const current = onReleases ? linksToReleases : (!linksToReleases && href === page);
+    if (current) a.setAttribute('aria-current', 'page');
   });
 
   const siteNav = document.querySelector('.site-nav');

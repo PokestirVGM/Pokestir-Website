@@ -8,3 +8,11 @@
 
 # Local AI project memory
 AGENTS.md
+.claude/
+codex_missing_links.txt
+
+# Local catalog research sources (the website data is maintained in releases/*.js)
+Pokestir Platform Link Library.csv
+Pokestir_Verified_Platform_Links.csv
+Pokestir Singles & Catalog (1).xlsx
+Pokestir_Release_Catalog_Research_COMPLETED.xlsx

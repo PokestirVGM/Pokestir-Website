@@ -8,88 +8,6 @@
   }
 
   /* =========================
-     VGM ALBUMS: Spotify embeds
-     ========================= */
-  const releases = [
-    // Most recent → oldest | monthYear format consistent (e.g., "May 2025")
-    { name: 'Battle Themes Collection: Pokémon, Vol. 3',                        type: 'album', id: '2SFMCYyUkiHXWGS3IywUo5', monthYear: 'March 2026' },
-    { name: 'Hyrule Okeanos (Music from "The Legend of Zelda: The Wind Waker")', type: 'album', id: '5wFdEgKLebHECAqxKTv2Rg', monthYear: 'October 2025' },
-    { name: 'Sill Bird (Music from "Chrono Trigger")',                           type: 'album', id: '3a6OmKsFbb9tAj3qM9sXdn', monthYear: 'September 2025' },
-    { name: 'Hyrule Tempus (Music from "The Legend of Zelda: Ocarina of Time")', type: 'album', id: '3jAmav8EAGMrv8p8YenzPL', monthYear: 'September 2025' },
-    { name: 'World Themes Collection: Pokémon, Vol. 5',                         type: 'album', id: '2KMBQ9PrRVWoc7abiNO7oN', monthYear: 'August 2025' },
-    { name: 'Super Mario Classics Collection',                                   type: 'album', id: '7C8mazhT2QhgUWds54vRKn', monthYear: 'August 2025' },
-    { name: 'Mii Channels Collection',                                           type: 'album', id: '5Yyrx0CTPHrPv5DBloEsmw', monthYear: 'May 2025' },
-    { name: 'Alola Adventures',                                                  type: 'album', id: '4UTytdnpTZ95LHw9u5uRce', monthYear: 'September 2024' },
-    { name: 'World Themes Collection: Pokémon, Vol. 4',                         type: 'album', id: '4V9EV0LocVpADhN3YD3mjI', monthYear: 'May 2024' },
-    { name: 'Kalos Towns & Cities Collection',                                   type: 'album', id: '4UFVXeicDN4Zl9y2pLIOCR', monthYear: 'November 2023' },
-    { name: 'Battle Themes Collection: Pokémon, Vol. 2',                        type: 'album', id: '1TYyDGLSOmHEsSPSxOPGOP', monthYear: 'November 2023' },
-    { name: 'Battle Themes Collection: Pokémon, Vol. 1',                        type: 'album', id: '7e4x3VdWtWoAJD46JPfo5j', monthYear: 'September 2022' },
-    { name: 'World Themes Collection: Pokémon, Vol. 3',                         type: 'album', id: '1cn4hO4bLen8ybLB4Xdoph', monthYear: 'August 2022' },
-    { name: 'World Themes Collection: Pokémon, Vol. 2',                         type: 'album', id: '0VVcplKK4JRHlQFFIaEeze', monthYear: 'January 2022' },
-    { name: 'World Themes Collection: Pokémon, Vol. 1',                         type: 'album', id: '2ikzlVg14ieFr39MujeVVC', monthYear: 'August 2021' },
-  ];
-
-  const albumsEl = document.getElementById('albums');
-  const embedEl = document.getElementById('spotifyEmbed');
-
-  embedEl.addEventListener('load', () => {
-    if (embedEl.src && embedEl.src !== 'about:blank') embedEl.style.opacity = '1';
-  });
-
-  function embedSrc(item) {
-    return item.type === 'track'
-      ? `https://open.spotify.com/embed/track/${item.id}`
-      : `https://open.spotify.com/embed/album/${item.id}`;
-  }
-
-  function setActive(item, tile) {
-    embedEl.style.opacity = '0';
-    embedEl.src = embedSrc(item);
-    embedEl.style.height = item.type === 'track' ? '232px' : '500px';
-    for (const el of albumsEl.querySelectorAll('.album')) el.classList.remove('selected');
-    if (!tile) tile = albumsEl.querySelector(`[data-id="${item.id}"]`);
-    if (tile) tile.classList.add('selected');
-  }
-
-  async function fetchArt(item) {
-    try {
-      const type = item.type === 'track' ? 'track' : 'album';
-      const res = await fetch(
-        `https://open.spotify.com/oembed?url=https://open.spotify.com/${type}/${item.id}`
-      );
-      const data = await res.json();
-      return data.thumbnail_url || null;
-    } catch { return null; }
-  }
-
-  function makeTile(item) {
-    const div = document.createElement('div');
-    div.className = 'album';
-    div.dataset.id = item.id;
-    div.setAttribute('role', 'button');
-    div.setAttribute('tabindex', '0');
-    div.innerHTML = `
-      <div class="ainfo">
-        <div class="aname">${escapeHTML(item.name)}</div>
-        ${item.monthYear ? `<div class="ameta">${escapeHTML(item.monthYear)}</div>` : ''}
-      </div>
-    `;
-
-    fetchArt(item).then((url) => {
-      if (url) div.style.setProperty('--art-url', `url("${url}")`);
-    });
-
-    div.addEventListener('click', () => setActive(item, div));
-    div.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(item, div); }
-    });
-    return div;
-  }
-
-  releases.forEach((item) => albumsEl.appendChild(makeTile(item)));
-  if (releases[0]) setActive(releases[0]);
-
-  /* =========================
      ABOUT / COMMISSIONS TABS
      ========================= */
   const tabAbout = document.getElementById('tabAbout');
@@ -301,24 +219,4 @@
     renderList();
   }());
 
-  /* =========================
-     SCROLL DOTS
-     ========================= */
-  window.addEventListener('load', () => {
-    const dots = Array.from(document.querySelectorAll('.scroll-dot'));
-    const ids = ['about', 'mywork-header', 'music-header'];
-    const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
-    if (!dots.length || !sections.length) return;
-    const offset = 90;
-    function update() {
-      let active = 0;
-      sections.forEach((el, i) => {
-        if (el.getBoundingClientRect().top <= offset) active = i;
-      });
-      dots.forEach((d, i) => d.classList.toggle('active', i === active));
-    }
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update, { passive: true });
-    update();
-  });
 }());

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Hidden archive page: not linked from the nav and kept out of search
+       indexes until launch. When making it public, remove the robots meta and
+       add the usual canonical/Open Graph/Twitter metadata. -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="The complete archive of Pokestir releases across all music platforms.">
+  <meta name="theme-color" content="#0b0f19">
+  <title>Pokestir - Releases</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="releases.css">
+  <link rel="icon" href="../images/icon.png">
+  <script src="tracks-data.js" defer></script>
+  <script src="data.js" defer></script>
+  <script src="releases.js" defer></script>
+  <script src="../nav.js" defer></script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="site-nav__inner">
+      <a class="site-nav__brand" href="../index.html"><img src="../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <div class="site-nav__links" id="site-nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../releases/">Releases</a>
+        <a href="../gearAndSoftware.html">Software & Gear</a>
+        <a href="../usage_terms_claims.html">Usage Terms & Claims</a>
+        <a href="../links.html">Links</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap" role="main" id="main">
+    <!-- LIST VIEW -->
+    <div id="listView">
+      <h1 class="page-title">Releases <span class="muted" id="count"></span></h1>
+
+      <div class="controls">
+        <div class="search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.6"/></svg>
+          <input id="q" type="search" placeholder="Search releases, tracks, codes&#8230;" aria-label="Search">
+        </div>
+        <select id="sortSel" aria-label="Sort by">
+          <option value="newest" selected>Release Date (Newest)</option>
+          <option value="oldest">Release Date (Oldest)</option>
+          <option value="title">Title A-Z</option>
+          <option value="tracks">Most Tracks</option>
+        </select>
+        <button class="btn btn-clear" id="clear" type="button">Clear</button>
+      </div>
+
+      <div id="rgrid"></div>
+    </div>
+
+    <!-- DETAIL VIEW (rendered by releases.js when ?r=<slug> is present) -->
+    <div id="detailView" hidden></div>
+
+    <footer class="site-footer" role="contentinfo">Copyright &copy; 2026 Pokestir. All rights reserved.</footer>
+  </main>
+</body>
+</html>

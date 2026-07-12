@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Pokestir's composer profile, commission details, and VGM album player.">
+  <meta name="description" content="Pokestir's composer profile, commission details, and selected music portfolio.">
   <meta name="theme-color" content="#0b0f19">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pokestir">
   <meta property="og:title" content="Pokestir - Home">
-  <meta property="og:description" content="Pokestir's composer profile, commission details, and VGM album player.">
+  <meta property="og:description" content="Pokestir's composer profile, commission details, and selected music portfolio.">
   <meta property="og:url" content="https://www.pokestir.com/">
   <meta property="og:image" content="https://www.pokestir.com/images/logo-4k.png">
   <meta property="og:image:width" content="3000">
@@ -57,6 +57,7 @@
       <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="index.html">Home</a>
+        <a href="releases/">Releases</a>
         <a href="gearAndSoftware.html">Software & Gear</a>
         <a href="usage_terms_claims.html">Usage Terms & Claims</a>
         <a href="links.html">Links</a>
@@ -170,30 +171,7 @@
       <audio id="mwAudio" preload="metadata"></audio>
     </section>
 
-    <!-- VGM ALBUMS -->
-    <header id="music-header">
-      <h2 class="page-title">VGM Albums</h2>
-      <p class="section-sub">Select a release to start playing.</p>
-    </header>
-
-    <section id="music" class="card" aria-label="Spotify Player">
-      <iframe id="spotifyEmbed" class="player-embed"
-              loading="lazy"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              src="about:blank" title="Spotify Embed"></iframe>
-
-      <div aria-label="Release Grid">
-        <div id="albums" class="albums"></div>
-      </div>
-    </section>
-
     <footer class="site-footer" role="contentinfo">Copyright &copy; 2026 Pokestir. All rights reserved.</footer>
   </main>
-
-  <nav class="scroll-dots" aria-label="Page sections">
-    <a class="scroll-dot" href="#about" aria-label="About" data-label="About"></a>
-    <a class="scroll-dot" href="#mywork-header" aria-label="My Work" data-label="My Work"></a>
-    <a class="scroll-dot" href="#music-header" aria-label="VGM Albums" data-label="VGM Albums"></a>
-  </nav>
 </body>
 </html>

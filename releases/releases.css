@@ -1,0 +1,267 @@
+/* Releases archive — searchable list and per-release detail views */
+
+.page-title { margin: 0 0 18px; }
+.page-title .muted { font-size: 15px; font-weight: 600; }
+
+/* ── Search / sort controls (mirrors the gear page) ── */
+.controls {
+  display: grid; grid-template-columns: 1fr auto auto; gap: 10px;
+  margin: 0 0 10px;
+}
+
+.search { position: relative; }
+.search input {
+  width: 100%; padding: 12px 14px 12px 40px; border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text); border: 1px solid var(--line);
+}
+.search input::placeholder { color: var(--muted); }
+
+/* Form fields signal focus with a brightened border, not the outline ring */
+.search input:focus-visible,
+.controls select:focus-visible {
+  outline: none;
+  border-color: rgba(16,177,255,.55);
+}
+.search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); opacity: .8; }
+
+select {
+  appearance: none; -webkit-appearance: none;
+  padding: 11px 36px 11px 16px; border-radius: var(--radius-md);
+  color: var(--text); font: inherit; font-size: 14px; border: 1px solid var(--line);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") right 12px center / 14px 14px no-repeat,
+    var(--surface);
+}
+.btn-clear { background: transparent; border-color: var(--line-soft); color: var(--muted); }
+
+/* ── Release grid — square artwork tiles with the caption below the cover,
+      so nothing overlays the art (album covers are the identifier).
+      The default view is sectioned: albums render first in a larger grid,
+      then singles in the standard one. Searching or filtering collapses to
+      a single flat grid (renderInto in releases.js). ── */
+.rgrid { display: grid; gap: 18px 14px; grid-template-columns: repeat(auto-fill, minmax(196px, 1fr)); }
+
+/* Album rail: same tiles, laid out as one horizontally scrolling row.
+   The scrollbar is hidden (macOS overlay bars are invisible until you're
+   already scrolling anyway) — the chevron buttons in the section header
+   page through it instead, and touch/trackpad swiping still works. */
+.rgrid--rail {
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: 280px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.rgrid--rail::-webkit-scrollbar { display: none; }
+.rgrid--rail .release-tile { scroll-snap-align: start; }
+
+.rail-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.rail-head .grid-section-title { margin: 0 2px; }
+.rgrid + .rail-head { margin-top: 26px; }
+.rail-head { margin-bottom: 12px; }
+.rail-nav { display: flex; gap: 8px; }
+.rail-btn {
+  display: grid; place-items: center; width: 34px; height: 34px;
+  background: transparent; border: 1px solid var(--line); border-radius: var(--radius-sm);
+  color: var(--white); cursor: pointer; line-height: 0;
+  transition: background-color .15s ease, border-color .15s ease, opacity .15s ease;
+}
+.rail-btn:hover { background: rgba(255,255,255,.06); border-color: var(--line-strong); }
+.rail-btn:disabled { opacity: .35; cursor: default; background: transparent; border-color: var(--line); }
+.rgrid + .grid-section-title { margin-top: 26px; }
+.grid-section-title {
+  font-family: var(--font-display); font-weight: 800; font-size: 20px;
+  letter-spacing: .2px; color: var(--white); margin: 0 2px 12px;
+}
+.grid-section-title .muted { font-size: 14px; font-weight: 600; }
+.grid-msg { color: var(--muted); padding: 16px 0; }
+
+.release-tile--album .rname { font-size: 17px; }
+.release-tile--album .rsub, .release-tile--album .rmeta, .release-tile--album .rcomp { font-size: 13px; }
+
+.release-tile {
+  display: block; min-width: 0;
+  color: var(--text); text-decoration: none;
+}
+
+.tile-cover {
+  aspect-ratio: 1 / 1; border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background:
+    var(--art-url, linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 100%))
+    center / cover, hsl(220 25% 14%);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.release-tile:hover .tile-cover,
+.release-tile:focus-visible .tile-cover {
+  transform: translateY(-3px);
+  border-color: var(--line-strong);
+  box-shadow: 0 10px 28px rgba(2,6,23,.5);
+}
+.release-tile:focus-visible { outline: none; }
+.release-tile:focus-visible .tile-cover { outline: 2px solid rgba(16,177,255,.55); outline-offset: 2px; }
+
+.rinfo { display: grid; gap: 2px; padding: 10px 4px 0; }
+.rname {
+  font-weight: 800; letter-spacing: .2px; line-height: 1.25; color: var(--white);
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+}
+.rsub {
+  font-size: 12px; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.rmeta { font-size: 12px; color: var(--muted); }
+.rcomp {
+  font-size: 11.5px; color: var(--muted); margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ── Detail view ── */
+.back-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin: 0 0 14px; padding: 8px 12px;
+  color: var(--muted); text-decoration: none; font-weight: 700; font-size: 14px;
+  border: 1px solid transparent; border-radius: var(--radius-sm);
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+.back-link:hover { color: var(--text); border-color: var(--line); background: rgba(255,255,255,.06); }
+
+/* Same card-stacking rhythm as the Links page (26px between cards) */
+.detail-stack { display: flex; flex-direction: column; gap: 26px; }
+
+.detail-head { display: flex; gap: 22px; padding: 22px; }
+.detail-head .art {
+  flex: 0 0 auto; width: 172px; aspect-ratio: 1 / 1; align-self: start;
+  border-radius: var(--radius-md); border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow);
+  background:
+    var(--art-url, linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 100%))
+    center / cover, hsl(220 25% 14%);
+}
+.detail-head .info { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+
+.d-title {
+  font-family: var(--font-display); font-weight: 800; font-size: 28px;
+  letter-spacing: .2px; color: var(--white); margin: 0; line-height: 1.2;
+}
+.d-sub { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+/* Type + tag chips — same recipe as the home player's track tags */
+.d-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.chip {
+  font-size: 11px; padding: 2px 8px; border-radius: 999px;
+  background: rgba(255,255,255,.05); border: 1px solid var(--line); color: var(--muted);
+}
+
+.d-facts { color: var(--muted); font-size: 14px; margin-top: 10px; }
+
+/* "Included in <compilation>" on singles that were re-released on one */
+.d-from { color: var(--muted); font-size: 14px; margin-top: 4px; }
+.d-from a { color: var(--white); font-weight: 700; text-decoration: none; }
+.d-from a:hover { text-decoration: underline; }
+.d-from-note { font-size: 12px; color: var(--muted); opacity: .85; margin-top: 2px; }
+.d-upc { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.d-upc span { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.d-desc { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 10px 0 0; }
+
+/* ── Platform links — brand-tinted tiles, same treatment as the Links page ── */
+.plat-links {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 10px; margin-top: 16px;
+}
+/* Buttons keep the .btn surface by default (used by otherLinks entries);
+   the brand classes below replace it with each platform's tint. */
+.plat-links .btn {
+  padding: 11px 14px;
+  color: var(--white);
+}
+.plat-links .btn:hover { box-shadow: 0 6px 14px rgba(2,6,23,.45); }
+.plat-links .btn img { width: 20px; height: 20px; display: block; }
+
+.plat-bandcamp     { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #1ea0c3; }
+.plat-spotify      { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #1db954; }
+.plat-appleMusic   { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #fa2d48; }
+.plat-youtubeMusic { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #ff0000; }
+.plat-youtube      { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #ff0000; }
+.plat-pandora      { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #3668ff; }
+.plat-itunes       { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #ea4cc0; }
+.plat-deezer       { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #0ec7f7; }
+.plat-amazonMusic  { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #5a2dff; }
+.plat-tidal        { background: linear-gradient(180deg, rgba(255,255,255,.04) 0%, rgba(0,0,0,.10) 100%), #0b0b0b; }
+.plat-qobuz        { background: linear-gradient(180deg, rgba(255,255,255,.04) 0%, rgba(0,0,0,.10) 100%), #10131f; }
+/* The Linkfire mark is a full-color logo (not a flat single-tone glyph like
+   the platform icons above), so it gets a neutral tinted chip instead of a
+   solid brand-color fill — a solid cyan background would fight the icon's
+   own cyan/white rings instead of framing them. */
+.plat-linkfire     { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), rgba(45,195,230,.14); border-color: rgba(45,195,230,.35); }
+
+/* ── Track list — header + bare rows straight on the page background with
+      hairline dividers (no card box), same header construction as the home
+      page player section (page-title + section-sub) ── */
+.section-sub { color: var(--muted); font-size: 14px; margin: 2px 2px 8px; }
+.tracks-section .page-title { margin: 4px 2px 6px; }
+.tracks-list { margin-top: 4px; }
+
+.track-row {
+  display: grid; grid-template-columns: 26px 1fr auto; gap: 14px;
+  align-items: center; padding: 10px 12px;
+  border-top: 1px solid var(--line-soft);
+  border-radius: var(--radius-sm);
+}
+.track-row:first-child { border-top: 0; }
+.track-row.has-preview { cursor: pointer; transition: background .15s ease; }
+.track-row.has-preview:hover { background: rgba(255,255,255,.05); }
+.track-row.has-preview:focus-visible { outline-offset: -2px; }
+
+/* While a preview plays: blue selection tint that fills left-to-right as
+   progress (releases.js updates --pct on timeupdate). */
+.track-row.is-playing,
+.track-row.is-playing:hover {
+  background: linear-gradient(90deg, rgba(16,177,255,.16) var(--pct, 0%), rgba(16,177,255,.07) var(--pct, 0%));
+}
+
+/* Leading cell: track number, swapped for a play/pause glyph on hover/playing.
+   Number and glyphs are stacked in the same grid cell and toggled with
+   visibility (not display) so the swap never changes the row's height —
+   a height change here shifts the rows under the cursor and causes
+   hover-flicker jitter. */
+.t-lead { display: grid; place-items: center; color: var(--muted); }
+.t-lead > * { grid-area: 1 / 1; }
+.t-num { font-size: 13px; font-variant-numeric: tabular-nums; line-height: 1.4; }
+.t-ic-play, .t-ic-pause { visibility: hidden; color: var(--white); line-height: 0; }
+.track-row.has-preview:hover .t-num,
+.track-row.has-preview:focus-visible .t-num,
+.track-row.is-playing .t-num { visibility: hidden; }
+.track-row.has-preview:hover:not(.is-playing) .t-ic-play,
+.track-row.has-preview:focus-visible:not(.is-playing) .t-ic-play { visibility: visible; }
+.track-row.is-playing .t-ic-pause { visibility: visible; }
+
+.t-main { min-width: 0; }
+.t-title { font-weight: 700; font-size: 14px; color: var(--text); }
+.t-isrc {
+  font-size: 11.5px; color: var(--muted); margin-top: 2px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.t-dur { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .controls { grid-template-columns: 1fr; gap: 8px; }
+}
+@media (max-width: 640px) {
+  .search input::placeholder { font-size: 13px; }
+  .rgrid { grid-template-columns: repeat(2, 1fr); gap: 16px 10px; }
+  .rgrid--rail { grid-template-columns: none; grid-auto-columns: min(240px, 68vw); }
+  .rinfo { padding: 8px 2px 0; }
+  .rname { font-size: 13px; }
+  .rsub, .rmeta { font-size: 11px; }
+  .release-tile--album .rname { font-size: 15px; }
+  .release-tile--album .rsub, .release-tile--album .rmeta, .release-tile--album .rcomp { font-size: 12px; }
+  .detail-head { flex-direction: column; align-items: center; text-align: center; padding: 18px; }
+  .detail-head .info { align-items: center; }
+  .d-chips, .plat-links { justify-content: center; }
+  .plat-links { width: 100%; }
+  .track-row { padding: 10px 16px; }
+}
