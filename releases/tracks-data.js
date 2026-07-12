@@ -12,10 +12,16 @@
 //   "isrc:QZXXXXXXXXXX": {
 //     title: "Canonical recording title",
 //     isrc: "QZXXXXXXXXXX",
+//     artists: ["Pokestir", "Other Artist"],   // omit for solo Pokestir tracks
 //     duration: "3:42",
 //     spotifyTrackId: "",
 //     preview: ""
 //   },
+//
+// `artists` lists the credited artists in Spotify's display order (primary
+// first, then co-primaries/featured). Tracks without it render as "Pokestir".
+// ISRCs (and release UPCs in data.js) are kept for reference but are no
+// longer displayed anywhere on the site.
 //
 // Preview URLs must be stable Spotify MP3 previews. Apple AAC previews are not
 // used because their audio/x-m4p responses fail in some browsers. Do not use
@@ -32,6 +38,7 @@ const TRACKS = {
   "isrc:QZPJ32396585": {
     title: "A Captain’s Trial Begins! (feat. Pokestir)",
     isrc: "QZPJ32396585",
+    artists: ["StevenMix", "Pokestir"],
     duration: "4:29",
     spotifyTrackId: "0HPxNaIKuUQxZI29782uWa",
     preview: "https://p.scdn.co/mp3-preview/0a44695be1e2b79a97409537d3215a3f937acdaf"
@@ -53,6 +60,7 @@ const TRACKS = {
   "isrc:QZPJ32198863": {
     title: "Airship Theme (From \"Super Mario Bros 3\") [Arrangement]",
     isrc: "QZPJ32198863",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "4:29",
     spotifyTrackId: "3E86ex2Lrz01c5Jot9HoOO",
     preview: "https://p.scdn.co/mp3-preview/256f79445ab2f21ce32d4aa2c143d85c2de31dfa"
@@ -60,6 +68,7 @@ const TRACKS = {
   "isrc:QZPJ32396579": {
     title: "Alola Region Theme (feat. StevenMix) [Orchestral Arrangement]",
     isrc: "QZPJ32396579",
+    artists: ["Pokestir", "StevenMix"],
     duration: "4:33",
     spotifyTrackId: "1LkdF7ydQdf68CCDOxp8bT",
     preview: "https://p.scdn.co/mp3-preview/648b1a82b36c65d0e06bf89c7175dd14f1875d50"
@@ -74,6 +83,7 @@ const TRACKS = {
   "isrc:QZPJ32318648": {
     title: "Anistar City (Arrangement)",
     isrc: "QZPJ32318648",
+    artists: ["Pokestir", "StevenMix"],
     duration: "3:12",
     spotifyTrackId: "0iba4ZfB3xWw4aeYOabM7b",
     preview: "https://p.scdn.co/mp3-preview/ce2c2f91ae1edd3b010c8d0afcd5c29067f8d712"
@@ -88,6 +98,7 @@ const TRACKS = {
   "isrc:QZPJ32318638": {
     title: "Aquacorde Town (Arrangement)",
     isrc: "QZPJ32318638",
+    artists: ["Pokestir", "StevenMix"],
     duration: "1:58",
     spotifyTrackId: "5Ud29s3230wfYqNMDjAedW",
     preview: "https://p.scdn.co/mp3-preview/36f768e3b63946003db06abebe5f4501192e952a"
@@ -102,6 +113,7 @@ const TRACKS = {
   "isrc:QZPJ32184450": {
     title: "Athletic Theme (From \"Yoshi's Island\") (Arrangement)",
     isrc: "QZPJ32184450",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "3:42",
     spotifyTrackId: "5ggcbGCFgOg7gcSHlwCyNW",
     preview: "https://p.scdn.co/mp3-preview/6a4c1bdbbe859178cc094d6e4a90e1480cf2d04a"
@@ -109,6 +121,7 @@ const TRACKS = {
   "isrc:QZPJ32133920": {
     title: "Azalea Town (From \"Pokémon HeartGold & SoulSilver\")",
     isrc: "QZPJ32133920",
+    artists: ["Shota Kageyama", "Go Ichinose", "Pokestir"],
     duration: "4:55",
     spotifyTrackId: "7ghAgHhwUPWOJjU2qxOHjb",
     preview: "https://p.scdn.co/mp3-preview/ee5bc0150e46ec3ddaeec7a98b8cb67727572105"
@@ -123,6 +136,7 @@ const TRACKS = {
   "isrc:QZ6K42500964": {
     title: "Battle (Champion) (From \"Pokémon Black & White\")",
     isrc: "QZ6K42500964",
+    artists: ["Pokestir", "StevenMix"],
     duration: "4:44",
     spotifyTrackId: "0EW9Ks8gvKwR779Batyh8c",
     preview: "https://p.scdn.co/mp3-preview/5946ee2d0c65cbacbc80fd57b6cb56931b11e8c9"
@@ -130,6 +144,7 @@ const TRACKS = {
   "isrc:QZ6K42501135": {
     title: "Battle (From \"The Legend of Zelda: Ocarina of Time\")",
     isrc: "QZ6K42501135",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "2:02",
     spotifyTrackId: "1qd6B4Cca3l2KZViOZ1r4H",
     preview: "https://p.scdn.co/mp3-preview/8ff346f42b9d072eda4a7a3d8c329653f41e35ba"
@@ -207,6 +222,7 @@ const TRACKS = {
   "isrc:QZ6K42500385": {
     title: "Battle (Wild Pokémon) [from “Pokémon Ruby & Sapphire”] [Modern Arrangement]",
     isrc: "QZ6K42500385",
+    artists: ["Pokestir", "Mudstep"],
     duration: "2:16",
     spotifyTrackId: "1QUVgW6CwvNvtggl68ZscH",
     preview: "https://p.scdn.co/mp3-preview/a93d6b9304fce0c96c2c5cbebbc5b1c335e090b3"
@@ -214,6 +230,7 @@ const TRACKS = {
   "isrc:QZPJ32334368": {
     title: "Battle 1 (From \"Chrono Trigger\") [Arrangement]",
     isrc: "QZPJ32334368",
+    artists: ["Yasunori Mitsuda", "Pokestir"],
     duration: "2:22",
     spotifyTrackId: "6ciyDW2jvIjEWnp5iJDeUU",
     preview: "https://p.scdn.co/mp3-preview/bf13ece57c3c58f7c391360599ca2415f95695bd"
@@ -221,6 +238,7 @@ const TRACKS = {
   "isrc:QZPJ32383047": {
     title: "Battle 2 (From \"Chrono Trigger\")",
     isrc: "QZPJ32383047",
+    artists: ["Yasunori Mitsuda", "Pokestir"],
     duration: "3:44",
     spotifyTrackId: "6lJzSkaZmHnrKtt0oC8sAb",
     preview: "https://p.scdn.co/mp3-preview/00c22cc6051ba423ccbbcf6735cf5315d079d92c"
@@ -228,6 +246,7 @@ const TRACKS = {
   "isrc:QZ6K42501416": {
     title: "Battle at Sea (From \"the Legend of Zelda: The Wind Waker\")",
     isrc: "QZ6K42501416",
+    artists: ["Kenta Nagata", "Koji Kondo", "Hajime Wakai", "Toru Minegishi", "Pokestir"],
     duration: "2:27",
     spotifyTrackId: "2bW07PItL5FfsNluxeoXli",
     preview: "https://p.scdn.co/mp3-preview/75ee8866c59db1f5941e234c267d5b050c9b965c"
@@ -235,6 +254,7 @@ const TRACKS = {
   "isrc:QZ6K42501083": {
     title: "Battle with Magus (From \"Chrono Trigger\")",
     isrc: "QZ6K42501083",
+    artists: ["Yasunori Mitsuda", "Pokestir"],
     duration: "2:53",
     spotifyTrackId: "7ntrzutaRcNdWWwe8W43ld",
     preview: "https://p.scdn.co/mp3-preview/dad251966be646da1075180168e4993f846c3ad1"
@@ -319,6 +339,7 @@ const TRACKS = {
   "isrc:QZPJ32380636": {
     title: "Battle! Elite Four (From \"Pokémon X & Y\") [Arrangement]",
     isrc: "QZPJ32380636",
+    artists: ["Pokestir", "StevenMix"],
     duration: "3:44",
     spotifyTrackId: "29XAbGKY9KnONScJRNLFdD",
     preview: "https://p.scdn.co/mp3-preview/68c1045c2282a87eab83e1005238c02c0998942b"
@@ -333,6 +354,7 @@ const TRACKS = {
   "isrc:QZPJ32189512": {
     title: "Battle! Gym Leader (From \"Pokémon Black & White\") [Arrangement]",
     isrc: "QZPJ32189512",
+    artists: ["Pokestir", "StevenMix"],
     duration: "4:03",
     spotifyTrackId: "3UxD37FUPB8im6RagXicm4",
     preview: "https://p.scdn.co/mp3-preview/4a7897deef01bd8c7d5945315c6a4ba96831ce99"
@@ -445,6 +467,7 @@ const TRACKS = {
   "isrc:QZPJ32150307": {
     title: "Beware the Forest's Mushrooms (From “Super Mario Rpg”) [Arrangement]",
     isrc: "QZPJ32150307",
+    artists: ["Yoko Shimomura", "Pokestir"],
     duration: "4:42",
     spotifyTrackId: "69k6lDKxrQV0kkDLdJLLAQ",
     preview: "https://p.scdn.co/mp3-preview/98943c64ba9bf839a3a50e933498798b12931a3b"
@@ -452,6 +475,7 @@ const TRACKS = {
   "isrc:QZPJ32345647": {
     title: "Bicycle (From \"Pokémon Black & White\")",
     isrc: "QZPJ32345647",
+    artists: ["Shota Kageyama", "Hitomi Sato", "Pokestir"],
     duration: "2:26",
     spotifyTrackId: "4Roi7B7x5WSPUSwlrZnWFJ",
     preview: "https://p.scdn.co/mp3-preview/d7ebc763e0792292fbad10913d413253730e05f7"
@@ -480,6 +504,7 @@ const TRACKS = {
   "isrc:QZPJ32408787": {
     title: "Bob - Omb Battlefield (From \"Super Mario 64\") [Arrangement]",
     isrc: "QZPJ32408787",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "3:35",
     spotifyTrackId: "1fCWec9GdHnCtHY9nEAztA",
     preview: "https://p.scdn.co/mp3-preview/52b6d7c4e138d4e13f1f71d7b85141f79b8a316e"
@@ -494,6 +519,7 @@ const TRACKS = {
   "isrc:QZPJ32441895": {
     title: "Boss Battle (From \"the Legend of Zelda: Ocarina of Time\") [Orchestral Arrangement]",
     isrc: "QZPJ32441895",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "3:31",
     spotifyTrackId: "5ABkS1Q5FuLuqEk74TDwUI",
     preview: "https://p.scdn.co/mp3-preview/ceb598360108e22f93bb3599fe76e0d1be1a3146"
@@ -501,6 +527,7 @@ const TRACKS = {
   "isrc:QZPJ32182765": {
     title: "Boss Battle 1 (From \"Chrono Trigger\") (Orchestral Arrangement)",
     isrc: "QZPJ32182765",
+    artists: ["Noriko Matsueda", "Pokestir"],
     duration: "4:39",
     spotifyTrackId: "1cm3EV0gtDLCvKyfzTskNv",
     preview: "https://p.scdn.co/mp3-preview/0b35be71a6e13026c3f988a6f31049bbb77be188"
@@ -508,6 +535,7 @@ const TRACKS = {
   "isrc:QZ6K42500316": {
     title: "Boss Battle 2 (From \"Chrono Trigger) [Arr. for Orchestra by Pokestir]",
     isrc: "QZ6K42500316",
+    artists: ["Yasunori Mitsuda", "Pokestir"],
     duration: "3:42",
     spotifyTrackId: "62GUfiNXjdTPKN9y3aJdxL",
     preview: "https://p.scdn.co/mp3-preview/e791a9e51a9372e3d70365b7d199ea64917332f2"
@@ -515,6 +543,7 @@ const TRACKS = {
   "isrc:QZPJ32246157": {
     title: "Bowser's Road (From \"Super Mario 64\") [Arr. for Orchestra by Pokestir]",
     isrc: "QZPJ32246157",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "4:49",
     spotifyTrackId: "4wDhs1xzRC2QPK8qMpLWbE",
     preview: "https://p.scdn.co/mp3-preview/db136bda91cb0b1cc666f3cf37349e2ae5245433"
@@ -536,6 +565,7 @@ const TRACKS = {
   "isrc:QZPJ32365596": {
     title: "Canalave City (From \"Pokémon Diamond & Pearl\")",
     isrc: "QZPJ32365596",
+    artists: ["Go Ichinose", "Pokestir"],
     duration: "5:08",
     spotifyTrackId: "3QkfKpfapE1oMTe1Rezgiq",
     preview: "https://p.scdn.co/mp3-preview/b71fa65ad3f12f60761baa9c9dab6128efad702f"
@@ -571,6 +601,7 @@ const TRACKS = {
   "isrc:QZGWX2246987": {
     title: "Castle & Fortress (From \"Yoshi's Island\") [Arrangement]",
     isrc: "QZGWX2246987",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "4:23",
     spotifyTrackId: "3HAyVDlNZCJ8jmStfcKMjz",
     preview: "https://p.scdn.co/mp3-preview/15400cae091e4b11b4aebd917a5daeddb2d08c3d"
@@ -578,6 +609,7 @@ const TRACKS = {
   "isrc:QZ6K42601011": {
     title: "Castle Theme (From \"New Super Mario Bros.\") [Arr. for Orchestra by Pokestir]",
     isrc: "QZ6K42601011",
+    artists: ["Asuka Ohta", "Pokestir"],
     duration: "2:53",
     spotifyTrackId: "3vTAfWW2tJSnu9hfPqRIDL",
     preview: "https://p.scdn.co/mp3-preview/3b9476d17edc3709555eca83cbd6c73c354c0a0e"
@@ -606,6 +638,7 @@ const TRACKS = {
   "isrc:QZ6K42500366": {
     title: "Checking the News: Daytime (News Channel) [feat. CrystalVGM] [Drum N Bass Arrangement]",
     isrc: "QZ6K42500366",
+    artists: ["Pokestir", "CrystalVGM"],
     duration: "3:48",
     spotifyTrackId: "6iMz0ESszyNKCEVAJUveuY",
     preview: "https://p.scdn.co/mp3-preview/bcfb572fd9d07b21bbdc14bdfa079bdf8d7fdb7f"
@@ -620,6 +653,7 @@ const TRACKS = {
   "isrc:QZPJ32296233": {
     title: "Cianwood City (From \"Pokémon HeartGold & SoulSilver\")",
     isrc: "QZPJ32296233",
+    artists: ["Go Ichinose", "Morikazu Aoki", "Junichi Masuda", "Pokestir"],
     duration: "3:51",
     spotifyTrackId: "2QFVcPNGkizkxKWFReancF",
     preview: "https://p.scdn.co/mp3-preview/a38c9b676dfc92899bbc966fabb7acc989c91b98"
@@ -627,6 +661,7 @@ const TRACKS = {
   "isrc:QZPJ32141713": {
     title: "Coronation Day (From \"Pokémon Black & White\") [Arr. for Orchestra by Pokestir]",
     isrc: "QZPJ32141713",
+    artists: ["Shota Kageyama", "Junichi Masuda", "Pokestir"],
     duration: "2:16",
     spotifyTrackId: "5jNXCHoO8IfAmplFkkZEcc",
     preview: "https://p.scdn.co/mp3-preview/6b5d8d053a89ec0afa011ff22d44fcc94dee3260"
@@ -634,6 +669,7 @@ const TRACKS = {
   "isrc:QZGWX2245059": {
     title: "Corridors of Time (From \"Chrono Trigger\") [Arrangement]",
     isrc: "QZGWX2245059",
+    artists: ["Yasunori Mitsuda", "Pokestir"],
     duration: "5:24",
     spotifyTrackId: "5qhUiYP1hfFmuf2W8Iowa0",
     preview: "https://p.scdn.co/mp3-preview/1fceb9580f8b12476c8d5b81b992b4fac46c011c"
@@ -662,6 +698,7 @@ const TRACKS = {
   "isrc:QZ6K42501081": {
     title: "Credits (From \"The Legend of Zelda: Ocarina of Time\")",
     isrc: "QZ6K42501081",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "4:33",
     spotifyTrackId: "2Hr9yzq3DvNHG8RyWkN1Dh",
     preview: "https://p.scdn.co/mp3-preview/90440f7a17748bfa602a10e83374d74cf3fc2323"
@@ -676,6 +713,7 @@ const TRACKS = {
   "isrc:QZPJ32132935": {
     title: "Cycling (From \"Pokémon Red & Blue\") [Arrangement]",
     isrc: "QZPJ32132935",
+    artists: ["Junichi Masuda", "Pokestir"],
     duration: "4:45",
     spotifyTrackId: "4m5HX6kAt3HDWeeNF4XdJM",
     preview: "https://p.scdn.co/mp3-preview/a0d74a7ff574486765498c600f73f6b1b4da1014"
@@ -683,6 +721,7 @@ const TRACKS = {
   "isrc:QZPJ32318642": {
     title: "Cyllage City (Arrangement)",
     isrc: "QZPJ32318642",
+    artists: ["StevenMix"],
     duration: "3:19",
     spotifyTrackId: "5Ww3QzvEJfzCsvxLEdKoby",
     preview: "https://p.scdn.co/mp3-preview/1d5c86b8e610678929c01c479d4fb36dd0fcdd61"
@@ -704,6 +743,7 @@ const TRACKS = {
   "isrc:QZ6K42501469": {
     title: "Dark Sanctuary (From \"Deltarune) [Arr. for Orchestra by Pokestir]",
     isrc: "QZ6K42501469",
+    artists: ["Toby Fox", "Pokestir"],
     duration: "3:48",
     spotifyTrackId: "4hTTgBqjS2MM5iZsZOgZoM",
     preview: "https://p.scdn.co/mp3-preview/14cb71f5f4790345ef03011fafc06def02ffcdca"
@@ -718,6 +758,7 @@ const TRACKS = {
   "isrc:QZPJ32438732": {
     title: "Delfino Plaza (From \"Super Mario Sunshine\") [Arrangement]",
     isrc: "QZPJ32438732",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "4:14",
     spotifyTrackId: "3yU3MLi8q2qTt4BREYyqhI",
     preview: "https://p.scdn.co/mp3-preview/a3ee52a45ffc9fd09c088f37fab586408c26f368"
@@ -725,6 +766,7 @@ const TRACKS = {
   "isrc:QZPJ32318647": {
     title: "Dendemille Town (Arrangement)",
     isrc: "QZPJ32318647",
+    artists: ["StevenMix"],
     duration: "3:12",
     spotifyTrackId: "1S1Tv0nndGG1Qhw2kNSPAk",
     preview: "https://p.scdn.co/mp3-preview/81ccfdaf186f734dad720df39bfe424e6bf7c09c"
@@ -739,6 +781,7 @@ const TRACKS = {
   "isrc:QZPJ32369381": {
     title: "Dire, Dire Docks (From \"Super Mario 64\") [Arrangement]",
     isrc: "QZPJ32369381",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "5:57",
     spotifyTrackId: "1DE7dlxRNEOmzWiQJBskW0",
     preview: "https://p.scdn.co/mp3-preview/5a6ff8a9ece6cef0c2577f7f31339b7c606ac245"
@@ -753,6 +796,7 @@ const TRACKS = {
   "isrc:QZ6K42501414": {
     title: "Dragon Roost Island (From \"the Legend of Zelda: The Wind Waker\")",
     isrc: "QZ6K42501414",
+    artists: ["Kenta Nagata", "Pokestir"],
     duration: "3:00",
     spotifyTrackId: "6Gsri5ruvYJyUKVj1gVtrw",
     preview: "https://p.scdn.co/mp3-preview/ee51067b2162a56711ad2af5b378e6cd00cf388a"
@@ -809,6 +853,7 @@ const TRACKS = {
   "isrc:QZPJ32338002": {
     title: "Entralink (From \"Pokémon Black & White\") [Arr. for Orchestra by Pokestir]",
     isrc: "QZPJ32338002",
+    artists: ["Go Ichinose", "Shota Kageyama", "Pokestir"],
     duration: "2:54",
     spotifyTrackId: "27QMkEeXyrLNJgjVS6ca5f",
     preview: "https://p.scdn.co/mp3-preview/0522a573da7e46404aa687364b83429e9cfc0e95"
@@ -830,6 +875,7 @@ const TRACKS = {
   "isrc:QZPJ32161153": {
     title: "Eterna City (Night) (From \"Pokémon Diamond & Pearl\") [Arrangement]",
     isrc: "QZPJ32161153",
+    artists: ["Go Ichinose", "Pokestir"],
     duration: "4:58",
     spotifyTrackId: "6BaMMoLB0rld2AVAb7sniB",
     preview: "https://p.scdn.co/mp3-preview/98f8e2b16c662e265075f1d8ab58d40362fa083e"
@@ -858,6 +904,7 @@ const TRACKS = {
   "isrc:QZPJ32396583": {
     title: "Ferry Terminal (Garage Remix)",
     isrc: "QZPJ32396583",
+    artists: ["onion_mu"],
     duration: "2:20",
     spotifyTrackId: "3ciGtM19bZxitM4RCPWI6i",
     preview: "https://p.scdn.co/mp3-preview/3b4722c2f650bf0745c431685090bbe36d138d0f"
@@ -865,6 +912,7 @@ const TRACKS = {
   "isrc:QZPJ32127948": {
     title: "Floccesy Town (From \"Pokémon Black 2 & White 2\") [Arrangement]",
     isrc: "QZPJ32127948",
+    artists: ["Hitomi Sato", "Go Ichinose", "Pokestir"],
     duration: "4:52",
     spotifyTrackId: "3rd9swihvdFa4e2lIQNhCY",
     preview: "https://p.scdn.co/mp3-preview/b10405c1e2bc27cc2dcd2e3f7bdac485db4f6f69"
@@ -872,6 +920,7 @@ const TRACKS = {
   "isrc:QZGWX2245159": {
     title: "Flower Garden (From \"Yoshi's Island\")",
     isrc: "QZGWX2245159",
+    artists: ["Kazumi Totaka", "Pokestir"],
     duration: "5:12",
     spotifyTrackId: "0idybBaAq6xZBbJ1gtERjY",
     preview: "https://p.scdn.co/mp3-preview/875d6a5af057cadb1bffd21a7041eba88d2445bc"
@@ -886,6 +935,7 @@ const TRACKS = {
   "isrc:QZ6K42501142": {
     title: "Forest Temple (From \"The Legend of Zelda: Ocarina of Time\")",
     isrc: "QZ6K42501142",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "3:35",
     spotifyTrackId: "3KdxcXhUcLFLeIwzHXUI5W",
     preview: "https://p.scdn.co/mp3-preview/8fa688a746d5c80e53fdbf776065bcf21ac2407b"
@@ -893,6 +943,7 @@ const TRACKS = {
   "isrc:QZPJ32277418": {
     title: "Fortress (From \"Super Mario World\") [Cinematic Arrangement]",
     isrc: "QZPJ32277418",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "5:20",
     spotifyTrackId: "41MgUf7tNldeuG4GDHHv33",
     preview: "https://p.scdn.co/mp3-preview/d8b207d288818358b63a5f704388662d5a52e302"
@@ -907,6 +958,7 @@ const TRACKS = {
   "isrc:QZPJ32435884": {
     title: "Freezy Flake Galaxy (From \"Super Mario Galaxy 2\") [Arrangement]",
     isrc: "QZPJ32435884",
+    artists: ["Mahito Yokota", "Pokestir"],
     duration: "4:38",
     spotifyTrackId: "39i9y7oc5rgjqFQ7DrlEax",
     preview: "https://p.scdn.co/mp3-preview/206d7e6351f2803065e63a979b4de12bd6df067f"
@@ -914,6 +966,7 @@ const TRACKS = {
   "isrc:QZ6K42501274": {
     title: "Frog's Theme (From \"Chrono Trigger\")",
     isrc: "QZ6K42501274",
+    artists: ["Yasunori Mitsuda", "Pokestir"],
     duration: "2:15",
     spotifyTrackId: "6LCEernF5PGiA2SfqzvhmM",
     preview: "https://p.scdn.co/mp3-preview/7f489ebe687338b4b145f215c9fd29616fb4bc4b"
@@ -942,6 +995,7 @@ const TRACKS = {
   "isrc:QZ6K42501408": {
     title: "Ganondorf Battle (From \"the Legend of Zelda: The Wind Waker\")",
     isrc: "QZ6K42501408",
+    artists: ["Kenta Nagata", "Koji Kondo", "Hajime Wakai", "Toru Minegishi", "Pokestir"],
     duration: "4:14",
     spotifyTrackId: "4CsdzsP4CidKb65TUD4lqo",
     preview: "https://p.scdn.co/mp3-preview/00291b98c9de6ffc4f04bedf3a35feb281b4eab2"
@@ -956,6 +1010,7 @@ const TRACKS = {
   "isrc:QZPJ32148502": {
     title: "Gear Station (From \"Pokémon Black & White\")",
     isrc: "QZPJ32148502",
+    artists: ["Go Ichinose", "Morikazu Aoiki", "Pokestir"],
     duration: "4:38",
     spotifyTrackId: "5UvOsN3cH6at8sLuJLAbWm",
     preview: "https://p.scdn.co/mp3-preview/3ccd50d6bbcb8a2b312339db560e8e37cdeb2016"
@@ -963,6 +1018,7 @@ const TRACKS = {
   "isrc:QZPJ32318643": {
     title: "Geosenge Town (Arrangement)",
     isrc: "QZPJ32318643",
+    artists: ["Pokestir", "StevenMix"],
     duration: "2:59",
     spotifyTrackId: "4gL99Q4h7Un7QfmpxlZZnR",
     preview: "https://p.scdn.co/mp3-preview/c91e50c5690a4052e782fef39900091377d6686b"
@@ -970,6 +1026,7 @@ const TRACKS = {
   "isrc:QZPJ32302596": {
     title: "Gerudo Valley (From \"The Legend of Zelda: Ocarina of Time\")",
     isrc: "QZPJ32302596",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "3:58",
     spotifyTrackId: "5lKkmmuIgJGC9xhQOJwfe5",
     preview: "https://p.scdn.co/mp3-preview/6a7c71603c6541c47f994f6324e2aedd1b8835e9"
@@ -984,6 +1041,7 @@ const TRACKS = {
   "isrc:QZPJ32114113": {
     title: "Goldenrod Game Corner (From \"Pokémon Heartgold & Soulsilver\") [Arrangement]",
     isrc: "QZPJ32114113",
+    artists: ["Shota Kageyama", "Go Ichinose", "Pokestir"],
     duration: "5:23",
     spotifyTrackId: "1TVA5xCqIwD4rA9IsKIBhS",
     preview: "https://p.scdn.co/mp3-preview/3fa8cc8f8a4e34a396cbca38711f8401f51c2d60"
@@ -991,6 +1049,7 @@ const TRACKS = {
   "isrc:QZ6K42501410": {
     title: "Grandma (From \"the Legend of Zelda: The Wind Waker\")",
     isrc: "QZ6K42501410",
+    artists: ["Kenta Nagata", "Koji Kondo", "Hajime Wakai", "Toru Minegishi", "Pokestir"],
     duration: "3:12",
     spotifyTrackId: "1ELZsdhvwKo7mK34cfbmYm",
     preview: "https://p.scdn.co/mp3-preview/2e17c1922155156a978a14411a4ec6b8fc3de531"
@@ -1005,6 +1064,7 @@ const TRACKS = {
   "isrc:QZPJ32423957": {
     title: "Guardia Millennial Fair (From \"Chrono Trigger\")",
     isrc: "QZPJ32423957",
+    artists: ["Yasunori Mitsuda", "Pokestir"],
     duration: "4:44",
     spotifyTrackId: "5B2oN5aTMi7Qpo4vhKbfd6",
     preview: "https://p.scdn.co/mp3-preview/725572362b0bf1a83e2fe7781990a8ca0983257f"
@@ -1012,6 +1072,7 @@ const TRACKS = {
   "isrc:QZPJ32396582": {
     title: "Hau'oli City (Night) [Arrangement]",
     isrc: "QZPJ32396582",
+    artists: ["Pokestir", "StevenMix"],
     duration: "3:00",
     spotifyTrackId: "1Gi8JtLVzlwv0ywNmnucEF",
     preview: "https://p.scdn.co/mp3-preview/71a506e6039c6305058ea724bb18f94c4c51e828"
@@ -1019,6 +1080,7 @@ const TRACKS = {
   "isrc:QZPJ32396586": {
     title: "Heahea City (Arrangement)",
     isrc: "QZPJ32396586",
+    artists: ["Pokestir", "StevenMix"],
     duration: "3:26",
     spotifyTrackId: "1Ybb4Oo3JwEX6RRPucULpO",
     preview: "https://p.scdn.co/mp3-preview/c1120299578d9c12726e97bf290921a9882e83dd"
@@ -1033,6 +1095,7 @@ const TRACKS = {
   "isrc:QZPJ32124959": {
     title: "Hoenn Victory Road (From \"Pokémon Ruby & Sapphire\") [Arrangement]",
     isrc: "QZPJ32124959",
+    artists: ["Go Ichinose", "Pokestir"],
     duration: "5:20",
     spotifyTrackId: "0UoOSgsVKaUfRrYELDGswL",
     preview: "https://p.scdn.co/mp3-preview/c693a12d605db713b01aa60e01e7087c5a1e58dc"
@@ -1040,6 +1103,7 @@ const TRACKS = {
   "isrc:QZ6K42501132": {
     title: "House (From \"The Legend of Zelda: Ocarina of Time\")",
     isrc: "QZ6K42501132",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "1:26",
     spotifyTrackId: "2XXhEbUAr73iLQF6mp3QFB",
     preview: "https://p.scdn.co/mp3-preview/01ea4d2e56244ca604cfee438302b1e22cf2dd23"
@@ -1047,6 +1111,7 @@ const TRACKS = {
   "isrc:QZ6K42600752": {
     title: "Hyrule Castle (From \"The Legend of Zelda: A Link to the Past\") [Arr. for Orchestra by Pokestir]",
     isrc: "QZ6K42600752",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "2:55",
     spotifyTrackId: "4ExY0YFUJrsRmXlG5Ub779",
     preview: "https://p.scdn.co/mp3-preview/052524a96171454927bbb7465bfbc936d5a2be9f"
@@ -1054,6 +1119,7 @@ const TRACKS = {
   "isrc:QZ6K42501406": {
     title: "Hyrule Castle (From \"the Legend of Zelda: The Wind Waker\")",
     isrc: "QZ6K42501406",
+    artists: ["Kenta Nagata", "Koji Kondo", "Hajime Wakai", "Toru Minegishi", "Pokestir"],
     duration: "4:11",
     spotifyTrackId: "03usNLyr6qX4wk9HQaT9B1",
     preview: "https://p.scdn.co/mp3-preview/4b373f70de722147ff16ccd0ccab78758d93e895"
@@ -1061,6 +1127,7 @@ const TRACKS = {
   "isrc:QZ6K42501080": {
     title: "Hyrule Field (From \"The Legend of Zelda: Ocarina of Time\") [Arr. for Orchestra by Pokestir]",
     isrc: "QZ6K42501080",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "4:57",
     spotifyTrackId: "6C6dZvDGWbLZrXgXgIlnS6",
     preview: "https://p.scdn.co/mp3-preview/c6d99521d9fdb1ff8fb9e969d20c0352a418a771"
@@ -1068,6 +1135,7 @@ const TRACKS = {
   "isrc:QZPJ32351947": {
     title: "Icirrus City (From \"Pokémon Black & White\") [Arrangement]",
     isrc: "QZPJ32351947",
+    artists: ["Shota Kageyama", "Pokestir"],
     duration: "2:31",
     spotifyTrackId: "5F0QjUp9JtcWboV57HlpTI",
     preview: "https://p.scdn.co/mp3-preview/696d6c80ed6aace6d20cb7f3935021a27807730b"
@@ -1075,6 +1143,7 @@ const TRACKS = {
   "isrc:QZPJ32136565": {
     title: "In the Final (From \"Mario & Luigi: Bowser's Inside Story\") [Arrangement]",
     isrc: "QZPJ32136565",
+    artists: ["Yoko Shimomura", "Pokestir"],
     duration: "4:17",
     spotifyTrackId: "6wOyzD9cpf0ng8wKLXFRie",
     preview: "https://p.scdn.co/mp3-preview/b7d4b5167081e2e25774f061f0208eb69aede52d"
@@ -1089,6 +1158,7 @@ const TRACKS = {
   "isrc:QZ6K42501415": {
     title: "Intense Battle (From \"the Legend of Zelda: The Wind Waker\")",
     isrc: "QZ6K42501415",
+    artists: ["Kenta Nagata", "Koji Kondo", "Hajime Wakai", "Toru Minegishi", "Pokestir"],
     duration: "2:22",
     spotifyTrackId: "76hzrSHTCRqKn1Tq1rxkZa",
     preview: "https://p.scdn.co/mp3-preview/7fea457768a1c183804325645b6277ffa2e2c446"
@@ -1096,6 +1166,7 @@ const TRACKS = {
   "isrc:QZPJ32318774": {
     title: "Introduction (From \"Pokémon Diamond & Pearl\") [Orchestral Arrangement]",
     isrc: "QZPJ32318774",
+    artists: ["Go Ichinose", "Pokestir"],
     duration: "4:48",
     spotifyTrackId: "69IMQWykY1yuym4ZMaKNfO",
     preview: "https://p.scdn.co/mp3-preview/92edd58b4a4c9179d5a14906c752fe2e575fdd0f"
@@ -1117,6 +1188,7 @@ const TRACKS = {
   "isrc:QZPJ32432448": {
     title: "Jubilife City (From \"Pokémon Diamond & Pearl\") [Arrangement]",
     isrc: "QZPJ32432448",
+    artists: ["Hitomi Sato", "Pokestir"],
     duration: "3:13",
     spotifyTrackId: "7iCov4QDuuUSPz5To2ee1q",
     preview: "https://p.scdn.co/mp3-preview/2922788b664cad1a4f5310d35134d44a2f73f628"
@@ -1124,6 +1196,7 @@ const TRACKS = {
   "isrc:QZ6K42500315": {
     title: "Kalos Region Theme (From \"Pokemon X & Y) [Arr. for Orchestra by Pokestir]",
     isrc: "QZ6K42500315",
+    artists: ["Shota Kageyama", "Pokestir"],
     duration: "3:03",
     spotifyTrackId: "3AFQkC7H2AmbdJj3q06Nok",
     preview: "https://p.scdn.co/mp3-preview/c0b24d0cae6973237f73e8a025f16ec66e69628d"
@@ -1131,6 +1204,7 @@ const TRACKS = {
   "isrc:QZPJ32318650": {
     title: "Kiloude City (Arrangement)",
     isrc: "QZPJ32318650",
+    artists: ["StevenMix"],
     duration: "2:41",
     spotifyTrackId: "3LKa3AUhVlYhPvs06kpbSo",
     preview: "https://p.scdn.co/mp3-preview/2cef950f9d0035a0478772230e7bf0c0226fdc80"
@@ -1138,6 +1212,7 @@ const TRACKS = {
   "isrc:QZPJ32374355": {
     title: "Kokiri Forest (From \"the Legend of Zelda: Ocarina of Time\") [Arrangement]",
     isrc: "QZPJ32374355",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "2:26",
     spotifyTrackId: "7Apku1LnEVTbENgu45z0yU",
     preview: "https://p.scdn.co/mp3-preview/7717edf32876370c9872c2247668c7a6ab2a36c8"
@@ -1145,6 +1220,7 @@ const TRACKS = {
   "isrc:QZPJ32305303": {
     title: "Lacunosa Town (From \"Pokémon Black & White\") [Arrangement]",
     isrc: "QZPJ32305303",
+    artists: ["Go Ichinose", "Shota Kageyama", "Hitomi Sato", "Pokestir"],
     duration: "3:23",
     spotifyTrackId: "4fmxXJMRf8GlzEsWNG8K6B",
     preview: "https://p.scdn.co/mp3-preview/4af1230b7daa1a9334764c3926e728c6cca8aeb0"
@@ -1152,6 +1228,7 @@ const TRACKS = {
   "isrc:QZPJ32279543": {
     title: "Lake of Rage (From \"Pokémon Heartgold & Soulsilver\") [Orchestral Arrangement]",
     isrc: "QZPJ32279543",
+    artists: ["Go Ichinose", "Junichi Masuda", "Pokestir", "David Karsten"],
     duration: "3:05",
     spotifyTrackId: "2TdC6NlyL9wMfvAxrP5SzV",
     preview: "https://p.scdn.co/mp3-preview/90c41570d0a868ae4512cc7cfbd647269aec9ef8"
@@ -1159,6 +1236,7 @@ const TRACKS = {
   "isrc:QZ6K42501280": {
     title: "Last Battle (From \"Chrono Trigger\")",
     isrc: "QZ6K42501280",
+    artists: ["Yasunori Mitsuda", "Pokestir"],
     duration: "3:50",
     spotifyTrackId: "27mAFMSku0tzLE8jnAWLXq",
     preview: "https://p.scdn.co/mp3-preview/853d78846604198b7abff0d6bb885daeabc10659"
@@ -1166,6 +1244,7 @@ const TRACKS = {
   "isrc:QZ6K42501145": {
     title: "Last Battle (From \"The Legend of Zelda: Ocarina of Time\")",
     isrc: "QZ6K42501145",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "3:39",
     spotifyTrackId: "1PFnyhoD3GaZIsWnWgAVIf",
     preview: "https://p.scdn.co/mp3-preview/9fa84e7e62ae2ebe99626225ebe6a1c4501f7b7b"
@@ -1180,6 +1259,7 @@ const TRACKS = {
   "isrc:QZPJ32318646": {
     title: "Laverre City (feat. StevenMix) [Arrangement]",
     isrc: "QZPJ32318646",
+    artists: ["Pokestir", "StevenMix"],
     duration: "3:26",
     spotifyTrackId: "6R4C7F1cgMo7ziRmJWTOE1",
     preview: "https://p.scdn.co/mp3-preview/abc02e4b96a1977f628daf653b40421da5cc3132"
@@ -1194,6 +1274,7 @@ const TRACKS = {
   "isrc:QZPJ32413773": {
     title: "Looker's Theme (From \"Pokémon Platinum\") [Arrangement]",
     isrc: "QZPJ32413773",
+    artists: ["Hitomi Sato", "Pokestir"],
     duration: "2:03",
     spotifyTrackId: "7rCGn8Oz7VVbk6EO8pm9qr",
     preview: "https://p.scdn.co/mp3-preview/1639928ee962a4d0a3f0b159d55957edff138904"
@@ -1201,6 +1282,7 @@ const TRACKS = {
   "isrc:QZPJ32303788": {
     title: "Lost Woods (From \"The Legend of Zelda: Ocarina of Time\")",
     isrc: "QZPJ32303788",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "3:13",
     spotifyTrackId: "3uwdm84ZyAfp4keICyQ13l",
     preview: "https://p.scdn.co/mp3-preview/6bb859e9b243baaeddea7ed8af88b95d89a130b8"
@@ -1229,6 +1311,7 @@ const TRACKS = {
   "isrc:QZPJ32377113": {
     title: "Main Theme (From \"Chrono Trigger\") [Orchestral Arrangement]",
     isrc: "QZPJ32377113",
+    artists: ["Yasunori Mitsuda", "Pokestir"],
     duration: "4:22",
     spotifyTrackId: "2iyNWecg4gaoockkLwOBLN",
     preview: "https://p.scdn.co/mp3-preview/29552fe3d039ce1a6dda87911ed27138e90b2151"
@@ -1271,6 +1354,7 @@ const TRACKS = {
   "isrc:QZPJ32388849": {
     title: "Middle Boss Battle (From \"the Legend of Zelda: Ocarina of Time\") [Arrangement]",
     isrc: "QZPJ32388849",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "3:05",
     spotifyTrackId: "72go80l2AdNSR78URft3NC",
     preview: "https://p.scdn.co/mp3-preview/c9d8100515a14089539e2412b91e81ee00acabf3"
@@ -1285,6 +1369,7 @@ const TRACKS = {
   "isrc:QZPJ32285176": {
     title: "Mistralton City (From \"Pokemon Black and White\") [Arrangement]",
     isrc: "QZPJ32285176",
+    artists: ["Go Ichinose", "Pokestir", "The Zame"],
     duration: "3:58",
     spotifyTrackId: "6Cnr4No2uXVaJZs71YWKIQ",
     preview: "https://p.scdn.co/mp3-preview/e872e1fe7997d9abf5a31d53335cd509f7c147a5"
@@ -1292,6 +1377,7 @@ const TRACKS = {
   "isrc:QZ6K42501407": {
     title: "Molgera Battle (From \"the Legend of Zelda: The Wind Waker\")",
     isrc: "QZ6K42501407",
+    artists: ["Kenta Nagata", "Koji Kondo", "Hajime Wakai", "Toru Minegishi", "Pokestir"],
     duration: "2:35",
     spotifyTrackId: "7Cn7kwehgCTfv3ljJLGiya",
     preview: "https://p.scdn.co/mp3-preview/8f05679245f50c299223030aec124a07d0f3736d"
@@ -1306,6 +1392,7 @@ const TRACKS = {
   "isrc:QZPJ32282119": {
     title: "Mt. Coronet (From \"Pokémon Diamond & Pearl\") [Arrangement]",
     isrc: "QZPJ32282119",
+    artists: ["Go Ichinose", "Pokestir"],
     duration: "4:21",
     spotifyTrackId: "5jUVfEVAtnkrjEIcg0cPiT",
     preview: "https://p.scdn.co/mp3-preview/f60e1bb9aa0ba09008e2c598ba92f74f8dec754b"
@@ -1327,6 +1414,7 @@ const TRACKS = {
   "isrc:QZPJ32138049": {
     title: "Musical: Pokémon Party (From \"Pokémon Black & White\") [Arrangement]",
     isrc: "QZPJ32138049",
+    artists: ["Minako Adachi", "Pokestir"],
     duration: "4:22",
     spotifyTrackId: "3x4TPVrnOwsAY0E9zJyAFJ",
     preview: "https://p.scdn.co/mp3-preview/70d78e03bb10fdfde1461395592dc1a74b43c39c"
@@ -1341,6 +1429,7 @@ const TRACKS = {
   "isrc:QZPJ32332168": {
     title: "Nacrene City (From \"Pokémon Black & White\") [Arrangement]",
     isrc: "QZPJ32332168",
+    artists: ["Shota Kageyama", "Go Ichinose", "Pokestir"],
     duration: "4:43",
     spotifyTrackId: "5bNZreg9BJL8zjegEtdGWm",
     preview: "https://p.scdn.co/mp3-preview/54c11732c92641360970f7a7ce621d5ac5cb467d"
@@ -1348,6 +1437,7 @@ const TRACKS = {
   "isrc:QZPJ32114841": {
     title: "Nimbasa City (From \"Pokémon Black & White\") [Arrangement]",
     isrc: "QZPJ32114841",
+    artists: ["Shota Kageyama", "Pokestir"],
     duration: "5:36",
     spotifyTrackId: "5NhJxfan0HZoiKr6H1c8Oj",
     preview: "https://p.scdn.co/mp3-preview/beb314bde13e17d4758677f245decceb3cb14935"
@@ -1355,6 +1445,7 @@ const TRACKS = {
   "isrc:QZPJ32325962": {
     title: "Nimbasa City (From \"Pokémon Black & White\") [Modern Arrangement]",
     isrc: "QZPJ32325962",
+    artists: ["Shota Kageyama", "Pokestir"],
     duration: "3:53",
     spotifyTrackId: "1nVZKlkUBZKQ6fm35P7Zty",
     preview: "https://p.scdn.co/mp3-preview/beb314bde13e17d4758677f245decceb3cb14935"
@@ -1383,6 +1474,7 @@ const TRACKS = {
   "isrc:QZPJ32250042": {
     title: "Nuvema Town (From \"Pokémon Black & White\") [Arrangement]",
     isrc: "QZPJ32250042",
+    artists: ["Shota Kageyama", "Pokestir"],
     duration: "2:59",
     spotifyTrackId: "19TUCl8uH7SmgCoPDDF5Bv",
     preview: "https://p.scdn.co/mp3-preview/2e1f5efcb33436c45dc30ce881ace86cedee2e77"
@@ -1411,6 +1503,7 @@ const TRACKS = {
   "isrc:QZPJ32281069": {
     title: "Opelucid City (From \"Pokémon White\") [Arrangement]",
     isrc: "QZPJ32281069",
+    artists: ["Shota Kageyama", "Go Ichinose", "Pokestir"],
     duration: "3:26",
     spotifyTrackId: "7m5sxE7xUruRI9rnkqU8JB",
     preview: "https://p.scdn.co/mp3-preview/79a074ab8ee768aa23b8273d7b8543af842e1e03"
@@ -1418,6 +1511,7 @@ const TRACKS = {
   "isrc:QZPJ32266806": {
     title: "Opening Movie (From \"Pokémon Heartgold & Soulsilver\") [Arrangement]",
     isrc: "QZPJ32266806",
+    artists: ["Go Ichinose", "Junichi Masuda", "Morikazu Aoki", "Pokestir"],
     duration: "1:10",
     spotifyTrackId: "4nNtSqt7LcY3KCVmHeakVv",
     preview: "https://p.scdn.co/mp3-preview/91c7f2eea9851963bf63a06dfaf1152194d4e20f"
@@ -1432,6 +1526,7 @@ const TRACKS = {
   "isrc:QZ6K42501409": {
     title: "Outset Island (From \"the Legend of Zelda: The Wind Waker\")",
     isrc: "QZ6K42501409",
+    artists: ["Kenta Nagata", "Koji Kondo", "Hajime Wakai", "Toru Minegishi", "Pokestir"],
     duration: "3:50",
     spotifyTrackId: "3T2atZZlyuq4jVVX5hRj4Q",
     preview: "https://p.scdn.co/mp3-preview/1f2e2b057129cd5a491bb38956f350abcda4e0cc"
@@ -1439,6 +1534,7 @@ const TRACKS = {
   "isrc:QZPJ32255646": {
     title: "Overworld (From \"Super Mario World\") (Arrangement)",
     isrc: "QZPJ32255646",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "2:54",
     spotifyTrackId: "416PYrFCRZuIqF8MwR9O1W",
     preview: "https://p.scdn.co/mp3-preview/2b95ac3e0375ab0718bad76fc7209fa2d62b3d67"
@@ -1460,6 +1556,7 @@ const TRACKS = {
   "isrc:QZ6K42500978": {
     title: "Palace (From “Super Mario Bros. Wonder”) [Arr. for Orchestra by Pokestir]",
     isrc: "QZ6K42500978",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "5:17",
     spotifyTrackId: "1K9b0ecxhAKAqGm3bLjzeA",
     preview: "https://p.scdn.co/mp3-preview/08d605a4cba53b50d5d34a73bb172d92f4d9c300"
@@ -1467,6 +1564,7 @@ const TRACKS = {
   "isrc:QZPJ32396588": {
     title: "Paniola Ranch (Orchestral Arrangement)",
     isrc: "QZPJ32396588",
+    artists: ["StevenMix"],
     duration: "3:04",
     spotifyTrackId: "5meabxp7bICOKAekc2hBSw",
     preview: "https://p.scdn.co/mp3-preview/1935ece79964a0238b629796da043ab55c6bd0ea"
@@ -1481,6 +1579,7 @@ const TRACKS = {
   "isrc:QZ6K42501411": {
     title: "Pirates (From \"the Legend of Zelda: The Wind Waker\")",
     isrc: "QZ6K42501411",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "3:06",
     spotifyTrackId: "1hWc2N1RRXJYssff3KGSBK",
     preview: "https://p.scdn.co/mp3-preview/72274ca247449197bf95740fdcaf78ac5658a984"
@@ -1495,6 +1594,7 @@ const TRACKS = {
   "isrc:QZPJ32396591": {
     title: "Poke Pelago (Arrangement)",
     isrc: "QZPJ32396591",
+    artists: ["StevenMix"],
     duration: "3:09",
     spotifyTrackId: "1VXgBtbh2ldmKKdBGwZyzF",
     preview: "https://p.scdn.co/mp3-preview/6f9460fff14738d8c4b412e5092ca681fa6b7e1d"
@@ -1502,6 +1602,7 @@ const TRACKS = {
   "isrc:QZPJ32111075": {
     title: "Pokéathlon: Finals (From \"Pokémon Heartgold & Soulsilver\") [Arrangement]",
     isrc: "QZPJ32111075",
+    artists: ["Shota Kageyama", "Takuto Kitsuta", "Pokestir"],
     duration: "5:25",
     spotifyTrackId: "6kJEMtyUWMVBnUZNW20RZY",
     preview: "https://p.scdn.co/mp3-preview/d28fd830418a297465f3f872179a532a7e54744a"
@@ -1523,6 +1624,7 @@ const TRACKS = {
   "isrc:QZPJ32264557": {
     title: "Princess Zelda (From \"The Legend of Zelda: Ocarina of Time\") (Orchestral Arrangement)",
     isrc: "QZPJ32264557",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "3:21",
     spotifyTrackId: "5eHMNNvJshJY6aKU93AXfI",
     preview: "https://p.scdn.co/mp3-preview/17b17a112c2d546f8dcef938efa4648a9bc34e47"
@@ -1558,6 +1660,7 @@ const TRACKS = {
   "isrc:QZ6K42500369": {
     title: "Results (Everybody Votes Channel) [feat. Pokestir] [Jazzy House Arrangement]",
     isrc: "QZ6K42500369",
+    artists: ["CrystalVGM", "Pokestir"],
     duration: "2:36",
     spotifyTrackId: "3olaASEw30YhXzIiDczfNp",
     preview: "https://p.scdn.co/mp3-preview/02483b38936e31689e5e024d2296c472fb5fb014"
@@ -1572,6 +1675,7 @@ const TRACKS = {
   "isrc:QZPJ32396580": {
     title: "Route 1 on Melemele Island (Arrangement)",
     isrc: "QZPJ32396580",
+    artists: ["StevenMix"],
     duration: "2:59",
     spotifyTrackId: "1011ytmEcnXXolhD43ktLu",
     preview: "https://p.scdn.co/mp3-preview/f3f0bb8778c2dc83a97a09284c07a2c4b83b5742"
@@ -1579,6 +1683,7 @@ const TRACKS = {
   "isrc:QZPJ32253323": {
     title: "Route 10 (From \"Pokémon Black & White\") [2023 Arrangement]",
     isrc: "QZPJ32253323",
+    artists: ["Shota Kageyama", "Pokestir"],
     duration: "4:26",
     spotifyTrackId: "0OBTkFqgW5NXy1s7gVYMDk",
     preview: "https://p.scdn.co/mp3-preview/4d88dab53a3c5c25ddff34057b88a237ed5ad668"
@@ -1593,6 +1698,7 @@ const TRACKS = {
   "isrc:QZPJ32396596": {
     title: "Route 10 on Ula'ula Island (Orchestral Arrangement)",
     isrc: "QZPJ32396596",
+    artists: ["Pokestir", "StevenMix"],
     duration: "3:43",
     spotifyTrackId: "2J6DTL8liJdtA5liJKkSzD",
     preview: "https://p.scdn.co/mp3-preview/7d7089835b8d5eee050eeae79c227c68aac2fdd6"
@@ -1600,6 +1706,7 @@ const TRACKS = {
   "isrc:QZ6K42501333": {
     title: "Route 104 (From \"Pokémon Ruby & Sapphire) [Arr. for Orchestra by Pokestir]",
     isrc: "QZ6K42501333",
+    artists: ["Go Ichinose", "Pokestir"],
     duration: "2:54",
     spotifyTrackId: "2xbxkHnpu8CTAAYBhJAYki",
     preview: "https://p.scdn.co/mp3-preview/24ef0e40ce113f9f8af957d599f348c36d9ed518"
@@ -1607,6 +1714,7 @@ const TRACKS = {
   "isrc:QZPJ32373045": {
     title: "Route 111 (From \"Pokémon Ruby & Sapphire\") [Arrangement]",
     isrc: "QZPJ32373045",
+    artists: ["Go Ichinose", "Pokestir"],
     duration: "2:12",
     spotifyTrackId: "6TYzg8rPSVCM2fHFOgIHLm",
     preview: "https://p.scdn.co/mp3-preview/d3080bf7755847e11b417c6d85f1d57c9eff8e53"
@@ -1635,6 +1743,7 @@ const TRACKS = {
   "isrc:QZPJ32298152": {
     title: "Route 120 (From \"Pokémon Ruby & Sapphire\") [Orchestral Arrangement]",
     isrc: "QZPJ32298152",
+    artists: ["Morikazu Aoki", "Pokestir"],
     duration: "4:00",
     spotifyTrackId: "1Lx7f45XHP1OZHeXxu941F",
     preview: "https://p.scdn.co/mp3-preview/40329ca861431ff520df5fb5628bab6358f966ed"
@@ -1642,6 +1751,7 @@ const TRACKS = {
   "isrc:QZ6K42500370": {
     title: "Route 18 (From \"Pokemon X & Y) [Arr. for Orchestra by Pokestir]",
     isrc: "QZ6K42500370",
+    artists: ["Shota Kageyama", "Pokestir"],
     duration: "3:27",
     spotifyTrackId: "1vwIIGoGRZHn92lYboOdcc",
     preview: "https://p.scdn.co/mp3-preview/c9cad8ba55bae0e95847f3b79047d7e814d775c0"
@@ -1649,6 +1759,7 @@ const TRACKS = {
   "isrc:QZPJ32263213": {
     title: "Route 19 (From \"Pokémon Black 2 & White 2\") [Arrangement]",
     isrc: "QZPJ32263213",
+    artists: ["Go Ichinose", "Shota Kageyama", "Pokestir"],
     duration: "4:59",
     spotifyTrackId: "5NiLze5ZqfJdVS5hLfrGeR",
     preview: "https://p.scdn.co/mp3-preview/3d08c2e1d46e0e20cc5c1e0adaad3312b4791f35"
@@ -1670,6 +1781,7 @@ const TRACKS = {
   "isrc:QZPJ32300918": {
     title: "Route 201 (From \"Pokémon Diamond & Pearl\") [Arrangement]",
     isrc: "QZPJ32300918",
+    artists: ["Hitomi Sato", "Pokestir"],
     duration: "2:10",
     spotifyTrackId: "5bQu4D0pHvuDm9qpfkVGms",
     preview: "https://p.scdn.co/mp3-preview/b9e17922a4963508929fd2ed46eb362cdb019225"
@@ -1677,6 +1789,7 @@ const TRACKS = {
   "isrc:QZPJ32271825": {
     title: "Route 203 (From \"Pokémon Diamond & Pearl\") [Arrangement]",
     isrc: "QZPJ32271825",
+    artists: ["Hitomi Sato", "Go Ichinose", "Pokestir"],
     duration: "4:13",
     spotifyTrackId: "5sTUEzm1NG0DMfOdKwRm1f",
     preview: "https://p.scdn.co/mp3-preview/bb2d6b68cbd727110e8aedd1baf07c1a4e0f0387"
@@ -1698,6 +1811,7 @@ const TRACKS = {
   "isrc:QZPJ32118229": {
     title: "Route 209 (Night) (From \"Pokémon Diamond & Pearl\") [Arrangement]",
     isrc: "QZPJ32118229",
+    artists: ["Hitomi Sato", "Pokestir"],
     duration: "5:01",
     spotifyTrackId: "7tSHQy7jawyLcFPMpQQgHy",
     preview: "https://p.scdn.co/mp3-preview/1a7079a8bbcf626a336a3e5c582969ae0b47aebe"
@@ -1712,6 +1826,7 @@ const TRACKS = {
   "isrc:QZPJ32126790": {
     title: "Route 216 (Day) (From \"Pokémon Diamond & Pearl\") [Arrangement]",
     isrc: "QZPJ32126790",
+    artists: ["Go Ichinose", "Pokestir"],
     duration: "4:51",
     spotifyTrackId: "25gGPIhqZl1nSrXFoputey",
     preview: "https://p.scdn.co/mp3-preview/a03459971bf9c6a79c3951e69ac1934229beed75"
@@ -1719,6 +1834,7 @@ const TRACKS = {
   "isrc:QZPJ32374354": {
     title: "Route 22 (From \"Pokémon Black 2 & White 2\") [Arrangement]",
     isrc: "QZPJ32374354",
+    artists: ["Hitomi Sato", "Pokestir"],
     duration: "2:40",
     spotifyTrackId: "7JYY1bfG5KLF4FubuQfROY",
     preview: "https://p.scdn.co/mp3-preview/7d1127d55e3b93beb3e244c9f090c47319b27a5a"
@@ -1733,6 +1849,7 @@ const TRACKS = {
   "isrc:QZPJ32142941": {
     title: "Route 225 (Day) (From \"Pokémon Diamond & Pearl\") [Arrangement]",
     isrc: "QZPJ32142941",
+    artists: ["Go Ichinose", "Pokestir"],
     duration: "3:50",
     spotifyTrackId: "5fTUV06uOvTbSgdzPIGBY7",
     preview: "https://p.scdn.co/mp3-preview/ef4dbec4700796e1b9b6d727c5cd4adfda5954a3"
@@ -1740,6 +1857,7 @@ const TRACKS = {
   "isrc:QZPJ32429453": {
     title: "Route 225 (From \"Pokémon Diamond & Pearl\") [Synth - Pop Remix]",
     isrc: "QZPJ32429453",
+    artists: ["Go Ichinose", "Pokestir"],
     duration: "3:49",
     spotifyTrackId: "1ZbhmCXPxftYsQiR0xphSt",
     preview: "https://p.scdn.co/mp3-preview/e1f737ec67a03caa2aa8e72e82f645f1909f05f3"
@@ -1747,6 +1865,7 @@ const TRACKS = {
   "isrc:QZPJ32391557": {
     title: "Route 228 (From \"Pokémon Diamond & Pearl\") [Arrangement]",
     isrc: "QZPJ32391557",
+    artists: ["Hitomi Sato", "Pokestir"],
     duration: "5:04",
     spotifyTrackId: "4bDfiotHcZYO7nQEfOUOjH",
     preview: "https://p.scdn.co/mp3-preview/691006b42471bc32253d58ae109e44770d19c201"
@@ -1761,6 +1880,7 @@ const TRACKS = {
   "isrc:QZ6K42600795": {
     title: "Route 3 (From \"Pokémon Red & Blue\") (Arr. for Orchestra by Pokestir)",
     isrc: "QZ6K42600795",
+    artists: ["Junichi Masuda", "Pokestir"],
     duration: "3:42",
     spotifyTrackId: "420jh49y4CkKdng2nIQLXC",
     preview: "https://p.scdn.co/mp3-preview/d2c6971d4aa50ee5a117f4718d080efed4239167"
@@ -1789,6 +1909,7 @@ const TRACKS = {
   "isrc:QZPJ32121696": {
     title: "Route 38 (From \"Pokémon Heartgold & Soulsilver\") [Arrangement]",
     isrc: "QZPJ32121696",
+    artists: ["Junichi Masuda", "Pokestir"],
     duration: "5:43",
     spotifyTrackId: "1x5v9QRaO8TIiX7OmnT52j",
     preview: "https://p.scdn.co/mp3-preview/44c07f63545ea4e89684ba022782ddc2491421b3"
@@ -1796,6 +1917,7 @@ const TRACKS = {
   "isrc:QZPJ32120849": {
     title: "Route 4 (Autumn) (From \"Pokémon Black & White\") [Arr. for Orchestra by Pokestir]",
     isrc: "QZPJ32120849",
+    artists: ["Shota Kageyama", "Junichi Masuda", "Pokestir"],
     duration: "5:11",
     spotifyTrackId: "3jaj5mX4NBtG3gdHoQP8FA",
     preview: "https://p.scdn.co/mp3-preview/3ca0fa6e76021059cc77f98b8345e389bd8c89e7"
@@ -1803,6 +1925,7 @@ const TRACKS = {
   "isrc:QZPJ32396587": {
     title: "Route 4 on Akala Island (feat. StevenMix) [Orchestral Arrangement]",
     isrc: "QZPJ32396587",
+    artists: ["Pokestir", "StevenMix"],
     duration: "2:51",
     spotifyTrackId: "0h1D8qJaquXCNzV5MtWxfE",
     preview: "https://p.scdn.co/mp3-preview/939d3c4907d37b73bfe4f3187a6cd81b4d15c8d0"
@@ -1817,6 +1940,7 @@ const TRACKS = {
   "isrc:QZPJ32396590": {
     title: "Royal Avenue (Arrangement)",
     isrc: "QZPJ32396590",
+    artists: ["StevenMix"],
     duration: "2:41",
     spotifyTrackId: "0cQhMey8KfJXVG5bDdNBL1",
     preview: "https://p.scdn.co/mp3-preview/9ee6ec377b430a0a5fd11db793234d6dcff4e8a9"
@@ -1824,6 +1948,7 @@ const TRACKS = {
   "isrc:QZ6K42500353": {
     title: "Ruins (From \"Undertale) [Arr. for Orchestra by Pokestir]",
     isrc: "QZ6K42500353",
+    artists: ["Toby Fox", "Pokestir"],
     duration: "4:03",
     spotifyTrackId: "4gh12auyW84iRpfwOW1nrG",
     preview: "https://p.scdn.co/mp3-preview/82205f9b2cf1319289b6cab8ed1572f0e70bd44d"
@@ -1873,6 +1998,7 @@ const TRACKS = {
   "isrc:QZPJ32318639": {
     title: "Santalune City (Arrangement)",
     isrc: "QZPJ32318639",
+    artists: ["Pokestir", "StevenMix"],
     duration: "2:07",
     spotifyTrackId: "2PuzjlwmO6kAr6jcEi8hUV",
     preview: "https://p.scdn.co/mp3-preview/55752d8352cd6dfff839b0beb68a307850495b57"
@@ -1880,6 +2006,7 @@ const TRACKS = {
   "isrc:QZPJ32347767": {
     title: "Santalune Forest (From \"Pokémon X & Y\") [Arrangement]",
     isrc: "QZPJ32347767",
+    artists: ["Shota Kageyama", "Pokestir"],
     duration: "3:20",
     spotifyTrackId: "16M5CJmq9sb5OLoNdfNSWJ",
     preview: "https://p.scdn.co/mp3-preview/06e1ef1b148de9a5fc5a6daf1c22b4ea9fdedc67"
@@ -1908,6 +2035,7 @@ const TRACKS = {
   "isrc:QZ6K42501270": {
     title: "Secret of the Forest (From \"Chrono Trigger\")",
     isrc: "QZ6K42501270",
+    artists: ["Yasunori Mitsuda", "Pokestir"],
     duration: "4:30",
     spotifyTrackId: "1nZwtiaeC2pdQ51N0ZF6MB",
     preview: "https://p.scdn.co/mp3-preview/454acc49d8f60857e579c01ba61a747c62b4a7f8"
@@ -1922,6 +2050,7 @@ const TRACKS = {
   "isrc:QZPJ32318644": {
     title: "Shalour City (Arrangement)",
     isrc: "QZPJ32318644",
+    artists: ["StevenMix"],
     duration: "3:58",
     spotifyTrackId: "3scDeP1xbpIWHsy1HfIYV6",
     preview: "https://p.scdn.co/mp3-preview/7375ecb46b194d8060b94eeade679e444c1e9561"
@@ -1929,6 +2058,7 @@ const TRACKS = {
   "isrc:QZ6K42501134": {
     title: "Shop (From \"The Legend of Zelda: Ocarina of Time\")",
     isrc: "QZ6K42501134",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "3:58",
     spotifyTrackId: "1lABaoTU97M7NMnGaMLTEK",
     preview: "https://p.scdn.co/mp3-preview/182d71926e87fd2b5392affd179ea9b4854dab30"
@@ -1964,6 +2094,7 @@ const TRACKS = {
   "isrc:QZ6K42501272": {
     title: "Silent Light (From \"Chrono Trigger\")",
     isrc: "QZ6K42501272",
+    artists: ["Nobuo Uematsu", "Pokestir"],
     duration: "3:31",
     spotifyTrackId: "5mfmKTb5PLg5GJVsAYmUNV",
     preview: "https://p.scdn.co/mp3-preview/7a4299cd50d3b07280bde5a911423e6937d1b209"
@@ -1971,6 +2102,7 @@ const TRACKS = {
   "isrc:QZPJ32130394": {
     title: "Snow Mountain (From \"Super Mario 64\") [Arrangement]",
     isrc: "QZPJ32130394",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "5:44",
     spotifyTrackId: "5Kol6BHAnZEPumatXGUh4Y",
     preview: "https://p.scdn.co/mp3-preview/c1c444c8c31bec72a6cfd593081b7de83e3c2b58"
@@ -1978,6 +2110,7 @@ const TRACKS = {
   "isrc:QZPJ32318649": {
     title: "Snowbelle City (feat. StevenMix) [Arrangement]",
     isrc: "QZPJ32318649",
+    artists: ["Pokestir", "StevenMix"],
     duration: "3:58",
     spotifyTrackId: "2hCSPnLN6Y6rF6kL0HIQhS",
     preview: "https://p.scdn.co/mp3-preview/3cb94158a6df60fb5f712a98c69a3ee40da946d5"
@@ -1992,6 +2125,7 @@ const TRACKS = {
   "isrc:QZ6K42500356": {
     title: "Snowman (From \"Earthbound\") [Arr. for Orchestra by Pokestir and CrystalVGM]",
     isrc: "QZ6K42500356",
+    artists: ["Hirokazu Tanaka", "Keiichi Suzuki", "Hiroshi Kanazu", "Pokestir", "CrystalVGM"],
     duration: "4:32",
     spotifyTrackId: "33pJ7j8MZu4V9Sic1SVo4I",
     preview: "https://p.scdn.co/mp3-preview/cc9769b5b26a63e2654479c59eec6ef4d2353dac"
@@ -1999,6 +2133,7 @@ const TRACKS = {
   "isrc:QZ6K42501514": {
     title: "Snowpoint City (From \"Pokémon Diamond & Pearl) [Arr. for Orchestra by Pokestir]",
     isrc: "QZ6K42501514",
+    artists: ["Junichi Masuda", "Pokestir"],
     duration: "4:09",
     spotifyTrackId: "69LkybiIOcwCCjeiXYjr70",
     preview: "https://p.scdn.co/mp3-preview/41a0d0e6853eec8daffd3982ba2586a8092952c2"
@@ -2006,6 +2141,7 @@ const TRACKS = {
   "isrc:QZ6K42501513": {
     title: "Snowy - Mountain (From “Super Mario Bros. Wonder) [Arr. for Orchestra by Pokestir]",
     isrc: "QZ6K42501513",
+    artists: ["Koji Kondo", "Shiho Fujii", "Pokestir"],
     duration: "4:25",
     spotifyTrackId: "5Ax41hUEl2M4JKhSSO0SLF",
     preview: "https://p.scdn.co/mp3-preview/f083a395e6d47922a495103154d8eaf4301cfff0"
@@ -2020,6 +2156,7 @@ const TRACKS = {
   "isrc:QZPJ32161151": {
     title: "Song of Storms (From \"the Legend of Zelda: Ocarina of Time\") [Arrangement]",
     isrc: "QZPJ32161151",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "4:15",
     spotifyTrackId: "5rklT3VqExDVggV51jpQAY",
     preview: "https://p.scdn.co/mp3-preview/d9e8bb1c00e736f4805fb5372d191902521ec515"
@@ -2034,6 +2171,7 @@ const TRACKS = {
   "isrc:QZ6K42500959": {
     title: "South Province (From \"Pokémon Scarlet & Violet) [Arr. for Orchestra by Pokestir]",
     isrc: "QZ6K42500959",
+    artists: ["Toby Fox", "Minako Adachi", "Pokestir"],
     duration: "5:34",
     spotifyTrackId: "5rCylS8Cy2Kqn9kkbMHsfV",
     preview: "https://p.scdn.co/mp3-preview/3d3040033fec134cddf25d54c9f0da3b1094b599"
@@ -2062,6 +2200,7 @@ const TRACKS = {
   "isrc:QZPJ32118231": {
     title: "Stark Mountain (From \"Pokémon Diamond & Pearl\") [Arr. for Orchestra by Pokestir]",
     isrc: "QZPJ32118231",
+    artists: ["Go Ichinose", "Pokestir"],
     duration: "5:50",
     spotifyTrackId: "0xn2kggyoncJkCQnft34rM",
     preview: "https://p.scdn.co/mp3-preview/aa501aee6c9b71bd310884ed2b9483b862979347"
@@ -2097,6 +2236,7 @@ const TRACKS = {
   "isrc:QZPJ32369382": {
     title: "Surf (From \"Pokémon Diamond & Pearl\") [Arrangement]",
     isrc: "QZPJ32369382",
+    artists: ["Hitomi Sato", "Pokestir"],
     duration: "4:24",
     spotifyTrackId: "6YLf5ZvIpKm9nLXsGYv0JY",
     preview: "https://p.scdn.co/mp3-preview/59c7a4d270385a7478f4aa79a8c939fa830574d7"
@@ -2111,6 +2251,7 @@ const TRACKS = {
   "isrc:QZPJ32181166": {
     title: "Swimming (From \"Super Mario World\") [Arrangement]",
     isrc: "QZPJ32181166",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "4:15",
     spotifyTrackId: "7ABCDoiFELy9VNL8pOk7cu",
     preview: "https://p.scdn.co/mp3-preview/0f0ece0baed736f0a4c351f620616580ad154339"
@@ -2118,6 +2259,7 @@ const TRACKS = {
   "isrc:QZPJ32135746": {
     title: "Team Galactic Hq (From \"Pokémon Diamond & Pearl\") [Arrangement]",
     isrc: "QZPJ32135746",
+    artists: ["Go Ichinose", "Pokestir"],
     duration: "4:26",
     spotifyTrackId: "5brbR2zCuib2aWt5o3iaGO",
     preview: "https://p.scdn.co/mp3-preview/dff120d113a8aac8dba3cb646fe3adcc7e1d0779"
@@ -2132,6 +2274,7 @@ const TRACKS = {
   "isrc:QZPJ32396589": {
     title: "Ten Carat Hill (Arrangement)",
     isrc: "QZPJ32396589",
+    artists: ["StevenMix"],
     duration: "3:17",
     spotifyTrackId: "4vjfMEinjq4btuITHVbQSb",
     preview: "https://p.scdn.co/mp3-preview/adbb7a499a397fd60c6dadf346868bad91a5dd31"
@@ -2174,6 +2317,7 @@ const TRACKS = {
   "isrc:QZ6K42501413": {
     title: "The Great Sea (From \"the Legend of Zelda: The Wind Waker\")",
     isrc: "QZ6K42501413",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "5:15",
     spotifyTrackId: "6ISUsvP6yDDHzkejcog2lQ",
     preview: "https://p.scdn.co/mp3-preview/e465a31b5121b93bd759f2e07afde3bd58900da8"
@@ -2195,6 +2339,7 @@ const TRACKS = {
   "isrc:QZPJ32396597": {
     title: "The Path to the League (feat. StevenMix) [Orchestral Arrangement]",
     isrc: "QZPJ32396597",
+    artists: ["Pokestir", "StevenMix"],
     duration: "3:21",
     spotifyTrackId: "7fiBWkq179cAsipppkIlLo",
     preview: "https://p.scdn.co/mp3-preview/e6b3eb38996f984db2c9f152b030078ec2a00222"
@@ -2202,6 +2347,7 @@ const TRACKS = {
   "isrc:QZPJ32116741": {
     title: "The Pokémon League (From “Pokémon Black & White”) [Arrangement]",
     isrc: "QZPJ32116741",
+    artists: ["Shota Kageyama", "Pokestir"],
     duration: "5:28",
     spotifyTrackId: "1jqD8tPI4fznbmPmnzQZF0",
     preview: "https://p.scdn.co/mp3-preview/63d29e1008435e9d74bfb04446700236c626f42f"
@@ -2216,6 +2362,7 @@ const TRACKS = {
   "isrc:QZGWX2250901": {
     title: "The Underground (From \"Pokémon Diamond & Pearl\") [Arrangement]",
     isrc: "QZGWX2250901",
+    artists: ["Go Ichinose", "Pokestir"],
     duration: "5:02",
     spotifyTrackId: "3HssJHRHnOiakCeoKrYOi0",
     preview: "https://p.scdn.co/mp3-preview/6b5861b20f18d3bf2340cb2970aeca4f43c069db"
@@ -2223,6 +2370,7 @@ const TRACKS = {
   "isrc:QZPJ32119164": {
     title: "Title Screen (From \"Pokémon Black & White\") [Arrangement]",
     isrc: "QZPJ32119164",
+    artists: ["Junichi Masuda", "Go Ichinose", "Pokestir"],
     duration: "1:18",
     spotifyTrackId: "3QgadhMDdAXxerJ5pCkch3",
     preview: "https://p.scdn.co/mp3-preview/1ea58304cfa0f9df85e7a976dcdce2491293a847"
@@ -2230,6 +2378,7 @@ const TRACKS = {
   "isrc:QZPJ32266807": {
     title: "Title Screen (From \"Pokémon Heartgold & Soulsilver\") [Arrangement]",
     isrc: "QZPJ32266807",
+    artists: ["Junichi Masuda", "Shota Kageyama", "Pokestir"],
     duration: "1:37",
     spotifyTrackId: "2h7sLdVEL7OwioOiHdNEgn",
     preview: "https://p.scdn.co/mp3-preview/985518a45112d702fccc743e2989a2f5a7fbf774"
@@ -2237,6 +2386,7 @@ const TRACKS = {
   "isrc:QZPJ32230130": {
     title: "Title Screen (From \"Super Mario World\") (Orchestral Arrangement)",
     isrc: "QZPJ32230130",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "4:04",
     spotifyTrackId: "4E1HxJR5lGF3sZzuhRfyV1",
     preview: "https://p.scdn.co/mp3-preview/75f507c8f574dab0f5ebf2bdd8df4d506b7018bc"
@@ -2244,6 +2394,7 @@ const TRACKS = {
   "isrc:QZ6K42501405": {
     title: "Title Screen (From \"the Legend of Zelda: The Wind Waker\")",
     isrc: "QZ6K42501405",
+    artists: ["Kenta Nagata", "Koji Kondo", "Hajime Wakai", "Toru Minegishi", "Pokestir"],
     duration: "3:46",
     spotifyTrackId: "4IKigjLRn1SaLVC0F4kWZ5",
     preview: "https://p.scdn.co/mp3-preview/bd68f2f7052d1eac82e352635563ea5d9d65caf0"
@@ -2251,6 +2402,7 @@ const TRACKS = {
   "isrc:QZPJ32306901": {
     title: "Title Theme (From \"The Legend of Zelda: Ocarina of Time\")",
     isrc: "QZPJ32306901",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "3:48",
     spotifyTrackId: "4XMqu73QWliPgxuRj803xG",
     preview: "https://p.scdn.co/mp3-preview/a09f8b00b377ee865f3003a7f314063137ecba93"
@@ -2279,6 +2431,7 @@ const TRACKS = {
   "isrc:QZPJ32122828": {
     title: "Underground Theme (From \"Yoshi’s Island\") [Arrangement]",
     isrc: "QZPJ32122828",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "4:55",
     spotifyTrackId: "5rUsqKmJ0puJVG5SdKJ1hr",
     preview: "https://p.scdn.co/mp3-preview/4dad8e0c8c8bac45a82d7872283a82dc2c1e39db"
@@ -2286,6 +2439,7 @@ const TRACKS = {
   "isrc:QZ6K42501279": {
     title: "Undersea Palace (From \"Chrono Trigger\")",
     isrc: "QZ6K42501279",
+    artists: ["Yasunori Mitsuda", "Pokestir", "Mudstep"],
     duration: "3:30",
     spotifyTrackId: "7lwXqKufhb6FC8p9uBWxcb",
     preview: "https://p.scdn.co/mp3-preview/7f22d2f347e25c463e448472795a9e07a4c70d2c"
@@ -2300,6 +2454,7 @@ const TRACKS = {
   "isrc:QZPJ32259827": {
     title: "Unova Route 1 (From \"Pokémon Black & White\") [Arrangement]",
     isrc: "QZPJ32259827",
+    artists: ["Shota Kageyama", "Go Ichinose", "Pokestir"],
     duration: "3:40",
     spotifyTrackId: "6seOkbh9wOzjGYN4fnWV74",
     preview: "https://p.scdn.co/mp3-preview/15124f5ffbe93a328b8ec972eca6f1386bda2086"
@@ -2321,6 +2476,7 @@ const TRACKS = {
   "isrc:QZPJ32396595": {
     title: "Vast Poni Canyon (feat. Pokestir) [Arrangement]",
     isrc: "QZPJ32396595",
+    artists: ["StevenMix", "Pokestir"],
     duration: "3:50",
     spotifyTrackId: "3beW87GBYa8WGTxsWgT1LF",
     preview: "https://p.scdn.co/mp3-preview/7697ac4a6a8bdd71f0a6ef072ec91374daaddc00"
@@ -2363,6 +2519,7 @@ const TRACKS = {
   "isrc:QZPJ32156015": {
     title: "Viridian City (From \"Pokémon HeartGold & SoulSilver\")",
     isrc: "QZPJ32156015",
+    artists: ["Junichi Masuda", "Takuto Kitsuta", "Pokestir"],
     duration: "4:28",
     spotifyTrackId: "3OtM9BF4szFGk5WlevUHjy",
     preview: "https://p.scdn.co/mp3-preview/c0daf9640b2c446b8ffaebfc3c737711c0bef215"
@@ -2405,6 +2562,7 @@ const TRACKS = {
   "isrc:QZ6K42501143": {
     title: "Water Temple (From \"The Legend of Zelda: Ocarina of Time\")",
     isrc: "QZ6K42501143",
+    artists: ["Koji Kondo", "Pokestir"],
     duration: "5:11",
     spotifyTrackId: "16JdDzeOceFTuMkvmDdqUI",
     preview: "https://p.scdn.co/mp3-preview/2b4a201624fb379ad93d57b3101a16f83c779062"
@@ -2412,6 +2570,7 @@ const TRACKS = {
   "isrc:QZ6K42501269": {
     title: "Wind Scene (600 A.D.) [From \"Chrono Trigger\"]",
     isrc: "QZ6K42501269",
+    artists: ["Yasunori Mitsuda", "Pokestir"],
     duration: "3:14",
     spotifyTrackId: "5PVPTyXthvhzCLa4UexBc1",
     preview: "https://p.scdn.co/mp3-preview/4c9d5355118cc61cff23ea786448361d1e430ca9"
@@ -2419,6 +2578,7 @@ const TRACKS = {
   "isrc:QZ6K42501412": {
     title: "Windfall Island (From \"the Legend of Zelda: The Wind Waker\")",
     isrc: "QZ6K42501412",
+    artists: ["Kenta Nagata", "Koji Kondo", "Hajime Wakai", "Toru Minegishi", "Pokestir"],
     duration: "2:13",
     spotifyTrackId: "2W7NVMsYz4LQcUilmdo2jf",
     preview: "https://p.scdn.co/mp3-preview/e8c6663a746d8a1c660438b4a79aa69804f5206b"

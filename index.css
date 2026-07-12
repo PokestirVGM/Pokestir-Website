@@ -2,7 +2,7 @@
 
 .wrap { display: grid; gap: 28px; }
 
-#about, #mywork-header { scroll-margin-top: 80px; }
+#about, #mywork-header, #links-header { scroll-margin-top: 80px; }
 
 /* ── Section headers ── */
 .page-title { margin: 4px 2px 6px; }
@@ -121,9 +121,43 @@
 .mw-item-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
 .mw-item-dur { font-size: 12px; color: var(--muted); white-space: nowrap; }
 
+/* =========================
+   LINKS
+   ========================= */
+.lgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 24px; padding: 18px; }
+.lcol-title { margin: 0 0 10px; color: var(--white); font-size: 13px; letter-spacing: .3px; text-transform: uppercase; }
+.lrows { display: grid; gap: 10px; align-content: start; }
+.lrow {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 14px;
+  font-size: 14px; font-weight: 700; color: var(--white); text-decoration: none;
+  border: 1px solid var(--line-strong); border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%);
+  transition: transform .08s ease, filter .15s ease, box-shadow .15s ease;
+}
+.lrow:hover { transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 6px 14px rgba(2,6,23,.45); }
+.lrow:active { transform: translateY(0); }
+.lrow img { width: 20px; height: 20px; display: block; }
+
+/* Platform tints */
+.lrow.yt       { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #ff0000; }
+.lrow.bandcamp { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #1ea0c3; }
+.lrow.spotify  { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #1db954; }
+.lrow.apple    { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #fa2d48; }
+.lrow.amazon   { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #5a2dff; }
+.lrow.tidal    { background: linear-gradient(180deg, rgba(255,255,255,.04) 0%, rgba(0,0,0,.10) 100%), #0b0b0b; }
+.lrow.deezer   { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #0ec7f7; }
+.lrow.x        { background: linear-gradient(180deg, rgba(255,255,255,.04) 0%, rgba(0,0,0,.10) 100%), #000; }
+.lrow.bsky     { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #1185fe; }
+.lrow.instagram{ background-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 100%), linear-gradient(45deg, #f58529, #f56040, #f77737, #e1306c, #c13584, #833ab4, #515bd4); }
+.lrow.discord  { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #5865f2; }
+.lrow.patreon  { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #ff424d; }
+.lrow.kofi     { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #00b9fe; }
+
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .agrid { grid-template-columns: 1fr; padding: 16px; }
+  .lgrid { grid-template-columns: 1fr; gap: 18px; }
 }
 @media (max-width: 640px) {
   /* About / Commissions card: hide portrait on mobile, bio uses full width */

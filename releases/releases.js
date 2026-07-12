@@ -53,7 +53,8 @@
       rel.title, rel.subtitle, rel.type, rel.description, rel.upc, rel.slug,
       rel.releaseDate, formatReleaseDate(rel.releaseDate),
       (rel.tags || []).join(' '),
-      (rel.tracks || []).map((t) => t.title + ' ' + (t.isrc || '')).join(' ')
+      (rel.tracks || []).map((t) =>
+        t.title + ' ' + (t.isrc || '') + ' ' + (t.artists || []).join(' ')).join(' ')
     ].join(' ').toLowerCase();
     return { ...rel, dateMs: dateMs(rel.releaseDate), searchHaystack: haystack };
   }
@@ -199,8 +200,7 @@
   const SORTERS = {
     newest: (a, b) => (b.dateMs - a.dateMs) || compareByTitle(a, b),
     oldest: (a, b) => (a.dateMs - b.dateMs) || compareByTitle(a, b),
-    title: compareByTitle,
-    tracks: (a, b) => ((b.tracks || []).length - (a.tracks || []).length) || compareByTitle(a, b)
+    title: compareByTitle
   };
 
   function match(rel) {
@@ -332,7 +332,59 @@
     };
   }
 
+  /* Returning from a detail page should land where the visitor left off,
+     not back at the top of the list. Navigations between the list and
+     ?r=<slug> are full page loads, so the list state (search, sort, scroll
+     position, album-rail offset) is stashed in sessionStorage when a tile
+     is clicked and restored only when the visitor arrives back from a
+     detail page (back link, or browser back without bfcache). Fresh visits
+     via the nav ignore the stash and start at the top. */
+  const LIST_STATE_KEY = 'pokestir-releases-list-state';
+
+  function saveListState() {
+    try {
+      const rail = grid.querySelector('.rgrid--rail');
+      sessionStorage.setItem(LIST_STATE_KEY, JSON.stringify({
+        q: qEl.value,
+        sort: state.sort,
+        y: window.scrollY,
+        railX: rail ? rail.scrollLeft : 0
+      }));
+    } catch (e) { /* storage unavailable (private mode); skip */ }
+  }
+
+  function restoreListState() {
+    let saved = null;
+    try { saved = JSON.parse(sessionStorage.getItem(LIST_STATE_KEY)); } catch (e) { return false; }
+    if (!saved) return false;
+
+    const nav = performance.getEntriesByType('navigation')[0];
+    const fromDetail = document.referrer.includes('?r=');
+    if (!fromDetail && !(nav && nav.type === 'back_forward')) return false;
+
+    if (saved.q) {
+      qEl.value = saved.q;
+      state.q = saved.q.trim().toLowerCase();
+    }
+    if (saved.sort && SORTERS[saved.sort]) {
+      sortSel.value = saved.sort;
+      state.sort = saved.sort;
+    }
+    render();
+    const rail = grid.querySelector('.rgrid--rail');
+    if (rail && saved.railX) rail.scrollLeft = saved.railX;
+    // Layout finishes after this frame; scroll once the page has its height.
+    // 'instant' bypasses the site-wide `scroll-behavior: smooth`, which would
+    // otherwise animate the restore all the way down from the top.
+    requestAnimationFrame(() => window.scrollTo({ top: saved.y || 0, behavior: 'instant' }));
+    return true;
+  }
+
   function initList() {
+    grid.addEventListener('click', (e) => {
+      if (e.target.closest('.release-tile')) saveListState();
+    });
+
     qEl.addEventListener('input', debounce(() => {
       state.q = qEl.value.trim().toLowerCase();
       render();
@@ -349,7 +401,7 @@
       render();
     });
 
-    render();
+    if (!restoreListState()) render();
   }
 
   /* =========================
@@ -384,6 +436,13 @@
     return out.join('');
   }
 
+  /* Tracks without an explicit artists array are solo Pokestir recordings;
+     only tracks with featured or co-primary artists store one in
+     tracks-data.js. UPC/ISRC stay in the data but are not rendered. */
+  function trackArtists(t) {
+    return (t.artists && t.artists.length) ? t.artists.join(', ') : 'Pokestir';
+  }
+
   const SVG_PLAY = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
   const SVG_PAUSE = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
 
@@ -400,7 +459,7 @@
         </div>
         <div class="t-main">
           <div class="t-title">${escapeHTML(t.title)}</div>
-          ${t.isrc ? `<div class="t-isrc">ISRC ${escapeHTML(t.isrc)}</div>` : ''}
+          <div class="t-artist">${escapeHTML(trackArtists(t))}</div>
         </div>
         ${t.duration ? `<div class="t-dur">${escapeHTML(t.duration)}</div>` : '<div></div>'}
       </div>`;
@@ -492,9 +551,7 @@
 
     document.title = `Pokestir - ${rel.title}`;
 
-    const chips = [rel.type, ...(rel.tags || [])].filter(Boolean)
-      .map((t) => `<span class="chip">${escapeHTML(t)}</span>`).join('');
-    const facts = [formatReleaseDate(rel.releaseDate), trackCountText(rel)]
+    const facts = [rel.type, formatReleaseDate(rel.releaseDate), trackCountText(rel)]
       .filter(Boolean).map(escapeHTML).join(' &middot; ');
 
     const host = (rel.includedIn || [])[0] || null;
@@ -514,10 +571,8 @@
           <div class="info">
             <h1 class="d-title">${escapeHTML(rel.title)}</h1>
             ${rel.subtitle ? `<div class="d-sub">${escapeHTML(rel.subtitle)}</div>` : ''}
-            ${chips ? `<div class="d-chips">${chips}</div>` : ''}
             <div class="d-facts">${facts}</div>
             ${fromAlbum}
-            ${rel.upc ? `<div class="d-upc">UPC <span>${escapeHTML(rel.upc)}</span></div>` : ''}
             ${rel.description ? `<p class="d-desc">${escapeHTML(rel.description)}</p>` : ''}
             ${buttons ? `<nav class="plat-links" aria-label="Listen on">${buttons}</nav>` : ''}
           </div>

@@ -12,6 +12,7 @@ AGENTS.md
 codex_missing_links.txt
 
 # Local catalog research sources (the website data is maintained in releases/*.js)
+releases/missing-links-research.csv
 Pokestir Platform Link Library.csv
 Pokestir_Verified_Platform_Links.csv
 Pokestir Singles & Catalog (1).xlsx

@@ -148,13 +148,6 @@ select {
 }
 .d-sub { color: var(--muted); font-size: 14px; margin-top: 4px; }
 
-/* Type + tag chips — same recipe as the home player's track tags */
-.d-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
-.chip {
-  font-size: 11px; padding: 2px 8px; border-radius: 999px;
-  background: rgba(255,255,255,.05); border: 1px solid var(--line); color: var(--muted);
-}
-
 .d-facts { color: var(--muted); font-size: 14px; margin-top: 10px; }
 
 /* "Included in <compilation>" on singles that were re-released on one */
@@ -162,8 +155,6 @@ select {
 .d-from a { color: var(--white); font-weight: 700; text-decoration: none; }
 .d-from a:hover { text-decoration: underline; }
 .d-from-note { font-size: 12px; color: var(--muted); opacity: .85; margin-top: 2px; }
-.d-upc { font-size: 12px; color: var(--muted); margin-top: 4px; }
-.d-upc span { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 .d-desc { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 10px 0 0; }
 
 /* ── Platform links — brand-tinted tiles, same treatment as the Links page ── */
@@ -240,10 +231,7 @@ select {
 
 .t-main { min-width: 0; }
 .t-title { font-weight: 700; font-size: 14px; color: var(--text); }
-.t-isrc {
-  font-size: 11.5px; color: var(--muted); margin-top: 2px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-}
+.t-artist { font-size: 12px; color: var(--muted); margin-top: 2px; }
 .t-dur { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 /* ── Responsive ── */
@@ -261,7 +249,7 @@ select {
   .release-tile--album .rsub, .release-tile--album .rmeta, .release-tile--album .rcomp { font-size: 12px; }
   .detail-head { flex-direction: column; align-items: center; text-align: center; padding: 18px; }
   .detail-head .info { align-items: center; }
-  .d-chips, .plat-links { justify-content: center; }
+  .plat-links { justify-content: center; }
   .plat-links { width: 100%; }
   .track-row { padding: 10px 16px; }
 }
