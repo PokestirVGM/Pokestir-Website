@@ -1,11 +1,14 @@
 /* Usage Terms & Claims page — content cards, code boxes, FAQ */
 
-.hero { position: relative; margin: 12px 0 24px; }
-.hero .page-title { margin: 0 0 8px; }
-.lead { color: var(--muted); font-size: 16px; line-height: 1.65; margin: 0; }
+.wrap { display: grid; gap: 26px; }
+
+/* ── Section header (same pattern as the home page) ── */
+.page-title { margin: 4px 2px 6px; }
+.section-sub { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 2px 2px 8px; }
 
 /* ── Layout ── */
 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+#usage, #claims { scroll-margin-top: 80px; }
 .card .inner { padding: 18px 18px 20px; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
@@ -15,12 +18,13 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   overflow-wrap: anywhere; word-break: break-word;
 }
-.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
 .small { font-size: 12px; }
 
 /* ── Lists ── */
 .list { margin: 10px 0 0; padding-left: 18px; line-height: 1.7; }
 .list li { margin: 6px 0; }
+.list li::marker { color: var(--muted); }
+.list .codebox { margin: 8px 0 2px; }
 
 /* ── FAQ (details/summary) ── */
 details { padding: 12px 14px; border-radius: var(--radius-md); }
@@ -30,14 +34,14 @@ summary { cursor: pointer; font-weight: 700; font-family: var(--font-display); }
 summary::marker { color: var(--muted); }
 .faq-title { font-size: 18px; }
 
-/* ── Underlined link utility ── */
+/* ── Underlined link utility (matches inline links on the home page) ── */
 .link-underline {
-  color: var(--text);
+  color: var(--white);
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-thickness: 1.5px;
 }
-.link-underline:visited { color: var(--text); }
+.link-underline:visited { color: var(--white); }
 .link-underline:hover { opacity: .9; }
 .link-underline:focus-visible { border-radius: 3px; }
 
