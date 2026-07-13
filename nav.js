@@ -1,17 +1,14 @@
 (function () {
   'use strict';
 
-  // Highlight the current page in the nav. Top-level pages are flat files
-  // compared by filename; the Releases archive lives in its own folder, so
-  // any path under /releases/ highlights the Releases link instead.
-  const path = window.location.pathname;
-  const onReleases = /\/releases\/(index\.html)?$/.test(path);
-  const page = path.split('/').pop() || 'index.html';
+  // Highlight the current page in the nav. Every page is either the root
+  // index.html or a <section>/index.html folder page, so the location and
+  // each nav href both reduce to a section name ('home' for the root).
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  const section = parts.find((p) => !p.endsWith('.html')) || 'home';
   document.querySelectorAll('.site-nav__links a').forEach((a) => {
-    const href = a.getAttribute('href');
-    const linksToReleases = /releases\/(index\.html)?$/.test(href);
-    const current = onReleases ? linksToReleases : (!linksToReleases && href === page);
-    if (current) a.setAttribute('aria-current', 'page');
+    const m = a.getAttribute('href').match(/(?:^|\/)([^/.]+)\/$/);
+    if ((m ? m[1] : 'home') === section) a.setAttribute('aria-current', 'page');
   });
 
   const siteNav = document.querySelector('.site-nav');

@@ -8,6 +8,7 @@
 
 # Local AI project memory
 AGENTS.md
+CLAUDE.md
 .claude/
 codex_missing_links.txt
 
