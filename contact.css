@@ -1,0 +1,55 @@
+/* Contact page — form posts to FormSubmit, which forwards to email.
+   Unlisted: reachable at /contact and from the home page footer, not the nav.
+   Fields render as full-bleed hairline-divided rows inside the card (same
+   language as the home page track list), not boxed inputs. */
+
+.wrap { display: grid; gap: 10px; }
+
+.page-title { margin: 4px 2px 6px; }
+.section-sub { color: var(--muted); font-size: 14px; margin: 2px 2px 8px; }
+.section-sub a { color: var(--white); text-decoration: underline; }
+.section-sub a:hover { text-decoration: none; }
+.cwhite { color: var(--white); }
+
+.card { max-width: 680px; }
+
+.cform { display: flex; flex-direction: column; }
+.cform-row { display: grid; grid-template-columns: 1fr 1fr; }
+.cform-row input:first-child { border-right: 1px solid var(--line-soft); }
+
+.cform input[type="text"],
+.cform input[type="email"],
+.cform textarea {
+  width: 100%; padding: 14px 18px;
+  background: transparent; border: 0;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--text); font: inherit; font-size: 14px;
+  caret-color: var(--ring);
+}
+.cform ::placeholder { color: var(--muted); }
+.cform textarea { resize: vertical; min-height: 150px; }
+
+/* Fields signal focus with a subtle row highlight, not the outline ring */
+.cform input:focus-visible,
+.cform textarea:focus-visible {
+  outline: none;
+  background: rgba(255,255,255,.03);
+}
+
+/* Keep Chrome's forced autofill colors off the dark rows */
+.cform input:-webkit-autofill {
+  -webkit-text-fill-color: var(--text);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.cform-foot { display: flex; padding: 12px 18px; }
+.cform-foot .btn { padding: 10px 26px; }
+
+.cform-sent { padding: 18px; color: var(--text); }
+.cform-sent p { margin: 0; }
+
+@media (max-width: 640px) {
+  .cform-row { grid-template-columns: 1fr; }
+  .cform-row input:first-child { border-right: 0; }
+}

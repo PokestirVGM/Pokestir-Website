@@ -219,11 +219,34 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   .pill { padding: 7px 14px; font-size: 14px; }
 }
 
+/* ── Social icon strip ──
+   Icons are drawn as CSS masks (the SVGs have a hardcoded white fill), so
+   color is controlled here: muted at rest, white on hover/focus. Each anchor
+   carries its glyph via an inline --icon custom property. */
+.social-strip { display: flex; align-items: center; gap: 6px; }
+.social-strip a {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center;
+}
+.social-strip a::before {
+  content: ""; width: 18px; height: 18px;
+  background: var(--muted);
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+  transition: background .15s ease;
+}
+.social-strip a:hover::before,
+.social-strip a:focus-visible::before { background: var(--white); }
+
 /* ── Footer ── */
 .site-footer {
   text-align: center; color: var(--muted); font-size: 12px;
   padding: 18px 0 28px; border-top: 1px solid rgba(255,255,255,.06); margin-top: 24px;
 }
+.site-footer .social-strip { justify-content: center; margin-bottom: 8px; }
+.site-footer p { margin: 0; }
+.site-footer .all-links { color: var(--muted); text-decoration: underline; }
+.site-footer .all-links:hover { color: var(--white); }
 
 /* ── Responsive ── */
 @media (max-width: 640px) {
