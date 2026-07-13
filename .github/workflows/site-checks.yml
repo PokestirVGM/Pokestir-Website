@@ -1,0 +1,32 @@
+# Two safety nets for the hand-edited release catalog. Pushing to main is
+# still the deploy (Pages doesn't wait for CI); these turn silent breakage
+# into a red X on the commit plus a notification email.
+#  - validate: every push/PR, catches syntax errors, bad references, and
+#    rule violations in releases/data.js and releases/tracks-data.js
+#    (see scripts/check-catalog.js).
+#  - links: weekly, fails (which emails the repo owner) when hotlinked Deezer
+#    artwork or Spotify preview URLs start dying (see scripts/check-links.js).
+name: Site checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 12 * * 1'  # Mondays 12:00 UTC
+
+jobs:
+  validate:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: node scripts/check-catalog.js
+
+  links:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: node scripts/check-catalog.js
+      - run: node scripts/check-links.js

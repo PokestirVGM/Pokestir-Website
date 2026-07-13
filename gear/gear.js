@@ -59,6 +59,17 @@
     return Number.isNaN(t) ? 0 : t;
   }
 
+  /* Spelled-out dates, matching the releases page ("June 1, 2026"). Falls
+     back to the raw CSV text if the date doesn't parse. */
+  const MONTHS = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+  function formatDate(dateText) {
+    const ms = toMs(dateText);
+    if (!ms) return dateText;
+    const d = new Date(ms);
+    return `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+  }
+
   function parseCSVRows(text) {
     const rows = [];
     let row = [];
@@ -276,11 +287,11 @@
     el.setAttribute("role", "listitem");
 
     const source = [item.vendor, item.tag].filter(Boolean).map(escapeHTML).join(" &bull; ");
-    const dateHTML = item.date ? `<span class="date-added">Added ${escapeHTML(item.date)}</span>` : "";
+    const dateHTML = item.date ? `<span class="date-added">Added ${escapeHTML(formatDate(item.date))}</span>` : "";
 
     el.innerHTML = `
       <div class="card-head">
-        <div class="title">${escapeHTML(item.name)}</div>
+        <div class="title">${item.favorite ? '<span class="fav-star" role="img" aria-label="Favorite">&#9733;</span>' : ''}${escapeHTML(item.name)}</div>
         <div class="vendor">${source}</div>
       </div>
       ${item.description ? `<div class="desc">${escapeHTML(item.description)}</div>` : ""}
@@ -356,8 +367,9 @@
     state.sort = sortTop.value;
     render();
   });
-  favOnlyEl.addEventListener("change", () => {
-    state.favOnly = favOnlyEl.checked;
+  favOnlyEl.addEventListener("click", () => {
+    state.favOnly = !state.favOnly;
+    favOnlyEl.setAttribute("aria-pressed", String(state.favOnly));
     render();
   });
 
@@ -369,7 +381,7 @@
     state.subtags.clear();
     qEl.value = "";
     vendorSel.value = "";
-    favOnlyEl.checked = false;
+    favOnlyEl.setAttribute("aria-pressed", "false");
     buildCategoryPills();
     buildSubtags();
     render();

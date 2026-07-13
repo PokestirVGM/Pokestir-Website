@@ -9,21 +9,19 @@
   <meta property="og:site_name" content="Pokestir">
   <meta property="og:title" content="Pokestir - Software &amp; Gear">
   <meta property="og:description" content="A searchable catalog of Pokestir's music gear, sample libraries, synths, and tools.">
-  <meta property="og:url" content="https://www.pokestir.com/gear/">
-  <meta property="og:image" content="https://www.pokestir.com/images/logo-4k.png">
-  <meta property="og:image:width" content="3000">
-  <meta property="og:image:height" content="3000">
+  <meta property="og:url" content="https://pokestir.com/gear/">
+  <meta property="og:image" content="https://pokestir.com/images/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1200">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@pokestir">
   <meta name="twitter:creator" content="@pokestir">
-  <link rel="canonical" href="https://www.pokestir.com/gear/">
+  <link rel="canonical" href="https://pokestir.com/gear/">
   <title>Pokestir - Software &amp; Gear</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="gear.css">
   <link rel="icon" href="../images/icon.png">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
   <script src="gear.js" defer></script>
   <script src="../nav.js" defer></script>
 </head>
@@ -43,7 +41,7 @@
   </nav>
 
   <main class="wrap" role="main" id="main">
-    <h1 class="page-title">Gear, Libraries &amp; Tools <span class="muted" id="count"></span></h1>
+    <h1 class="page-title">Software &amp; Gear <span class="muted" id="count"></span></h1>
 
     <div class="controls">
       <div class="search">
@@ -56,11 +54,7 @@
         <option value="oldest">Date Added (Oldest)</option>
         <option value="name">Name A-Z</option>
       </select>
-      <label class="fav-toggle">
-        <input type="checkbox" id="favOnly">
-        <span class="fav-toggle__box" aria-hidden="true"></span>
-        Favorites only
-      </label>
+      <button class="btn fav-btn" id="favOnly" type="button" aria-pressed="false"><span aria-hidden="true">&#9733;</span>Favorites</button>
       <button class="btn btn-clear" id="clear" type="button">Clear</button>
     </div>
 
