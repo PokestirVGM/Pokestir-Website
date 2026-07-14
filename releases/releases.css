@@ -50,6 +50,8 @@ select {
   grid-template-columns: none;
   grid-auto-flow: column;
   grid-auto-columns: 280px;
+  padding-top: 12px;
+  margin-top: -12px;
   overflow-x: auto;
   scroll-snap-type: x proximity;
   scrollbar-width: none;

@@ -145,7 +145,8 @@
       desc: header.findIndex((h) => /description/i.test(h)),
       subs: header.findIndex((h) => /^subtags$/i.test(h)),
       date: header.findIndex((h) => /^date$/i.test(h)),
-      favorite: header.findIndex((h) => /^favorite$/i.test(h))
+      favorite: header.findIndex((h) => /^favorite$/i.test(h)),
+      link: header.findIndex((h) => /^link$/i.test(h))
     };
 
     const items = [];
@@ -163,11 +164,14 @@
       const subsRaw = idx.subs >= 0 ? String(cols[idx.subs] || "").trim() : "";
       const date = idx.date >= 0 ? String(cols[idx.date] || "").trim() : "";
       const favorite = idx.favorite >= 0 ? /^(true|yes|1)$/i.test(String(cols[idx.favorite] || "").trim()) : false;
+      // Exact product pages only (never a vendor homepage); https or it's dropped.
+      const linkRaw = idx.link >= 0 ? String(cols[idx.link] || "").trim() : "";
+      const link = /^https:\/\//.test(linkRaw) ? linkRaw : "";
       const pair = splitVendorAndName(product);
 
       const subtags = subsRaw ? subsRaw.split(/[;|,]/).map((s) => s.trim()).filter(Boolean) : [];
 
-      items.push(buildDerived({ product, vendor: pair.vendor, name: pair.name, tag, description, subtags, date, favorite }));
+      items.push(buildDerived({ product, vendor: pair.vendor, name: pair.name, tag, description, subtags, date, favorite, link }));
     }
     return items;
   }
@@ -289,9 +293,16 @@
     const source = [item.vendor, item.tag].filter(Boolean).map(escapeHTML).join(" &bull; ");
     const dateHTML = item.date ? `<span class="date-added">Added ${escapeHTML(formatDate(item.date))}</span>` : "";
 
+    const star = item.favorite ? '<span class="fav-star" role="img" aria-label="Favorite">&#9733;</span>' : '';
+    // A product link makes the name an external link to that exact product page.
+    const name = escapeHTML(item.name);
+    const titleInner = item.link
+      ? `<a class="title-link" href="${escapeHTML(item.link)}" target="_blank" rel="noopener noreferrer" aria-label="${name} (product page, opens in a new tab)">${name}<svg class="ext-ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>`
+      : name;
+
     el.innerHTML = `
       <div class="card-head">
-        <div class="title">${item.favorite ? '<span class="fav-star" role="img" aria-label="Favorite">&#9733;</span>' : ''}${escapeHTML(item.name)}</div>
+        <div class="title">${star}${titleInner}</div>
         <div class="vendor">${source}</div>
       </div>
       ${item.description ? `<div class="desc">${escapeHTML(item.description)}</div>` : ""}
