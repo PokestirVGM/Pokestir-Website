@@ -209,18 +209,24 @@ const RELEASES = [
     subtitle: "",
     type: "Single",
     releaseDate: "2026-07-17",
-    upc: "",
+    upc: "810179613914",
     description: "",
-    tags: [],
-    artwork: "",
+    tags: ["Electro"],
+    artwork: "https://cdn-images.dzcdn.net/images/cover/376be04bbb4b34049e6982a06edca7a5/1000x1000-000000-80-0-0.jpg",
     links: {
-      bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "",
-      youtube: "", pandora: "", itunes: "", deezer: "",
-      amazonMusic: "", tidal: "", qobuz: ""
+      bandcamp: "https://pokestir.bandcamp.com/album/dewford-town-from-pok-mon-ruby-sapphire",
+      spotify: "https://open.spotify.com/album/0uF830eycStKGHd1eT7NFN",
+      appleMusic: "https://music.apple.com/us/album/dewford-town-from-pok%C3%A9mon-ruby-sapphire-single/6791633112?uo=4",
+      youtubeMusic: "https://music.youtube.com/watch?v=VMHZ4mABpk0",
+      youtube: "https://www.youtube.com/watch?v=VMHZ4mABpk0",
+      pandora: "https://www.pandora.com/artist/pokestir/dewford-town-from-pokemon-ruby-and-sapphire/ALxfXhtVlfhvjdq",
+      itunes: "https://music.apple.com/us/album/dewford-town-from-pok%C3%A9mon-ruby-sapphire-single/6791633112?app=itunes",
+      deezer: "https://www.deezer.com/album/1030079342",
+      amazonMusic: "", tidal: "https://tidal.com/album/543436718", qobuz: "https://open.qobuz.com/album/h4htphrvuuww0"
     },
     otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/DewfordTownPSBC" }],
     tracklist: [
-      { trackId: "local:dewford-town-2026" },
+      { trackId: "isrc:QZ6K42601122" },
     ]
   },
   {

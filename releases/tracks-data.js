@@ -771,12 +771,12 @@ const TRACKS = {
     spotifyTrackId: "1S1Tv0nndGG1Qhw2kNSPAk",
     preview: "https://p.scdn.co/mp3-preview/81ccfdaf186f734dad720df39bfe424e6bf7c09c"
   },
-  "local:dewford-town-2026": {
+  "isrc:QZ6K42601122": {
     title: "Dewford Town (From \"Pokémon Ruby & Sapphire\")",
-    isrc: "",
-    duration: "",
-    spotifyTrackId: "",
-    preview: ""
+    isrc: "QZ6K42601122",
+    duration: "4:36",
+    spotifyTrackId: "0oXo9R5H5pKBUcWRkorKUo",
+    preview: "https://p.scdn.co/mp3-preview/8353de6338eec39bb41c54addc6c45a8433ad092"
   },
   "isrc:QZPJ32293113": {
     title: "Dingodile (From \"Crash Bandicoot 3: Warped\") [Arrangement]",
