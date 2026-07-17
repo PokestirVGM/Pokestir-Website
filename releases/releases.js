@@ -48,6 +48,16 @@
     return p.d ? `${month} ${p.d}, ${p.y}` : `${month} ${p.y}`;
   }
 
+  /* Releases with a future releaseDate are kept in the catalog (so they can
+     be edited ahead of time and validated by check-catalog.js) but must stay
+     invisible to the public until that date: out of the list, out of search,
+     out of "did you mean", and out of direct ?r=<slug> access. Computed once
+     against the visitor's local calendar date at load. */
+  const TODAY_MS = (() => {
+    const now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  })();
+
   function buildDerived(rel) {
     const haystack = [
       rel.title, rel.subtitle, rel.type, rel.description, rel.upc, rel.slug,
@@ -56,7 +66,8 @@
       (rel.tracks || []).map((t) =>
         t.title + ' ' + (t.isrc || '') + ' ' + (t.artists || []).join(' ')).join(' ')
     ].join(' ').toLowerCase();
-    return { ...rel, dateMs: dateMs(rel.releaseDate), searchHaystack: haystack };
+    const relDateMs = dateMs(rel.releaseDate);
+    return { ...rel, dateMs: relDateMs, isReleased: relDateMs <= TODAY_MS, searchHaystack: haystack };
   }
 
   const TRACK_CATALOG = typeof TRACKS !== 'undefined' && TRACKS ? TRACKS : {};
@@ -141,7 +152,7 @@
   }
   for (const rel of DB) {
     rel.includedIn = !rel.trackIdSet.size ? [] : DB.filter((other) =>
-      other !== rel &&
+      other !== rel && other.isReleased &&
       (other.tracks || []).length > (rel.tracks || []).length &&
       [...rel.trackIdSet].every((trackId) => other.trackIdSet.has(trackId))
     ).sort((a, b) => b.dateMs - a.dateMs);
@@ -150,6 +161,11 @@
       rel.searchHaystack += ' ' + rel.includedIn.map((h) => h.title).join(' ').toLowerCase();
     }
   }
+
+  // Public-facing views (list, search, detail routing, "did you mean") only
+  // ever see released entries; DB itself stays complete for the includedIn
+  // derivation above and for catalog validation.
+  const VISIBLE_DB = DB.filter((rel) => rel.isReleased);
 
   /* Artwork URLs are stored directly in data.js rather than fetched live in
      the browser — at catalog scale, hundreds of live lookups on page load
@@ -287,7 +303,7 @@
 
   function render() {
     const sorter = SORTERS[state.sort] || SORTERS.newest;
-    const list = DB.filter(match).sort(sorter);
+    const list = VISIBLE_DB.filter(match).sort(sorter);
 
     countEl.textContent = list.length === 1 ? '1 release' : `${list.length} releases`;
 
@@ -299,7 +315,7 @@
     if (!list.length) {
       const p = document.createElement('p');
       p.className = 'grid-msg';
-      p.textContent = DB.length
+      p.textContent = VISIBLE_DB.length
         ? 'No releases match the selected filters.'
         : 'Unable to load release data. Please refresh the page.';
       grid.appendChild(p);
@@ -567,7 +583,7 @@
   function suggestReleases(q, limit) {
     const norm = String(q).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
     if (!norm) return [];
-    return DB
+    return VISIBLE_DB
       .map((rel) => ({ rel, score: slugSimilarity(norm, rel.slug) }))
       .filter((s) => s.score >= 0.5)
       .sort((a, b) => b.score - a.score)
@@ -598,7 +614,7 @@
     listView.hidden = true;
     detailView.hidden = false;
 
-    const rel = DB.find((r) => r.slug === slug);
+    const rel = VISIBLE_DB.find((r) => r.slug === slug);
     if (!rel) {
       document.title = 'Pokestir - Releases';
       renderNotFound(slug);

@@ -184,6 +184,46 @@ const RELEASES = [
     ]
   },
   {
+    slug: "route-206",
+    title: "Route 206 (From \"Pokémon Diamond & Pearl\") [Arr. for Orchestra by Pokestir]",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-07-24",
+    upc: "",
+    description: "",
+    tags: ["Classical"],
+    artwork: "",
+    links: {
+      bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "",
+      youtube: "", pandora: "", itunes: "", deezer: "",
+      amazonMusic: "", tidal: "", qobuz: ""
+    },
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/route206PS" }],
+    tracklist: [
+      { trackId: "local:route-206-2026" },
+    ]
+  },
+  {
+    slug: "dewford-town",
+    title: "Dewford Town (From \"Pokémon Ruby & Sapphire\")",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-07-17",
+    upc: "",
+    description: "",
+    tags: [],
+    artwork: "",
+    links: {
+      bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "",
+      youtube: "", pandora: "", itunes: "", deezer: "",
+      amazonMusic: "", tidal: "", qobuz: ""
+    },
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/DewfordTownPSBC" }],
+    tracklist: [
+      { trackId: "local:dewford-town-2026" },
+    ]
+  },
+  {
     slug: "shurrey-hill",
     title: "Shurrey Hill (From \"Tales of the Abyss\")",
     subtitle: "",

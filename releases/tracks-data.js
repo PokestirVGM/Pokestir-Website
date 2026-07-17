@@ -771,6 +771,13 @@ const TRACKS = {
     spotifyTrackId: "1S1Tv0nndGG1Qhw2kNSPAk",
     preview: "https://p.scdn.co/mp3-preview/81ccfdaf186f734dad720df39bfe424e6bf7c09c"
   },
+  "local:dewford-town-2026": {
+    title: "Dewford Town (From \"Pokémon Ruby & Sapphire\")",
+    isrc: "",
+    duration: "",
+    spotifyTrackId: "",
+    preview: ""
+  },
   "isrc:QZPJ32293113": {
     title: "Dingodile (From \"Crash Bandicoot 3: Warped\") [Arrangement]",
     isrc: "QZPJ32293113",
@@ -1800,6 +1807,13 @@ const TRACKS = {
     duration: "5:41",
     spotifyTrackId: "4YTWNZhHTUIyULKr1uQNp0",
     preview: "https://p.scdn.co/mp3-preview/50ab412e06845980d645ef26f98efe5e79a6c96c"
+  },
+  "local:route-206-2026": {
+    title: "Route 206 (From \"Pokémon Diamond & Pearl\") [Arr. for Orchestra by Pokestir]",
+    isrc: "",
+    duration: "",
+    spotifyTrackId: "",
+    preview: ""
   },
   "isrc:QZGWX2245068": {
     title: "Route 209 (Day) (From \"Pokémon Diamond & Pearl\") [Arrangement]",
