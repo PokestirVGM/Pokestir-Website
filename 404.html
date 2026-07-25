@@ -19,6 +19,19 @@
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="/images/icon.png">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <script>
+    /* A /releases/<slug>/ URL with no generated page (renamed release, typo,
+       or data.js edited without rerunning scripts/build-release-pages.js)
+       lands here. Hand it back to the archive, which knows the catalog and
+       can offer "did you mean". `missing=1` tells releases.js not to bounce
+       it straight back at us. */
+    (function () {
+      var m = /^\/releases\/([^/]+)\/?$/.exec(window.location.pathname);
+      if (m && !/\.html?$/i.test(m[1])) {
+        window.location.replace('/releases/?r=' + m[1] + '&missing=1');
+      }
+    }());
+  </script>
   <script src="/nav.js" defer></script>
   <style>
     /* Section header (same pattern as the home page) */

@@ -189,18 +189,19 @@ const RELEASES = [
     subtitle: "",
     type: "Single",
     releaseDate: "2026-07-24",
-    upc: "",
+    upc: "810179613921",
     description: "",
     tags: ["Classical"],
-    artwork: "",
+    artwork: "https://cdn-images.dzcdn.net/images/cover/63eac0ef983156a7860e128e00766aab/1000x1000-000000-80-0-0.jpg",
     links: {
-      bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "",
-      youtube: "", pandora: "", itunes: "", deezer: "",
+      bandcamp: "https://pokestir.bandcamp.com/album/route-206-from-pok-mon-diamond-pearl-arr-for-orchestra-by-pokestir",
+      spotify: "https://open.spotify.com/album/3lZqkqRc5hCgg283nnxvmn", appleMusic: "https://music.apple.com/us/album/route-206-from-pok%C3%A9mon-diamond-pearl-arr-for-orchestra/6791486858?uo=4", youtubeMusic: "https://music.youtube.com/watch?v=FoUezja7DJs",
+      youtube: "https://www.youtube.com/watch?v=DhyNXmbQhKM", pandora: "https://www.pandora.com/AL:68287065", itunes: "https://music.apple.com/us/album/route-206-from-pok%C3%A9mon-diamond-pearl-arr-for-orchestra/6791486858?app=itunes", deezer: "https://www.deezer.com/album/1030099632",
       amazonMusic: "", tidal: "", qobuz: ""
     },
     otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/route206PS" }],
     tracklist: [
-      { trackId: "local:route-206-2026" },
+      { trackId: "isrc:QZ6K42601123" },
     ]
   },
   {

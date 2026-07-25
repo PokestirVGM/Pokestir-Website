@@ -1808,12 +1808,13 @@ const TRACKS = {
     spotifyTrackId: "4YTWNZhHTUIyULKr1uQNp0",
     preview: "https://p.scdn.co/mp3-preview/50ab412e06845980d645ef26f98efe5e79a6c96c"
   },
-  "local:route-206-2026": {
+  "isrc:QZ6K42601123": {
     title: "Route 206 (From \"Pokémon Diamond & Pearl\") [Arr. for Orchestra by Pokestir]",
-    isrc: "",
-    duration: "",
-    spotifyTrackId: "",
-    preview: ""
+    isrc: "QZ6K42601123",
+    artists: ["Hitomi Sato", "Pokestir"],
+    duration: "2:49",
+    spotifyTrackId: "5seqSMns6dTOZ3C2H6qJSh",
+    preview: "https://p.scdn.co/mp3-preview/4672c3175f69c954f5af18c6c5ead50e1927ae45"
   },
   "isrc:QZGWX2245068": {
     title: "Route 209 (Day) (From \"Pokémon Diamond & Pearl\") [Arrangement]",

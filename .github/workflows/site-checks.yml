@@ -3,7 +3,9 @@
 # into a red X on the commit plus a notification email.
 #  - validate: every push/PR, catches syntax errors, bad references, and
 #    rule violations in releases/data.js and releases/tracks-data.js
-#    (see scripts/check-catalog.js).
+#    (see scripts/check-catalog.js), then checks that the generated
+#    per-release pages and sitemap.xml still match the catalog
+#    (see scripts/build-release-pages.js).
 #  - links: weekly, fails (which emails the repo owner) when hotlinked Deezer
 #    artwork or Spotify preview URLs start dying (see scripts/check-links.js).
 name: Site checks
@@ -22,6 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: node scripts/check-catalog.js
+      - run: node scripts/build-release-pages.js --check
 
   links:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
