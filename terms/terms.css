@@ -34,17 +34,6 @@ summary { cursor: pointer; font-weight: 700; font-family: var(--font-display); }
 summary::marker { color: var(--muted); }
 .faq-title { font-size: 18px; }
 
-/* ── Underlined link utility (matches inline links on the home page) ── */
-.link-underline {
-  color: var(--white);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-thickness: 1.5px;
-}
-.link-underline:visited { color: var(--white); }
-.link-underline:hover { opacity: .9; }
-.link-underline:focus-visible { border-radius: 3px; }
-
 /* ── Embedded explainer video ── */
 .video-embed {
   aspect-ratio: 16 / 9;

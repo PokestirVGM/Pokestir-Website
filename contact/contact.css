@@ -29,11 +29,14 @@
 .cform ::placeholder { color: var(--muted); }
 .cform textarea { resize: vertical; min-height: 150px; }
 
-/* Fields signal focus with a subtle row highlight, not the outline ring */
+/* Fields signal focus with a row highlight rather than the outline ring, but
+   the highlight alone is too faint to locate: the divider under the focused
+   row lights up in the accent color too (same cue the search inputs use). */
 .cform input:focus-visible,
 .cform textarea:focus-visible {
   outline: none;
-  background: rgba(255,255,255,.03);
+  background: rgba(255,255,255,.04);
+  border-bottom-color: var(--ring);
 }
 
 /* Keep Chrome's forced autofill colors off the dark rows */

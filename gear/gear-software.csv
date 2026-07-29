@@ -85,7 +85,7 @@ Native Instruments — Mallet Flux,Sample Library,,Percussion/Drums;Textures/Atm
 Native Instruments — Stradivari Cello,Sample Library,,Strings,6/1/2021,FALSE,https://www.native-instruments.com/en/products/komplete/cinematic/stradivari-cello/
 Native Instruments — Alicia's Keys,Sample Library,,Keys/Pianos,6/1/2021,FALSE,https://www.native-instruments.com/en/products/komplete/keys/alicias-keys/
 Native Instruments — Noire,Sample Library,,Keys/Pianos,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/keys/noire/
-Native Instruments — Piano Colors,Sample Library,,Keys/Pianos,6/1/2021,FALSE,https://www.native-instruments.com/en/products/komplete/keys/piano-colors/
+Native Instruments — Piano Colors,Sample Library,Inspiring instrument exploring the limits of a grand piano's sonic capabilities with state-of-the-art modulation features.,Keys/Pianos;Textures/Atmospheres,6/1/2021,FALSE,https://www.native-instruments.com/en/products/komplete/keys/piano-colors/
 Native Instruments — The Gentleman,Sample Library,,Keys/Pianos,6/1/2021,FALSE,https://www.native-instruments.com/en/products/komplete/keys/the-gentleman/
 Native Instruments — The Giant,Sample Library,,Keys/Pianos,6/1/2021,FALSE,https://www.native-instruments.com/en/products/komplete/keys/the-giant/
 Native Instruments — The Grandeur,Sample Library,,Keys/Pianos,6/1/2021,FALSE,https://www.native-instruments.com/en/products/komplete/keys/the-grandeur/
@@ -108,10 +108,10 @@ Native Instruments — Guarneri Violin,Sample Library,,Strings,6/1/2021,FALSE
 Native Instruments — Spotlight Series: Middle East,Sample Library,,World/Ethnic,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/spotlight-collection/middle-east/
 Native Instruments — Spotlight Series: East Asia,Sample Library,,World/Ethnic,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/spotlight-collection/east-asia/
 Native Instruments — Stradivari Violin,Sample Library,,Strings,6/1/2021,FALSE,https://www.native-instruments.com/en/products/komplete/cinematic/stradivari-violin/
-Native Instruments — Choir: Omnia,Sample Library,,Choir/Voices,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/cinematic/choir-omnia/
+Native Instruments — Choir: Omnia,Sample Library,"The passionate sound of a 40-piece vocal ensemble at their most expressive. Take control of soprano, alto, tenor, and bass sections, and build phrases and melodies with 16 syllables in multiple articulations.",Choir/Voices;Orchestral,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/cinematic/choir-omnia/
 Native Instruments — Action Strikes,Sample Library,,Percussion/Drums,6/1/2021,FALSE,https://www.native-instruments.com/en/products/komplete/cinematic/action-strikes/
-Native Instruments — Action Strings 2,Sample Library,,Strings;Orchestral,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/cinematic/action-strings-2/
-Native Instruments — Arkhis,Sample Library,,Textures/Atmospheres,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/cinematic/arkhis/
+Native Instruments — Action Strings 2,Sample Library,"The dramatic sound of a full string orchestra blending realism with creative control, with over 31 GB of dynamic phrases.",Strings;Orchestral,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/cinematic/action-strings-2/
+Native Instruments — Arkhis,Sample Library,Specialized instrument for creating screen-ready cinematic atmospheres and underscores with a streamlined layering engine.,Textures/Atmospheres;Multi-instrument,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/cinematic/arkhis/
 Native Instruments — Ashlight,Sample Library,,Textures/Atmospheres,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/cinematic/ashlight/
 Native Instruments — Damage,Sample Library,,Percussion/Drums,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/cinematic/damage/
 Native Instruments — Emotive Strings,Sample Library,,Strings,6/1/2021,FALSE,https://www.native-instruments.com/en/products/komplete/cinematic/emotive-strings/
@@ -127,7 +127,7 @@ Native Instruments — Straylight,Sample Library,,Textures/Atmospheres,6/1/2021,
 Native Instruments — Thrill,Sample Library,,Textures/Atmospheres,6/1/2021,FALSE
 Native Instruments — Spotlight Series: Balinese Gamelan,Sample Library,,World/Ethnic,6/1/2021,FALSE
 Native Instruments — Spotlight Series: Cuba,Sample Library,,World/Ethnic,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/spotlight-collection/cuba/
-Native Instruments — Lores,Sample Library,,Textures/Atmospheres;World/Ethnic,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/cinematic/lores/
+Native Instruments — Lores,Sample Library,"An eclectic collection of organic instruments expressed through hand-played articulations, for evolving tones and textures that tell a story.",Textures/Atmospheres;World/Ethnic;Multi-instrument,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/cinematic/lores/
 Native Instruments — Session Guitarist: Electric Sunburst Deluxe,Sample Library,,Guitar,6/1/2021,FALSE
 Native Instruments — Studio Drummer,Sample Library,,Percussion/Drums,6/1/2021,FALSE
 Native Instruments — Session Guitarist: Picked Acoustic,Sample Library,,Guitar,6/1/2021,TRUE,https://www.native-instruments.com/en/products/komplete/guitar/session-guitarist-picked-acoustic/
@@ -164,7 +164,7 @@ Audio Imperia — Solo,Sample Library,Expressive soloists,Strings;Brass;Woodwind
 Wavesfactory — Le Parisien,Sample Library,,Keys/Pianos,11/26/2021,FALSE,https://www.wavesfactory.com/kontakt-libraries/le-parisien/
 Steinberg — HALion 6,Synth,Great for layering; sample manipulator,Sampler/Workstation,11/26/2021,TRUE
 Spectrasonics — Keyscape,Sample Library,Amazing keys incl. Rhodes & Celesta,Keys/Pianos,11/27/2021,TRUE,https://www.spectrasonics.net/products/keyscape/
-Orchestral Tools — LA Sessions,Sample Library,Individual instruments,Guitar;Bass;Drums;Keys/Pianos,1/1/2022,FALSE,https://www.orchestraltools.com/store/collections/la-sessions
+Orchestral Tools — LA Sessions,Sample Library,Individual instruments,Guitar;Bass;Percussion/Drums;Keys/Pianos,1/1/2022,FALSE,https://www.orchestraltools.com/store/collections/la-sessions
 Orchestral Tools — Phoenix Orchestra,Sample Library,Individual instruments,Orchestral,1/1/2022,FALSE,https://www.orchestraltools.com/phoenix-orchestra
 Orchestral Tools — Modus — Jeff Russo,Sample Library,,Textures/Atmospheres,1/1/2022,FALSE,https://www.orchestraltools.com/modus
 Orchestral Tools — Metropolis Ark 4,Sample Library,Individual instruments,Orchestral;Strings;Brass;Percussion/Drums,1/1/2022,FALSE,https://www.orchestraltools.com/metropolis-ark-4
@@ -175,16 +175,16 @@ Yamaha — HS5 (Monitors),Gear,Brutally honest since 2022,Studio Monitors,6/19/2
 iZotope — Music Production Suite 5,Effect Plugin,,Mastering Suite;Other Effects,7/1/2022,TRUE
 iZotope — Ozone 11 Advanced,Effect Plugin,"Comprehensive mastering suite with AI-powered tools like Clarity, Stem Focus, and Vocal Balance.",Mastering Suite,7/1/2022,TRUE
 iZotope — Nectar 4 Advanced,Effect Plugin,"Vocal production suite with Auto-Level, Voices, Backer, and Vocal Assistant.",Vocal Processing,7/1/2022,FALSE,https://www.izotope.com/products/nectar-advanced
-Native Instruments — Guitar Rig 7 Pro,Effect Plugin,"Amp and effects playground with 100+ presets, new amps, pedals, and lo-fi modules.",Amp Simulation;Guitar Effects,7/1/2022,FALSE,https://www.native-instruments.com/en/products/komplete/guitar/guitar-rig-7-pro/
-iZotope — RX 10 Standard,Effect Plugin,Industry-standard audio repair with noise reduction and restoration tools.,Audio Repair,7/1/2022,TRUE
+Native Instruments — Guitar Rig 7 Pro,Effect Plugin,"Amp and effects playground with 100+ presets, new amps, pedals, and lo-fi modules.",Amp Suite,7/1/2022,FALSE,https://www.native-instruments.com/en/products/komplete/guitar/guitar-rig-7-pro/
+iZotope — RX 10 Standard,Effect Plugin,Industry-standard audio repair with noise reduction and restoration tools.,Other Effects,7/1/2022,TRUE
 iZotope — Neoverb,Effect Plugin,AI-assisted reverb with smart blending and easy spatial design.,Reverb,7/1/2022,FALSE,https://www.izotope.com/products/neoverb
-iZotope — Tonal Balance Control 2,Effect Plugin,Tonal spectrum metering and control for balanced mixes and masters.,Metering;Mixing Tools,7/1/2022,FALSE
-iZotope — Insight 2,Effect Plugin,"Comprehensive metering suite for mixing, mastering, and post.",Metering Suite,7/1/2022,FALSE,https://www.izotope.com/products/insight
-iZotope — VocalSynth 2,Effect Plugin,"Creative vocal effects including vocoder, talkbox, and harmonizing modules.",Vocal Effects,7/1/2022,FALSE,https://www.izotope.com/products/vocalsynth
-iZotope — Audiolens,Effect Plugin,Track referencing tool for comparing audio from streaming platforms.,Referencing,7/1/2022,FALSE
+iZotope — Tonal Balance Control 2,Effect Plugin,Tonal spectrum metering and control for balanced mixes and masters.,Metering/Analysis;Other Effects,7/1/2022,FALSE
+iZotope — Insight 2,Effect Plugin,"Comprehensive metering suite for mixing, mastering, and post.",Metering/Analysis,7/1/2022,FALSE,https://www.izotope.com/products/insight
+iZotope — VocalSynth 2,Effect Plugin,"Creative vocal effects including vocoder, talkbox, and harmonizing modules.",Vocal Processing,7/1/2022,FALSE,https://www.izotope.com/products/vocalsynth
+iZotope — Audiolens,Effect Plugin,Track referencing tool for comparing audio from streaming platforms.,Metering/Analysis,7/1/2022,FALSE
 iZotope — Exponential Audio Symphony 3D,Effect Plugin,Immersive reverb designed for cinematic and surround scoring.,Immersive Reverb,7/1/2022,FALSE
 iZotope — Exponential Audio Stratus 3D,Effect Plugin,"Clean, transparent immersive reverb for post and broadcast.",Immersive Reverb,7/1/2022,FALSE
-iZotope — Brainworx Creative Mixing Set,Effect Plugin,"Bundle of delay, low-end, filter, distortion, and tonal tools.",Creative Mixing Suite,7/1/2022,FALSE
+iZotope — Brainworx Creative Mixing Set,Effect Plugin,"Bundle of delay, low-end, filter, distortion, and tonal tools.",Other Effects,7/1/2022,FALSE
 Cinesamples — Session Drummer,Sample Library,,Percussion/Drums,7/2/2022,FALSE
 IsoAcoustics — Aperta Isolation Stands,Gear,Reduces vibrations; better speaker position,Accessories,7/6/2022,FALSE,https://isoacoustics.com/home-audio-isolation-products/aperta-series/
 Massdrop x Sennheiser — HD 6XX (Headphones),Gear,Daily drivers; pristine mids,Headphones,7/14/2022,FALSE,https://drop.com/buy/massdrop-sennheiser-hd6xx
@@ -266,12 +266,6 @@ Native Instruments — Schema: Dark,Sample Library,"Create dark, driving pattern
 Native Instruments — Schema: Light,Sample Library,Craft lush melodic patterns and evolving textures from over 320 shapeable sound sources.,Textures/Atmospheres;Multi-instrument,9/23/2024,FALSE,https://www.native-instruments.com/en/products/komplete/cinematic/schema-light/
 Native Instruments — Vocal Colors,Sample Library,An expressive vocal engine that infuses the emotion of the human voice with inventive modulation features.,Choir/Voices;Textures/Atmospheres,9/23/2024,FALSE,https://www.native-instruments.com/en/products/komplete/vocal/vocal-colors/
 Native Instruments — Valves Pro,Sample Library,"Soft and evolving trombone, flugelhorn, French Horn, tuba, and euphonium sounds, with an expanded library of articulations.",Brass;Orchestral,9/23/2024,FALSE,https://www.native-instruments.com/en/products/komplete/cinematic/valves-pro/
-Native Instruments — Action Strings 2,Sample Library,"The dramatic sound of a full string orchestra blending realism with creative control, with over 31 GB of dynamic phrases.",Strings;Orchestral,9/23/2024,FALSE,https://www.native-instruments.com/en/products/komplete/cinematic/action-strings-2/
-Native Instruments — Choir: Omnia,Sample Library,"The passionate sound of a 40-piece vocal ensemble at their most expressive. Take control of soprano, alto, tenor, and bass sections, and build phrases and melodies with 16 syllables in multiple articulations.",Choir/Voices;Orchestral,9/23/2024,FALSE,https://www.native-instruments.com/en/products/komplete/cinematic/choir-omnia/
-Native Instruments — Lores,Sample Library,"An eclectic collection of organic instruments expressed through hand-played articulations, for evolving tones and textures that tell a story.",World/Ethnic;Textures/Atmospheres;Multi-instrument,9/23/2024,FALSE,https://www.native-instruments.com/en/products/komplete/cinematic/lores/
-Native Instruments — Piano Colors,Sample Library,Inspiring instrument exploring the limits of a grand piano's sonic capabilities with state-of-the-art modulation features.,Keys/Pianos;Textures/Atmospheres,9/23/2024,FALSE,https://www.native-instruments.com/en/products/komplete/keys/piano-colors/
-Native Instruments — Arkhis,Sample Library,Specialized instrument for creating screen-ready cinematic atmospheres and underscores with a streamlined layering engine.,Textures/Atmospheres;Multi-instrument,9/23/2024,FALSE,https://www.native-instruments.com/en/products/komplete/cinematic/arkhis/
-Native Instruments — Ashlight,Sample Library,,Textures/Atmospheres,9/23/2024,TRUE,https://www.native-instruments.com/en/products/komplete/cinematic/ashlight/
 Native Instruments — Alicia's Electric Keys,Sample Library,,Keys/Pianos,9/23/2024,FALSE,https://www.native-instruments.com/en/products/komplete/keys/alicias-electric-keys/
 Native Instruments — Session Guitarist Acoustic Sunburst Deluxe,Sample Library,,Guitar,9/23/2024,TRUE,https://www.native-instruments.com/en/products/komplete/guitar/session-guitarist-acoustic-sunburst-deluxe/
 Native Instruments — Session Bassist Icon Bass,Sample Library,,Bass,9/23/2024,TRUE,https://www.native-instruments.com/en/products/komplete/guitar/session-bassist-icon-bass/
@@ -294,23 +288,23 @@ IK Multimedia — AmpliTube TONEX MAX,Effect Plugin,AI rig capture + ToneNET,Amp
 IK Multimedia — MixBox,Effect Plugin,500-series style modular FX,EQ;Compressor;Reverb;Delay;Saturation/Distortion;Channel Strip;Other Effects,11/14/2024,FALSE,https://www.ikmultimedia.com/products/mixbox/
 IK Multimedia — T-RackS 5 MAX v2,Effect Plugin,53 mastering/mixing modules,EQ;Compressor;Limiter;Reverb;Saturation/Distortion;Metering/Analysis;Mastering Suite;Other Effects,11/14/2024,TRUE
 IK Multimedia — Mastering Console,Effect Plugin,"Standalone mastering suite with analog quality, waveform editing, metadata tools, and ARC integration.",Mastering Suite,11/14/2024,FALSE,https://www.ikmultimedia.com/products/lurssen/
-IK Multimedia — T-RackS 6 Plug-in,Effect Plugin,DAW-integrated version of Mastering Console with 63 modules for mixing and mastering.,Mixing;Mastering Suite,11/14/2024,TRUE,https://www.ikmultimedia.com/products/tr6/
+IK Multimedia — T-RackS 6 Plug-in,Effect Plugin,DAW-integrated version of Mastering Console with 63 modules for mixing and mastering.,Other Effects;Mastering Suite,11/14/2024,TRUE,https://www.ikmultimedia.com/products/tr6/
 IK Multimedia — Prism Reverb,Effect Plugin,Creative shimmer reverb for evolving textures and sound design.,Reverb,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trprismreverb/
-IK Multimedia — Lurssen Mastering EQ,Effect Plugin,Stereo tube EQ with warm analog character for mastering.,EQ;Mastering,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trlurssenmasteringeq/
-IK Multimedia — Triad Chorus,Effect Plugin,Enhanced rack-style chorus with triple modulation options.,Chorus,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trtriadchorus/
-IK Multimedia — Master Match X,Effect Plugin,AI-assisted mastering tool that matches reference tracks instantly.,Mastering Assistant,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trmastermatchx/
+IK Multimedia — Lurssen Mastering EQ,Effect Plugin,Stereo tube EQ with warm analog character for mastering.,EQ;Mastering Suite,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trlurssenmasteringeq/
+IK Multimedia — Triad Chorus,Effect Plugin,Enhanced rack-style chorus with triple modulation options.,Modulation,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trtriadchorus/
+IK Multimedia — Master Match X,Effect Plugin,AI-assisted mastering tool that matches reference tracks instantly.,Mastering Suite,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trmastermatchx/
 IK Multimedia — Channel Strip X,Effect Plugin,"Advanced channel strip with EQ, de-essing, dynamics, and transient shaping.",Channel Strip,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trchannelstripx/
-IK Multimedia — Bass ONE,Effect Plugin,"Low-end processor for thick, precise, and powerful bass management.",Bass Processor,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trbassone/
-IK Multimedia — LO-FI Punch,Effect Plugin,"Harmonics and dynamics processor for warmth, grit, and texture.",Saturation;Dynamics,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trlofipunch/
+IK Multimedia — Bass ONE,Effect Plugin,"Low-end processor for thick, precise, and powerful bass management.",Other Effects,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trbassone/
+IK Multimedia — LO-FI Punch,Effect Plugin,"Harmonics and dynamics processor for warmth, grit, and texture.",Saturation/Distortion;Compressor,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trlofipunch/
 IK Multimedia — Dual Spring,Effect Plugin,Flexible spring reverb with adjustable parameters and analog tone.,Reverb,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trdualspring/
 IK Multimedia — Delay Lab,Effect Plugin,"Versatile delay for adding space, movement, and dimension.",Delay,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trdelaylab/
-IK Multimedia — Quad Saturator,Effect Plugin,4-band saturation processor with multiple saturation types per band.,Saturation,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trquadsaturator/
-IK Multimedia — Filter Fusion,Effect Plugin,Multi-filter processor with step sequencer and modulation joystick.,Filter,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trfilterfusion/
+IK Multimedia — Quad Saturator,Effect Plugin,4-band saturation processor with multiple saturation types per band.,Saturation/Distortion,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trquadsaturator/
+IK Multimedia — Filter Fusion,Effect Plugin,Multi-filter processor with step sequencer and modulation joystick.,Other Effects,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trfilterfusion/
 IK Multimedia — The Farm Stone Room,Effect Plugin,Reverb modeled after the iconic Farm studio stone room.,Reverb,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trfarmstoneroom/
 IK Multimedia — Joe Chiccarelli Vocal Strip,Effect Plugin,Vocal strip designed with Grammy-winning engineer Joe Chiccarelli.,Channel Strip;Vocal Processing,11/14/2024,FALSE
 IK Multimedia — FAME Studio Reverb,Effect Plugin,Reverb based on the legendary FAME Studios acoustic spaces.,Reverb,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trfame/
 IK Multimedia — TASCAM 388,Effect Plugin,Emulation of TASCAM's classic 8-track mixer/recorder.,Tape;Channel Strip,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trtascam388/
-IK Multimedia — TASCAM PORTA ONE,Effect Plugin,Portable multitrack cassette recorder emulation.,Tape;Lo-Fi,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trtascamportaone/
+IK Multimedia — TASCAM PORTA ONE,Effect Plugin,Portable multitrack cassette recorder emulation.,Tape;Saturation/Distortion,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trtascamportaone/
 IK Multimedia — TEAC A-3340S,Effect Plugin,Emulation of TEAC's vintage reel-to-reel tape machine.,Tape,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trteaca3340s/
 IK Multimedia — TEAC A-6100 MKII,Effect Plugin,High-fidelity reel-to-reel tape machine emulation.,Tape,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trteaca6100/
 IK Multimedia — Comprexxor,Effect Plugin,Flexible compressor inspired by classic analog designs.,Compressor,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trcomprexxor/
@@ -320,20 +314,20 @@ IK Multimedia — Tape Machine 24,Effect Plugin,Analog tape machine emulation fo
 IK Multimedia — Tape Machine 80,Effect Plugin,Classic tape emulation with rich analog tone.,Tape,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trtapemac80/
 IK Multimedia — Tape Machine 99,Effect Plugin,Vintage tape recorder emulation with distinctive color.,Tape,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trtapemac99/
 IK Multimedia — Tape Machine 440,Effect Plugin,Analog tape deck emulation for authentic saturation.,Tape,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trtapemac440/
-IK Multimedia — T-RackS Leslie,Effect Plugin,Authentic rotary speaker emulation with full Leslie tone.,Modulation;Amp Effect,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trleslie/
+IK Multimedia — T-RackS Leslie,Effect Plugin,Authentic rotary speaker emulation with full Leslie tone.,Modulation;Amp Suite,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trleslie/
 IK Multimedia — Dyna-Mu,Effect Plugin,Tube compressor emulation with musical warmth and punch.,Compressor,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trdynamu/
 IK Multimedia — EQual,Effect Plugin,High-quality linear-phase digital equalizer.,EQ,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trequal/
-IK Multimedia — ONE,Effect Plugin,All-in-one mixing and mastering processor.,Multi-Effect,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trone/
-IK Multimedia — Metering,Effect Plugin,Comprehensive loudness and spectrum metering tools.,Metering,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trmetering/
-IK Multimedia — Saturator X,Effect Plugin,Versatile saturation plugin with multiple modes.,Saturation,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trsaturatorx/
-IK Multimedia — Mic Room,Effect Plugin,Microphone modeler for emulating classic mics.,Mic Modeling,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trmicroom/
+IK Multimedia — ONE,Effect Plugin,All-in-one mixing and mastering processor.,Other Effects,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trone/
+IK Multimedia — Metering,Effect Plugin,Comprehensive loudness and spectrum metering tools.,Metering/Analysis,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trmetering/
+IK Multimedia — Saturator X,Effect Plugin,Versatile saturation plugin with multiple modes.,Saturation/Distortion,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trsaturatorx/
+IK Multimedia — Mic Room,Effect Plugin,Microphone modeler for emulating classic mics.,Other Effects,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trmicroom/
 IK Multimedia — Stealth Limiter,Effect Plugin,Transparent limiter with maximum loudness control.,Limiter,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trstealthlimiter/
 IK Multimedia — EQ PA,Effect Plugin,Classic analog EQ emulation.,EQ,11/14/2024,FALSE,https://www.ikmultimedia.com/products/treqpa/
 IK Multimedia — EQ PB,Effect Plugin,Vintage-style equalizer for tonal shaping.,EQ,11/14/2024,FALSE,https://www.ikmultimedia.com/products/treqpb/
 IK Multimedia — EQ PG,Effect Plugin,Analog-modeled EQ for precise sculpting.,EQ,11/14/2024,FALSE,https://www.ikmultimedia.com/products/treqpg/
 IK Multimedia — EQ 73,Effect Plugin,Neve-style EQ with warm character.,EQ,11/14/2024,FALSE,https://www.ikmultimedia.com/products/treq73/
 IK Multimedia — EQ 81,Effect Plugin,Classic analog EQ with smooth tonal shaping.,EQ,11/14/2024,FALSE,https://www.ikmultimedia.com/products/treq81/
-IK Multimedia — Master EQ 432,Effect Plugin,High-end mastering EQ with surgical precision.,EQ;Mastering,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trmastereq432/
+IK Multimedia — Master EQ 432,Effect Plugin,High-end mastering EQ with surgical precision.,EQ;Mastering Suite,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trmastereq432/
 IK Multimedia — Precision Comp/Limiter,Effect Plugin,Transparent compressor/limiter for subtle dynamics control.,Compressor;Limiter,11/14/2024,FALSE
 IK Multimedia — Bus Compressor,Effect Plugin,Classic SSL-style bus compressor.,Compressor,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trbuscomp/
 IK Multimedia — White Channel,Effect Plugin,Analog-modeled channel strip with EQ and dynamics.,Channel Strip,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trwhitechannel/
@@ -344,15 +338,15 @@ IK Multimedia — White 2A Leveling Amplifier,Effect Plugin,LA-2A optical compre
 IK Multimedia — Vintage Tube Compressor/Limiter 670,Effect Plugin,Fairchild 670-style compressor with rich analog tone.,Compressor,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trvintubcomplim/
 IK Multimedia — Quad Comp,Effect Plugin,4-band compressor with flexible control.,Compressor;Multiband,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trquadcomp/
 IK Multimedia — Quad Lim,Effect Plugin,4-band limiter for transparent loudness control.,Limiter;Multiband,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trquadlim/
-IK Multimedia — Quad Image,Effect Plugin,Multiband stereo imager for widening or narrowing mixes.,Stereo Imaging,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trquadimage/
-IK Multimedia — De-esser,Effect Plugin,Sibilance control tool for vocals and instruments.,De-esser,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trdeesser/
+IK Multimedia — Quad Image,Effect Plugin,Multiband stereo imager for widening or narrowing mixes.,Other Effects,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trquadimage/
+IK Multimedia — De-esser,Effect Plugin,Sibilance control tool for vocals and instruments.,Compressor,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trdeesser/
 IK Multimedia — EQP-1A Vintage Tube Program Equalizer,Effect Plugin,Classic Pultec-style tube EQ emulation.,EQ,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trvintubprogeq/
 IK Multimedia — Opto Compressor,Effect Plugin,Smooth optical compressor for natural dynamics.,Compressor,11/14/2024,FALSE,https://www.ikmultimedia.com/products/troptocomp/
 IK Multimedia — Brickwall Limiter,Effect Plugin,Limiter for maximum peak control and loudness.,Limiter,11/14/2024,FALSE
-IK Multimedia — Linear Phase Equalizer,Effect Plugin,Transparent linear-phase EQ for mastering.,EQ;Mastering,11/14/2024,FALSE
+IK Multimedia — Linear Phase Equalizer,Effect Plugin,Transparent linear-phase EQ for mastering.,EQ;Mastering Suite,11/14/2024,FALSE
 IK Multimedia — Classic T-RackS Compressor,Effect Plugin,Analog-style compressor with smooth character.,Compressor,11/14/2024,FALSE
 IK Multimedia — Classic T-RackS Multiband Limiter,Effect Plugin,Multiband limiter for transparent mastering.,Limiter;Multiband,11/14/2024,FALSE
-IK Multimedia — Classic T-RackS Clipper,Effect Plugin,Hard clipper for loudness and harmonics.,Clipper,11/14/2024,FALSE
+IK Multimedia — Classic T-RackS Clipper,Effect Plugin,Hard clipper for loudness and harmonics.,Limiter,11/14/2024,FALSE
 IK Multimedia — Classic T-RackS Equalizer,Effect Plugin,Classic analog EQ for tonal shaping.,EQ,11/14/2024,FALSE
 IK Multimedia — CSR Plate Reverb,Effect Plugin,Plate reverb emulation for lush depth.,Reverb,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trcsrplate/
 IK Multimedia — CSR Hall Reverb,Effect Plugin,Hall reverb for natural spaciousness.,Reverb,11/14/2024,FALSE,https://www.ikmultimedia.com/products/trcsrhall/

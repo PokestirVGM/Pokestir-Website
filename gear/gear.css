@@ -9,17 +9,25 @@
   margin: 0 0 10px;
 }
 
-/* Favorites-only toggle — a .btn that lights up like an active pill */
+/* Favorites-only toggle — a .btn that lights up like an active pill. The star
+   carries the same orange as the one marking favorite cards, so the filter and
+   the thing it filters read as one idea; on the lit state it drops back to the
+   label color rather than fighting the blue. */
 .fav-btn { white-space: nowrap; }
+.fav-btn .fav-ic { flex: 0 0 auto; color: #FF8327; }
 .fav-btn[aria-pressed="true"] {
   background: var(--ring); color: var(--on-ring); border-color: var(--line-bright);
 }
+.fav-btn[aria-pressed="true"] .fav-ic { color: currentColor; }
 
+/* Every control in this row is the same height, font, and border weight, so
+   the bar reads as one set: inputs don't inherit type by default, hence the
+   explicit `font` here. */
 .search { position: relative; }
 .search input {
-  width: 100%; padding: 12px 14px 12px 40px; border-radius: var(--radius-md);
+  width: 100%; padding: 11px 14px 11px 40px; border-radius: var(--radius-md);
   background: var(--surface);
-  color: var(--text); border: 1px solid var(--line);
+  color: var(--text); font: inherit; font-size: 14px; border: 1px solid var(--line);
 }
 .search input::placeholder { color: var(--muted); }
 
@@ -29,19 +37,26 @@
   outline: none;
   border-color: rgba(16,177,255,.55);
 }
-.search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); opacity: .8; }
+.search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); }
 
 select {
   appearance: none; -webkit-appearance: none;
   padding: 11px 36px 11px 16px; border-radius: var(--radius-md);
-  color: var(--text); font: inherit; font-size: 14px; border: 1px solid var(--line);
+  color: var(--text); font: inherit; font-size: 14px; font-weight: 600; border: 1px solid var(--line);
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") right 12px center / 14px 14px no-repeat,
     var(--surface);
 }
-.btn-clear { background: transparent; border-color: var(--line-soft); color: var(--muted); }
+/* Row buttons match the inputs' border and weight; Clear stays quieter through
+   its muted label and transparent fill, not a fainter outline. */
+.controls .btn { font-weight: 600; border-color: var(--line); }
+.btn-clear { background: transparent; color: var(--muted); }
 
 /* ── Filter pills (.pill base from style.css) ── */
+/* Subtag pills only exist once a category is picked, so the row starts hidden
+   rather than flashing an empty "Tags" label while the CSV loads; gear.js
+   sets an inline display once it knows whether there are pills to show. */
+#subtagsWrap { display: none; }
 .filter-label { margin: 8px 2px 2px; }
 .pillbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 14px; }
 
@@ -63,7 +78,7 @@ select {
 .card-head { padding: 14px 16px 0; }
 .title { font-weight: 700; letter-spacing: .2px; }
 /* Star marking favorites; the orange from the card ring's gradient */
-.title .fav-star { color: #FF8327; font-size: 13px; margin-right: 7px; vertical-align: 1px; }
+.title .fav-star { color: #FF8327; margin-right: 7px; vertical-align: -2px; }
 /* When an item has a product link the name becomes that link, with a small
    external-link glyph that only firms up on hover/focus. */
 .title-link {

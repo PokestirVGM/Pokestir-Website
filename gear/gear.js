@@ -3,7 +3,7 @@
 
   const CATEGORY_SUBTAGS = {
     "Sample Library": ["Bass", "Brass", "Choir/Voices", "Guitar", "Harp", "Keys/Pianos", "Multi-instrument", "Orchestral", "Percussion/Drums", "Strings", "Textures/Atmospheres", "Woodwinds", "World/Ethnic"],
-    "Effect Plugin": ["Amp Suite", "Channel Strip", "Compressor", "Delay", "EQ", "Limiter", "Mastering Suite", "Metering/Analysis", "Other Effects", "Reverb", "Saturation/Distortion"],
+    "Effect Plugin": ["Amp Suite", "Channel Strip", "Compressor", "Delay", "EQ", "Immersive Reverb", "Limiter", "Mastering Suite", "Metering/Analysis", "Modulation", "Multiband", "Other Effects", "Reverb", "Saturation/Distortion", "Tape", "Vocal Processing"],
     "Synth": ["Analog/VA", "Bass", "Drums", "Modular/Builder", "Organ/Keys", "Other Synth", "Sampler/Workstation", "Wavetable/Hybrid"],
     "Gear": ["Accessories", "Audio Interface", "DAW", "Headphones", "Microphone", "MIDI Keyboard", "Studio Monitors", "Workstation"]
   };
@@ -293,7 +293,9 @@
     const source = [item.vendor, item.tag].filter(Boolean).map(escapeHTML).join(" &bull; ");
     const dateHTML = item.date ? `<span class="date-added">Added ${escapeHTML(formatDate(item.date))}</span>` : "";
 
-    const star = item.favorite ? '<span class="fav-star" role="img" aria-label="Favorite">&#9733;</span>' : '';
+    const star = item.favorite
+      ? '<svg class="fav-star" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Favorite"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>'
+      : '';
     // A product link makes the name an external link to that exact product page.
     const name = escapeHTML(item.name);
     const titleInner = item.link
@@ -399,6 +401,10 @@
   });
 
   async function init() {
+    // Category pills come from CATEGORY_SUBTAGS, not the CSV, so paint them
+    // before the fetch instead of leaving the filter bar empty until it lands.
+    buildCategoryPills();
+    buildSubtags();
     gridMessage('Loading…');
     let csvText;
     try {
@@ -422,8 +428,6 @@
       return;
     }
     buildVendorOptions();
-    buildCategoryPills();
-    buildSubtags();
     render();
   }
 

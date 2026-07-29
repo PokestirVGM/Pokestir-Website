@@ -28,6 +28,10 @@ function validateCatalog(TRACKS, RELEASES) {
   const SLUG_RE = /^[a-z0-9-]+$/;
   const DATE_RE = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/;
   const KNOWN_TYPES = ['Single', 'Album'];
+  /* Must match PLATFORMS in releases.js: a key that isn't in this list renders
+     no button at all, which looks identical to the link simply being absent. */
+  const KNOWN_PLATFORMS = ['bandcamp', 'spotify', 'appleMusic', 'youtubeMusic',
+    'youtube', 'pandora', 'itunes', 'deezer', 'amazonMusic', 'tidal', 'qobuz'];
 
   /* ---- tracks ---- */
   for (const [key, track] of Object.entries(TRACKS)) {
@@ -99,6 +103,9 @@ function validateCatalog(TRACKS, RELEASES) {
       errors.push(`${label}: artwork URL must be https.`);
     }
     for (const [platform, url] of Object.entries(rel.links || {})) {
+      if (!KNOWN_PLATFORMS.includes(platform)) {
+        errors.push(`${label}: unknown platform key "${platform}" (nothing renders it).`);
+      }
       if (url && !/^https:\/\//.test(url)) errors.push(`${label}: ${platform} link must be https.`);
     }
     for (const extra of rel.otherLinks || []) {

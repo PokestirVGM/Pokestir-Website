@@ -9,11 +9,14 @@
   margin: 0 0 10px;
 }
 
+/* Every control in this row is the same height, font, and border weight, so
+   the bar reads as one set: inputs don't inherit type by default, hence the
+   explicit `font` here. */
 .search { position: relative; }
 .search input {
-  width: 100%; padding: 12px 14px 12px 40px; border-radius: var(--radius-md);
+  width: 100%; padding: 11px 14px 11px 40px; border-radius: var(--radius-md);
   background: var(--surface);
-  color: var(--text); border: 1px solid var(--line);
+  color: var(--text); font: inherit; font-size: 14px; border: 1px solid var(--line);
 }
 .search input::placeholder { color: var(--muted); }
 
@@ -23,17 +26,20 @@
   outline: none;
   border-color: rgba(16,177,255,.55);
 }
-.search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); opacity: .8; }
+.search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); }
 
 select {
   appearance: none; -webkit-appearance: none;
   padding: 11px 36px 11px 16px; border-radius: var(--radius-md);
-  color: var(--text); font: inherit; font-size: 14px; border: 1px solid var(--line);
+  color: var(--text); font: inherit; font-size: 14px; font-weight: 600; border: 1px solid var(--line);
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") right 12px center / 14px 14px no-repeat,
     var(--surface);
 }
-.btn-clear { background: transparent; border-color: var(--line-soft); color: var(--muted); }
+/* Row buttons match the inputs' border and weight; Clear stays quieter through
+   its muted label and transparent fill, not a fainter outline. */
+.controls .btn { font-weight: 600; border-color: var(--line); }
+.btn-clear { background: transparent; color: var(--muted); }
 
 /* ── Release grid — square artwork tiles with the caption below the cover,
       so nothing overlays the art (album covers are the identifier).
@@ -187,7 +193,8 @@ select {
 .plat-youtube      { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #ff0000; }
 .plat-pandora      { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #3668ff; }
 .plat-itunes       { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #ea4cc0; }
-.plat-deezer       { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #0ec7f7; }
+/* Deezer's 2023 rebrand: purple heart, not the old cyan equalizer bars. */
+.plat-deezer       { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #a238ff; }
 .plat-amazonMusic  { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #5a2dff; }
 .plat-tidal        { background: linear-gradient(180deg, rgba(255,255,255,.04) 0%, rgba(0,0,0,.10) 100%), #0b0b0b; }
 .plat-qobuz        { background: linear-gradient(180deg, rgba(255,255,255,.04) 0%, rgba(0,0,0,.10) 100%), #10131f; }
@@ -258,7 +265,6 @@ select {
   .release-tile--album .rsub, .release-tile--album .rmeta, .release-tile--album .rcomp { font-size: 12px; }
   .detail-head { flex-direction: column; align-items: center; text-align: center; padding: 18px; }
   .detail-head .info { align-items: center; }
-  .plat-links { justify-content: center; }
-  .plat-links { width: 100%; }
+  .plat-links { justify-content: center; width: 100%; }
   .track-row { padding: 10px 16px; }
 }

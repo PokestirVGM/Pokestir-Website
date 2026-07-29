@@ -307,7 +307,11 @@
       next.disabled = (rail.scrollLeft || 0) >= max - 1;
     };
     rail.addEventListener('scroll', sync, { passive: true });
-    window.addEventListener('resize', sync, { passive: true });
+    // render() runs again on every search keystroke and throws the old rail
+    // away; tie the window listener to the rail's lifetime so the discarded
+    // ones don't pile up holding detached nodes alive.
+    const ro = new ResizeObserver(sync);
+    ro.observe(rail);
     // Layout isn't done during render; measure once the frame settles.
     requestAnimationFrame(sync);
 
@@ -566,7 +570,7 @@
      - edit distance catches typos (shurey-hill -> shurrey-hill);
      - hyphen-token overlap catches longer/reworded addresses, including any
        pre-rename slug, whose tokens contain the current short slug's tokens.
-     257 slugs is small enough to brute-force score on every miss. */
+     The catalog is small enough to brute-force score on every miss. */
   function editDistance(a, b) {
     let prev2 = null;
     let prev = Array.from({ length: b.length + 1 }, (_, j) => j);
