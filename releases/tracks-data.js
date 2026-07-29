@@ -2241,6 +2241,13 @@ const TRACKS = {
     spotifyTrackId: "17uynQuyTB6DicCoGrWOuZ",
     preview: "https://p.scdn.co/mp3-preview/96bca503ddea06fda19dd5acecaa06f0cd4fe6cf"
   },
+  "local:sunset-of-seven-suns-2026": {
+    title: "Sunset of Seven Suns (From \"Deltarune Chapter 5\") [Arr. for Orchestra by Pokestir]",
+    isrc: "",
+    duration: "",
+    spotifyTrackId: "",
+    preview: ""
+  },
   "isrc:QZPJ32211893": {
     title: "Sunyshore City (From \"Pokémon Diamond & Pearl\") (Arrangement)",
     isrc: "QZPJ32211893",
@@ -2582,6 +2589,13 @@ const TRACKS = {
     spotifyTrackId: "16JdDzeOceFTuMkvmDdqUI",
     preview: "https://p.scdn.co/mp3-preview/2b4a201624fb379ad93d57b3101a16f83c779062"
   },
+  "local:wedgehurst-2026": {
+    title: "Wedgehurst (From \"Pokémon Sword & Shield\")",
+    isrc: "",
+    duration: "",
+    spotifyTrackId: "",
+    preview: ""
+  },
   "isrc:QZ6K42501269": {
     title: "Wind Scene (600 A.D.) [From \"Chrono Trigger\"]",
     isrc: "QZ6K42501269",
@@ -2597,5 +2611,12 @@ const TRACKS = {
     duration: "2:13",
     spotifyTrackId: "2W7NVMsYz4LQcUilmdo2jf",
     preview: "https://p.scdn.co/mp3-preview/e8c6663a746d8a1c660438b4a79aa69804f5206b"
+  },
+  "local:zoness-2026": {
+    title: "Zoness (From \"Star Fox 64\") [Arr. for Orchestra by Pokestir]",
+    isrc: "",
+    duration: "",
+    spotifyTrackId: "",
+    preview: ""
   },
 };

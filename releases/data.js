@@ -184,6 +184,66 @@ const RELEASES = [
     ]
   },
   {
+    slug: "zoness",
+    title: "Zoness (From \"Star Fox 64\") [Arr. for Orchestra by Pokestir]",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-08-14",
+    upc: "",
+    description: "",
+    tags: [],
+    artwork: "",
+    links: {
+      bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "",
+      youtube: "", pandora: "", itunes: "", deezer: "",
+      amazonMusic: "", tidal: "", qobuz: ""
+    },
+    otherLinks: [],
+    tracklist: [
+      { trackId: "local:zoness-2026" },
+    ]
+  },
+  {
+    slug: "wedgehurst",
+    title: "Wedgehurst (From \"Pokémon Sword & Shield\")",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-08-07",
+    upc: "",
+    description: "",
+    tags: [],
+    artwork: "",
+    links: {
+      bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "",
+      youtube: "", pandora: "", itunes: "", deezer: "",
+      amazonMusic: "", tidal: "", qobuz: ""
+    },
+    otherLinks: [],
+    tracklist: [
+      { trackId: "local:wedgehurst-2026" },
+    ]
+  },
+  {
+    slug: "sunset-of-seven-suns",
+    title: "Sunset of Seven Suns (From \"Deltarune Chapter 5\") [Arr. for Orchestra by Pokestir]",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-07-31",
+    upc: "",
+    description: "",
+    tags: [],
+    artwork: "",
+    links: {
+      bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "",
+      youtube: "", pandora: "", itunes: "", deezer: "",
+      amazonMusic: "", tidal: "", qobuz: ""
+    },
+    otherLinks: [],
+    tracklist: [
+      { trackId: "local:sunset-of-seven-suns-2026" },
+    ]
+  },
+  {
     slug: "route-206",
     title: "Route 206 (From \"Pokémon Diamond & Pearl\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
