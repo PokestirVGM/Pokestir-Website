@@ -2241,12 +2241,12 @@ const TRACKS = {
     spotifyTrackId: "17uynQuyTB6DicCoGrWOuZ",
     preview: "https://p.scdn.co/mp3-preview/96bca503ddea06fda19dd5acecaa06f0cd4fe6cf"
   },
-  "local:sunset-of-seven-suns-2026": {
+  "isrc:QZ6K42601341": {
     title: "Sunset of Seven Suns (From \"Deltarune Chapter 5\") [Arr. for Orchestra by Pokestir]",
-    isrc: "",
-    duration: "",
-    spotifyTrackId: "",
-    preview: ""
+    isrc: "QZ6K42601341",
+    duration: "4:19",
+    spotifyTrackId: "4aFsYcxIm4R2e6t2VNzeuo",
+    preview: "https://p.scdn.co/mp3-preview/1d7f391e5ac9e4630fed51de799ad8fcca9a3eac"
   },
   "isrc:QZPJ32211893": {
     title: "Sunyshore City (From \"Pokémon Diamond & Pearl\") (Arrangement)",

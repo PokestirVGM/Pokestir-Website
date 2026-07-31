@@ -229,18 +229,26 @@ const RELEASES = [
     subtitle: "",
     type: "Single",
     releaseDate: "2026-07-31",
-    upc: "",
+    upc: "810179614041",
     description: "",
-    tags: [],
-    artwork: "",
+    tags: ["Classical"],
+    artwork: "https://cdn-images.dzcdn.net/images/cover/854037e0d3e63114c45b79d0523e0d0b/1000x1000-000000-80-0-0.jpg",
     links: {
-      bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "",
-      youtube: "", pandora: "", itunes: "", deezer: "",
-      amazonMusic: "", tidal: "", qobuz: ""
+      bandcamp: "https://pokestir.bandcamp.com/album/sunset-of-seven-suns-from-deltarune-chapter-5-arr-for-orchestra-by-pokestir",
+      spotify: "https://open.spotify.com/album/7hQqppCuKu8qcyevhgEHKy",
+      appleMusic: "https://music.apple.com/us/album/sunset-of-seven-suns-from-deltarune-chapter-5-arr/6795763120?uo=4",
+      youtubeMusic: "",
+      youtube: "https://www.youtube.com/watch?v=RAsy2_bypZ8",
+      pandora: "https://www.pandora.com/artist/pokestir/sunset-of-7-suns-from-deltarune-chapter-5-arr-for-orchestra-by-pokestir/ALn3KjK3pwl5bp4",
+      itunes: "https://music.apple.com/us/album/sunset-of-seven-suns-from-deltarune-chapter-5-arr/6795763120?app=itunes",
+      deezer: "https://www.deezer.com/album/1040789242",
+      amazonMusic: "https://music.amazon.com/albums/B0HC1HCJ3L",
+      tidal: "https://tidal.com/album/547330111",
+      qobuz: "https://open.qobuz.com/album/zal4ncn0rvcwa"
     },
-    otherLinks: [],
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/sunsetof7sunspsBC" }],
     tracklist: [
-      { trackId: "local:sunset-of-seven-suns-2026" },
+      { trackId: "isrc:QZ6K42601341" },
     ]
   },
   {
