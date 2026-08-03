@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Motion Filmstrip</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+    body { margin: 0; padding: 20px; background: #080b13; color: #e8edf7; }
+    #message { max-width: 760px; line-height: 1.5; }
+    #strip { display: grid; grid-template-columns: repeat(var(--frames, 1), minmax(0, 1fr)); gap: 12px; }
+    .frame { min-width: 0; }
+    iframe { width: 100%; height: 760px; border: 1px solid #334155; border-radius: 10px; background: #0b0f19; }
+    output { display: block; padding: 7px 2px; color: #94a3b8; font: 12px ui-monospace, monospace; }
+  </style>
+</head>
+<body>
+  <p id="message">Inert filmstrip harness. Supply same-origin page, selector, action, and times query parameters to run it.</p>
+  <main id="strip" hidden></main>
+  <script>
+    (() => {
+      const params = new URLSearchParams(location.search);
+      const page = params.get('page');
+      const selector = params.get('selector');
+      const action = params.get('action');
+      const times = (params.get('times') || '').split(',').map(Number).filter(Number.isFinite);
+      const message = document.getElementById('message');
+      const strip = document.getElementById('strip');
+
+      if (!page || !selector || !action || !times.length) return;
+
+      const targetURL = new URL(page, location.origin);
+      if (targetURL.origin !== location.origin) {
+        message.textContent = 'Only same-origin pages are allowed.';
+        return;
+      }
+
+      strip.hidden = false;
+      strip.style.setProperty('--frames', times.length);
+      message.textContent = `${selector}, ${action}`;
+
+      times.forEach((time) => {
+        const wrapper = document.createElement('section');
+        wrapper.className = 'frame';
+        const iframe = document.createElement('iframe');
+        iframe.src = targetURL.href;
+        iframe.title = `${time}ms frame`;
+        const output = document.createElement('output');
+        output.textContent = `${time}ms, waiting`;
+        wrapper.append(iframe, output);
+        strip.appendChild(wrapper);
+
+        iframe.addEventListener('load', () => {
+          setTimeout(() => {
+            let target;
+            try {
+              target = iframe.contentDocument.querySelector(selector);
+            } catch (error) {
+              output.textContent = `${time}ms, invalid selector`;
+              return;
+            }
+            if (!target) {
+              output.textContent = `${time}ms, target missing`;
+              return;
+            }
+
+            getComputedStyle(target).blockSize;
+            if (action === 'toggle' && target.tagName === 'DETAILS') {
+              target.querySelector('summary').click();
+            } else if (action.startsWith('class:')) {
+              target.classList.add(action.slice(6));
+            } else {
+              output.textContent = `${time}ms, unsupported action`;
+              return;
+            }
+            getComputedStyle(target).blockSize;
+
+            setTimeout(() => {
+              const animations = iframe.contentDocument.getAnimations().filter((animation) => {
+                const effectTarget = animation.effect && animation.effect.target;
+                return effectTarget === target || (effectTarget && target.contains(effectTarget));
+              });
+              animations.forEach((animation) => {
+                animation.pause();
+                animation.currentTime = time;
+              });
+              const opacityStates = animations.map((animation) => {
+                const effectTarget = animation.effect && animation.effect.target;
+                if (!effectTarget) return '';
+                return `${effectTarget.className}:${getComputedStyle(effectTarget).opacity}`;
+              }).filter(Boolean).join(', ');
+              output.textContent = `${time}ms, ${animations.length} animations${opacityStates ? `, ${opacityStates}` : ''}`;
+            }, 0);
+          }, 0);
+        }, { once: true });
+      });
+    })();
+  </script>
+</body>
+</html>
