@@ -100,7 +100,6 @@
 
       <aside class="csplit__direct" aria-label="Other ways to reach me">
         <h2 class="cdirect-title">Or reach me directly</h2>
-        <p class="cdirect-lead">Any of these get to me just as fast.</p>
         <a class="crow" href="mailto:contact@pokestir.com">
           <span class="crow__mark" aria-hidden="true" style="--icon:url(../images/icons/mail.svg)"></span>
           <span class="crow__who"><b>Email</b><span>contact@pokestir.com</span></span>
@@ -159,15 +158,26 @@
       contactForm.classList.add('was-validated');
     }, true);
 
+    /* The pending state is only ever meant to last until the browser leaves for
+       FormSubmit. If that navigation is slow, refused, or the visitor cancels
+       it, nothing here used to hand the button back: it stayed disabled and
+       reading "Sending…" with no way out but a reload. `pageshow` covers coming
+       back through history, and this covers staying put. */
+    let submitTimer = 0;
     contactForm.addEventListener('submit', () => {
       contactForm.classList.add('is-submitting');
       contactForm.setAttribute('aria-busy', 'true');
       submitButton.disabled = true;
       submitLabel.setAttribute('aria-hidden', 'true');
       submitPending.setAttribute('aria-hidden', 'false');
+      clearTimeout(submitTimer);
+      submitTimer = setTimeout(resetSubmitState, 12000);
     });
 
-    addEventListener('pageshow', resetSubmitState);
+    addEventListener('pageshow', () => {
+      clearTimeout(submitTimer);
+      resetSubmitState();
+    });
 
     if (new URLSearchParams(location.search).get('sent') === '1') {
       sentNote.hidden = false;
@@ -184,12 +194,37 @@
         contactForm.classList.add('is-success-exit');
         sentNote.classList.add('is-visible');
 
-        sentNote.addEventListener('transitionend', (event) => {
-          if (event.propertyName !== 'opacity') return;
+        /* Two things went wrong here, and both showed as the panel snapping.
+
+           `transitionend` bubbles, so this fired on the first opacity
+           transition finishing anywhere *inside* the note — a link, a faded
+           child — rather than on the note itself. With `{ once: true }` that
+           was the only shot it got: the height was released and the form
+           hidden while the note was still fading in. Matching on the target
+           fixes it, which means the listener can no longer be `once` and has
+           to take itself off.
+
+           And if the transition never ran at all, nothing ever cleared the
+           explicit block-size, leaving the panel pinned to a fixed height for
+           the rest of the visit. The timeout is the floor under that: slightly
+           longer than --mo-base, so it only lands when the event genuinely
+           never came. */
+        let settled = false;
+        function finishSwap() {
+          if (settled) return;
+          settled = true;
+          clearTimeout(swapTimer);
+          sentNote.removeEventListener('transitionend', onSwapEnd);
           contactForm.hidden = true;
           contactShell.classList.remove('is-swapping');
           contactShell.style.removeProperty('block-size');
-        }, { once: true });
+        }
+        function onSwapEnd(event) {
+          if (event.target !== sentNote || event.propertyName !== 'opacity') return;
+          finishSwap();
+        }
+        const swapTimer = setTimeout(finishSwap, 600);
+        sentNote.addEventListener('transitionend', onSwapEnd);
       }
     }
   </script>

@@ -39,14 +39,36 @@
   --line-strong: rgba(255,255,255,.22);    /* interactive-control borders */
   --line-bright: rgba(255,255,255,.35);    /* borders on accent backgrounds */
   --focus-ring: 2px solid var(--ring);     /* standard keyboard focus outline */
-  --focus-line: rgba(16,177,255,.55);      /* focus border inside form controls */
-  --error-line: rgba(254,14,14,.72);       /* quiet form validation border */
-  --error-wash: rgba(254,14,14,.06);       /* quiet form validation surface */
+  /* Focus outranks error, deliberately. Focus answers "where am I", which is
+     the more urgent question; an unfilled field is something you need before
+     you submit, not this instant. These were the other way round (focus .55
+     against error .72), so on a form with one empty required field the eye went
+     to the empty field rather than to the one being typed in. */
+  --focus-line: rgba(16,177,255,.80);      /* focus border inside form controls */
+  --error-line: rgba(254,14,14,.50);       /* quiet form validation border */
+  --error-wash: rgba(254,14,14,.07);       /* quiet form validation surface */
+  /* The halo that says "held". Not a new idea: the audio scrubber's thumb wears
+     the same soft ring while it is being dragged. Giving it to focus is what
+     stops focus and error from being one component in two colours, which is
+     what they were when both amounted to a 1px border and a faint wash. */
+  --focus-halo: 0 0 0 3px rgba(16,177,255,.13);
+  --error-halo: 0 0 0 3px rgba(254,14,14,.12);
 
   /* Surfaces */
   --glass: linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.03) 100%);
   --surface: var(--glass), linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 120%), var(--panel);
   --accentbar: linear-gradient(90deg, #0050B3 0%, #10B1FF 18%, #c8eeff 32%, #FF8327 44%, #FE0E0E 50%, #FF8327 56%, #c8eeff 68%, #10B1FF 82%, #0050B3 100%);
+  /* The bleed's own copy of the accent, for the card interior only. Identical
+     hues and identical stop positions, with one substitution: #c8eeff becomes a
+     deeper cyan. That stop is 100% saturated but 89% light, so on the 1px ring
+     it reads as a bright cyan highlight and does its job, while at the bleed's
+     7% over --panel it lands as almost pure white haze and washes two of the
+     nine stops out to grey. The replacement is the same hue carrying real
+     chroma, so the cyan phase of the sweep reads as cyan rather than as a pale
+     smudge. It is slightly *darker* than what it replaces, which is the point:
+     more colour, not more light. Kept separate from --accentbar so the ring
+     itself is untouched. */
+  --accentbar-bleed: linear-gradient(90deg, #0050B3 0%, #10B1FF 18%, #5ad0ff 32%, #FF8327 44%, #FE0E0E 50%, #FF8327 56%, #5ad0ff 68%, #10B1FF 82%, #0050B3 100%);
   --shadow: 0 12px 40px rgba(2,6,23,.35);
 
   /* Shape */
@@ -163,12 +185,45 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   max-width: 1120px; margin: 0 auto; padding: 6px 18px;
   display: flex; align-items: center; justify-content: space-between; gap: 14px;
 }
+/* The brand is a round mark, so it does not take the rounded rect the text
+   links wear. The same argument is already made further down against giving the
+   mobile toggle a container: a bordered rounded rect next to a circular logo
+   belongs to neither shape. It was being drawn here anyway, and with no
+   transition behind it, so it snapped into place on hover as a hard-edged box
+   around a circle.
+
+   What is left is what every other icon control on this site does — the social
+   strips answer with scale, not with a box. The padding stays, because it is
+   the tap target; it is simply no longer painted. Uniform now rather than
+   9px 10px, so that the 36px square mark sits in a 54px square box and the
+   focus ring, which follows border-radius, comes out as a true circle instead
+   of a slight ellipse. */
 .site-nav__brand {
   flex: 0 0 auto; display: block; line-height: 1;
-  padding: 9px 10px; border: 1px solid transparent; border-radius: var(--radius-sm);
+  padding: 9px; border: 1px solid transparent; border-radius: 50%;
 }
+/* `transform` carries the fixed optical scale that sizes the mark against the
+   nav; the separate `scale` property carries the hover on top of it. Individual
+   transform properties apply before `transform`, and both are pure scales about
+   the same origin, so the two compose cleanly to 1.325 rather than fighting. */
 .site-nav__logo {
-  height: 36px; width: auto; display: block; transform: scale(1.25); transform-origin: center center;
+  height: 36px; width: auto; display: block;
+  transform: scale(1.25); transform-origin: center center;
+  scale: 1;
+  transition: scale var(--mo-quick) var(--mo-out), filter var(--mo-quick) var(--mo-out);
+}
+.site-nav__brand:hover .site-nav__logo,
+.site-nav__brand:focus-visible .site-nav__logo {
+  scale: 1.06;
+  filter: brightness(1.08);
+  transition-duration: var(--mo-instant);
+}
+/* Same press beat the toggle takes, and the only feedback the mark gets on
+   touch, where there is no hover at all. */
+.site-nav__brand:active .site-nav__logo {
+  scale: .95;
+  transition-duration: 70ms;
+  transition-timing-function: var(--mo-in);
 }
 .site-nav__toggle { display: none; }
 .site-nav__links {
@@ -184,7 +239,6 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
               border-color var(--mo-quick) var(--mo-out),
               color var(--mo-quick) var(--mo-out);
 }
-.site-nav__brand:hover,
 .site-nav__links a:hover {
   border-color: var(--line); background: rgba(255,255,255,.06);
   transition-duration: var(--mo-instant);
@@ -354,10 +408,20 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   }
   .site-nav__toggle[aria-expanded="true"] .site-nav__burger::before { translate: 0 7px; rotate: 45deg; }
   .site-nav__toggle[aria-expanded="true"] .site-nav__burger::after { translate: 0 -7px; rotate: -45deg; }
+  /* No horizontal padding, and the rows carry their own instead, so a label
+     lands on the page's own 14px gutter rather than 17px inside it. Measured
+     against the releases page, the menu was the only thing on screen aligned to
+     nothing: the title, the search field and the brand all sit at 14px while
+     the labels sat at 31px, and the eye reads that as the menu belonging to a
+     different page than the one behind it.
+
+     `overflow: hidden` clips the rows while they are still travelling in from
+     the leading edge; without it they briefly stick out past the panel. */
   .site-nav__links {
-    display: flex; flex-direction: column; gap: 4px;
+    display: flex; flex-direction: column; gap: 0;
     position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 99;
-    padding: 8px 14px 12px;
+    overflow: hidden;
+    padding: 4px 0 8px;
     background: var(--glass), rgba(15,23,42,.82);
     border-bottom: 1px solid var(--line-soft);
     backdrop-filter: blur(32px) saturate(180%) brightness(0.82);
@@ -373,7 +437,57 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
     /* Arrives just behind the bars, on the same curve they travel in on. */
     transition: opacity .2s ease .04s, transform .24s cubic-bezier(.2,.8,.25,1) .04s, visibility .24s;
   }
-  .site-nav__links a { text-align: center; }
+  /* ── Menu rows ──
+     The desktop nav is a row of compact controls, so the current page there is
+     a snug blue chip. This is a column of full-width rows, which is a different
+     kind of object, and the site already marks a selected *row* a different
+     way: `.mw-list li[aria-selected="true"]` and `.track-row.is-playing` both
+     take a blue tint wash rather than a fill. Reusing that here is what stops
+     the highlight from becoming a slab the width of the screen, which is what
+     the desktop rule turns into once these are stacked.
+
+     Labels stay --text. They were the same --text as the desktop nav and must
+     remain so: --muted is this site's colour for secondary information, and on
+     a menu of four destinations it makes three of them look unavailable.
+
+     Left-aligned, because a column of centred labels of very different lengths
+     gives the eye no edge to run down. */
+  /* Flush, full-bleed rows rather than inset rounded rects. Two reasons, and
+     the second is the one that actually showed. A rounded rect running the
+     width of the panel is the same object as the search field, the sort select
+     and the Clear button sitting directly beneath it on the releases and gear
+     pages, so the open menu read as four more form controls stacked on the
+     ones behind it. Flush rows read as a list, which is what a menu is, and
+     which is what `.mw-list` already is elsewhere on the site.
+
+     16px label + 28px padding = a 44px row, with the border dropped so the
+     label starts exactly on the gutter rather than a pixel inside it. */
+  .site-nav__links a {
+    position: relative;
+    text-align: left;
+    font-size: 16px;
+    padding: 14px;
+    border: 0;
+    border-radius: 0;
+  }
+  .site-nav__links a:hover {
+    background: rgba(255,255,255,.05);
+    border-color: transparent;
+  }
+  .site-nav__links a[aria-current="page"] {
+    background: rgba(16,177,255,.10);
+    border-color: transparent;
+    color: var(--white);
+  }
+  /* The one mark here without a precedent elsewhere on the site, kept on
+     purpose: the wash alone is doing its work against translucent glass rather
+     than an opaque panel, and at 10% it is too quiet on its own to say which
+     page you are on at a glance. */
+  .site-nav__links a[aria-current="page"]::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--ring);
+  }
 
   /* The panel used to arrive as one slab with its contents already in place.
      Dealing the links in behind it gives the menu somewhere to arrive *to*,
@@ -384,20 +498,25 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
      the travelling pill prepends a `<span>` to this same element on desktop,
      and its ink copy carries the class `.site-nav__links` too. Both would
      otherwise be counted. */
+  /* Dealt in from the leading edge rather than downward: the rows are read left
+     to right from a left margin, so that is the axis they should assemble on.
+     The step is 50ms rather than the 40ms it was, which is the difference
+     between four things arriving in order and four things arriving at once
+     with a slight blur. */
   .site-nav__links > a {
     opacity: 0;
-    translate: 0 calc(-6px * var(--mo-travel));
+    translate: calc(-10px * var(--mo-travel)) 0;
     transition: opacity .12s var(--mo-in), translate .12s var(--mo-in);
   }
   .site-nav__links.is-open > a {
     opacity: 1;
     translate: 0 0;
     /* Behind the panel's own .04s, so the surface is already on its way. */
-    transition: opacity .22s var(--mo-out) .08s, translate .26s var(--mo-out) .08s;
+    transition: opacity .22s var(--mo-out) .06s, translate .26s var(--mo-out) .06s;
   }
-  .site-nav__links.is-open > a:nth-of-type(2) { transition-delay: .12s; }
+  .site-nav__links.is-open > a:nth-of-type(2) { transition-delay: .11s; }
   .site-nav__links.is-open > a:nth-of-type(3) { transition-delay: .16s; }
-  .site-nav__links.is-open > a:nth-of-type(4) { transition-delay: .2s; }
+  .site-nav__links.is-open > a:nth-of-type(4) { transition-delay: .21s; }
   /* Closing runs together and fast: a staggered exit just delays the dismissal
      the visitor already asked for. */
   .site-nav__links:not(.is-open) > a { transition-delay: 0s; }
@@ -429,12 +548,21 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   background-repeat: no-repeat, repeat, no-repeat;
   border: 1px solid var(--line);
 }
-@supports (backdrop-filter: blur(1px)) {
-  .card {
-    backdrop-filter: blur(10px) saturate(130%);
-    -webkit-backdrop-filter: blur(10px) saturate(130%);
-  }
-}
+/* No backdrop-filter here. A card's own background-color is --panel, which is
+   fully opaque, so the blurred backdrop it used to compute was painted over and
+   never reached the screen: measured across the home, gear and releases pages,
+   removing it moved 99.98% of pixels by 0-2 levels of dither noise and 17
+   pixels of 2.8M by more, all on glyph edges.
+
+   It was not free, though. Every card became its own backdrop root, and the
+   sticky nav sits above them blurring a backdrop assembled from all of them.
+   On software rendering (the stand-in here for a weak GPU) a scroll past forty
+   cards ran a 25ms 95th-percentile frame with a quarter of frames over budget;
+   without it the same scroll holds the frame cap with none over. Machines with
+   a real GPU showed no difference either way, which is why this only ever hurt
+   the low end. The glass on .site-nav is the opposite case: its background is
+   translucent, so the blur is visible there, and measured on its own it costs
+   nothing. */
 
 /* Animated gradient edge — the site's signature accent. Drawn as a 1px ring
    masked to the border area; browsers without mask-composite keep the plain
@@ -453,6 +581,51 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
     animation-play-state: paused;
   }
   .card.is-slidebar-active::before { animation-play-state: running; }
+}
+
+/* Inner bleed — the ring's colour carried a little way inside the card.
+   This is a real layer standing in for something the eye was already doing on
+   its own. A thin saturated contour around a large near-black field induces a
+   matching tint across the field itself (the watercolour illusion), so the
+   middle of a card already appeared to move with the ring while every interior
+   pixel sat still. How strongly it read depended on the viewer's display, which
+   is a poor thing to leave a signature effect resting on. Painting it makes it
+   consistent and puts it under our control.
+
+   Kept deliberately faint. At .07 it is below the threshold where it reads as a
+   coloured card and above the one where it reads as nothing: the intent is that
+   you notice the card is alive, not that you notice a gradient. The mask is
+   transparent through the middle and ramps to opaque at the rim, with the ramp
+   spread over several stops rather than one, because a two-stop ramp this
+   shallow banded against --panel.
+
+   It shares the ring's clock, so the bleed and the rim are always the same hue.
+   Sequenced behind the same IntersectionObserver as the ring (nav.js), so cards
+   below the fold paint nothing. Separate @supports from the ring above: this
+   needs plain mask-image, not mask-composite, and without mask support the
+   unmasked gradient would flood the whole card. */
+@supports ((mask-image: radial-gradient(#fff, transparent)) or (-webkit-mask-image: radial-gradient(#fff, transparent))) {
+  .card::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit;
+    z-index: -1; pointer-events: none; opacity: .07;
+    background: var(--accentbar-bleed); background-size: 200% 100%;
+    /* Colour, not light. CSS `saturate` is a luminance-preserving matrix, so it
+       lifts chroma while leaving brightness where it was — which is the whole
+       ask here, and something opacity cannot do. Measured against the layer on
+       its own: the deeper gradient alone gave +5.9% chroma but -10.1%
+       luminance, so it read dimmer rather than more colourful; with this it is
+       +21.3% chroma at -3.3% luminance. Deliberately the cheap filter: a colour
+       matrix is a per-pixel multiply, unlike blur, which needs a convolution
+       and measured far worse when it was tried here. */
+    filter: saturate(1.4);
+    -webkit-mask: radial-gradient(115% 90% at 50% 50%,
+      transparent 30%, rgba(255,255,255,.18) 52%, rgba(255,255,255,.55) 74%, #fff 100%);
+    mask: radial-gradient(115% 90% at 50% 50%,
+      transparent 30%, rgba(255,255,255,.18) 52%, rgba(255,255,255,.55) 74%, #fff 100%);
+    animation: slidebar 9s linear infinite;
+    animation-play-state: paused;
+  }
+  .card.is-slidebar-active::after { animation-play-state: running; }
 }
 @keyframes slidebar { 0% { background-position: 0% 0; } 100% { background-position: 200% 0; } }
 
@@ -627,8 +800,10 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   :root { --mo-travel: 0; }
 
   /* Ambient loops are decoration, not state. Stop them outright rather than
-     squashing them to 0.001ms, which leaves the gradient frozen mid-sweep. */
-  .card::before { animation: none !important; }
+     squashing them to 0.001ms, which leaves the gradient frozen mid-sweep.
+     The inner bleed is the same loop on the same clock, so it stops with it;
+     both keep their resting colour, they just stop travelling. */
+  .card::before, .card::after { animation: none !important; }
 
   *, *::before, *::after {
     animation-duration: 0.001ms !important;

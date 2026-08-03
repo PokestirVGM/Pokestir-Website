@@ -72,15 +72,19 @@
   width: 100%; padding: 11px 14px 11px 40px; border-radius: var(--radius-md);
   background: var(--surface);
   color: var(--text); font: inherit; font-size: 14px; border: 1px solid var(--line);
-  transition: border-color var(--mo-quick) var(--mo-out);
+  transition: border-color var(--mo-quick) var(--mo-out),
+              box-shadow var(--mo-quick) var(--mo-out);
 }
 .search input::placeholder { color: var(--muted); }
 
-/* Form fields signal focus with a brightened border, not the outline ring */
-.search input:focus-visible,
-.controls select:focus-visible {
+/* Form fields signal focus with a brightened border and the soft halo, not the
+   outline ring — the same pair the contact fields use, so focus looks the same
+   wherever it lands. (Duplicated in gear.css by choice; edit both.) */
+.search input:focus,
+.controls select:focus {
   outline: none;
   border-color: var(--focus-line);
+  box-shadow: var(--focus-halo);
   transition-duration: var(--mo-instant);
 }
 .search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); }
@@ -92,7 +96,8 @@ select {
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") right 12px center / 14px 14px no-repeat,
     var(--surface);
-  transition: border-color var(--mo-quick) var(--mo-out);
+  transition: border-color var(--mo-quick) var(--mo-out),
+              box-shadow var(--mo-quick) var(--mo-out);
 }
 /* Row buttons match the inputs' border and weight; Clear stays quieter through
    its muted label and transparent fill, not a fainter outline. */

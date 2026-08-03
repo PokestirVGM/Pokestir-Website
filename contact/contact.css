@@ -47,34 +47,88 @@
   border-radius: var(--radius-md);
   color: var(--text); font: inherit; font-size: 14px;
   caret-color: var(--ring);
+  /* box-shadow is in the list because focus now carries a halo. Without it the
+     ring appears on the same frame as the click while the border eases in
+     behind it, which is the snap that made the state read as bolted on. */
   transition: background-color var(--mo-quick) var(--mo-out),
-              border-color var(--mo-quick) var(--mo-out);
+              border-color var(--mo-quick) var(--mo-out),
+              box-shadow var(--mo-quick) var(--mo-out);
+}
+/* Fields were the only interactive things on the site with no hover at all:
+   every button, row, chip and link answers the pointer before it is used, and
+   these sat inert until clicked.
+
+   No `[type=...]` here, deliberately, even though the rule above is written
+   that way. An attribute selector weighs the same as a class, so
+   `.cform input[type="text"]:hover` scores (0,3,1) while `.cform input:focus`
+   scores (0,2,1) — hover then beats focus, and a field refuses to light up for
+   exactly as long as the pointer that clicked it is still resting on it. Only
+   the textarea escaped, having no attribute in its selector, which is why
+   Message behaved and the three inputs did not.
+
+   Dropping the attribute puts hover level with focus and with the error state
+   at (0,2,1), so plain source order decides: hover here, error next, focus
+   after it, combined last. Every later state wins over hover on its own terms
+   rather than by out-scoring it. Keep this rule above those three. */
+.cform input:hover,
+.cform textarea:hover {
+  border-color: var(--line);
+  transition-duration: var(--mo-instant);
 }
 .cform ::placeholder { color: var(--muted); opacity: .7; }
 /* Vertical only, and never below the height that makes it look like a message
    box rather than a wide input. */
 .cform textarea { resize: vertical; min-height: 156px; }
 
-/* Fields skip the outline ring, so the focus cue has to be unmistakable
-   without it: the border takes the accent and the fill warms toward it. A
-   background wash on its own was too faint to locate. */
-.cform input:focus-visible,
-.cform textarea:focus-visible {
-  outline: none;
-  border-color: var(--focus-line);
-  background: rgba(16,177,255,.06);
-  transition-duration: var(--mo-instant);
-}
-
 /* Validation stays restrained: a quiet red border and wash, with no shake or
-   travel. :user-invalid handles modern browsers; the class covers a submitted
-   required field in engines whose user-validity timing differs. */
+   travel. Listed before focus so that focusing an invalid field still reads as
+   focused; the combined state below then puts the red back on top of it.
+   :user-invalid handles modern browsers; the class covers a submitted required
+   field in engines whose user-validity timing differs. */
 .cform input:user-invalid,
 .cform textarea:user-invalid,
 .cform.was-validated input:invalid,
 .cform.was-validated textarea:invalid {
   background: var(--error-wash);
   border-color: var(--error-line);
+}
+
+/* Fields skip the outline ring, so the focus cue has to be unmistakable
+   without it: the border takes the accent, the fill warms toward it, and the
+   halo puts a soft ring around the whole field. A background wash on its own
+   was too faint to locate, and a border on its own was the same object the
+   error state was already using.
+
+   `:focus`, not `:focus-visible`, and it needs to stay that way. :focus-visible
+   is a modality heuristic: a text box matches it however you got there, but a
+   <select> clicked with a mouse does not, while tabbing to the same select
+   does. Applied to a row of form controls that produces a search field that
+   lights up on click sitting next to a dropdown that stays dark, and no way for
+   the visitor to work out the rule. It is the right selector for buttons and
+   links, where a ring after a click is noise nobody asked for. A field is the
+   opposite case: if the cursor is in it, it should look like the cursor is in
+   it, every time and however it was focused. Same reasoning in gear.css and
+   releases.css, which carry their own copies of this. */
+.cform input:focus,
+.cform textarea:focus {
+  outline: none;
+  border-color: var(--focus-line);
+  background: rgba(16,177,255,.05);
+  box-shadow: var(--focus-halo);
+  transition-duration: var(--mo-instant);
+}
+
+/* Focused *and* invalid. The error rule used to simply overwrite focus, so
+   clicking into the one field that needed fixing was the one place the form
+   stopped telling you where the cursor was. Red keeps the border, because that
+   is still the thing to deal with; the halo keeps the position. */
+.cform input:user-invalid:focus,
+.cform textarea:user-invalid:focus,
+.cform.was-validated input:invalid:focus,
+.cform.was-validated textarea:invalid:focus {
+  border-color: rgba(254,14,14,.62);
+  background: var(--error-wash);
+  box-shadow: var(--error-halo);
 }
 
 /* Keep Chrome's forced autofill colors off the dark fields */
@@ -163,7 +217,10 @@
   font-size: 11px; letter-spacing: .13em; text-transform: uppercase;
   color: var(--muted); font-weight: 700;
 }
-.cdirect-lead { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
+/* The heading carried a line under it saying these reached me just as fast.
+   It was reassurance nobody asked for about a list of the owner's own contact
+   details, so it went; the title already says what the list is. Rule kept out
+   with it rather than left behind unused. */
 
 .crow {
   display: flex; align-items: center; gap: 12px;

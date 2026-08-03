@@ -255,6 +255,16 @@
      page, so that item's geometry here is the geometry it had there. The index
      is what is stored rather than the href, because hrefs are relative and
      differ by page depth while the nav order is the same everywhere. */
+  /* Ceilings for the arrival travel: how long after navigation start it is
+     still worth playing, and how late a frame may run before the main thread
+     is judged too busy to carry it. Both are deliberately generous. The point
+     is to catch a page that is visibly struggling, not to police milliseconds:
+     on a warm load the two frames below land about 16ms apart and nothing here
+     ever triggers. */
+  const ARRIVAL_DEADLINE = 1500;
+  const ARRIVAL_FRAME_BUDGET = 50;
+  const ARRIVAL_SAMPLE_FRAMES = 3;
+
   function arrive() {
     let from = -1;
     const current = activeIndex();
@@ -266,7 +276,45 @@
     // A cross-page arrival is the one case with no previous on-page position to
     // travel from, so the source index is passed in explicitly.
     pill.update({ travel: false });
-    if (from >= 0) pill.update({ from });
+    if (from < 0) return;
+
+    /* Then decide whether the journey is affordable, because this one is not
+       cheap: it animates width and height, so every frame runs layout on the
+       main thread and there is no compositor to fall back on. That is the
+       price of the ink copy staying welded to the real labels, and it is worth
+       paying on a page that is ready to draw it.
+
+       It is not worth paying during the load. Deferred scripts run while the
+       page is still being assembled, so starting here drops a 400ms
+       layout-bound animation onto the busiest moment there is: on the heavier
+       pages that is a few hundred KB of catalog and several hundred tiles
+       being built. The slide loses most of its frames and jerks across the nav,
+       which reads far worse than a pill that was simply already in place.
+
+       So it watches a few frames go by first and only commits if they are
+       arriving on time. Frame health is the real question, not how long the
+       document took: a page that spent two seconds on the network but is idle
+       by the time it paints can carry the animation perfectly well, while one
+       that downloaded instantly and is now building a catalog cannot. The
+       wall-clock deadline is only a backstop for the other half of the
+       problem, which is taste rather than performance. Past a certain point
+       the visitor is already reading the page, and a pill that suddenly slides
+       across a nav they have finished looking at is just a distraction.
+
+       Skipping loses a flourish, and nothing else: the pill was already put in
+       its correct place above, so the failure mode is simply that it was
+       always there. Playing it on a stalled thread loses the illusion. */
+    let seen = 0;
+    let last = performance.now();
+    (function sample() {
+      requestAnimationFrame(() => {
+        const now = performance.now();
+        if (now - last > ARRIVAL_FRAME_BUDGET || now > ARRIVAL_DEADLINE) return;
+        last = now;
+        if (++seen < ARRIVAL_SAMPLE_FRAMES) return sample();
+        pill.update({ from });
+      });
+    }());
   }
 
   placeMenu();

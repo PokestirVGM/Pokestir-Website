@@ -4,21 +4,12 @@
 .page-title .muted { font-size: 15px; font-weight: 600; }
 
 /* ── Search / filter controls ── */
+/* Four items, not five: Favorites moved down to the category row, which gives
+   the search field the width the fifth control was taking. */
 .controls {
-  display: grid; grid-template-columns: 1fr auto auto auto auto; gap: 10px;
+  display: grid; grid-template-columns: 1fr auto auto auto; gap: 10px;
   margin: 0 0 10px;
 }
-
-/* Favorites-only toggle — a .btn that lights up like an active pill. The star
-   carries the same orange as the one marking favorite cards, so the filter and
-   the thing it filters read as one idea; on the lit state it drops back to the
-   label color rather than fighting the blue. */
-.fav-btn { white-space: nowrap; }
-.fav-btn .fav-ic {
-  flex: 0 0 auto; color: #FF8327;
-  transition: color var(--mo-quick) var(--mo-out);
-}
-.fav-btn[aria-pressed="true"] .fav-ic { color: currentColor; }
 
 /* Every control in this row is the same height, font, and border weight, so
    the bar reads as one set: inputs don't inherit type by default, hence the
@@ -28,15 +19,19 @@
   width: 100%; padding: 11px 14px 11px 40px; border-radius: var(--radius-md);
   background: var(--surface);
   color: var(--text); font: inherit; font-size: 14px; border: 1px solid var(--line);
-  transition: border-color var(--mo-quick) var(--mo-out);
+  transition: border-color var(--mo-quick) var(--mo-out),
+              box-shadow var(--mo-quick) var(--mo-out);
 }
 .search input::placeholder { color: var(--muted); }
 
-/* Form fields signal focus with a brightened border, not the outline ring */
-.search input:focus-visible,
-.controls select:focus-visible {
+/* Form fields signal focus with a brightened border and the soft halo, not the
+   outline ring — the same pair the contact fields use, so focus looks the same
+   wherever it lands. (Duplicated in releases.css by choice; edit both.) */
+.search input:focus,
+.controls select:focus {
   outline: none;
   border-color: var(--focus-line);
+  box-shadow: var(--focus-halo);
   transition-duration: var(--mo-instant);
 }
 .search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); }
@@ -48,15 +43,12 @@ select {
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") right 12px center / 14px 14px no-repeat,
     var(--surface);
-  transition: border-color var(--mo-quick) var(--mo-out);
+  transition: border-color var(--mo-quick) var(--mo-out),
+              box-shadow var(--mo-quick) var(--mo-out);
 }
 /* Row buttons match the inputs' border and weight; Clear stays quieter through
    its muted label and transparent fill, not a fainter outline. */
 .controls .btn { font-weight: 600; border-color: var(--line); }
-.controls .fav-btn[aria-pressed="true"] {
-  color: var(--on-ring); border-color: var(--line-bright);
-}
-.controls .fav-btn[aria-pressed="true"] .fav-ic { transition-duration: var(--mo-instant); }
 .btn-clear { background: transparent; color: var(--muted); }
 
 /* ── Filter pills (.pill base from style.css) ── */
@@ -82,6 +74,49 @@ select {
 }
 .filter-label { margin: 8px 2px 2px; }
 .pillbar { position: relative; display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 14px; }
+
+/* ── Category row: the categories themselves, then Favorites hard right ──
+   Two different questions on one line. Which category is a single-select group
+   of four; Favorites is a yes/no that applies on top of whichever is chosen.
+   The distance between them is what says so, which is why Favorites is pushed
+   to the far edge rather than sitting as a fifth chip: adjacent chips of equal
+   weight would read as a five-way choice where picking one clears the rest.
+
+   The row wraps rather than compressing. `.pillbar` is allowed to grow and
+   shrink, Favorites never is, and when the categories need the whole line
+   Favorites drops to the next one and stays right-aligned there. Letting it
+   shrink instead put it half off the edge at narrow widths, which is what the
+   mockup was checked against. The outer margin moves here from `.pillbar` so
+   both children share one baseline. */
+.pill-row {
+  display: flex; flex-wrap: wrap; align-items: flex-start;
+  gap: 8px 14px; margin: 10px 0 14px;
+}
+.pill-row .pillbar { flex: 1 1 auto; min-width: 0; margin: 0; }
+.pill-row .fav-pill { flex: 0 0 auto; margin-left: auto; }
+
+/* Favorites wears the chip vocabulary of the row it now sits on, not the
+   control bar's .btn. The star keeps the orange that marks a favorite card, so
+   the filter and the thing it filters read as one idea; lit, it drops to the
+   label colour rather than fighting the blue underneath it. */
+.fav-pill {
+  display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+}
+.fav-pill .fav-ic {
+  flex: 0 0 auto; color: #FF8327;
+  transition: color var(--mo-quick) var(--mo-out);
+}
+/* The state is aria-pressed, not .active — .active belongs to the category
+   group and is what the travelling pill reads. Keeping them distinct is what
+   stops Favorites from ever being mistaken for a fifth category. */
+.fav-pill[aria-pressed="true"] {
+  background: var(--ring); color: var(--on-ring); border-color: var(--line-bright);
+  transition-duration: var(--mo-instant);
+}
+.fav-pill[aria-pressed="true"] .fav-ic {
+  color: currentColor;
+  transition-duration: var(--mo-instant);
+}
 /* Categories are single-select, so the row carries the shared travelling pill.
    The selected chip underneath drops back to its resting look: both the blue
    and the dark label come from the pill sitting on top of it. Subtags are
@@ -98,24 +133,28 @@ select {
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
 /* Catalog items are compact, repeated components — plain border, no gradient
-   edge. Single column: header, description, then tags + date pinned to the
-   bottom so equal-height grid rows look deliberate. */
-.grid .card { display: flex; flex-direction: column; border-color: var(--line); }
-.grid .card::before { display: none; }
+   edge and no inner bleed. Single column: header, description, then tags + date
+   pinned to the bottom so equal-height grid rows look deliberate.
 
-/* Favorites get the site's signature animated gradient border back */
-.grid .card.is-favorite { border-color: transparent; }
-.grid .card.is-favorite::before { display: block; }
+   Favorites used to take the signature animated border back. They no longer do.
+   This is the one page that puts dozens of cards on screen at once and then
+   appends dozens more on scroll, so it is the only place where per-card ambient
+   paint multiplies into something worth counting, and the star in the title
+   already marks a favorite without spending a frame budget on it. Everywhere
+   else on the site a page carries one or two cards and keeps both effects. */
+.grid .card { display: flex; flex-direction: column; border-color: var(--line); }
+.grid .card::before, .grid .card::after { display: none; }
 
 /* Exit copies leave the grid so they can float over the incoming layout.
    Repeat only the parent-dependent card rules needed to preserve their rest
-   appearance while they fade away. */
+   appearance while they fade away — the clone is out of .grid, so it would
+   otherwise pick the plain .card treatment back up mid-fade and flash a ring
+   and a bleed on its way out. */
 .mo-grid-clone.gear-card-clone {
   display: flex; flex-direction: column; border-color: var(--line);
 }
-.mo-grid-clone.gear-card-clone::before { display: none; }
-.mo-grid-clone.gear-card-clone.is-favorite { border-color: transparent; }
-.mo-grid-clone.gear-card-clone.is-favorite::before { display: block; }
+.mo-grid-clone.gear-card-clone::before,
+.mo-grid-clone.gear-card-clone::after { display: none; }
 
 .grid-msg { color: var(--muted); padding: 16px 0; grid-column: 1 / -1; }
 
