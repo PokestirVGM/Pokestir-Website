@@ -1,5 +1,60 @@
 /* Releases archive — searchable list and per-release detail views */
 
+/* Same-origin generated release pages opt into the browser's cross-document
+   transition. Browsers without support keep ordinary navigation. Scoped to
+   these pages deliberately: it was briefly promoted site-wide to carry a
+   travelling nav pill, which did not survive contact with the cross-document
+   model. See the motion plan. */
+@view-transition { navigation: auto; }
+
+@keyframes mo-vt-fade-out { to { opacity: 0; } }
+@keyframes mo-vt-fade-in { from { opacity: 0; } }
+
+/* Fade the new page in *over* the old one, and never fade the old one out.
+
+   Cross-dissolving them left both semi-transparent at once: at the midpoint the
+   two layers composited to about 0.67 alpha, so a third of the backdrop showed
+   straight through the page and the whole screen appeared to flash. Holding the
+   outgoing page opaque underneath means there is no gap at any point, and the
+   incoming page simply arrives on top of it. */
+::view-transition-group(root) { animation: none; }
+::view-transition-old(root) { animation: none; }
+::view-transition-new(root) {
+  animation: mo-vt-fade-in var(--mo-base) var(--mo-out) both;
+}
+::view-transition-group(release-art) {
+  animation-duration: var(--mo-view);
+  animation-timing-function: var(--mo-inout);
+}
+/* It is the same artwork at both ends, so crossfading it against itself only
+   ghosts: for most of the morph you saw two copies of one cover at partial
+   opacity sliding through each other. Let the single group carry the geometry
+   and hold both snapshots opaque instead.
+
+   The sizing matters as much as the fade. Snapshots default to the old
+   element's aspect ratio and get stretched to the new one, which squashes a
+   square cover on its way to the hero and then pops it back. Pinning both to
+   fill the group with `object-fit: cover` keeps the art undistorted the whole
+   way across. */
+::view-transition-old(release-art),
+::view-transition-new(release-art) {
+  animation: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Drop the geometry morph and keep the root crossfade, which still confirms
+     that the page changed without moving anything across the screen. The
+     release-art snapshots no longer animate in either mode, so there is nothing
+     left to shorten for them here. */
+  ::view-transition-group(release-art) { animation: none !important; }
+  /* The outgoing page no longer animates in either mode, so only the incoming
+     fade is left to shorten. */
+  ::view-transition-new(root) { animation-duration: var(--mo-quick) !important; }
+}
+
 .page-title { margin: 0 0 18px; }
 .page-title .muted { font-size: 15px; font-weight: 600; }
 
@@ -17,6 +72,7 @@
   width: 100%; padding: 11px 14px 11px 40px; border-radius: var(--radius-md);
   background: var(--surface);
   color: var(--text); font: inherit; font-size: 14px; border: 1px solid var(--line);
+  transition: border-color var(--mo-quick) var(--mo-out);
 }
 .search input::placeholder { color: var(--muted); }
 
@@ -24,7 +80,8 @@
 .search input:focus-visible,
 .controls select:focus-visible {
   outline: none;
-  border-color: rgba(16,177,255,.55);
+  border-color: var(--focus-line);
+  transition-duration: var(--mo-instant);
 }
 .search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); }
 
@@ -35,6 +92,7 @@ select {
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") right 12px center / 14px 14px no-repeat,
     var(--surface);
+  transition: border-color var(--mo-quick) var(--mo-out);
 }
 /* Row buttons match the inputs' border and weight; Clear stays quieter through
    its muted label and transparent fill, not a fainter outline. */
@@ -64,6 +122,10 @@ select {
 }
 .rgrid--rail::-webkit-scrollbar { display: none; }
 .rgrid--rail .release-tile { scroll-snap-align: start; }
+.rail-motion-driver {
+  position: fixed; width: 0; height: 0; overflow: hidden;
+  pointer-events: none; opacity: 0;
+}
 
 .rail-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .rail-head .grid-section-title { margin: 0 2px; }
@@ -74,10 +136,45 @@ select {
   display: grid; place-items: center; width: 34px; height: 34px;
   background: transparent; border: 1px solid var(--line); border-radius: var(--radius-sm);
   color: var(--white); cursor: pointer; line-height: 0;
-  transition: background-color .15s ease, border-color .15s ease, opacity .15s ease;
+  scale: 1;
+  transition: background-color var(--mo-quick) var(--mo-out),
+              border-color var(--mo-quick) var(--mo-out),
+              opacity var(--mo-quick) var(--mo-out),
+              scale var(--mo-quick) var(--mo-out);
 }
-.rail-btn:hover { background: rgba(255,255,255,.06); border-color: var(--line-strong); }
-.rail-btn:disabled { opacity: .35; cursor: default; background: transparent; border-color: var(--line); }
+.rail-btn:hover {
+  background: rgba(255,255,255,.06); border-color: var(--line-strong);
+  transition-duration: var(--mo-instant);
+}
+/* The chevron leans the way it is about to send the rail, so the control says
+   what it does before it is pressed. */
+.rail-btn svg {
+  translate: 0;
+  transition: translate var(--mo-quick) var(--mo-out);
+}
+.rail-btn:hover:not(:disabled) svg,
+.rail-btn:focus-visible:not(:disabled) svg {
+  transition-duration: var(--mo-instant);
+  transition-timing-function: var(--mo-snap);
+}
+.rail-btn--prev:hover:not(:disabled) svg,
+.rail-btn--prev:focus-visible:not(:disabled) svg { translate: calc(-2px * var(--mo-travel)); }
+.rail-btn--next:hover:not(:disabled) svg,
+.rail-btn--next:focus-visible:not(:disabled) svg { translate: calc(2px * var(--mo-travel)); }
+/* Press and release, driven by nav.js, same as every other control: the recoil
+   accelerates in and the rebound springs back on its own curve. */
+.rail-btn.is-pressed {
+  scale: .9;
+  transition-duration: 70ms;
+  transition-timing-function: var(--mo-in);
+}
+.rail-btn.is-released { animation: rail-btn-unsquash 260ms var(--mo-snap); }
+@keyframes rail-btn-unsquash { from { scale: .9; } to { scale: 1; } }
+/* Nothing to give back when the rail cannot move any further that way. */
+.rail-btn:disabled {
+  opacity: .35; cursor: default; background: transparent; border-color: var(--line);
+  scale: 1;
+}
 .rgrid + .grid-section-title { margin-top: 26px; }
 .grid-section-title {
   font-family: var(--font-display); font-weight: 800; font-size: 20px;
@@ -90,28 +187,89 @@ select {
 .release-tile--album .rsub, .release-tile--album .rmeta, .release-tile--album .rcomp { font-size: 13px; }
 
 .release-tile {
+  position: relative; isolation: isolate;
   display: block; min-width: 0;
   color: var(--text); text-decoration: none;
 }
-
 .tile-cover {
+  position: relative; z-index: 1; overflow: hidden;
   aspect-ratio: 1 / 1; border-radius: var(--radius-md);
   border: 1px solid var(--line);
-  background:
-    var(--art-url, linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 100%))
-    center / cover, hsl(220 25% 14%);
-  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 100%), hsl(220 25% 14%);
+  scale: 1;
+  transition: scale var(--mo-base) var(--mo-in),
+              border-color var(--mo-quick) var(--mo-in);
 }
+.tile-cover.is-transition-art,
+.detail-head .art { view-transition-name: release-art; }
+.tile-art,
+.detail-art {
+  position: absolute; inset: 0;
+  background: var(--art-url) center / cover no-repeat;
+  opacity: 0;
+  transition: opacity var(--mo-base) var(--mo-out);
+}
+.tile-art.is-loaded,
+.detail-art.is-loaded { opacity: 1; }
+
+/* No zoom on the artwork. These covers carry their own baked-in typography and
+   border rules ("FROM ..." sits right on the bottom edge), so scaling the art
+   inside its frame crops the sleeve's own design and softens type that was
+   drawn to sit exactly where it is. A push-in is a good move for photographic
+   art and the wrong one for art that is already a composed layout.
+
+   What is left is a single idea done precisely: the cover lifts and its rim
+   brightens. On this near-black page a light rim carries elevation far better
+   than a dark shadow, which mostly just smudges the edge. */
+/* Tiles are links, so they lift: the movement is the affordance that says this
+   is something you can open. */
 .release-tile:hover .tile-cover,
 .release-tile:focus-visible .tile-cover {
-  transform: translateY(-3px);
-  border-color: var(--line-strong);
-  box-shadow: 0 10px 28px rgba(2,6,23,.5);
+  translate: 0 calc(-4px * var(--mo-travel));
+  border-color: var(--line-bright);
+  transition: translate var(--mo-base) var(--mo-snap),
+              border-color var(--mo-instant) var(--mo-out);
+}
+/* The shadow is cast on the page, not carried by the tile: it holds position as
+   the cover rises rather than travelling up glued to it. */
+.release-tile:hover::before,
+.release-tile:focus-visible::before {
+  opacity: 1;
+  translate: 0 calc(2px * var(--mo-travel));
+  transition: opacity var(--mo-quick) var(--mo-out),
+              translate var(--mo-base) var(--mo-out);
+}
+/* Press and release, driven by nav.js. Separate properties so the recoil and
+   the rise can run at different lengths, same as every other control. */
+.release-tile.is-pressed .tile-cover {
+  translate: 0 calc(2px * var(--mo-travel));
+  scale: .985;
+  transition-duration: 70ms;
+  transition-timing-function: var(--mo-in);
+}
+.release-tile.is-pressed::before { opacity: .35; translate: 0 0; transition-duration: 70ms; }
+.release-tile.is-released .tile-cover {
+  animation: tile-rise 170ms var(--mo-out), tile-unsquash 260ms var(--mo-snap);
+}
+@keyframes tile-rise {
+  from { translate: 0 calc(2px * var(--mo-travel)); }
+  to { translate: 0 calc(-4px * var(--mo-travel)); }
+}
+@keyframes tile-unsquash { from { scale: .985; } to { scale: 1; } }
+/* Handed to the view transition: the cover has to be in its resting pose when
+   the snapshot is taken, or the artwork starts its flight from wherever the
+   press rebound happened to be. Placed after the hover, press and release rules
+   so it wins on source order at equal specificity. */
+.release-tile .tile-cover.is-transition-still {
+  translate: 0;
+  scale: 1;
+  transition: none;
+  animation: none;
 }
 .release-tile:focus-visible { outline: none; }
-.release-tile:focus-visible .tile-cover { outline: 2px solid rgba(16,177,255,.55); outline-offset: 2px; }
+.release-tile:focus-visible .tile-cover { outline: var(--focus-ring); outline-offset: 2px; }
 
-.rinfo { display: grid; gap: 2px; padding: 10px 4px 0; }
+.rinfo { position: relative; z-index: 1; display: grid; gap: 2px; padding: 10px 4px 0; }
 .rname {
   font-weight: 800; letter-spacing: .2px; line-height: 1.25; color: var(--white);
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
@@ -129,24 +287,50 @@ select {
 /* ── Detail view ── */
 .back-link {
   display: inline-flex; align-items: center; gap: 7px;
+  scale: 1;
   margin: 0 0 14px; padding: 8px 12px;
   color: var(--muted); text-decoration: none; font-weight: 700; font-size: 14px;
   border: 1px solid transparent; border-radius: var(--radius-sm);
-  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+  transition: background-color var(--mo-quick) var(--mo-out),
+              border-color var(--mo-quick) var(--mo-out),
+              color var(--mo-quick) var(--mo-out),
+              scale var(--mo-quick) var(--mo-out);
 }
-.back-link:hover { color: var(--text); border-color: var(--line); background: rgba(255,255,255,.06); }
+.back-link:hover {
+  color: var(--text); border-color: var(--line); background: rgba(255,255,255,.06);
+  transition-duration: var(--mo-instant);
+}
+/* The arrow moves the way the link goes. It is the only part of the control
+   that means "back", so it is the part that should answer the pointer. */
+.back-arrow {
+  display: inline-block; line-height: 1;
+  translate: 0;
+  transition: translate var(--mo-quick) var(--mo-out);
+}
+.back-link:hover .back-arrow,
+.back-link:focus-visible .back-arrow {
+  translate: calc(-3px * var(--mo-travel));
+  transition-duration: var(--mo-instant);
+  transition-timing-function: var(--mo-snap);
+}
+.back-link.is-pressed {
+  scale: .96;
+  transition-duration: 70ms;
+  transition-timing-function: var(--mo-in);
+}
+.back-link.is-released { animation: back-link-unsquash 260ms var(--mo-snap); }
+@keyframes back-link-unsquash { from { scale: .96; } to { scale: 1; } }
 
 /* Same card-stacking rhythm as the Links page (26px between cards) */
 .detail-stack { display: flex; flex-direction: column; gap: 26px; }
 
 .detail-head { display: flex; gap: 22px; padding: 22px; }
 .detail-head .art {
+  position: relative; overflow: hidden;
   flex: 0 0 auto; width: 172px; aspect-ratio: 1 / 1; align-self: start;
   border-radius: var(--radius-md); border: 1px solid var(--line-strong);
   box-shadow: var(--shadow);
-  background:
-    var(--art-url, linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 100%))
-    center / cover, hsl(220 25% 14%);
+  background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 100%), hsl(220 25% 14%);
 }
 .detail-head .info { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
 
@@ -183,7 +367,6 @@ select {
   padding: 11px 14px;
   color: var(--white);
 }
-.plat-links .btn:hover { box-shadow: 0 6px 14px rgba(2,6,23,.45); }
 .plat-links .btn img { width: 20px; height: 20px; display: block; }
 
 .plat-bandcamp     { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #1ea0c3; }
@@ -212,43 +395,82 @@ select {
 .tracks-list { margin-top: 4px; }
 
 .track-row {
+  position: relative; isolation: isolate;
   display: grid; grid-template-columns: 26px 1fr auto; gap: 14px;
   align-items: center; padding: 10px 12px;
   border-top: 1px solid var(--line-soft);
   border-radius: var(--radius-sm);
 }
+.track-row > * { position: relative; z-index: 1; }
+.track-row::before {
+  content: ""; position: absolute; z-index: 0; pointer-events: none;
+  inset: 0; border-radius: inherit;
+  background: linear-gradient(90deg, rgba(16,177,255,.16) var(--pct, 0%), rgba(16,177,255,.07) var(--pct, 0%));
+  opacity: 0;
+  transition: opacity var(--mo-quick) var(--mo-in);
+}
 .track-row:first-child { border-top: 0; }
-.track-row.has-preview { cursor: pointer; transition: background .15s ease; }
-.track-row.has-preview:hover { background: rgba(255,255,255,.05); }
+/* Hover in fast, out slower: quick enough to feel responsive, slow enough that
+   sweeping the pointer down the list doesn't strobe. --pct glides the playing
+   row's progress edge between timeupdate events (see @property in style.css). */
+.track-row.has-preview {
+  cursor: pointer;
+  transition: background-color var(--mo-quick) var(--mo-out), --pct var(--mo-glide) linear;
+}
+/* Durations are listed in the same order as transition-property above: only the
+   background speeds up on hover-in, the progress glide keeps its own timing. */
+.track-row.has-preview:hover {
+  background-color: rgba(255,255,255,.05);
+  transition-duration: var(--mo-instant), var(--mo-glide);
+}
+.track-row--jump { transition: none; }
 .track-row.has-preview:focus-visible { outline-offset: -2px; }
 
 /* While a preview plays: blue selection tint that fills left-to-right as
    progress (releases.js updates --pct on timeupdate). */
-.track-row.is-playing,
-.track-row.is-playing:hover {
-  background: linear-gradient(90deg, rgba(16,177,255,.16) var(--pct, 0%), rgba(16,177,255,.07) var(--pct, 0%));
+.track-row.is-playing:hover { background-color: transparent; }
+.track-row.is-playing::before {
+  opacity: 1;
+  transition-duration: var(--mo-base);
+  transition-timing-function: var(--mo-out);
 }
 
 /* Leading cell: track number, swapped for a play/pause glyph on hover/playing.
    Number and glyphs are stacked in the same grid cell and toggled with
-   visibility (not display) so the swap never changes the row's height —
+   opacity (not display) so the swap never changes the row's height —
    a height change here shifts the rows under the cursor and causes
    hover-flicker jitter. */
 .t-lead { display: grid; place-items: center; color: var(--muted); }
 .t-lead > * { grid-area: 1 / 1; }
 .t-num { font-size: 13px; font-variant-numeric: tabular-nums; line-height: 1.4; }
-.t-ic-play, .t-ic-pause { visibility: hidden; color: var(--white); line-height: 0; }
+.t-ic-play, .t-ic-pause { color: var(--white); line-height: 0; }
+
+/* Crossfade rather than the old visibility toggle, which was a hard cut. The
+   grid stack above keeps all three glyphs in one cell, so opacity and scale
+   are layout-neutral by construction and the row height still cannot move:
+   the original reason visibility was chosen over display still holds.
+   The .t-lead wrapper is aria-hidden, so nothing here is exposed to AT. */
+.t-num, .t-ic-play, .t-ic-pause {
+  transition: opacity var(--mo-quick) var(--mo-out), scale var(--mo-quick) var(--mo-out);
+}
+.t-ic-play, .t-ic-pause { opacity: 0; scale: .7; }
 .track-row.has-preview:hover .t-num,
 .track-row.has-preview:focus-visible .t-num,
-.track-row.is-playing .t-num { visibility: hidden; }
+.track-row.is-playing .t-num { opacity: 0; scale: .8; }
 .track-row.has-preview:hover:not(.is-playing) .t-ic-play,
-.track-row.has-preview:focus-visible:not(.is-playing) .t-ic-play { visibility: visible; }
-.track-row.is-playing .t-ic-pause { visibility: visible; }
+.track-row.has-preview:focus-visible:not(.is-playing) .t-ic-play { opacity: 1; scale: 1; }
+.track-row.is-playing .t-ic-pause { opacity: 1; scale: 1; }
 
 .t-main { min-width: 0; }
 .t-title { font-weight: 700; font-size: 14px; color: var(--text); }
 .t-artist { font-size: 12px; color: var(--muted); margin-top: 2px; }
 .t-dur { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* Travel collapses globally; keep the row tint's fade, which moves nothing.
+     The tiles no longer have a shadow layer to exempt. */
+  .track-row::before { transition-duration: var(--mo-quick) !important; }
+}
 
 /* ── Responsive ── */
 @media (max-width: 900px) {

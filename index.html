@@ -51,16 +51,18 @@
   <link rel="stylesheet" href="home/home.css">
   <link rel="icon" href="images/icon.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <!-- nav.js first: it defines the shared motion primitives the page scripts
+       use. Deferred scripts run in document order, so this is the ordering. -->
+  <script src="nav.js" defer></script>
   <script src="home/tracks.js" defer></script>
   <script src="home/player.js" defer></script>
-  <script src="nav.js" defer></script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
       <a class="site-nav__brand" href="/"><img src="images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
-      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>
         <a href="releases/">Releases</a>
@@ -168,8 +170,8 @@
     <section class="card" id="mywork" aria-label="Music Player">
       <div class="mw-player">
         <div class="mw-info">
-          <div class="mw-title" id="mwTitle">Select a track to begin</div>
-          <div class="mw-ptags" id="mwPtags"></div>
+          <div class="mw-title mo-fade" id="mwTitle">Select a track to begin</div>
+          <div class="mw-ptags mo-fade" id="mwPtags"></div>
           <div class="mw-scrubber">
             <span class="mw-time" id="mwCur">0:00</span>
             <input type="range" class="mw-seek" id="mwSeek" value="0" min="0" max="100" step="0.1" aria-label="Seek">
@@ -177,7 +179,7 @@
           </div>
           <div class="mw-controls">
             <button class="mw-btn" id="mwPrev" aria-label="Previous"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg></button>
-            <button class="mw-btn" id="mwPlay" aria-label="Play"></button>
+            <button class="mw-btn mw-btn--play" id="mwPlay" aria-label="Play"></button>
             <button class="mw-btn" id="mwNext" aria-label="Next"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
           </div>
         </div>

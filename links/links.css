@@ -6,20 +6,92 @@
 .page-title { margin: 4px 2px 6px; }
 .section-sub { color: var(--muted); font-size: 14px; margin: 2px 2px 8px; }
 
-.lgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 24px; padding: 18px; }
+/* Two columns, not three. The groups hold 7, 4 and 2 links, so as three equal
+   columns the card stretched to Music's height and left the bottom right two
+   thirds of it empty. Stacking Socials over Support puts about 6 rows against
+   Music's 7, and the card ends near where both sides do. */
+.lgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 24px; padding: 18px; align-items: start; }
+.lstack { display: grid; gap: 22px; align-content: start; }
 .lcol-title { margin: 0 0 10px; color: var(--white); font-size: 13px; letter-spacing: .3px; text-transform: uppercase; }
 .lrows { display: grid; gap: 10px; align-content: start; }
 .lrow {
+  position: relative; isolation: isolate;
   display: flex; align-items: center; gap: 12px;
   padding: 11px 14px;
   font-size: 14px; font-weight: 700; color: var(--white); text-decoration: none;
   border: 1px solid var(--line-strong); border-radius: var(--radius-sm);
   background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%);
-  transition: transform .08s ease, filter .15s ease, box-shadow .15s ease;
+  /* Separate properties, not one transform, so the release can rise and
+     unsquash on different curves. */
+  translate: 0 0; scale: 1;
+  transition: translate var(--mo-quick) var(--mo-out),
+              scale var(--mo-quick) var(--mo-out);
 }
-.lrow:hover { transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 6px 14px rgba(2,6,23,.45); }
-.lrow:active { transform: translateY(0); }
+.lrow::after {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  inset: 0; border-radius: inherit;
+  /* Sized to the 3px lift rather than the 7px one it used to imply. */
+  box-shadow: 0 5px 13px rgba(2,6,23,.5);
+  opacity: 0;
+  transition: opacity var(--mo-quick) var(--mo-out),
+              transform var(--mo-quick) var(--mo-out);
+}
+.lrow:hover {
+  translate: 0 calc(-3px * var(--mo-travel));
+  transition-duration: var(--mo-instant);
+}
+/* Same rule as everywhere else on the site: the shadow belongs to the surface
+   under the row, so it counters the row's own lift to stay put and spreads as
+   the gap opens. Riding upward with the row is what read as sloppy. */
+.lrow:hover::after {
+  opacity: 1;
+  transform: translateY(calc(3px * var(--mo-travel))) scale(1.02);
+  transition-duration: var(--mo-instant);
+}
+/* Press and release, driven by nav.js: the press accelerates onto the surface
+   and the release rises and unsquashes on separate curves. */
+.lrow.is-pressed {
+  translate: 0 calc(2px * var(--mo-travel));
+  scale: .97;
+  transition-duration: 70ms;
+  transition-timing-function: var(--mo-in);
+}
+.lrow.is-pressed::after {
+  opacity: .4;
+  transform: translateY(0) scale(.98);
+  transition-duration: 70ms;
+}
+.lrow.is-released { animation: lrow-rise 170ms var(--mo-out), lrow-unsquash 260ms var(--mo-snap); }
+@keyframes lrow-rise {
+  from { translate: 0 calc(2px * var(--mo-travel)); }
+  to { translate: 0 calc(-3px * var(--mo-travel)); }
+}
+@keyframes lrow-unsquash { from { scale: .97; } to { scale: 1; } }
 .lrow img { width: 20px; height: 20px; display: block; }
+/* Every row leaves the site. The aria-label already says "opens in a new tab",
+   but nothing said it visually. `order` pushes the arrow past the icon and the
+   label, because ::after is already spoken for by the shadow. Same arrival as
+   the contact rows: it slides in the direction the link goes. */
+.lrow::before {
+  content: ""; order: 1; margin-left: auto; flex: 0 0 auto;
+  width: 13px; height: 13px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8 7h9v9'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8 7h9v9'/%3E%3C/svg%3E") center / contain no-repeat;
+  opacity: 0; translate: calc(-4px * var(--mo-travel)) 0;
+  transition: opacity var(--mo-quick) var(--mo-out),
+              translate var(--mo-quick) var(--mo-out);
+}
+.lrow:hover::before,
+.lrow:focus-visible::before {
+  opacity: .85; translate: 0;
+  transition-duration: var(--mo-instant);
+  transition-timing-function: var(--mo-snap);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lrow::after { transition-duration: var(--mo-quick) !important; }
+}
 
 /* Platform tints */
 .lrow.yt       { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), #ff0000; }

@@ -28,6 +28,102 @@
 
   let DB = [];
 
+  /* Web Animations are outside CSS's reduced-motion reach, so every scripted
+     list change consults this guard. Durations and curves resolve from the
+     shared motion tokens rather than being duplicated here. */
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)');
+  const MAX_MOTION_CARDS = 20;
+  const activeGridMotions = new Set();
+  /* First-paint guard: initial cards do not get a load entrance. */
+  let hasRendered = false;
+
+  function motionToken(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+
+  function motionDuration(name) {
+    const value = motionToken(name);
+    if (value.endsWith('ms')) return parseFloat(value);
+    if (value.endsWith('s')) return parseFloat(value) * 1000;
+    return 0;
+  }
+
+  function trackGridMotion(animation, cleanup) {
+    const motion = { animation, cleanup };
+    activeGridMotions.add(motion);
+    animation.finished.then(cleanup, cleanup).finally(() => activeGridMotions.delete(motion));
+  }
+
+  function clearGridMotions() {
+    for (const motion of activeGridMotions) {
+      motion.animation.cancel();
+      motion.cleanup();
+    }
+    activeGridMotions.clear();
+  }
+
+  function nearViewport(rect, margin) {
+    return rect.bottom >= -margin && rect.top <= window.innerHeight + margin;
+  }
+
+  /* ── Grid motion ──────────────────────────────────────────────────────────
+     Cards are dealt onto the grid rather than faded onto it: each one arrives
+     from slightly above and slightly larger than final and settles, and they
+     are dealt in reading order instead of all landing on the same frame.
+
+     Ordering is the part that matters. The old version animated every card
+     inside one flat 200ms window with nothing staggered, and forty cards on a
+     single clock is what read as one crossfade of the whole grid rather than as
+     a list rearranging. The window is capped so a long page still resolves
+     quickly: past the cap the remaining cards arrive together.
+
+     Durations here are tuned literals rather than tokens, the same as the nav
+     icon's: 260ms sits between --mo-base and --mo-comp because the settle needs
+     room the plain enter does not. The curves are tokens. */
+  const DEAL_STEP = 22;     // ms between consecutive arrivals
+  const DEAL_WINDOW = 240;  // ms; every arrival has begun by here
+
+  function dealDelay(index) {
+    return Math.min(index * DEAL_STEP, DEAL_WINDOW);
+  }
+
+  function dealIn(el, index) {
+    const travel = parseFloat(motionToken('--mo-travel')) || 0;
+    return el.animate([
+      { opacity: 0, transform: `translateY(${-6 * travel}px) scale(1.04)` },
+      { opacity: 1, transform: 'translateY(0) scale(1)' }
+    ], {
+      duration: 260,
+      easing: motionToken('--mo-snap'),
+      delay: dealDelay(index),
+      fill: 'backwards'
+    });
+  }
+
+  /* Cards that survive a filter change move on `travelPath`, the same law the
+     nav pill and the About/Commissions tabs use: the duration scales with the
+     distance and the arrival commits, overshoots, answers with a smaller
+     counter-swing and rests. A card crossing the grid and a card nudging one
+     column over should not share a number. Falls back to the old flat timing
+     when nav.js has not defined the primitive. */
+  function moveSurvivor(el, dx, dy, fromOpacity) {
+    const MO = window.PokestirMotion;
+    const move = MO && MO.travelPath({ x: dx, y: dy }, { x: 0, y: 0 });
+    if (!move) {
+      return el.animate([
+        { opacity: fromOpacity, transform: `translate(${dx}px, ${dy}px)` },
+        { opacity: 1, transform: 'translate(0, 0)' }
+      ], { duration: motionDuration('--mo-base'), easing: motionToken('--mo-out') });
+    }
+    const over = move.over;
+    return el.animate([
+      { opacity: fromOpacity, transform: `translate(${dx}px, ${dy}px)`, easing: 'cubic-bezier(.7,0,.35,1)' },
+      { transform: `translate(${move.ux * over}px, ${move.uy * over}px)`, offset: .6, easing: 'cubic-bezier(.4,0,.3,1)' },
+      { transform: `translate(${-move.ux * over * .32}px, ${-move.uy * over * .32}px)`, offset: .82, easing: 'cubic-bezier(.4,0,.3,1)' },
+      { opacity: 1, transform: 'translate(0, 0)' }
+    ], { duration: move.duration, fill: 'backwards' });
+  }
+
   function escapeHTML(s) {
     return (s == null ? '' : String(s)).replace(/[&<>"']/g, (m) => ({
       '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
@@ -217,24 +313,55 @@
     btn.setAttribute("aria-pressed", String(active));
   }
 
+  /* Categories are single-select, so the selection is marked by the shared
+     travelling pill rather than one chip turning blue while another turns off:
+     the same element and the same commit-and-settle curve as the site nav and
+     the home tabs. Deselecting leaves no category, and the pill fades out. */
+  let catPills = [];
+  let categoryPill = null;
+
+  function syncCategoryPills() {
+    for (const btn of catPills) setPillState(btn, state.category === btn.dataset.category);
+    if (categoryPill) categoryPill.update();
+  }
+
   function buildCategoryPills() {
     const frag = document.createDocumentFragment();
+    catPills = [];
     for (const category of Object.keys(CATEGORY_SUBTAGS)) {
       const btn = document.createElement("button");
       btn.className = "pill";
       btn.type = "button";
       btn.textContent = category;
+      btn.dataset.category = category;
       setPillState(btn, state.category === category);
+      // Restyle the existing chips rather than rebuilding the row: the pill
+      // travels between live elements, and replacing them mid-journey would
+      // leave it animating towards a node that no longer exists.
       btn.addEventListener("click", () => {
         state.category = state.category === category ? "" : category;
         state.subtags.clear();
-        buildCategoryPills();
+        syncCategoryPills();
         buildSubtags();
         render();
       });
       frag.appendChild(btn);
+      catPills.push(btn);
     }
     catpillsEl.replaceChildren(frag);
+
+    if (!window.PokestirMotion) return;
+    if (!categoryPill) {
+      categoryPill = window.PokestirMotion.travellingPill(catpillsEl, {
+        items: () => catPills,
+        active: () => catPills.findIndex((b) => b.classList.contains("active")),
+        pillClass: "mo-pill--round"
+      });
+      new ResizeObserver(() => categoryPill.update({ travel: false })).observe(catpillsEl);
+    }
+    // The copy inside the pill is a snapshot of the row, so it is retaken
+    // whenever the row itself is rebuilt.
+    categoryPill.rebuild();
   }
 
   function buildSubtags() {
@@ -257,7 +384,9 @@
     }
 
     subtagsEl.replaceChildren(frag);
-    subtagsWrapEl.style.display = list.length ? "block" : "none";
+    const open = Boolean(list.length);
+    subtagsWrapEl.classList.toggle("is-open", open);
+    subtagsWrapEl.setAttribute("aria-hidden", String(!open));
   }
 
   function compareByName(a, b) {
@@ -289,6 +418,7 @@
     const el = document.createElement("article");
     el.className = item.favorite ? "card is-favorite" : "card";
     el.setAttribute("role", "listitem");
+    el.dataset.motionKey = item.product;
 
     const source = [item.vendor, item.tag].filter(Boolean).map(escapeHTML).join(" &bull; ");
     const dateHTML = item.date ? `<span class="date-added">Added ${escapeHTML(formatDate(item.date))}</span>` : "";
@@ -324,6 +454,16 @@
   sentinel.id = 'gs-sentinel';
   sentinel.style.cssText = 'height:1px;';
 
+  function animateAppended(cards) {
+    if (REDUCED.matches) return;
+    const visible = cards.map((el) => ({ el, rect: el.getBoundingClientRect() }))
+      .filter(({ rect }) => nearViewport(rect, 320))
+      .slice(0, MAX_MOTION_CARDS);
+    // The next page of results is dealt exactly like a filter change, so
+    // scrolling for more and filtering feel like the same grid.
+    visible.forEach(({ el }, i) => trackGridMotion(dealIn(el, i), () => {}));
+  }
+
   function appendPage() {
     const start = currentPage * PAGE_SIZE;
     const slice = currentList.slice(start, start + PAGE_SIZE);
@@ -333,10 +473,13 @@
       return;
     }
 
+    const isPagination = currentPage > 0;
+    const cards = slice.map(card);
     const frag = document.createDocumentFragment();
-    for (const item of slice) frag.appendChild(card(item));
+    for (const el of cards) frag.appendChild(el);
     grid.appendChild(frag);
     currentPage++;
+    if (isPagination) animateAppended(cards);
 
     if (currentPage * PAGE_SIZE < currentList.length) {
       grid.after(sentinel);
@@ -350,11 +493,93 @@
       }, { rootMargin: '300px' });
       ioObserver.observe(sentinel);
     }
+    return cards;
+  }
+
+  function addExitClone(el, rect, opacity, index) {
+    const clone = el.cloneNode(true);
+    clone.classList.add('mo-grid-clone', 'gear-card-clone');
+    clone.setAttribute('aria-hidden', 'true');
+    clone.inert = true;
+    Object.assign(clone.style, {
+      position: 'fixed',
+      left: `${rect.left}px`,
+      top: `${rect.top}px`,
+      width: `${rect.width}px`,
+      height: `${rect.height}px`,
+      margin: '0',
+      pointerEvents: 'none',
+      zIndex: '90'
+    });
+    document.body.appendChild(clone);
+
+    /* Departures shrink slightly and go, with no travel. A card that is leaving
+       is not the thing being looked at, so it should clear the way rather than
+       take a journey of its own: it is out before the arrivals have finished
+       being dealt. Same ordering as the arrivals, so the two read as one move. */
+    const animation = clone.animate([
+      { opacity, transform: 'scale(1)' },
+      { opacity: 0, transform: 'scale(.98)' }
+    ], {
+      duration: 110,
+      easing: motionToken('--mo-in'),
+      delay: dealDelay(index),
+      fill: 'both'
+    });
+    trackGridMotion(animation, () => clone.remove());
+  }
+
+  function captureGridMotion(nextKeys) {
+    const oldRects = new Map();
+    const visible = Array.from(grid.querySelectorAll(':scope > .card'))
+      .map((el) => ({
+        el,
+        rect: el.getBoundingClientRect(),
+        opacity: getComputedStyle(el).opacity
+      }))
+      .filter(({ rect }) => nearViewport(rect, 0))
+      .slice(0, MAX_MOTION_CARDS);
+    clearGridMotions();
+    if (!hasRendered || REDUCED.matches) return oldRects;
+    let leaving = 0;
+    for (const { el, rect, opacity } of visible) {
+      const key = el.dataset.motionKey;
+      oldRects.set(key, { rect, opacity });
+      if (!nextKeys.has(key)) addExitClone(el, rect, opacity, leaving++);
+    }
+    return oldRects;
+  }
+
+  function animateFilteredGrid(oldRects) {
+    if (!hasRendered || REDUCED.matches) return;
+    const visible = Array.from(grid.querySelectorAll(':scope > .card'))
+      .map((el) => ({ el, rect: el.getBoundingClientRect() }))
+      .filter(({ rect }) => nearViewport(rect, 0))
+      .slice(0, MAX_MOTION_CARDS);
+    // Arrivals are counted separately from survivors, so the deal stays evenly
+    // spaced however many cards happened to stay put between them. DOM order is
+    // reading order, which is the order they land in.
+    let arriving = 0;
+    for (const { el, rect } of visible) {
+      const old = oldRects.get(el.dataset.motionKey);
+      if (!old) {
+        trackGridMotion(dealIn(el, arriving++), () => {});
+        continue;
+      }
+      if (old.opacity === '1' && old.rect.left === rect.left && old.rect.top === rect.top) continue;
+      trackGridMotion(
+        moveSurvivor(el, old.rect.left - rect.left, old.rect.top - rect.top, old.opacity),
+        () => {}
+      );
+    }
   }
 
   function render() {
     const sorter = SORTERS[state.sort] || SORTERS.recent;
-    currentList = DB.filter(match).sort(sorter);
+    const nextList = DB.filter(match).sort(sorter);
+    const nextKeys = new Set(nextList.slice(0, PAGE_SIZE).map((item) => item.product));
+    const oldRects = captureGridMotion(nextKeys);
+    currentList = nextList;
     currentPage = 0;
 
     countEl.textContent = `${currentList.length} items`;
@@ -364,6 +589,8 @@
     if (ioObserver) { ioObserver.disconnect(); ioObserver = null; }
 
     appendPage();
+    animateFilteredGrid(oldRects);
+    hasRendered = true;
   }
 
   const onSearchInput = debounce(() => {

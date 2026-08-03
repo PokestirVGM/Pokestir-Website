@@ -38,6 +38,10 @@
   --line: rgba(255,255,255,.16);           /* default borders */
   --line-strong: rgba(255,255,255,.22);    /* interactive-control borders */
   --line-bright: rgba(255,255,255,.35);    /* borders on accent backgrounds */
+  --focus-ring: 2px solid var(--ring);     /* standard keyboard focus outline */
+  --focus-line: rgba(16,177,255,.55);      /* focus border inside form controls */
+  --error-line: rgba(254,14,14,.72);       /* quiet form validation border */
+  --error-wash: rgba(254,14,14,.06);       /* quiet form validation surface */
 
   /* Surfaces */
   --glass: linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.03) 100%);
@@ -56,6 +60,44 @@
 
   /* Layout — overwritten by nav.js with the measured nav height */
   --nav-h: 64px;
+
+  /* Motion — see docs/motion-plan.md.
+     Durations are picked by how far a thing travels, not by what it is: a 3px
+     lift and a full-width panel must not share a number. Curves come in an
+     in/out pair because enters and exits are not the same gesture. Enters
+     decelerate; exits accelerate and run about two thirds as long. */
+  --mo-instant: 90ms;   /* color and opacity on small elements, hover in */
+  --mo-quick: 140ms;    /* control feedback, hover out */
+  --mo-base: 200ms;     /* element enter and exit */
+  --mo-comp: 280ms;     /* sequenced composites (the nav icon fold) */
+  --mo-view: 420ms;     /* view transitions, and the ceiling for anything */
+  --mo-glide: 300ms;    /* audio progress: just over the ~250ms timeupdate gap,
+                           so the fill is still travelling when the next value
+                           arrives and never stalls between events */
+  --mo-stagger: 60ms;   /* short handoff between stacked state glyphs */
+
+  --mo-out: cubic-bezier(.2,.7,.3,1);      /* arrivals, settles */
+  --mo-in: cubic-bezier(.5,0,.8,.25);      /* exits, and whipping through a
+                                              bad intermediate pose */
+  --mo-inout: cubic-bezier(.5,0,.2,1);     /* A to B moves */
+  --mo-snap: cubic-bezier(.2,1.18,.5,1);   /* state flips, slight overshoot */
+  /* `linear` stays reserved for continuous motion: audio progress, slidebar. */
+
+  /* Multiplier on every travel distance. Reduced motion sets it to 0, which
+     collapses movement while leaving the fade alongside it intact. */
+  --mo-travel: 1;
+}
+
+/* Both audio players paint their progress as a gradient stop at `--pct`, which
+   only advances when the `timeupdate` event fires: about four times a second,
+   so the fill visibly steps in quarter-second jumps. Registering the property
+   with a type makes it interpolable, so a short linear transition carries it
+   between events instead. An unregistered custom property is just a string and
+   cannot animate at all. */
+@property --pct {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
 }
 
 /* ── Global reset ── */
@@ -77,21 +119,21 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.14); border-radius: 9999px; border: 2px solid var(--bg); }
 ::-webkit-scrollbar-thumb:hover { background: rgba(16,177,255,.45); }
-html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); scroll-behavior: smooth; scrollbar-gutter: stable; }
+html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); scrollbar-gutter: stable; }
 
 /* ── Accessibility utilities ── */
 .skip-link { position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
 .skip-link:focus {
   left: 14px; top: 14px; width: auto; height: auto; padding: 10px 12px; z-index: 100;
   border-radius: var(--radius-sm); background: var(--panel); color: var(--text);
-  outline: 2px solid var(--ring);
+  outline: var(--focus-ring);
 }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
 /* One focus treatment for every interactive element; zero specificity so
    components can override the offset where geometry demands it. */
 :where(a, button, input, select, summary, [tabindex]):focus-visible {
-  outline: 2px solid var(--ring);
+  outline: var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -138,20 +180,180 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   text-decoration: none; font-weight: 700; font-size: 15px; line-height: 1;
   white-space: nowrap;
   padding: 9px 12px; border-radius: var(--radius-sm); border: 1px solid transparent;
-  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+  transition: background-color var(--mo-quick) var(--mo-out),
+              border-color var(--mo-quick) var(--mo-out),
+              color var(--mo-quick) var(--mo-out);
 }
 .site-nav__brand:hover,
-.site-nav__links a:hover { border-color: var(--line); background: rgba(255,255,255,.06); }
-.site-nav__links a[aria-current="page"] { color: var(--on-ring); background: var(--ring); border-color: var(--line-bright); }
+.site-nav__links a:hover {
+  border-color: var(--line); background: rgba(255,255,255,.06);
+  transition-duration: var(--mo-instant);
+}
+.site-nav__links a[aria-current="page"] {
+  color: var(--on-ring); background: var(--ring); border-color: var(--line-bright);
+  transition-duration: var(--mo-instant);
+}
+
+/* ── Travelling pill (shared) ──
+   The selected item's highlight is one element that travels between the items
+   of a group instead of vanishing from one and reappearing on the next. Used by
+   the nav, the About/Commissions tabs and the gear category filter, so all
+   three single-select groups on the site move with the same hand. nav.js builds
+   it; there is no view transition involved, so it stays a live element and its
+   border and radius stay crisp at every size.
+
+   It sits above the items, not behind them, because it carries a full copy of
+   the group's own labels in dark ink, translated by the inverse of the pill's
+   offset so the copy lands exactly on the real labels underneath. The pill's
+   overflow is what clips it, so the ink arrives letter by letter as the blue
+   crosses. Fading the real labels between light and dark was the tacky version
+   of this. The pill takes no pointer events, so every click reaches the real
+   control. */
+.mo-pill {
+  position: absolute; z-index: 2; top: 0; left: 0;
+  width: 0; height: 0; opacity: 0;
+  box-sizing: border-box;
+  border-radius: var(--radius-sm);
+  background: var(--ring);
+  border: 1px solid var(--line-bright);
+  pointer-events: none;
+  overflow: hidden;
+  /* Only for the first appearance and for a group emptying out. Journeys set
+     opacity outright and animate position instead. */
+  transition: opacity var(--mo-quick) var(--mo-out);
+}
+.mo-pill--round { border-radius: 999px; }
+/* The copy's coordinate space has to be the container's, exactly.
+   Two things push it out of line and both are cancelled here:
+   `top`/`left` back out the pill's own 1px border, since an absolutely
+   positioned child starts at the padding box while the item positions the JS
+   measures are relative to the pill's border box; and the margin is zeroed
+   because the clone inherits the container's class, so a group with a
+   `margin: 8px 0 14px` of its own would drop its copy 8px below the real
+   labels. Both showed up as the dark text sitting low and right of the light
+   text it is meant to cover. */
+.mo-pill__ink {
+  position: absolute; top: -1px; left: -1px;
+  margin: 0 !important;
+  color: var(--on-ring);
+  pointer-events: none;
+}
+/* The copy exists to be read, not to react: it must not carry the originals'
+   own backgrounds, borders, shadows, hover lifts or transitions, or the ink
+   fights the pill it lives inside and drifts off its own letters mid-journey.
+   Metrics (padding, font, border width, gap) are inherited from the clone, so
+   only paint and movement are stripped. */
+.mo-pill__ink *,
+.mo-pill__ink *::before,
+.mo-pill__ink *::after {
+  background: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  opacity: 1 !important;
+  filter: none !important;
+  translate: none !important;
+  scale: none !important;
+  rotate: none !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+/* ── Active-page pill (desktop) ──
+   Mobile keeps the background on the link itself: the menu is a dropdown column
+   there, so there is nothing to travel along. */
+@media (min-width: 641px) {
+  .site-nav__links { position: relative; }
+  .site-nav__links a { position: relative; z-index: 1; }
+  /* The link keeps its own background, and its own dark ink, until nav.js has
+     actually built and placed the pill. Handing the highlight over
+     unconditionally meant that if the pill never arrived, the nav showed no
+     current page at all. */
+  .site-nav__links.has-pill a[aria-current="page"] {
+    background: none; border-color: transparent; color: var(--text);
+  }
+}
+
 @media (max-width: 640px) {
   .site-nav__inner { padding: 10px 14px; }
+  /* No container: every other icon control on the site (the hero and footer
+     social strips) is a bare glyph, and a bordered rounded rect sitting next
+     to the round logo mark belonged to neither shape. The 44px tap target
+     stays, it just isn't drawn. */
   .site-nav__toggle {
     display: flex; align-items: center; justify-content: center;
-    margin-left: auto; padding: 10px 12px;
+    margin-left: auto; padding: 0;
     min-width: 44px; min-height: 44px;
-    background: transparent; border: 1px solid var(--line); border-radius: var(--radius-sm);
-    color: var(--white); cursor: pointer; line-height: 0;
+    background: none; border: 0; border-radius: var(--radius-sm);
+    color: var(--white); cursor: pointer;
   }
+
+  /* The three bars are drawn here rather than set as an icon so they can fold
+     into a close X while the menu is open. The span is the middle bar; its
+     ::before and ::after are the outer two.
+
+     The middle bar is painted as a background image rather than a background
+     colour so it can retract into its own centre: background-size doesn't
+     touch the two pseudo-element bars, where a scale on the span would drag
+     them in with it. */
+  .site-nav__burger {
+    position: relative;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat; background-position: center;
+    background-size: 100% 100%;
+    /* Closing: the bar grows back out only once the arms have unfolded. */
+    transition: background-size .14s var(--mo-out) .14s,
+                scale .12s ease-out;
+  }
+  .site-nav__burger,
+  .site-nav__burger::before,
+  .site-nav__burger::after {
+    display: block; width: 22px; height: 2px; border-radius: 2px;
+  }
+  .site-nav__burger::before,
+  .site-nav__burger::after {
+    content: ""; position: absolute; left: 0;
+    background-color: currentColor;
+    /* Travel and fold are separate properties so they can be sequenced instead
+       of running together. Closing plays the fold in reverse: unrotate on the
+       spot first, then slide back apart. The unrotate accelerates into 0deg
+       instead of easing out: while stacked, any small angle between the two
+       bars pinches them into a visible bowtie, so the rotation has to whip
+       through that range rather than settle through it. Ending abruptly is
+       fine here because the separation picks the motion straight back up, and
+       that last move is where the deceleration belongs. */
+    transition: rotate .11s var(--mo-in),
+                scale .11s var(--mo-in),
+                translate .15s var(--mo-out) .1s;
+  }
+  .site-nav__burger::before { top: -7px; }
+  .site-nav__burger::after { top: 7px; }
+  /* The icon is the whole tap target's only visible part, so it takes the press. */
+  .site-nav__toggle:active .site-nav__burger { scale: .88; }
+
+  /* Open state rides on the aria-expanded nav.js already maintains, so there
+     is no second source of truth. */
+  .site-nav__toggle[aria-expanded="true"] .site-nav__burger {
+    background-size: 0% 100%;
+    /* Clears out well before the outer bars stack, so the two of them arrive
+       at an empty centre instead of crowding a bar that's still there. */
+    transition: background-size .1s cubic-bezier(.4,0,.6,1),
+                scale .12s ease-out;
+  }
+  .site-nav__toggle[aria-expanded="true"] .site-nav__burger::before,
+  .site-nav__toggle[aria-expanded="true"] .site-nav__burger::after {
+    /* A bar rotated 45deg only spans 22px on the diagonal, so the X reads
+       narrower than the burger it replaced. 8% back on the long axis (applied
+       before the rotate) evens the two shapes out. */
+    scale: 1.08 1;
+    /* Meet in the middle first, then fold, landing with a slight overshoot. */
+    transition: translate .13s cubic-bezier(.4,0,.2,1),
+                rotate .19s var(--mo-snap) .1s,
+                scale .19s cubic-bezier(.2,.8,.3,1) .1s;
+  }
+  .site-nav__toggle[aria-expanded="true"] .site-nav__burger::before { translate: 0 7px; rotate: 45deg; }
+  .site-nav__toggle[aria-expanded="true"] .site-nav__burger::after { translate: 0 -7px; rotate: -45deg; }
   .site-nav__links {
     display: flex; flex-direction: column; gap: 4px;
     position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 99;
@@ -160,24 +362,71 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
     border-bottom: 1px solid var(--line-soft);
     backdrop-filter: blur(32px) saturate(180%) brightness(0.82);
     -webkit-backdrop-filter: blur(32px) saturate(180%) brightness(0.82);
-    opacity: 0; transform: translateY(-6px);
+    opacity: 0; transform: translateY(-8px);
     visibility: hidden; pointer-events: none;
-    transition: opacity .22s ease, transform .22s ease, visibility .22s;
+    /* Leaves ahead of the icon, so the X is still unfolding as the panel goes. */
+    transition: opacity .15s ease, transform .16s cubic-bezier(.4,0,1,1), visibility .16s;
   }
   .site-nav__links.is-open {
     opacity: 1; transform: translateY(0);
     visibility: visible; pointer-events: auto;
+    /* Arrives just behind the bars, on the same curve they travel in on. */
+    transition: opacity .2s ease .04s, transform .24s cubic-bezier(.2,.8,.25,1) .04s, visibility .24s;
   }
   .site-nav__links a { text-align: center; }
+
+  /* The panel used to arrive as one slab with its contents already in place.
+     Dealing the links in behind it gives the menu somewhere to arrive *to*,
+     and it is the same idea as the gear grid: the order is what turns a block
+     appearing into a thing opening.
+
+     Child combinator throughout, and `nth-of-type` rather than `nth-child`:
+     the travelling pill prepends a `<span>` to this same element on desktop,
+     and its ink copy carries the class `.site-nav__links` too. Both would
+     otherwise be counted. */
+  .site-nav__links > a {
+    opacity: 0;
+    translate: 0 calc(-6px * var(--mo-travel));
+    transition: opacity .12s var(--mo-in), translate .12s var(--mo-in);
+  }
+  .site-nav__links.is-open > a {
+    opacity: 1;
+    translate: 0 0;
+    /* Behind the panel's own .04s, so the surface is already on its way. */
+    transition: opacity .22s var(--mo-out) .08s, translate .26s var(--mo-out) .08s;
+  }
+  .site-nav__links.is-open > a:nth-of-type(2) { transition-delay: .12s; }
+  .site-nav__links.is-open > a:nth-of-type(3) { transition-delay: .16s; }
+  .site-nav__links.is-open > a:nth-of-type(4) { transition-delay: .2s; }
+  /* Closing runs together and fast: a staggered exit just delays the dismissal
+     the visitor already asked for. */
+  .site-nav__links:not(.is-open) > a { transition-delay: 0s; }
 }
 
 /* ── Card (shared across all pages) ── */
+/* The surface is anchored in pixels, not percentages, because cards change
+   height: a details panel opens inside one and the card grows by ~150px. A
+   percentage gradient gets re-proportioned by that, so every pixel of the card
+   recolors while it expands (measured: ~4 RGB levels across the lower half),
+   and the background looks like it is changing even though the declaration
+   never does. Anchoring the sheen to the top edge and the shade to the bottom
+   edge means growing a card only inserts flat panel color in the middle, and
+   it also stops two cards of different heights wearing different gradients.
+   The lengths are picked so the top and bottom edges match --surface exactly;
+   the flat wash is the value --glass used to trail off to. */
 .card {
   position: relative;
   overflow: hidden;
   isolation: isolate;
   border-radius: calc(var(--radius) + 4px);
-  background: var(--surface);
+  background-color: var(--panel);
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 100%),
+    linear-gradient(rgba(255,255,255,.03) 0 0),
+    linear-gradient(0deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,0) 100%);
+  background-size: 100% 320px, auto, 100% 160px;
+  background-position: 0 0, 0 0, 0 100%;
+  background-repeat: no-repeat, repeat, no-repeat;
   border: 1px solid var(--line);
 }
 @supports (backdrop-filter: blur(1px)) {
@@ -201,31 +450,91 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
     animation: slidebar 9s linear infinite;
+    animation-play-state: paused;
   }
+  .card.is-slidebar-active::before { animation-play-state: running; }
 }
 @keyframes slidebar { 0% { background-position: 0% 0; } 100% { background-position: 200% 0; } }
 
 /* Inset panel (darker nested card, no gradient edge) */
+/* Same pixel anchoring as .card, and it matters more here: the FAQ panels are
+   .card-inset and they go from 45px closed to ~200px open, so a full-height
+   gradient is stretched more than fourfold. The band is short because these are
+   small nested panels: the sheen reads as a lit top edge rather than a ramp. */
 .card-inset {
   border-radius: var(--radius);
   border: 1px solid var(--line-soft);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.03) 0%, rgba(255,255,255,0) 100%),
-    rgba(2,6,23,.32);
+  background-color: rgba(2,6,23,.32);
+  background-image: linear-gradient(180deg, rgba(255,255,255,.03) 0%, rgba(255,255,255,0) 100%);
+  background-size: 100% 64px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
 }
 
 /* ── Button base (pages layer their own backgrounds/layout on top) ── */
 .btn {
   appearance: none; cursor: pointer; text-decoration: none;
+  position: relative; isolation: isolate;
   display: inline-flex; align-items: center; gap: 8px;
   padding: 11px 16px; border-radius: var(--radius-md);
   border: 1px solid var(--line-strong);
   background: var(--surface);
   color: var(--text); font: inherit; font-size: 14px; font-weight: 700; letter-spacing: .2px;
-  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
+  /* translate and scale stay separate properties rather than one transform, so
+     the recoil and the rise can run at different lengths on release. */
+  translate: 0 0; scale: 1;
+  transition: translate var(--mo-quick) var(--mo-out),
+              scale var(--mo-quick) var(--mo-out),
+              filter var(--mo-quick) var(--mo-out),
+              color var(--mo-quick) var(--mo-out),
+              border-color var(--mo-quick) var(--mo-out);
 }
-.btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
-.btn:active { transform: translateY(0); }
+/* The selected-state tint rides on its own opacity layer so it can fade rather
+   than cut, and sitting behind the content preserves each platform button's
+   artwork. This is the layer that made `.btn` state changes animate at all. */
+.btn::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  pointer-events: none; opacity: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04)), var(--ring);
+  transition: opacity var(--mo-quick) var(--mo-out);
+}
+/* No hover shadow. Buttons never had one: the original hover was a small lift
+   plus a brightness bump, and the `box-shadow` in the transition list was
+   vestigial with no rule behind it. A drop shadow was added here during the
+   motion work, which changed how every button on the site looks rather than how
+   it moves, tabs included. Elevation also barely reads against a near-black
+   background; it mostly just smudges the edge. Brightness does the job on both
+   the neutral surface and the brand-coloured platform buttons. */
+.btn:hover {
+  translate: 0 calc(-3px * var(--mo-travel));
+  filter: brightness(1.06);
+  transition-duration: var(--mo-instant);
+}
+/* Press accelerates into the surface: it is being driven down, so it should
+   gain speed rather than ease to a stop, which reads as the control resisting
+   you. nav.js drives the class, because :active cannot survive the release. */
+.btn.is-pressed {
+  translate: 0 calc(2px * var(--mo-travel));
+  scale: .96;
+  transition-duration: 70ms;
+  transition-timing-function: var(--mo-in);
+}
+/* Release is two beats on two properties: the lift settles without bouncing
+   while the squash springs back past 1 and returns. Running both off one
+   transform made it read as a single rubbery blob. Keyframes rather than a
+   transition because returning from pressed to hovered is not an overshoot. */
+.btn.is-released {
+  animation: btn-rise 170ms var(--mo-out), btn-unsquash 260ms var(--mo-snap);
+}
+@keyframes btn-rise {
+  from { translate: 0 calc(2px * var(--mo-travel)); }
+  to { translate: 0 calc(-3px * var(--mo-travel)); }
+}
+@keyframes btn-unsquash { from { scale: .96; } to { scale: 1; } }
+.btn.active,
+.btn[aria-pressed="true"] { color: var(--on-ring); border-color: var(--line-bright); }
+.btn.active::before,
+.btn[aria-pressed="true"]::before { opacity: 1; transition-duration: var(--mo-instant); }
 
 /* ── Pill (interactive filter chip — track tags, gear categories/subtags) ── */
 .pill {
@@ -233,10 +542,18 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   font-family: inherit; font-size: 13px; font-weight: 600;
   padding: 5px 13px; border-radius: 999px;
   border: 1px solid var(--line); background: rgba(255,255,255,.05); color: var(--muted);
-  transition: background .15s ease, color .15s ease, border-color .15s ease;
+  transition: background-color var(--mo-quick) var(--mo-out),
+              color var(--mo-quick) var(--mo-out),
+              border-color var(--mo-quick) var(--mo-out);
 }
-.pill:hover { background: rgba(255,255,255,.10); color: var(--text); }
-.pill.active { background: var(--ring); color: var(--on-ring); border-color: var(--line-bright); }
+.pill:hover {
+  background: rgba(255,255,255,.10); color: var(--text);
+  transition-duration: var(--mo-instant);
+}
+.pill.active {
+  background: var(--ring); color: var(--on-ring); border-color: var(--line-bright);
+  transition-duration: var(--mo-instant);
+}
 @media (max-width: 640px) {
   .pill { padding: 7px 14px; font-size: 14px; }
 }
@@ -249,16 +566,30 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
 .social-strip a {
   width: 36px; height: 36px; border-radius: 50%;
   display: grid; place-items: center;
+  /* The colour change is the hover. The press is a separate beat, and it is
+     the only feedback these get on touch, where there is no hover at all. */
+  scale: 1;
+  transition: scale var(--mo-quick) var(--mo-out);
 }
+.social-strip a.is-pressed {
+  scale: .86;
+  transition-duration: 70ms;
+  transition-timing-function: var(--mo-in);
+}
+.social-strip a.is-released { animation: social-unsquash 240ms var(--mo-snap); }
+@keyframes social-unsquash { from { scale: .86; } to { scale: 1; } }
 .social-strip a::before {
   content: ""; width: 18px; height: 18px;
   background: var(--muted);
   -webkit-mask: var(--icon) center / contain no-repeat;
   mask: var(--icon) center / contain no-repeat;
-  transition: background .15s ease;
+  transition: background-color var(--mo-quick) var(--mo-out);
 }
 .social-strip a:hover::before,
-.social-strip a:focus-visible::before { background: var(--white); }
+.social-strip a:focus-visible::before {
+  background: var(--white);
+  transition-duration: var(--mo-instant);
+}
 
 /* ── Footer ── */
 .site-footer {
@@ -267,8 +598,16 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
 }
 .site-footer .social-strip { justify-content: center; margin-bottom: 8px; }
 .site-footer p { margin: 0; }
-.site-footer .all-links { color: var(--muted); text-decoration: underline; }
-.site-footer .all-links:hover { color: var(--white); }
+/* The colour change had no transition at all, so it snapped between two states
+   while every other link on the site eased. */
+.site-footer .all-links {
+  color: var(--muted); text-decoration: underline;
+  transition: color var(--mo-quick) var(--mo-out);
+}
+.site-footer .all-links:hover {
+  color: var(--white);
+  transition-duration: var(--mo-instant);
+}
 
 /* ── Responsive ── */
 @media (max-width: 640px) {
@@ -276,12 +615,41 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   .page-title { font-size: clamp(22px, 6.2vw, 28px); }
 }
 
-/* ── Reduced motion ── */
+/* ── Reduced motion ──
+   The setting asks for less *movement*, not less feedback: a crossfade is the
+   accessible substitute for a slide, not something to strip out too. So this
+   collapses travel and stops ambient loops, but leaves opt-in fades running.
+
+   Components express travel as `calc(<distance> * var(--mo-travel))`, which
+   goes to zero here while the accompanying fade still plays. The blanket rule
+   below stays as the safety net for anything not yet written that way. */
 @media (prefers-reduced-motion: reduce) {
+  :root { --mo-travel: 0; }
+
+  /* Ambient loops are decoration, not state. Stop them outright rather than
+     squashing them to 0.001ms, which leaves the gradient frozen mid-sweep. */
+  .card::before { animation: none !important; }
+
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    /* Sequenced transitions carry delays; without this they'd survive the
+       squashed duration and just stall the state change. */
+    transition-delay: 0.001ms !important;
+    animation-delay: 0.001ms !important;
   }
-  html { scroll-behavior: auto; }
+
+  /* Opt back in: pure opacity changes move nothing, so they keep their timing.
+     Anything tagged .mo-fade must animate opacity only. */
+  .mo-fade, .mo-fade::before, .mo-fade::after {
+    transition-duration: var(--mo-quick) !important;
+  }
+
+  /* The selected-state tint is opacity-only, so it keeps its timing. The press
+     gesture keeps its scale (no travel) but loses the rebound, which is the
+     only part of it that actually moves the control around. */
+  .btn { transition-duration: var(--mo-quick) !important; }
+  .btn::before { transition-duration: var(--mo-quick) !important; }
+  .btn.is-released { animation: none !important; }
 }

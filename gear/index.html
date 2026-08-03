@@ -28,17 +28,29 @@
   <title>Pokestir - Software &amp; Gear</title>
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="gear.css">
+  <!-- The catalog is a serial dependency without this: the browser cannot know
+       the CSV exists until it has downloaded and run gear.js, so the fetch only
+       starts once the scripts have landed and the grid sits on "Loading" for a
+       whole extra round trip. Declaring it here means it is discovered during
+       the HTML parse and downloads alongside the CSS and JS instead of after
+       them. Keep the href identical to CSV_URL in gear.js, or the browser warns
+       that the preload went unused and fetches it twice. `crossorigin` is
+       required for as="fetch" even same-origin; without it the preload is not
+       matched and the file is downloaded twice, which was measured. -->
+  <link rel="preload" as="fetch" href="./gear-software.csv" crossorigin>
   <link rel="icon" href="../images/icon.png">
   <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
-  <script src="gear.js" defer></script>
+  <!-- nav.js first: it defines the shared motion primitives the page scripts
+       use. Deferred scripts run in document order, so this is the ordering. -->
   <script src="../nav.js" defer></script>
+  <script src="gear.js" defer></script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
       <a class="site-nav__brand" href="/"><img src="../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
-      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>
         <a href="../releases/">Releases</a>
@@ -62,7 +74,7 @@
         <option value="oldest">Date Added (Oldest)</option>
         <option value="name">Name A-Z</option>
       </select>
-      <button class="btn fav-btn" id="favOnly" type="button" aria-pressed="false"><svg class="fav-ic" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>Favorites</button>
+      <button class="btn fav-btn" id="favOnly" type="button" aria-pressed="false"><svg class="fav-ic" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><span>Favorites</span></button>
       <button class="btn btn-clear" id="clear" type="button">Clear</button>
     </div>
 
@@ -71,9 +83,11 @@
       <div class="pillbar" id="catpills"></div>
     </div>
 
-    <div id="subtagsWrap">
-      <div class="muted filter-label">Tags</div>
-      <div class="pillbar" id="subtags"></div>
+    <div id="subtagsWrap" aria-hidden="true">
+      <div class="subtags-inner mo-fade">
+        <div class="muted filter-label">Tags</div>
+        <div class="pillbar" id="subtags"></div>
+      </div>
     </div>
 
     <div class="grid" id="grid" role="list"></div>

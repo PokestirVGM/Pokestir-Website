@@ -1,7 +1,10 @@
 /* Contact page — form posts to FormSubmit, which forwards to email.
-   Unlisted: reachable at /contact and from the home page footer, not the nav.
-   Fields render as full-bleed hairline-divided rows inside the card (same
-   language as the home page track list), not boxed inputs. */
+   Unlisted: reachable at /contact and from every footer, not the nav.
+
+   One card, split down the middle: the form on the left, the direct contacts on
+   the right on a darker inset ground. Two stacked cards were tried and read as
+   one card with a shorter one parked beside it, and no amount of padding fixes
+   two boxes disagreeing about height. Inside a single card they cannot. */
 
 .wrap { display: grid; gap: 10px; }
 
@@ -9,50 +12,224 @@
 .section-sub { color: var(--muted); font-size: 14px; margin: 2px 2px 8px; }
 .section-sub a { color: var(--white); text-decoration: underline; }
 .section-sub a:hover { text-decoration: none; }
-.cwhite { color: var(--white); }
 
-.card { max-width: 680px; }
+/* No max-width. Every other card on the site spans the full content column, so
+   capping this one left it stopping short of the heading above it and the
+   footer rule below it, which reads as a misalignment rather than as a
+   deliberately narrower card. */
+.csplit {
+  display: grid;
+  grid-template-columns: 1.55fr .8fr;
+}
+.csplit > * { min-width: 0; }
+.csplit__form { padding: 24px; }
 
-.cform { display: flex; flex-direction: column; }
-.cform-row { display: grid; grid-template-columns: 1fr 1fr; }
-.cform-row input:first-child { border-right: 1px solid var(--line-soft); }
+/* ── Fields ──
+   Labelled, permanently. The old form was labelled by placeholder only, so the
+   moment anyone started typing there was nothing left saying which box was
+   which, and a filled-in form was unreadable. */
+.cfield__label {
+  display: block;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); font-weight: 700;
+  margin: 0 0 6px;
+}
+.req { color: var(--ring); }
+.cform-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
 .cform input[type="text"],
 .cform input[type="email"],
 .cform textarea {
-  width: 100%; padding: 14px 18px;
-  background: transparent; border: 0;
-  border-bottom: 1px solid var(--line-soft);
+  width: 100%; box-sizing: border-box;
+  padding: 11px 13px;
+  background: rgba(2,6,23,.32);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
   color: var(--text); font: inherit; font-size: 14px;
   caret-color: var(--ring);
+  transition: background-color var(--mo-quick) var(--mo-out),
+              border-color var(--mo-quick) var(--mo-out);
 }
-.cform ::placeholder { color: var(--muted); }
-.cform textarea { resize: vertical; min-height: 150px; }
+.cform ::placeholder { color: var(--muted); opacity: .7; }
+/* Vertical only, and never below the height that makes it look like a message
+   box rather than a wide input. */
+.cform textarea { resize: vertical; min-height: 156px; }
 
-/* Fields signal focus with a row highlight rather than the outline ring, but
-   the highlight alone is too faint to locate: the divider under the focused
-   row lights up in the accent color too (same cue the search inputs use). */
+/* Fields skip the outline ring, so the focus cue has to be unmistakable
+   without it: the border takes the accent and the fill warms toward it. A
+   background wash on its own was too faint to locate. */
 .cform input:focus-visible,
 .cform textarea:focus-visible {
   outline: none;
-  background: rgba(255,255,255,.04);
-  border-bottom-color: var(--ring);
+  border-color: var(--focus-line);
+  background: rgba(16,177,255,.06);
+  transition-duration: var(--mo-instant);
 }
 
-/* Keep Chrome's forced autofill colors off the dark rows */
+/* Validation stays restrained: a quiet red border and wash, with no shake or
+   travel. :user-invalid handles modern browsers; the class covers a submitted
+   required field in engines whose user-validity timing differs. */
+.cform input:user-invalid,
+.cform textarea:user-invalid,
+.cform.was-validated input:invalid,
+.cform.was-validated textarea:invalid {
+  background: var(--error-wash);
+  border-color: var(--error-line);
+}
+
+/* Keep Chrome's forced autofill colors off the dark fields */
 .cform input:-webkit-autofill {
   -webkit-text-fill-color: var(--text);
   -webkit-background-clip: text;
   background-clip: text;
 }
 
-.cform-foot { display: flex; padding: 12px 18px; }
-.cform-foot .btn { padding: 10px 26px; }
+.cform-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; flex-wrap: wrap;
+  margin-top: 2px;
+}
+.cform-req { margin: 0; font-size: 12.5px; color: var(--muted); }
+/* Send is the point of the page, so it carries the accent rather than sitting
+   in the same neutral as everything around it. */
+.btn-send {
+  background: var(--ring);
+  color: var(--on-ring);
+  border-color: var(--line-bright);
+  font-weight: 800;
+  padding: 11px 22px;
+}
+.btn-send::before { content: none; }
 
-.cform-sent { padding: 18px; color: var(--text); }
+.submit-btn { display: grid; }
+.submit-label,
+.submit-pending { grid-area: 1 / 1; }
+.submit-label { transition: opacity var(--mo-instant) var(--mo-in); }
+.submit-pending { opacity: 0; transition: opacity var(--mo-quick) var(--mo-out); }
+.cform.is-submitting .submit-label { opacity: 0; }
+.cform.is-submitting .submit-pending { opacity: 1; transition-delay: var(--mo-stagger); }
+.submit-btn:disabled { cursor: wait; }
+/* `.btn` animates `translate` and `scale` as separate properties, never
+   `transform`, so a `transform: none` here would match nothing and a button
+   disabled mid-submit would still lift and brighten under the pointer,
+   offering itself while it was busy. */
+.submit-btn:disabled:hover,
+.submit-btn:disabled:active {
+  translate: 0;
+  scale: 1;
+  filter: none;
+}
+
+/* ── Success ──
+   The shell wraps the form only, not the whole card, so the sent note replaces
+   the form while the contacts stay put. contact/index.html measures both
+   heights and animates between them. */
+.cform-shell { position: relative; }
+.cform-shell.is-swapping {
+  overflow: hidden;
+  transition: block-size var(--mo-base) var(--mo-inout);
+}
+.cform-shell.is-swapping .cform-sent {
+  position: absolute; inset: 0 auto auto 0; width: 100%;
+}
+/* Spacing comes from the column's own gap. A `.cfield + .cfield` margin was
+   tried and also fired on the second field *inside* the Name/Email row, which
+   pushed Email half a row lower than Name. */
+.cform {
+  display: flex; flex-direction: column; gap: 16px; opacity: 1;
+  transition: opacity var(--mo-quick) var(--mo-in);
+}
+.cform[hidden],
+.cform-sent[hidden] { display: none; }
+.cform.is-success-exit { opacity: 0; }
+.cform-sent {
+  color: var(--text); opacity: 0;
+  transition: opacity var(--mo-base) var(--mo-out);
+}
+.cform-sent.is-visible { opacity: 1; }
 .cform-sent p { margin: 0; }
 
+/* ── Direct contacts ──
+   The darker ground is the same relationship .card-inset already has to .card
+   everywhere else on the site, so the two halves read as one object with two
+   sides rather than as a panel parked next to a form. */
+.csplit__direct {
+  padding: 24px;
+  border-left: 1px solid var(--line-soft);
+  background: rgba(2,6,23,.28);
+}
+.cdirect-title {
+  margin: 0 0 4px;
+  font-size: 11px; letter-spacing: .13em; text-transform: uppercase;
+  color: var(--muted); font-weight: 700;
+}
+.cdirect-lead { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
+
+.crow {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px; margin: 0 -12px;
+  color: var(--muted); text-decoration: none;
+  border-radius: var(--radius-sm);
+  /* An inset shadow rather than a border, so the divider does not move the row
+     by a pixel when the hover background arrives. */
+  box-shadow: inset 0 -1px 0 var(--line-soft);
+  scale: 1;
+  transition: color var(--mo-quick) var(--mo-out),
+              background-color var(--mo-quick) var(--mo-out),
+              scale var(--mo-quick) var(--mo-out);
+}
+.crow:last-child { box-shadow: none; }
+.crow:hover,
+.crow:focus-visible {
+  color: var(--white);
+  background: rgba(255,255,255,.05);
+  transition-duration: var(--mo-instant);
+}
+/* The brand mark is the identity, not the action, so it does not move. Only the
+   arrow travels, and it travels the way the row goes. An earlier pass slid the
+   logo right while the arrow flew in from the left, which put two things moving
+   in opposite directions on one row. */
+.crow__mark {
+  width: 18px; height: 18px; flex: 0 0 auto;
+  background: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+.crow__who { display: grid; min-width: 0; }
+.crow__who b { color: var(--white); font-weight: 700; font-size: 13.5px; line-height: 1.35; }
+.crow__who span { font-size: 12.5px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
+.crow__go {
+  margin-left: auto; flex: 0 0 auto;
+  opacity: 0; translate: calc(-6px * var(--mo-travel)) 0;
+  transition: opacity var(--mo-quick) var(--mo-out),
+              translate var(--mo-quick) var(--mo-out);
+}
+.crow:hover .crow__go,
+.crow:focus-visible .crow__go {
+  opacity: 1; translate: 0;
+  transition-duration: var(--mo-instant);
+  transition-timing-function: var(--mo-snap);
+}
+/* Press and release, driven by nav.js, same as every other row on the site. */
+.crow.is-pressed {
+  background: rgba(255,255,255,.09);
+  scale: .99;
+  transition-duration: 70ms;
+  transition-timing-function: var(--mo-in);
+}
+.crow.is-released { animation: crow-unsquash 220ms var(--mo-snap); }
+@keyframes crow-unsquash { from { scale: .99; } to { scale: 1; } }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .csplit { grid-template-columns: 1fr; }
+  .csplit__direct {
+    border-left: 0;
+    border-top: 1px solid var(--line-soft);
+  }
+}
 @media (max-width: 640px) {
-  .cform-row { grid-template-columns: 1fr; }
-  .cform-row input:first-child { border-right: 0; }
+  .cform-row { grid-template-columns: 1fr; gap: 16px; }
+  .csplit__form,
+  .csplit__direct { padding: 18px; }
 }

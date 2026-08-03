@@ -28,6 +28,40 @@
   <meta name="twitter:creator" content="@pokestir">
   <link rel="canonical" href="https://pokestir.com/releases/credits-ocarina-of-time/">
   <title>Pokestir - Credits (From &quot;The Legend of Zelda: Ocarina of Time&quot;)</title>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
+  "name": "Credits (From \"The Legend of Zelda: Ocarina of Time\")",
+  "url": "https://pokestir.com/releases/credits-ocarina-of-time/",
+  "image": "https://cdn-images.dzcdn.net/images/cover/94c4885651cdcae97d5847da6774de04/1000x1000-000000-80-0-0.jpg",
+  "datePublished": "2025-08-19",
+  "genre": [
+    "Classical"
+  ],
+  "byArtist": {
+    "@type": "MusicGroup",
+    "name": "Pokestir",
+    "url": "https://pokestir.com/"
+  },
+  "duration": "PT4M33S",
+  "isrcCode": "QZ6K42501081",
+  "sameAs": [
+    "https://pokestir.bandcamp.com/track/credits-from-the-legend-of-zelda-ocarina-of-time-arr-for-piano-by-pokestir",
+    "https://open.spotify.com/album/7te4GGRGjUb8seTzWK9M9y",
+    "https://music.apple.com/us/album/credits-from-the-legend-of-zelda-ocarina-of-time-single/1839121375",
+    "https://music.youtube.com/watch?v=vIfiWRpGjmM",
+    "https://www.youtube.com/watch?v=vIfiWRpGjmM",
+    "https://www.pandora.com/artist/pokestir/credits-from-the-legend-of-zelda-ocarina-of-time-arr-for-piano-by-pokestir/AL2ppwZdt796Z9Z",
+    "https://music.apple.com/us/album/credits-from-the-legend-of-zelda-ocarina-of-time-single/1839121375?app=itunes",
+    "https://www.deezer.com/album/807387091",
+    "https://music.amazon.com/albums/B0FN12P683",
+    "https://tidal.com/album/455081869",
+    "https://open.qobuz.com/album/fyfjza7vl3u9a",
+    "https://materia.to/qD6Hc4"
+  ]
+}
+  </script>
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../releases.css">
   <link rel="icon" href="../../images/icon.png">
@@ -42,7 +76,7 @@
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
       <a class="site-nav__brand" href="/"><img src="../../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
-      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>
         <a href="/releases/">Releases</a>
@@ -53,9 +87,20 @@
   </nav>
 
   <main class="wrap" role="main" id="main">
-    <!-- releases.js reads the slug out of the path and renders into #detailView. -->
+    <!-- The static overview gives the incoming view transition an artwork target. -->
     <div id="listView" hidden></div>
-    <div id="detailView"></div>
+    <div id="detailView">
+      <a class="back-link" href="/releases/">&larr; All Releases</a>
+      <div class="detail-stack">
+        <section class="card detail-head" aria-label="Release overview">
+          <div class="art" aria-hidden="true"><span class="detail-art mo-fade is-loaded" style="--art-url:url(&quot;https://cdn-images.dzcdn.net/images/cover/94c4885651cdcae97d5847da6774de04/500x500-000000-80-0-0.jpg&quot;)"></span></div>
+          <div class="info">
+            <h1 class="d-title">Credits (From &quot;The Legend of Zelda: Ocarina of Time&quot;)</h1>
+            <div class="d-facts">Single &middot; August 19, 2025 &middot; 1 track</div>
+          </div>
+        </section>
+      </div>
+    </div>
 
     <footer class="site-footer" role="contentinfo">
       <nav class="social-strip" aria-label="Social and support links">

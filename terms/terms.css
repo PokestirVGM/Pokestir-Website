@@ -1,52 +1,154 @@
-/* Usage Terms & Claims page — content cards, code boxes, FAQ */
+/* Usage Terms & Claims — the two questions people arrive with, answered before
+   the detail that qualifies them.
+
+   Two things shape this page. It is the most read-heavy page on the site, so
+   body copy uses the same reading style as the home page bio (--text at 16px,
+   not --muted, which measures 5.65:1 on the card surface against 11.71:1) and
+   --muted is left for captions. And each section is one card split by a
+   hairline rather than two cards side by side: the halves are never the same
+   length, so as separate cards they either sat at mismatched heights or, once
+   stretched to match, left a hole in the shorter one. */
 
 .wrap { display: grid; gap: 26px; }
 
-/* ── Section header (same pattern as the home page) ── */
-.page-title { margin: 4px 2px 6px; }
-.section-sub { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 2px 2px 8px; }
-
-/* ── Layout ── */
-.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
 #usage, #claims { scroll-margin-top: 80px; }
-.card .inner { padding: 18px 18px 20px; }
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.page-title { margin: 4px 2px 6px; }
 
-/* ── Codebox ── */
+/* The answer, then the qualifications. White against the reading grey is how
+   the rest of the site emphasises anything, so this needs no box or badge of
+   its own. Narrower than the card below it because it is meant to be read in
+   one go; `pretty` keeps the last line off a single orphan word. */
+.lede {
+  color: var(--text); font-size: 16px; line-height: 1.7;
+  margin: 4px 2px 0; max-width: 66ch; text-wrap: pretty;
+}
+.answer { color: var(--white); font-weight: 700; }
+
+/* ── Split card ── */
+.split { display: grid; grid-template-columns: 1.02fr .98fr; }
+.split__col { padding: 24px; min-width: 0; }
+.split__col + .split__col { border-left: 1px solid var(--line-soft); }
+
+/* ── Reading text ── */
+.lead { color: var(--text); font-size: 16px; line-height: 1.7; margin: 0 0 12px; }
+.lead:last-child { margin-bottom: 0; }
+.caption { color: var(--muted); font-size: 14px; margin: 0; }
+.caption--spaced { margin-top: 16px; }
+/* Marks the load-bearing phrase in a paragraph, so a skim lands on it. Four on
+   the page including the two ledes: past that, bold stops meaning anything. */
+.em { color: var(--white); font-weight: 700; }
+
+.list {
+  margin: 12px 0 0 20px; padding: 0;
+  color: var(--text); font-size: 16px; line-height: 1.7;
+}
+.list li { margin: 10px 0; padding-left: 2px; }
+.list li::marker { color: var(--muted); }
+.list b { color: var(--white); font-weight: 700; }
+
+/* ── Copy box ──
+   The whole box is the control. A separate button meant a bordered pill inset
+   inside a bordered box: two nested rounded rectangles with a gap, and the
+   loudest element on the page for the sake of a 39 character string. The hint
+   is a quiet word at the end of the line instead, and the code stays
+   selectable for anyone who would rather drag over it. */
 .codebox {
-  position: relative; padding: 14px; border-radius: var(--radius-md);
+  display: flex; align-items: baseline; gap: 14px; width: 100%;
+  margin: 8px 0 0; padding: 13px 14px; text-align: left;
+  border-radius: var(--radius-md); font: inherit; cursor: pointer;
+  transition: background-color var(--mo-quick) var(--mo-out);
+}
+.codebox:hover {
+  background-color: rgba(255,255,255,.05);
+  transition-duration: var(--mo-instant);
+}
+/* `:active` is unreliable on touch, so nav.js drives the class as well. No
+   rebound animation: a row this wide should not scale, and deepening the wash
+   is the whole of the feedback. */
+.codebox:active,
+.codebox.is-pressed {
+  background-color: rgba(255,255,255,.09);
+  transition-duration: 70ms;
+  transition-timing-function: var(--mo-in);
+}
+.codebox code {
+  flex: 1; min-width: 0; user-select: text;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 14px; line-height: 1.6; color: var(--text);
   overflow-wrap: anywhere; word-break: break-word;
 }
-.small { font-size: 12px; }
+/* Fixed width and a stacked grid, so swapping the word cannot resize the box
+   under the pointer mid-click. */
+.copyhint {
+  flex: 0 0 auto; display: grid; min-width: 46px; text-align: right;
+  font-family: inherit; font-size: 12.5px; font-weight: 700; color: var(--muted);
+  transition: color var(--mo-quick) var(--mo-out);
+}
+.codebox:hover .copyhint { color: var(--white); transition-duration: var(--mo-instant); }
+.copyhint > span { grid-area: 1 / 1; }
+.copyhint .idle {
+  opacity: 1; translate: 0;
+  transition: opacity var(--mo-quick) var(--mo-out), translate var(--mo-base) var(--mo-snap);
+}
+.copyhint .done {
+  opacity: 0; translate: 0 calc(4px * var(--mo-travel));
+  transition: opacity var(--mo-quick) var(--mo-out), translate var(--mo-base) var(--mo-snap);
+}
+.codebox.is-done .copyhint { color: var(--white); }
+.codebox.is-done .idle { opacity: 0; translate: 0 calc(-4px * var(--mo-travel)); }
+.codebox.is-done .done { opacity: 1; translate: 0; }
 
-/* ── Lists ── */
-.list { margin: 10px 0 0; padding-left: 18px; line-height: 1.7; }
-.list li { margin: 6px 0; }
-.list li::marker { color: var(--muted); }
-.list .codebox { margin: 8px 0 2px; }
-
-/* ── FAQ (details/summary) ── */
-details { padding: 12px 14px; border-radius: var(--radius-md); }
-details[open] > summary { margin-bottom: 10px; }
-details + details { margin-top: 10px; }
-summary { cursor: pointer; font-weight: 700; font-family: var(--font-display); }
-summary::marker { color: var(--muted); }
-.faq-title { font-size: 18px; }
+/* ── Closing block on the steps column ── */
+.tail { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line-soft); }
+.tail-title {
+  font-family: var(--font-display); font-weight: 700; font-size: 18px;
+  color: var(--white); letter-spacing: .2px; margin: 0 0 8px;
+}
+/* Leaves the site, and says so. The plain .btn here was a wide slab of dark
+   grey on dark grey: heavy, and silent about where it goes. */
+.btn--out {
+  padding: 10px 15px; font-size: 14px;
+  border-color: var(--line);
+  background: rgba(255,255,255,.05);
+  color: var(--text);
+}
+.btn--out::before { content: none; }
+.btn--out:hover { background: rgba(255,255,255,.10); color: var(--white); }
+.btn--out .ext {
+  flex: 0 0 auto; opacity: .55;
+  transition: opacity var(--mo-quick) var(--mo-out), translate var(--mo-quick) var(--mo-out);
+}
+.btn--out:hover .ext {
+  opacity: 1;
+  translate: calc(1px * var(--mo-travel)) calc(-1px * var(--mo-travel));
+  transition-timing-function: var(--mo-snap);
+}
 
 /* ── Embedded explainer video ── */
+.videoblock { margin: 18px 0 0; }
+.videoblock figcaption { margin: 9px 0 0; }
 .video-embed {
   aspect-ratio: 16 / 9;
-  margin: 12px 0 16px;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--panel);
 }
-.video-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+.video-embed iframe {
+  width: 100%; height: 100%; border: 0; display: block; opacity: 1;
+  transition: opacity var(--mo-base) var(--mo-out);
+}
+.video-embed iframe.is-awaiting-load { opacity: 0; }
+.video-embed iframe.is-loaded { opacity: 1; }
 
 /* ── Responsive ── */
-@media (max-width: 900px) { .cols { grid-template-columns: 1fr; } }
+@media (max-width: 900px) {
+  .split { grid-template-columns: 1fr; }
+  .split__col + .split__col {
+    border-left: 0;
+    border-top: 1px solid var(--line-soft);
+  }
+}
 @media (max-width: 640px) {
-  .grid-2 { grid-template-columns: 1fr; gap: 8px; }
+  .split__col { padding: 18px; }
 }

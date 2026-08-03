@@ -28,6 +28,40 @@
   <meta name="twitter:creator" content="@pokestir">
   <link rel="canonical" href="https://pokestir.com/releases/battle-gym-leader-red-blue/">
   <title>Pokestir - Battle! Gym Leader (From &quot;Pokémon Red &amp; Blue&quot;)</title>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
+  "name": "Battle! Gym Leader (From \"Pokémon Red & Blue\")",
+  "url": "https://pokestir.com/releases/battle-gym-leader-red-blue/",
+  "image": "https://cdn-images.dzcdn.net/images/cover/2d93e921ff2dbfc72ef4537eba744ff3/1000x1000-000000-80-0-0.jpg",
+  "datePublished": "2025-11-28",
+  "genre": [
+    "Electro"
+  ],
+  "byArtist": {
+    "@type": "MusicGroup",
+    "name": "Pokestir",
+    "url": "https://pokestir.com/"
+  },
+  "duration": "PT3M19S",
+  "isrcCode": "QZ6K42501457",
+  "sameAs": [
+    "https://pokestir.bandcamp.com/album/battle-gym-leader-from-pok-mon-red-blue",
+    "https://open.spotify.com/album/1TWBSOaQChA98UfIE1lI5g",
+    "https://music.apple.com/us/album/battle-gym-leader-from-pok%C3%A9mon-red-blue-single/1857039673?uo=4",
+    "https://music.youtube.com/watch?v=JyuZ52NuL-0",
+    "https://www.youtube.com/watch?v=JyuZ52NuL-0",
+    "https://www.pandora.com/artist/pokestir/battle-gym-leader-from-pokemon-red-and-blue/ALr2mp3xpX2pv7V",
+    "https://music.apple.com/us/album/battle-gym-leader-from-pok%C3%A9mon-red-blue-single/1857039673?app=itunes",
+    "https://www.deezer.com/album/864947452",
+    "https://music.amazon.com/albums/B0G45VXJ86",
+    "https://tidal.com/album/477127653",
+    "https://open.qobuz.com/album/gi9w18j1kk7ic",
+    "https://materia.to/BattleGymLeader"
+  ]
+}
+  </script>
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../releases.css">
   <link rel="icon" href="../../images/icon.png">
@@ -42,7 +76,7 @@
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
       <a class="site-nav__brand" href="/"><img src="../../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
-      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>
         <a href="/releases/">Releases</a>
@@ -53,9 +87,20 @@
   </nav>
 
   <main class="wrap" role="main" id="main">
-    <!-- releases.js reads the slug out of the path and renders into #detailView. -->
+    <!-- The static overview gives the incoming view transition an artwork target. -->
     <div id="listView" hidden></div>
-    <div id="detailView"></div>
+    <div id="detailView">
+      <a class="back-link" href="/releases/">&larr; All Releases</a>
+      <div class="detail-stack">
+        <section class="card detail-head" aria-label="Release overview">
+          <div class="art" aria-hidden="true"><span class="detail-art mo-fade is-loaded" style="--art-url:url(&quot;https://cdn-images.dzcdn.net/images/cover/2d93e921ff2dbfc72ef4537eba744ff3/500x500-000000-80-0-0.jpg&quot;)"></span></div>
+          <div class="info">
+            <h1 class="d-title">Battle! Gym Leader (From &quot;Pokémon Red &amp; Blue&quot;)</h1>
+            <div class="d-facts">Single &middot; November 28, 2025 &middot; 1 track</div>
+          </div>
+        </section>
+      </div>
+    </div>
 
     <footer class="site-footer" role="contentinfo">
       <nav class="social-strip" aria-label="Social and support links">

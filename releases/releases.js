@@ -180,12 +180,242 @@
   // derivation above and for catalog validation.
   const VISIBLE_DB = DB.filter((rel) => rel.isReleased);
 
+  /* Script-driven motion has to carry its own reduced-motion guard: CSS cannot
+     suppress Web Animations. Timings and curves are resolved from the shared
+     tokens so this code cannot drift into a second motion vocabulary. */
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)');
+  const MAX_MOTION_TILES = 24;
+  const activeGridMotions = new Set();
+  let activeRailMotion = null;
+
+  function motionToken(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+
+  function motionDuration(name) {
+    const value = motionToken(name);
+    if (value.endsWith('ms')) return parseFloat(value);
+    if (value.endsWith('s')) return parseFloat(value) * 1000;
+    return 0;
+  }
+
+  function trackGridMotion(animation, cleanup) {
+    const motion = { animation, cleanup };
+    activeGridMotions.add(motion);
+    animation.finished.then(cleanup, cleanup).finally(() => activeGridMotions.delete(motion));
+  }
+
+  function clearGridMotions() {
+    for (const motion of activeGridMotions) {
+      motion.animation.cancel();
+      motion.cleanup();
+    }
+    activeGridMotions.clear();
+  }
+
+  function nearViewport(rect) {
+    return rect.bottom >= 0 && rect.top <= window.innerHeight;
+  }
+
+  /* ── Grid motion ──────────────────────────────────────────────────────────
+     The same deal the gear grid uses, and for the same reason: tiles are placed
+     rather than faded in, arriving from slightly above and slightly larger than
+     final, in reading order rather than all on one frame. Twenty-four tiles
+     starting together read as a single crossfade of the archive instead of a
+     list rearranging.
+
+     Kept as a local copy rather than shared with gear.js. The two grids hold
+     different things at different sizes and will diverge before they converge,
+     and this file already keeps its own copies of the motion helpers by choice.
+     What is genuinely shared is `travelPath`, because a card crossing a grid
+     must move on the same law as everything else on the site. */
+  const DEAL_STEP = 22;     // ms between consecutive arrivals
+  const DEAL_WINDOW = 240;  // ms; every arrival has begun by here
+
+  function dealDelay(index) {
+    return Math.min(index * DEAL_STEP, DEAL_WINDOW);
+  }
+
+  function dealIn(el, index) {
+    const travel = parseFloat(motionToken('--mo-travel')) || 0;
+    return el.animate([
+      { opacity: 0, transform: `translateY(${-6 * travel}px) scale(1.04)` },
+      { opacity: 1, transform: 'translateY(0) scale(1)' }
+    ], {
+      duration: 260,
+      easing: motionToken('--mo-snap'),
+      delay: dealDelay(index),
+      fill: 'backwards'
+    });
+  }
+
+  /* Survivors of a search or a sort travel on `travelPath`, so a tile crossing
+     the archive takes longer than one shifting a column, and both land with the
+     commit and settle the nav pill uses. */
+  function moveSurvivor(el, dx, dy, fromOpacity) {
+    const MO = window.PokestirMotion;
+    const move = MO && MO.travelPath({ x: dx, y: dy }, { x: 0, y: 0 });
+    if (!move) {
+      return el.animate([
+        { opacity: fromOpacity, transform: `translate(${dx}px, ${dy}px)` },
+        { opacity: 1, transform: 'translate(0, 0)' }
+      ], { duration: motionDuration('--mo-base'), easing: motionToken('--mo-out') });
+    }
+    const over = move.over;
+    return el.animate([
+      { opacity: fromOpacity, transform: `translate(${dx}px, ${dy}px)`, easing: 'cubic-bezier(.7,0,.35,1)' },
+      { transform: `translate(${move.ux * over}px, ${move.uy * over}px)`, offset: .6, easing: 'cubic-bezier(.4,0,.3,1)' },
+      { transform: `translate(${-move.ux * over * .32}px, ${-move.uy * over * .32}px)`, offset: .82, easing: 'cubic-bezier(.4,0,.3,1)' },
+      { opacity: 1, transform: 'translate(0, 0)' }
+    ], { duration: move.duration, fill: 'backwards' });
+  }
+
+  function cancelRailMotion() {
+    if (activeRailMotion) activeRailMotion.cancel();
+  }
+
+  /* Native smooth scrolling owns its curve, so it cannot share the motion
+     language used everywhere around it. A hidden WAAPI driver supplies the
+     tokenized easing while rAF applies that eased progress to scrollLeft. */
+  /* One tile's worth of horizontal distance, measured live: the rail's column
+     width is 280px on desktop and `min(240px, 68vw)` on mobile, so it cannot be
+     assumed. Every snap point is a multiple of this. */
+  function railStride(rail) {
+    const tiles = rail.querySelectorAll('.release-tile');
+    if (tiles.length < 2) return Math.max(1, rail.clientWidth || 1);
+    return Math.max(1, Math.round(tiles[1].offsetLeft - tiles[0].offsetLeft));
+  }
+
+  /* A whole number of tiles, never a fraction of the viewport. */
+  function railPage(rail) {
+    const stride = railStride(rail);
+    return Math.max(1, Math.floor((rail.clientWidth || stride) / stride)) * stride;
+  }
+
+  function animateRailBy(rail, distance) {
+    cancelRailMotion();
+    const start = rail.scrollLeft;
+    const max = Math.max(0, rail.scrollWidth - rail.clientWidth);
+    /* Land on a snap point. The paging distance used to be `clientWidth * 0.9`,
+       which at the real geometry is 3.32 tiles, so every click glided to a
+       position that was not a snap point and the snap engine then yanked it
+       back by as much as 107px once the glide finished. A smooth move followed
+       by an uncontrolled jerk is what made these arrows feel clunky. Rounding
+       to the nearest tile also re-aligns the rail if it was left mid-tile by a
+       swipe, so the arrows always tidy up rather than compound the offset. */
+    const stride = railStride(rail);
+    const end = Math.max(0, Math.min(max, Math.round((start + distance) / stride) * stride));
+    if (start === end) return;
+    if (REDUCED.matches || typeof rail.animate !== 'function') {
+      rail.scrollLeft = end;
+      return;
+    }
+
+    /* Suspended for the duration: while this animation is the thing setting
+       scrollLeft, the snap engine has nothing to contribute and every frame it
+       touches is a frame it can fight. The landing is already a snap point, so
+       restoring it at the end moves nothing. */
+    const snapType = rail.style.scrollSnapType;
+    rail.style.scrollSnapType = 'none';
+
+    const driver = document.createElement('span');
+    driver.className = 'rail-motion-driver';
+    driver.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(driver);
+    /* Distance-scaled on the same law as the nav pill and the gear grid, rather
+       than a flat --mo-comp for every hop. A scroll does not get the pill's
+       overshoot, though: content that sails past its stop and comes back is
+       disorienting to read, and it would hand the snap engine something to
+       correct all over again. Only the duration is shared. */
+    const MO = window.PokestirMotion;
+    const move = MO && MO.travelPath({ x: 0, y: 0 }, { x: Math.abs(end - start), y: 0 });
+    const animation = driver.animate([{ opacity: 0 }, { opacity: 1 }], {
+      duration: move ? move.duration : motionDuration('--mo-comp'),
+      easing: motionToken('--mo-inout'),
+      fill: 'both'
+    });
+    let frame = 0;
+    let stopped = false;
+
+    function stop(land, cancelAnimation) {
+      if (stopped) return;
+      stopped = true;
+      if (cancelAnimation) animation.cancel();
+      cancelAnimationFrame(frame);
+      if (land) rail.scrollLeft = end;
+      rail.style.scrollSnapType = snapType;
+      driver.remove();
+      if (activeRailMotion && activeRailMotion.animation === animation) activeRailMotion = null;
+    }
+
+    function step() {
+      if (stopped) return;
+      const progress = parseFloat(getComputedStyle(driver).opacity) || 0;
+      rail.scrollLeft = start + (end - start) * progress;
+      frame = requestAnimationFrame(step);
+    }
+
+    activeRailMotion = { animation, cancel: () => stop(false, true) };
+    animation.finished.then(() => stop(true, false), () => stop(false, false));
+    step();
+  }
+
   /* Artwork URLs are stored directly in data.js rather than fetched live in
      the browser — at catalog scale, hundreds of live lookups on page load
      would be slow and unreliable. Elements without artwork keep the CSS
      gradient placeholder. */
-  function applyArt(el, rel) {
-    if (rel.artwork) el.style.setProperty('--art-url', `url(${JSON.stringify(rel.artwork)})`);
+
+  /* Every stored artwork URL is a 1000x1000 crop, because that is the size
+     link unfurlers want in og:image. Nothing on the page is anywhere near
+     that big: tiles are 196-280px and the detail hero is 172px, so a 1000px
+     cover is ~170KB to draw ~60KB worth of pixels even at 2x DPR. Both CDNs
+     in the catalog (Deezer and Apple) encode the size in the path, so ask
+     them for the 500x500 crop instead: same URL, about a third of the bytes,
+     still sharp on retina. og:image keeps the 1000 in the generated pages. */
+  const artAtSize = (url, px) => String(url).replace(/1000x1000/, `${px}x${px}`);
+
+  const decodedArt = new Set();
+  const pendingArt = new Map();
+
+  function decodeArt(url) {
+    if (decodedArt.has(url)) return Promise.resolve();
+    if (pendingArt.has(url)) return pendingArt.get(url);
+
+    const image = new Image();
+    image.decoding = 'async';
+    const loaded = new Promise((resolve, reject) => {
+      image.onload = resolve;
+      image.onerror = reject;
+    });
+    image.src = url;
+
+    const promise = (typeof image.decode === 'function'
+      ? image.decode().catch(() => loaded)
+      : loaded).then(() => {
+        decodedArt.add(url);
+        pendingArt.delete(url);
+        return true;
+      }, () => {
+        pendingArt.delete(url);
+        return false;
+      });
+    pendingArt.set(url, promise);
+    return promise;
+  }
+
+  function revealArt(layer, rel) {
+    if (!layer || !rel.artwork) return;
+    const url = artAtSize(rel.artwork, 500);
+    const wasDecoded = decodedArt.has(url);
+    const paint = (animate) => {
+      if (!layer.isConnected) return;
+      layer.style.setProperty('--art-url', `url(${JSON.stringify(url)})`);
+      if (animate) void getComputedStyle(layer).opacity;
+      layer.classList.add('is-loaded');
+    };
+
+    if (wasDecoded) paint(false);
+    else decodeArt(url).then((loaded) => { if (loaded) paint(true); });
   }
 
   /* The list view can hold hundreds of tiles; setting every background image
@@ -195,11 +425,18 @@
   let artObserver = null;
   function applyArtLazy(el, rel) {
     if (!rel.artwork) return;
+    const url = artAtSize(rel.artwork, 500);
+    if (decodedArt.has(url)) {
+      const layer = el.querySelector('.tile-art');
+      layer.style.setProperty('--art-url', `url(${JSON.stringify(url)})`);
+      layer.classList.add('is-loaded');
+      return;
+    }
     if (!artObserver) {
       artObserver = new IntersectionObserver((entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
-          applyArt(entry.target, entry.target._release);
+          revealArt(entry.target.querySelector('.tile-art'), entry.target._release);
           artObserver.unobserve(entry.target);
         }
       }, { rootMargin: '400px' });
@@ -241,13 +478,14 @@
     const a = document.createElement('a');
     a.className = 'release-tile' + (rel.type === 'Album' ? ' release-tile--album' : '');
     a.href = releaseHref(rel.slug);
+    a.dataset.motionKey = rel.slug;
 
     const meta = [rel.type, formatReleaseDate(rel.releaseDate), trackCountText(rel)]
       .filter(Boolean).map(escapeHTML).join(' &middot; ');
 
     const host = (rel.includedIn || [])[0] || null;
     a.innerHTML = `
-      <div class="tile-cover" aria-hidden="true"></div>
+      <div class="tile-cover" aria-hidden="true"><span class="tile-art mo-fade"></span></div>
       <div class="rinfo">
         <div class="rname">${escapeHTML(rel.title)}</div>
         ${rel.subtitle ? `<div class="rsub">${escapeHTML(rel.subtitle)}</div>` : ''}
@@ -287,7 +525,8 @@
     nav.className = 'rail-nav';
     const prev = document.createElement('button');
     const next = document.createElement('button');
-    prev.className = next.className = 'rail-btn';
+    prev.className = 'rail-btn rail-btn--prev';
+    next.className = 'rail-btn rail-btn--next';
     prev.type = next.type = 'button';
     prev.setAttribute('aria-label', 'Scroll albums back');
     next.setAttribute('aria-label', 'Scroll albums forward');
@@ -297,9 +536,10 @@
     nav.appendChild(next);
     head.appendChild(nav);
 
-    const page = () => Math.max((rail.clientWidth || 0) * 0.9, 280);
-    prev.addEventListener('click', () => rail.scrollBy({ left: -page(), behavior: 'smooth' }));
-    next.addEventListener('click', () => rail.scrollBy({ left: page(), behavior: 'smooth' }));
+    prev.addEventListener('click', () => animateRailBy(rail, -railPage(rail)));
+    next.addEventListener('click', () => animateRailBy(rail, railPage(rail)));
+    rail.addEventListener('wheel', cancelRailMotion, { passive: true });
+    rail.addEventListener('pointerdown', cancelRailMotion, { passive: true });
 
     const sync = () => {
       const max = (rail.scrollWidth || 0) - (rail.clientWidth || 0);
@@ -318,9 +558,97 @@
     return head;
   }
 
+  function primaryTiles() {
+    return Array.from(grid.querySelectorAll('.rgrid:not(.rgrid--rail) .release-tile'));
+  }
+
+  function addExitClone(tile, rect, opacity, index) {
+    const clone = tile.cloneNode(true);
+    clone.classList.add('release-motion-clone');
+    clone.setAttribute('aria-hidden', 'true');
+    clone.inert = true;
+    Object.assign(clone.style, {
+      position: 'fixed',
+      left: `${rect.left}px`,
+      top: `${rect.top}px`,
+      width: `${rect.width}px`,
+      height: `${rect.height}px`,
+      margin: '0',
+      pointerEvents: 'none',
+      zIndex: '90'
+    });
+    document.body.appendChild(clone);
+
+    /* Departures shrink slightly and go, with no travel: a tile that is leaving
+       is not the thing being looked at, so it clears the way rather than taking
+       a journey of its own. Same ordering as the arrivals. */
+    const animation = clone.animate([
+      { opacity, transform: 'scale(1)' },
+      { opacity: 0, transform: 'scale(.98)' }
+    ], {
+      duration: 110,
+      easing: motionToken('--mo-in'),
+      delay: dealDelay(index),
+      fill: 'both'
+    });
+    trackGridMotion(animation, () => clone.remove());
+  }
+
+  function captureGridMotion(nextKeys) {
+    const oldRects = new Map();
+    const visible = primaryTiles().map((tile) => ({
+      tile,
+      rect: tile.getBoundingClientRect(),
+      opacity: getComputedStyle(tile).opacity
+    }))
+      .filter(({ rect }) => nearViewport(rect))
+      .slice(0, MAX_MOTION_TILES);
+    clearGridMotions();
+    if (!hasRendered || REDUCED.matches) return oldRects;
+
+    let leaving = 0;
+    for (const { tile, rect, opacity } of visible) {
+      const key = tile.dataset.motionKey;
+      oldRects.set(key, { rect, opacity });
+      if (!nextKeys.has(key)) addExitClone(tile, rect, opacity, leaving++);
+    }
+    return oldRects;
+  }
+
+  function animateGridIn(oldRects) {
+    if (!hasRendered || REDUCED.matches) return;
+    const visible = primaryTiles().map((tile) => ({ tile, rect: tile.getBoundingClientRect() }))
+      .filter(({ rect }) => nearViewport(rect))
+      .slice(0, MAX_MOTION_TILES);
+
+    // Arrivals are counted separately from survivors, so the deal stays evenly
+    // spaced however many tiles happened to stay put between them.
+    let arriving = 0;
+    for (const { tile, rect } of visible) {
+      const old = oldRects.get(tile.dataset.motionKey);
+      if (!old) {
+        trackGridMotion(dealIn(tile, arriving++), () => {});
+        continue;
+      }
+      if (old.opacity === '1' && old.rect.left === rect.left && old.rect.top === rect.top) continue;
+      trackGridMotion(
+        moveSurvivor(tile, old.rect.left - rect.left, old.rect.top - rect.top, old.opacity),
+        () => {}
+      );
+    }
+  }
+
+  /* First-paint guard: the initial archive lands in its settled state. Artwork
+     may perform its one decode fade, but tiles never stack a load entrance on
+     top of it. Only later filter and sort renders enter this motion path. */
+  let hasRendered = false;
+
   function render() {
+    cancelRailMotion();
     const sorter = SORTERS[state.sort] || SORTERS.newest;
     const list = VISIBLE_DB.filter(match).sort(sorter);
+    const nextKeys = new Set(list.map((rel) => rel.slug));
+    const oldRects = captureGridMotion(nextKeys);
 
     countEl.textContent = list.length === 1 ? '1 release' : `${list.length} releases`;
 
@@ -336,6 +664,7 @@
         ? 'No releases match the selected filters.'
         : 'Unable to load release data. Please refresh the page.';
       grid.appendChild(p);
+      hasRendered = true;
       return;
     }
 
@@ -355,6 +684,8 @@
     } else {
       grid.appendChild(tileGrid(list));
     }
+    animateGridIn(oldRects);
+    hasRendered = true;
   }
 
   function debounce(fn, waitMs) {
@@ -374,14 +705,44 @@
      via the nav ignore the stash and start at the top. */
   const LIST_STATE_KEY = 'pokestir-releases-list-state';
 
-  function saveListState() {
+  /* The view transition snapshots `.tile-cover` at the moment the navigation
+     starts, which is the moment the pointer comes up: measured there, the cover
+     is translated 2px, scaled to .985, and running three animations at once (a
+     transition plus tile-rise and tile-unsquash). So the artwork begins its
+     flight from a slightly different position and size on every single click,
+     depending only on how fast the click was released. That is why the same
+     navigation never quite looks the same twice.
+
+     Put the cover back in its resting pose and flush that before the navigation
+     proceeds, so the flight always starts from the tile as drawn. The class
+     only ever lands on a document that is about to be replaced. */
+  function stillTransitionArt(tile) {
+    const cover = tile.querySelector('.tile-cover');
+    if (!cover) return;
+    tile.classList.remove('is-pressed', 'is-released');
+    cover.getAnimations().forEach((a) => a.cancel());
+    cover.classList.add('is-transition-still');
+    void cover.offsetWidth;
+  }
+
+  function markTransitionArt(tile) {
+    for (const cover of grid.querySelectorAll('.tile-cover.is-transition-art')) {
+      cover.classList.remove('is-transition-art');
+    }
+    const cover = tile && tile.querySelector('.tile-cover');
+    if (cover) cover.classList.add('is-transition-art');
+  }
+
+  function saveListState(tile) {
     try {
       const rail = grid.querySelector('.rgrid--rail');
       sessionStorage.setItem(LIST_STATE_KEY, JSON.stringify({
         q: qEl.value,
         sort: state.sort,
         y: window.scrollY,
-        railX: rail ? rail.scrollLeft : 0
+        railX: rail ? rail.scrollLeft : 0,
+        artSlug: tile ? tile.dataset.motionKey : '',
+        artRail: Boolean(tile && tile.closest('.rgrid--rail'))
       }));
     } catch (e) { /* storage unavailable (private mode); skip */ }
   }
@@ -411,6 +772,17 @@
     render();
     const rail = grid.querySelector('.rgrid--rail');
     if (rail && saved.railX) rail.scrollLeft = saved.railX;
+    // Force the rebuilt archive to its final height before restoring scroll.
+    // The incoming view-transition snapshot must see the same viewport the
+    // visitor left, not the top of the freshly rebuilt page.
+    void grid.offsetHeight;
+    window.scrollTo({ top: saved.y || 0, behavior: 'instant' });
+    if (saved.artSlug) {
+      const target = Array.from(grid.querySelectorAll('.release-tile')).find((tile) =>
+        tile.dataset.motionKey === saved.artSlug &&
+        Boolean(tile.closest('.rgrid--rail')) === Boolean(saved.artRail));
+      if (target && nearViewport(target.getBoundingClientRect())) markTransitionArt(target);
+    }
     // Layout finishes after this frame; scroll once the page has its height.
     // 'instant' bypasses the site-wide `scroll-behavior: smooth`, which would
     // otherwise animate the restore all the way down from the top.
@@ -418,9 +790,29 @@
     return true;
   }
 
+  function saveReturnArt(rel) {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(LIST_STATE_KEY)) || {
+        q: '', sort: 'newest', y: 0, railX: 0
+      };
+      if (saved.artSlug !== rel.slug) {
+        saved.artSlug = rel.slug;
+        saved.artRail = rel.type === 'Album';
+      }
+      sessionStorage.setItem(LIST_STATE_KEY, JSON.stringify(saved));
+    } catch (e) { /* storage unavailable; root crossfade still works */ }
+  }
+
   function initList() {
     grid.addEventListener('click', (e) => {
-      if (e.target.closest('.release-tile')) saveListState();
+      const tile = e.target.closest('.release-tile');
+      if (!tile) return;
+      const plainNavigation = !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey;
+      if (plainNavigation) {
+        stillTransitionArt(tile);
+        markTransitionArt(tile);
+      }
+      saveListState(tile);
     });
 
     qEl.addEventListener('input', debounce(() => {
@@ -522,11 +914,26 @@
       });
     }
 
+    /* `timeupdate` fires about four times a second, so writing --pct straight
+       from it steps the progress edge in quarter-second jumps. The CSS glides
+       between values (see .track-row); resetting a row back to zero has to skip
+       that glide, or a finished preview visibly rewinds itself. */
+    function setPct(row, pct, glide) {
+      if (!glide) {
+        row.classList.add('track-row--jump');
+        row.style.setProperty('--pct', pct);
+        void row.offsetWidth;   // land the value before the transition returns
+        row.classList.remove('track-row--jump');
+        return;
+      }
+      row.style.setProperty('--pct', pct);
+    }
+
     function setRow(row, playing) {
       row.classList.toggle('is-playing', playing);
       row.setAttribute('aria-label',
         (playing ? 'Pause preview: ' : 'Play preview: ') + (row.dataset.title || ''));
-      if (!playing) row.style.setProperty('--pct', '0%');
+      if (!playing) setPct(row, '0%', false);
     }
 
     function toggle(row) {
@@ -561,7 +968,7 @@
     });
     audio.addEventListener('timeupdate', () => {
       if (!current || !isFinite(audio.duration) || !audio.duration) return;
-      current.style.setProperty('--pct', (audio.currentTime / audio.duration * 100) + '%');
+      setPct(current, (audio.currentTime / audio.duration * 100) + '%', true);
     });
   }
 
@@ -623,7 +1030,7 @@
             </ul>
           </div>` : '';
     detailView.innerHTML = `
-      <a class="back-link" href="${LIST_URL}">&larr; All Releases</a>
+      <a class="back-link" href="${LIST_URL}"><span class="back-arrow" aria-hidden="true">&larr;</span> All Releases</a>
       <section class="card detail-head">
         <div class="info">
           <h1 class="d-title">Release not found</h1>
@@ -643,6 +1050,8 @@
       return;
     }
 
+    saveReturnArt(rel);
+
     document.title = `Pokestir - ${rel.title}`;
 
     const facts = [rel.type, formatReleaseDate(rel.releaseDate), trackCountText(rel)]
@@ -658,10 +1067,10 @@
     const hasPreviews = (rel.tracks || []).some((t) => t.preview);
 
     detailView.innerHTML = `
-      <a class="back-link" href="${LIST_URL}">&larr; All Releases</a>
+      <a class="back-link" href="${LIST_URL}"><span class="back-arrow" aria-hidden="true">&larr;</span> All Releases</a>
       <div class="detail-stack">
         <section class="card detail-head" aria-label="Release overview">
-          <div class="art" aria-hidden="true"></div>
+          <div class="art" aria-hidden="true"><span class="detail-art mo-fade"></span></div>
           <div class="info">
             <h1 class="d-title">${escapeHTML(rel.title)}</h1>
             ${rel.subtitle ? `<div class="d-sub">${escapeHTML(rel.subtitle)}</div>` : ''}
@@ -681,7 +1090,7 @@
         </div>
       </div>`;
 
-    applyArt(detailView.querySelector('.art'), rel);
+    revealArt(detailView.querySelector('.detail-art'), rel);
     initPreviewPlayer(detailView);
   }
 

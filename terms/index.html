@@ -37,7 +37,7 @@
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
       <a class="site-nav__brand" href="/"><img src="../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
-      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>
         <a href="../releases/">Releases</a>
@@ -47,95 +47,94 @@
     </div>
   </nav>
   <main class="wrap" role="main" id="main">
-    <h1 class="sr-only">Usage Terms & Claims</h1>
+    <h1 class="sr-only">Usage Terms &amp; Claims</h1>
 
     <header id="usage">
       <h2 class="page-title" id="usage-title">Using My Music</h2>
-      <p class="section-sub">You're welcome to use my music as background audio if you credit me visibly. Please don't reupload it, and reach out first if you'd like to use it in a larger project.</p>
+      <p class="lede"><span class="answer">Yes, you&rsquo;re welcome to use my music in your videos.</span> Credit me visibly, please don&rsquo;t reupload it on its own, and reach out first if you&rsquo;d like to use it in a larger project.</p>
     </header>
 
-    <section class="cols" aria-labelledby="usage-title">
-      <article class="card" aria-labelledby="crediting">
-        <div class="inner">
-          <h2 id="crediting" class="card-title">How to credit me</h2>
-          <p class="muted">Please place this on-screen or in your description:</p>
+    <!-- One card split by a hairline, not two cards side by side. The two halves
+         are never the same length, and as separate cards that meant either
+         mismatched heights or, once stretched to match, a card with a hole in
+         it. Inside one panel a shorter column is just a short column. -->
+    <section class="card split" aria-labelledby="usage-title">
+      <div class="split__col">
+        <h3 class="card-title">How to credit me</h3>
+        <p class="caption">Please place this on-screen or in your description:</p>
+        <button class="codebox card-inset" type="button" data-copy="Music by Pokestir: https://pokestir.com" aria-label="Copy the credit line"><code>Music by Pokestir: https://pokestir.com</code><span class="copyhint" aria-hidden="true"><span class="idle">Copy</span><span class="done">Copied</span></span></button>
+        <p class="caption caption--spaced">Feel free to link my YouTube channel instead, if you&rsquo;d rather:</p>
+        <button class="codebox card-inset" type="button" data-copy="https://www.youtube.com/@pokestir" aria-label="Copy the channel link"><code>https://www.youtube.com/@pokestir</code><span class="copyhint" aria-hidden="true"><span class="idle">Copy</span><span class="done">Copied</span></span></button>
+      </div>
 
-          <div>
-            <div class="codebox card-inset">
-              Music by Pokestir: https://pokestir.com
-            </div>
-            <p class="muted">Feel free to link my YouTube channel instead, if you'd rather:</p>
-            <div class="codebox card-inset">
-              https://www.youtube.com/@pokestir
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="card" aria-labelledby="rules">
-        <div class="inner">
-          <h2 id="rules" class="card-title">Quick rules</h2>
-          <ul class="list">
-            <li>Please keep credit visible, either on-screen or in the video description.</li>
-            <li>Please don't reupload my music.</li>
-            <li>If you'd like to use the music in a larger project (games, apps, albums, releases), just ask first.</li>
-            <li>My covers and arrangements are licensed through mechanical licenses, so YouTube may still auto-flag them from melody matching. That's expected.</li>
-          </ul>
-        </div>
-      </article>
+      <div class="split__col">
+        <h3 class="card-title">Quick rules</h3>
+        <ul class="list">
+          <li>Please keep credit visible, either on-screen or in the video description.</li>
+          <li>Please don&rsquo;t reupload my music.</li>
+          <li>If you&rsquo;d like to use the music in a larger project (games, apps, albums, releases), just ask first.</li>
+          <li>My covers and arrangements are licensed through mechanical licenses, so YouTube may still auto-flag them from melody matching.</li>
+        </ul>
+      </div>
     </section>
 
     <header id="claims">
       <h2 class="page-title" id="claims-title">Content ID Claims</h2>
-      <p class="section-sub">Claims on covers are automated matches, not strikes against you. If YouTube flagged your video, here's how to sort it out.</p>
+      <p class="lede"><span class="answer">A claim is not a strike against your channel.</span> It only affects monetization, it&rsquo;s fully automated, and it wasn&rsquo;t made by me. Dispute it and it should lift within a week.</p>
     </header>
 
-    <section class="cols" aria-labelledby="claims-title">
-      <article class="card" aria-labelledby="covers">
-        <div class="inner">
-          <h2 id="covers" class="card-title">Incorrect Content ID claims</h2>
-          <p class="muted">I license my covers legally through my label, so please don't worry if you see a claim. Claims naming Materia Music Publishing or FUGA are automated Content ID matches, not manual claims from me.</p>
-          <p class="muted">Even if you didn't use my recording, YouTube can still match the shared melody of a game piece. It's worth disputing the claim; it should be resolved fairly quickly.</p>
-          <p class="muted">If you'd like a deeper explanation, another cover artist made a great video about it.</p>
+    <section class="card split" aria-labelledby="claims-title">
+      <div class="split__col">
+        <h3 class="card-title">Steps if you received a claim</h3>
+        <!-- An ordered list, not a stepper. Each item leads with what the step
+             is, in white, so the four are scannable with no decoration. -->
+        <ol class="list">
+          <li><b>Check who claimed it.</b> If it names Materia Music Publishing, FUGA, or one of my cover tracks, it&rsquo;s an automated Content ID match. It was not manually made by me or my distributor.</li>
+          <li><b>Dispute it in YouTube Studio</b> using this statement:
+            <button class="codebox card-inset" type="button" data-copy="No audio from the claimed recording is present; the match is incorrect." aria-label="Copy the dispute statement"><code>No audio from the claimed recording is present; the match is incorrect.</code><span class="copyhint" aria-hidden="true"><span class="idle">Copy</span><span class="done">Copied</span></span></button>
+          </li>
+          <li><b>Give it 5 to 7 days.</b> Most claims lift automatically, and monetization along with any held revenue should return.</li>
+          <li><b>Or remove the audio.</b> If you&rsquo;d rather not wait, you&rsquo;re welcome to use YouTube Studio&rsquo;s tools to remove the matched audio.</li>
+        </ol>
+
+        <!-- Not a disclosure. Closed it was a one line stub with empty space
+             under it; open it revealed three short lines. The person who just
+             read "give it 5 to 7 days" is the person who needs this, so it
+             closes the sequence rather than hiding behind a click. -->
+        <div class="tail">
+          <h4 class="tail-title">Still stuck after a week?</h4>
+          <p class="lead">If the claim names Materia Music Publishing, feel free to reach out to them directly.</p>
+          <p><a class="btn btn--out" href="https://materiamusicpub.com/contact/" target="_blank" rel="noopener">Contact Materia Music Publishing<svg class="ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></p>
+          <p class="caption caption--spaced">I&rsquo;m sorry, but I&rsquo;m not able to remove third-party claims that aren&rsquo;t mine.</p>
+        </div>
+      </div>
+
+      <div class="split__col">
+        <h3 class="card-title">Why this happens</h3>
+        <p class="lead">I license my covers legally through my label, so please don&rsquo;t worry if you see a claim. Claims naming Materia Music Publishing or FUGA are automated Content ID matches, <b class="em">not manual claims from me</b>.</p>
+        <p class="lead">Even if you didn&rsquo;t use my recording, <b class="em">YouTube can still match the shared melody of a game piece</b>. It&rsquo;s worth disputing the claim; it should be resolved fairly quickly.</p>
+
+        <figure class="videoblock">
           <div class="video-embed">
             <iframe src="https://www.youtube-nocookie.com/embed/gTk8PeCI-wc" title="Content ID claims explained by another cover artist" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <script>
+              (() => {
+                const frame = document.currentScript.previousElementSibling;
+                const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+                if (reduced.matches) return;
+                frame.classList.add('is-awaiting-load');
+                frame.addEventListener('load', () => {
+                  frame.classList.remove('is-awaiting-load');
+                  frame.classList.add('is-loaded');
+                }, { once: true });
+              })();
+            </script>
           </div>
-          <details class="card-inset">
-            <summary>FAQ</summary>
-              <div class="grid-2">
-              <div>
-                <h3 class="card-title faq-title">Is a claim a strike?</h3>
-                <p class="muted">No, not at all. Content ID claims only affect monetization, not your channel status, and they're fully automated.</p>
-              </div>
-              <div>
-                <h3 class="card-title faq-title">Why did it match my video?</h3>
-                <p class="muted">Covers share melodies with the original game music, so the system can match your video even if you used a different recording.</p>
-              </div>
-            </div>
-          </details>
-        </div>
-      </article>
+          <figcaption class="caption">Another cover artist explains Content ID claims in more depth.</figcaption>
+        </figure>
 
-      <article class="card" aria-labelledby="steps">
-        <div class="inner">
-          <h2 id="steps" class="card-title">Steps if you received a claim</h2>
-          <ol class="list">
-            <li>Please check the claim text first. If it names Materia Music Publishing, FUGA, or one of my cover tracks, it's an automated Content ID match. It was not manually made by me or my distributor.</li>
-            <li>Please dispute the claim in YouTube Studio using this statement:
-              <div class="codebox card-inset">No audio from the claimed recording is present; the match is incorrect.</div>
-            </li>
-            <li>Give it 5 to 7 days. Most claims lift automatically, and monetization along with any held revenue should return.</li>
-            <li>If you'd like, you're also welcome to use YouTube Studio's tools to remove the matched audio.</li>
-          </ol>
-
-          <details class="card-inset">
-            <summary>Still stuck after a week?</summary>
-              <p class="muted">If the claim names Materia Music Publishing, feel free to reach out to them directly:</p>
-            <p><a class="btn" href="https://materiamusicpub.com/contact/" target="_blank" rel="noopener">Contact Materia Music Publishing</a></p>
-            <p class="small muted">I'm sorry, but I'm not able to remove third-party claims that aren't mine.</p>
-          </details>
-        </div>
-      </article>
+</div>
+      </div>
     </section>
 
     <footer class="site-footer" role="contentinfo">
@@ -151,5 +150,35 @@
       <p>Copyright &copy; 2026 Pokestir. All rights reserved. <a class="all-links" href="../links/">All links</a> &middot; <a class="all-links" href="../contact/">Contact me</a></p>
     </footer>
   </main>
+  <script>
+    /* Copy the credit lines and the dispute statement. The whole box is the
+       button, so the target is the full row rather than a small inset control.
+       The label reports back rather than the click succeeding silently, and it
+       resets itself so the box does not sit reading "Copied" forever. */
+    document.addEventListener('click', async (e) => {
+      const box = e.target.closest('.codebox');
+      if (!box) return;
+      const text = box.dataset.copy;
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (err) {
+        /* Clipboard API needs a secure context and permission; fall back to a
+           throwaway textarea so the button still works over plain http and in
+           older engines. */
+        const scratch = document.createElement('textarea');
+        scratch.value = text;
+        scratch.setAttribute('readonly', '');
+        scratch.style.cssText = 'position:fixed;top:-9999px;opacity:0';
+        document.body.appendChild(scratch);
+        scratch.select();
+        try { document.execCommand('copy'); } catch (e2) { /* nothing left to try */ }
+        scratch.remove();
+      }
+      box.classList.add('is-done');
+      clearTimeout(box._copyReset);
+      box._copyReset = setTimeout(() => box.classList.remove('is-done'), 1600);
+    });
+  </script>
 </body>
 </html>

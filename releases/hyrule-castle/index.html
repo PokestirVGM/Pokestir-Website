@@ -28,6 +28,40 @@
   <meta name="twitter:creator" content="@pokestir">
   <link rel="canonical" href="https://pokestir.com/releases/hyrule-castle/">
   <title>Pokestir - Hyrule Castle (From &quot;The Legend of Zelda: A Link to the Past&quot;) [Arr. for Orchestra by Pokestir]</title>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
+  "name": "Hyrule Castle (From \"The Legend of Zelda: A Link to the Past\") [Arr. for Orchestra by Pokestir]",
+  "url": "https://pokestir.com/releases/hyrule-castle/",
+  "image": "https://cdn-images.dzcdn.net/images/cover/4e7c2da90c79ba283a76680b57e323c1/1000x1000-000000-80-0-0.jpg",
+  "datePublished": "2026-05-08",
+  "genre": [
+    "Classical"
+  ],
+  "byArtist": {
+    "@type": "MusicGroup",
+    "name": "Pokestir",
+    "url": "https://pokestir.com/"
+  },
+  "duration": "PT2M55S",
+  "isrcCode": "QZ6K42600752",
+  "sameAs": [
+    "https://pokestir.bandcamp.com/album/hyrule-castle-from-the-legend-of-zelda-a-link-to-the-past-arr-for-orchestra-by-pokestir",
+    "https://open.spotify.com/album/0vMRP3alY2oAKqUqh5MKHr",
+    "https://music.apple.com/us/album/hyrule-castle-from-the-legend-of-zelda-a-link-to/6767403991?uo=4",
+    "https://music.youtube.com/watch?v=2GHSLFkl5-4",
+    "https://www.youtube.com/watch?v=2GHSLFkl5-4",
+    "https://www.pandora.com/artist/pokestir/hyrule-castle-from-the-legend-of-zelda-a-link-to-the-past-arr-for-orchestra-by-pokestir/ALpjzjvnrt25brP",
+    "https://music.apple.com/us/album/hyrule-castle-from-the-legend-of-zelda-a-link-to/6767403991?app=itunes",
+    "https://www.deezer.com/album/977362781",
+    "https://music.amazon.com/albums/B0GZSCTGW4",
+    "https://tidal.com/album/522112787",
+    "https://open.qobuz.com/album/xka3mzvuqyrzx",
+    "https://materia.to/PokestirHyruleCastle"
+  ]
+}
+  </script>
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../releases.css">
   <link rel="icon" href="../../images/icon.png">
@@ -42,7 +76,7 @@
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
       <a class="site-nav__brand" href="/"><img src="../../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
-      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>
         <a href="/releases/">Releases</a>
@@ -53,9 +87,20 @@
   </nav>
 
   <main class="wrap" role="main" id="main">
-    <!-- releases.js reads the slug out of the path and renders into #detailView. -->
+    <!-- The static overview gives the incoming view transition an artwork target. -->
     <div id="listView" hidden></div>
-    <div id="detailView"></div>
+    <div id="detailView">
+      <a class="back-link" href="/releases/">&larr; All Releases</a>
+      <div class="detail-stack">
+        <section class="card detail-head" aria-label="Release overview">
+          <div class="art" aria-hidden="true"><span class="detail-art mo-fade is-loaded" style="--art-url:url(&quot;https://cdn-images.dzcdn.net/images/cover/4e7c2da90c79ba283a76680b57e323c1/500x500-000000-80-0-0.jpg&quot;)"></span></div>
+          <div class="info">
+            <h1 class="d-title">Hyrule Castle (From &quot;The Legend of Zelda: A Link to the Past&quot;) [Arr. for Orchestra by Pokestir]</h1>
+            <div class="d-facts">Single &middot; May 8, 2026 &middot; 1 track</div>
+          </div>
+        </section>
+      </div>
+    </div>
 
     <footer class="site-footer" role="contentinfo">
       <nav class="social-strip" aria-label="Social and support links">

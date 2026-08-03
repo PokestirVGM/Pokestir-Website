@@ -39,7 +39,13 @@
     .section-sub { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 2px 2px 8px; }
     .nf-card { padding: 22px; }
     .nf-card p { margin: 0; color: var(--muted); line-height: 1.6; }
-    .nf-card a { color: var(--white); }
+    /* Same treatment as every other inline link on the site: underlined at
+       rest, brightening on hover. It had no hover state at all. */
+    .nf-card a {
+      color: var(--white); text-decoration: underline;
+      transition: color var(--mo-quick) var(--mo-out);
+    }
+    .nf-card a:hover { text-decoration: none; }
   </style>
 </head>
 <body>
@@ -47,7 +53,7 @@
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
       <a class="site-nav__brand" href="/"><img src="/images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
-      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>
         <a href="/releases/">Releases</a>

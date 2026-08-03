@@ -28,6 +28,31 @@
   <meta name="twitter:creator" content="@pokestir">
   <link rel="canonical" href="https://pokestir.com/releases/bob-omb-battlefield/">
   <title>Pokestir - Bob-omb Battlefield (From &quot;Super Mario 64&quot;) (Arrangement)</title>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
+  "name": "Bob-omb Battlefield (From \"Super Mario 64\") (Arrangement)",
+  "url": "https://pokestir.com/releases/bob-omb-battlefield/",
+  "image": "https://cdn-images.dzcdn.net/images/cover/b2d13813969c9578d91c3458641d895a/1000x1000-000000-80-0-0.jpg",
+  "datePublished": "2024-10-14",
+  "genre": [
+    "Instrumental"
+  ],
+  "byArtist": {
+    "@type": "MusicGroup",
+    "name": "Pokestir",
+    "url": "https://pokestir.com/"
+  },
+  "duration": "PT3M35S",
+  "isrcCode": "QZPJ32408787",
+  "sameAs": [
+    "https://music.apple.com/us/album/bob-omb-battlefield-from-super-mario-64-arrangement-single/1773956223?uo=4",
+    "https://music.apple.com/us/album/bob-omb-battlefield-from-super-mario-64-arrangement-single/1773956223?app=itunes",
+    "https://www.deezer.com/album/656824791"
+  ]
+}
+  </script>
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../releases.css">
   <link rel="icon" href="../../images/icon.png">
@@ -42,7 +67,7 @@
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
       <a class="site-nav__brand" href="/"><img src="../../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
-      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>
         <a href="/releases/">Releases</a>
@@ -53,9 +78,20 @@
   </nav>
 
   <main class="wrap" role="main" id="main">
-    <!-- releases.js reads the slug out of the path and renders into #detailView. -->
+    <!-- The static overview gives the incoming view transition an artwork target. -->
     <div id="listView" hidden></div>
-    <div id="detailView"></div>
+    <div id="detailView">
+      <a class="back-link" href="/releases/">&larr; All Releases</a>
+      <div class="detail-stack">
+        <section class="card detail-head" aria-label="Release overview">
+          <div class="art" aria-hidden="true"><span class="detail-art mo-fade is-loaded" style="--art-url:url(&quot;https://cdn-images.dzcdn.net/images/cover/b2d13813969c9578d91c3458641d895a/500x500-000000-80-0-0.jpg&quot;)"></span></div>
+          <div class="info">
+            <h1 class="d-title">Bob-omb Battlefield (From &quot;Super Mario 64&quot;) (Arrangement)</h1>
+            <div class="d-facts">Single &middot; October 14, 2024 &middot; 1 track</div>
+          </div>
+        </section>
+      </div>
+    </div>
 
     <footer class="site-footer" role="contentinfo">
       <nav class="social-strip" aria-label="Social and support links">

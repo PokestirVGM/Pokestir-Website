@@ -14,9 +14,9 @@
    the thing it filters read as one idea; on the lit state it drops back to the
    label color rather than fighting the blue. */
 .fav-btn { white-space: nowrap; }
-.fav-btn .fav-ic { flex: 0 0 auto; color: #FF8327; }
-.fav-btn[aria-pressed="true"] {
-  background: var(--ring); color: var(--on-ring); border-color: var(--line-bright);
+.fav-btn .fav-ic {
+  flex: 0 0 auto; color: #FF8327;
+  transition: color var(--mo-quick) var(--mo-out);
 }
 .fav-btn[aria-pressed="true"] .fav-ic { color: currentColor; }
 
@@ -28,6 +28,7 @@
   width: 100%; padding: 11px 14px 11px 40px; border-radius: var(--radius-md);
   background: var(--surface);
   color: var(--text); font: inherit; font-size: 14px; border: 1px solid var(--line);
+  transition: border-color var(--mo-quick) var(--mo-out);
 }
 .search input::placeholder { color: var(--muted); }
 
@@ -35,7 +36,8 @@
 .search input:focus-visible,
 .controls select:focus-visible {
   outline: none;
-  border-color: rgba(16,177,255,.55);
+  border-color: var(--focus-line);
+  transition-duration: var(--mo-instant);
 }
 .search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); }
 
@@ -46,19 +48,51 @@ select {
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") right 12px center / 14px 14px no-repeat,
     var(--surface);
+  transition: border-color var(--mo-quick) var(--mo-out);
 }
 /* Row buttons match the inputs' border and weight; Clear stays quieter through
    its muted label and transparent fill, not a fainter outline. */
 .controls .btn { font-weight: 600; border-color: var(--line); }
+.controls .fav-btn[aria-pressed="true"] {
+  color: var(--on-ring); border-color: var(--line-bright);
+}
+.controls .fav-btn[aria-pressed="true"] .fav-ic { transition-duration: var(--mo-instant); }
 .btn-clear { background: transparent; color: var(--muted); }
 
 /* ── Filter pills (.pill base from style.css) ── */
-/* Subtag pills only exist once a category is picked, so the row starts hidden
-   rather than flashing an empty "Tags" label while the CSV loads; gear.js
-   sets an inline display once it knows whether there are pills to show. */
-#subtagsWrap { display: none; }
+/* The outer grid track owns the height change; the inner layer owns only the
+   fade, so reduced motion can collapse the travel while keeping feedback. */
+#subtagsWrap {
+  display: grid; grid-template-rows: 0fr; visibility: hidden;
+  transition: grid-template-rows var(--mo-quick) var(--mo-in), visibility var(--mo-quick) step-end;
+}
+#subtagsWrap.is-open {
+  grid-template-rows: 1fr; visibility: visible;
+  transition-duration: var(--mo-base), var(--mo-base);
+  transition-timing-function: var(--mo-out), step-start;
+}
+.subtags-inner {
+  min-height: 0; overflow: hidden; opacity: 0;
+  transition: opacity var(--mo-quick) var(--mo-in);
+}
+#subtagsWrap.is-open .subtags-inner {
+  opacity: 1;
+  transition-duration: var(--mo-base);
+  transition-timing-function: var(--mo-out);
+}
 .filter-label { margin: 8px 2px 2px; }
-.pillbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 14px; }
+.pillbar { position: relative; display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 14px; }
+/* Categories are single-select, so the row carries the shared travelling pill.
+   The selected chip underneath drops back to its resting look: both the blue
+   and the dark label come from the pill sitting on top of it. Subtags are
+   multi-select and keep their own backgrounds, since one element cannot mark
+   three selections at once. */
+.pillbar .pill { position: relative; z-index: 1; }
+.pillbar.has-pill .pill.active {
+  background: rgba(255,255,255,.05);
+  color: var(--muted);
+  border-color: var(--line);
+}
 
 /* ── Catalog grid ── */
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -73,6 +107,16 @@ select {
 .grid .card.is-favorite { border-color: transparent; }
 .grid .card.is-favorite::before { display: block; }
 
+/* Exit copies leave the grid so they can float over the incoming layout.
+   Repeat only the parent-dependent card rules needed to preserve their rest
+   appearance while they fade away. */
+.mo-grid-clone.gear-card-clone {
+  display: flex; flex-direction: column; border-color: var(--line);
+}
+.mo-grid-clone.gear-card-clone::before { display: none; }
+.mo-grid-clone.gear-card-clone.is-favorite { border-color: transparent; }
+.mo-grid-clone.gear-card-clone.is-favorite::before { display: block; }
+
 .grid-msg { color: var(--muted); padding: 16px 0; grid-column: 1 / -1; }
 
 .card-head { padding: 14px 16px 0; }
@@ -84,10 +128,20 @@ select {
 .title-link {
   color: inherit; text-decoration: none;
   display: inline-flex; align-items: baseline; gap: 5px;
+  transition: color var(--mo-quick) var(--mo-out);
 }
-.title-link:hover, .title-link:focus-visible { color: var(--ring); text-decoration: underline; text-underline-offset: 2px; }
-.title-link .ext-ic { flex: 0 0 auto; align-self: center; opacity: .45; transition: opacity .15s ease; }
-.title-link:hover .ext-ic, .title-link:focus-visible .ext-ic { opacity: 1; }
+.title-link:hover, .title-link:focus-visible {
+  color: var(--ring); text-decoration: underline; text-underline-offset: 2px;
+  transition-duration: var(--mo-instant);
+}
+.title-link .ext-ic {
+  flex: 0 0 auto; align-self: center; opacity: .45;
+  transition: opacity var(--mo-quick) var(--mo-out);
+}
+.title-link:hover .ext-ic, .title-link:focus-visible .ext-ic {
+  opacity: 1;
+  transition-duration: var(--mo-instant);
+}
 .vendor { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
 .desc { color: var(--muted); font-size: 14px; line-height: 1.6; padding: 8px 16px 0; }

@@ -28,6 +28,40 @@
   <meta name="twitter:creator" content="@pokestir">
   <link rel="canonical" href="https://pokestir.com/releases/hearthome-city/">
   <title>Pokestir - Hearthome City (from &quot;Pokémon Diamond &amp; Pearl&quot;) (Jazz Arrangement)</title>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
+  "name": "Hearthome City (from \"Pokémon Diamond & Pearl\") (Jazz Arrangement)",
+  "url": "https://pokestir.com/releases/hearthome-city/",
+  "image": "https://cdn-images.dzcdn.net/images/cover/034b88dc57db7424de5a657725b93999/1000x1000-000000-80-0-0.jpg",
+  "datePublished": "2025-10-24",
+  "genre": [
+    "Jazz"
+  ],
+  "byArtist": {
+    "@type": "MusicGroup",
+    "name": "Pokestir",
+    "url": "https://pokestir.com/"
+  },
+  "duration": "PT2M5S",
+  "isrcCode": "QZ6K42501401",
+  "sameAs": [
+    "https://pokestir.bandcamp.com/album/hearthome-city-from-pok-mon-diamond-pearl-jazz-arrangement",
+    "https://open.spotify.com/album/4CBud6CMWTsCAZxUSRZUuy",
+    "https://music.apple.com/us/album/hearthome-city-from-pok%C3%A9mon-diamond-pearl-jazz-arrangement/1847445645?uo=4",
+    "https://music.youtube.com/watch?v=9Aa8pz0HNcc",
+    "https://www.youtube.com/watch?v=9Aa8pz0HNcc",
+    "https://www.pandora.com/artist/pokestir/hearthome-city-from-pokemon-diamond-and-pearl-jazz-arrangement/ALtK4jzzkfzjhVP",
+    "https://music.apple.com/us/album/hearthome-city-from-pok%C3%A9mon-diamond-pearl-jazz-arrangement/1847445645?app=itunes",
+    "https://www.deezer.com/album/839897272",
+    "https://music.amazon.com/albums/B0FWTYW4JH",
+    "https://tidal.com/album/467642699",
+    "https://open.qobuz.com/album/h2ifoyey04wka",
+    "https://materia.to/hearthomecity"
+  ]
+}
+  </script>
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../releases.css">
   <link rel="icon" href="../../images/icon.png">
@@ -42,7 +76,7 @@
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
       <a class="site-nav__brand" href="/"><img src="../../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
-      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>
         <a href="/releases/">Releases</a>
@@ -53,9 +87,20 @@
   </nav>
 
   <main class="wrap" role="main" id="main">
-    <!-- releases.js reads the slug out of the path and renders into #detailView. -->
+    <!-- The static overview gives the incoming view transition an artwork target. -->
     <div id="listView" hidden></div>
-    <div id="detailView"></div>
+    <div id="detailView">
+      <a class="back-link" href="/releases/">&larr; All Releases</a>
+      <div class="detail-stack">
+        <section class="card detail-head" aria-label="Release overview">
+          <div class="art" aria-hidden="true"><span class="detail-art mo-fade is-loaded" style="--art-url:url(&quot;https://cdn-images.dzcdn.net/images/cover/034b88dc57db7424de5a657725b93999/500x500-000000-80-0-0.jpg&quot;)"></span></div>
+          <div class="info">
+            <h1 class="d-title">Hearthome City (from &quot;Pokémon Diamond &amp; Pearl&quot;) (Jazz Arrangement)</h1>
+            <div class="d-facts">Single &middot; October 24, 2025 &middot; 1 track</div>
+          </div>
+        </section>
+      </div>
+    </div>
 
     <footer class="site-footer" role="contentinfo">
       <nav class="social-strip" aria-label="Social and support links">

@@ -6,8 +6,13 @@
 // and logo. Each generated page carries its own og:title / og:image (the
 // album art) / og:description in static markup, then hands rendering to the
 // same releases.js the archive already uses (it reads the slug out of the
-// path). The page body is only the two containers releases.js needs; the
-// list-view markup stays in releases/index.html alone.
+// path). The page body includes a static overview shell so cross-document
+// view transitions can capture the incoming artwork before deferred scripts
+// run; releases.js replaces it with the full detail view.
+//
+// Each page also carries JSON-LD (MusicAlbum / MusicRecording) describing the
+// release and its tracks, since the visible body is rendered by releases.js
+// and a crawler reading the static HTML would otherwise see nothing.
 //
 // Also rewrites sitemap.xml (the six hand-listed pages plus every release).
 //
@@ -15,9 +20,9 @@
 //   node scripts/build-release-pages.js          # write pages + sitemap
 //   node scripts/build-release-pages.js --check  # CI: fail if out of date
 //
-// There is no Node on the owner's machine; run it locally through JXA the
-// same way check-catalog.js is run (load this file's text with `new Function`
-// and call buildAll, then write the returned files).
+// If a machine has no Node, this file also runs through JXA: load its text
+// with `new Function`, call buildAll(RELEASES, TRACKS, todayMs), and write
+// the returned files.
 //
 // Releases dated in the future are left out entirely: releases.js hides them
 // from the archive until the date passes, so their pages get generated on the
@@ -29,6 +34,11 @@ const ORIGIN = 'https://pokestir.com';
 
 /* Pages hand-listed in the sitemap before releases were added to it. */
 const STATIC_PAGES = ['/', '/releases/', '/gear/', '/terms/', '/links/', '/contact/'];
+
+/* Same keys as PLATFORMS in releases/releases.js; used for the sameAs list
+   in the structured data below. check-catalog.js rejects any other key. */
+const PLATFORM_KEYS = ['bandcamp', 'spotify', 'appleMusic', 'youtubeMusic', 'youtube',
+  'pandora', 'itunes', 'deezer', 'amazonMusic', 'tidal', 'qobuz'];
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
@@ -84,6 +94,11 @@ function clamp(s, max) {
   return (space > max * 0.6 ? cut.slice(0, space) : cut).replace(/[,;:]$/, '') + '…';
 }
 
+/* The unfurl and the search result both print og:title above this, so the
+   description doesn't repeat the title: it carries the facts line and
+   nothing else unless the release has something of its own to say. Prose
+   generated from the title was tried here and removed; it read as padding
+   next to a title that already names the piece and its source. */
 function metaDescription(rel) {
   const own = [rel.subtitle, rel.description].filter(Boolean).join('. ');
   return own ? clamp(own, 280) : factsLine(rel);
@@ -97,7 +112,106 @@ function artworkSize(url) {
   return m ? { w: m[1], h: m[2] } : null;
 }
 
-function renderReleasePage(rel) {
+/* Match the archive's lighter list/detail crop without changing the source
+   catalog. Deezer exposes the same cover at each square size. */
+function artAtSize(url, px) {
+  return String(url || '').replace(/1000x1000/, `${px}x${px}`);
+}
+
+/* ── Structured data ──
+   The page body is rendered by releases.js from the shared catalog, so the
+   static HTML a crawler reads first carries nothing about the music. This
+   block is the machine-readable version of what the page will show, and it
+   is what search engines use for music results. Album -> MusicAlbum with a
+   track list; a one-track single -> MusicRecording; anything in between
+   (a two-track single) -> MusicAlbum tagged as a single release.
+
+   ISRC and UPC are included here deliberately. They are the identifiers that
+   tie these pages to the same recordings on every streaming service, which
+   is the whole point of emitting them; they stay out of the *rendered*
+   metadata line exactly as before. */
+
+const ARTIST = { '@type': 'MusicGroup', name: 'Pokestir', url: `${ORIGIN}/` };
+
+/* "3:21" -> "PT3M21S" */
+function isoDuration(text) {
+  const m = /^(\d+):([0-5]\d)$/.exec(String(text || '').trim());
+  return m ? `PT${parseInt(m[1], 10)}M${parseInt(m[2], 10)}S` : null;
+}
+
+/* Resolve a release's tracklist the same way releases.js does: canonical
+   recording from TRACKS, with per-release title/duration overrides. */
+function resolveTracks(rel, TRACKS) {
+  return (rel.tracklist || []).map((ref) => {
+    const canonical = (TRACKS && TRACKS[ref.trackId]) || {};
+    const has = (k) => Object.prototype.hasOwnProperty.call(ref, k);
+    return {
+      title: has('title') ? ref.title : canonical.title,
+      duration: has('duration') ? ref.duration : canonical.duration,
+      isrc: canonical.isrc || ''
+    };
+  }).filter((t) => t.title);
+}
+
+function prune(obj) {
+  for (const k of Object.keys(obj)) {
+    const v = obj[k];
+    if (v == null || v === '' || (Array.isArray(v) && !v.length)) delete obj[k];
+  }
+  return obj;
+}
+
+/* No byArtist here: every recording on a release is by the release's artist,
+   which the enclosing MusicAlbum already states. */
+function recordingNode(track, position) {
+  return prune({
+    '@type': 'MusicRecording',
+    position,
+    name: track.title,
+    duration: isoDuration(track.duration),
+    isrcCode: track.isrc
+  });
+}
+
+function structuredData(rel, tracks) {
+  const sameAs = PLATFORM_KEYS.map((k) => rel.links && rel.links[k]).filter(Boolean)
+    .concat((rel.otherLinks || []).map((l) => l && l.url).filter(Boolean));
+
+  // A single holding one recording is that recording; it gets no album wrapper.
+  const single = rel.type !== 'Album' && tracks.length === 1;
+  const only = single ? tracks[0] : null;
+
+  return prune({
+    '@context': 'https://schema.org',
+    '@type': single ? 'MusicRecording' : 'MusicAlbum',
+    name: rel.title,
+    url: `${ORIGIN}/releases/${rel.slug}/`,
+    image: rel.artwork || `${ORIGIN}/images/og.jpg`,
+    datePublished: rel.releaseDate || '',
+    genre: rel.tags || [],
+    byArtist: ARTIST,
+    duration: single ? isoDuration(only.duration) : undefined,
+    isrcCode: single ? only.isrc : undefined,
+    albumReleaseType: single ? undefined : (rel.type === 'Album'
+      ? 'https://schema.org/AlbumRelease'
+      : 'https://schema.org/SingleRelease'),
+    numTracks: single ? undefined : (tracks.length || undefined),
+    identifier: (!single && rel.upc)
+      ? { '@type': 'PropertyValue', propertyID: 'UPC', value: rel.upc }
+      : undefined,
+    track: single ? undefined : tracks.map((t, i) => recordingNode(t, i + 1)),
+    sameAs
+  });
+}
+
+/* JSON-LD sits inside <script>, so the only sequence that can break out of
+   it is a literal "</script>"; escaping the slash is enough and keeps the
+   payload readable. */
+function jsonLd(data) {
+  return JSON.stringify(data, null, 2).replace(/<\//g, '<\\/');
+}
+
+function renderReleasePage(rel, TRACKS) {
   const url = `${ORIGIN}/releases/${rel.slug}/`;
   const title = `Pokestir - ${rel.title}`;
   const desc = metaDescription(rel);
@@ -108,6 +222,12 @@ function renderReleasePage(rel) {
   const imageDims = size
     ? `\n  <meta property="og:image:width" content="${size.w}">\n  <meta property="og:image:height" content="${size.h}">`
     : '';
+
+  const schema = jsonLd(structuredData(rel, resolveTracks(rel, TRACKS)));
+  const shellFacts = escapeHTML(factsLine(rel)).replace(/ · /g, ' &middot; ');
+  const shellArt = rel.artwork
+    ? `<span class="detail-art mo-fade is-loaded" style="--art-url:url(${escapeHTML(JSON.stringify(artAtSize(rel.artwork, 500)))})"></span>`
+    : '<span class="detail-art mo-fade"></span>';
 
   return `<!doctype html>
 <html lang="en">
@@ -137,6 +257,9 @@ function renderReleasePage(rel) {
   <meta name="twitter:creator" content="@pokestir">
   <link rel="canonical" href="${url}">
   <title>${escapeHTML(title)}</title>
+  <script type="application/ld+json">
+${schema}
+  </script>
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../releases.css">
   <link rel="icon" href="../../images/icon.png">
@@ -151,7 +274,7 @@ function renderReleasePage(rel) {
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
       <a class="site-nav__brand" href="/"><img src="../../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
-      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>
         <a href="/releases/">Releases</a>
@@ -162,9 +285,21 @@ function renderReleasePage(rel) {
   </nav>
 
   <main class="wrap" role="main" id="main">
-    <!-- releases.js reads the slug out of the path and renders into #detailView. -->
+    <!-- The static overview gives the incoming view transition an artwork target. -->
     <div id="listView" hidden></div>
-    <div id="detailView"></div>
+    <div id="detailView">
+      <a class="back-link" href="/releases/">&larr; All Releases</a>
+      <div class="detail-stack">
+        <section class="card detail-head" aria-label="Release overview">
+          <div class="art" aria-hidden="true">${shellArt}</div>
+          <div class="info">
+            <h1 class="d-title">${escapeHTML(rel.title)}</h1>${rel.subtitle ? `
+            <div class="d-sub">${escapeHTML(rel.subtitle)}</div>` : ''}
+            <div class="d-facts">${shellFacts}</div>
+          </div>
+        </section>
+      </div>
+    </div>
 
     <footer class="site-footer" role="contentinfo">
       <nav class="social-strip" aria-label="Social and support links">
@@ -194,15 +329,17 @@ ${locs.map((loc) => `  <url><loc>${loc}</loc></url>`).join('\n')}
 `;
 }
 
-/* Returns every file the catalog implies, as repo-relative paths. */
-function buildAll(RELEASES, todayMs) {
+/* Returns every file the catalog implies, as repo-relative paths.
+   TRACKS is needed for the per-release structured data (track names,
+   durations, ISRCs). */
+function buildAll(RELEASES, TRACKS, todayMs) {
   const released = RELEASES.filter((rel) => rel.slug && isReleased(rel, todayMs))
     .slice()
     .sort((a, b) => dateMs(b.releaseDate) - dateMs(a.releaseDate));
 
   const files = released.map((rel) => ({
     path: `releases/${rel.slug}/index.html`,
-    content: renderReleasePage(rel)
+    content: renderReleasePage(rel, TRACKS)
   }));
   files.push({ path: 'sitemap.xml', content: renderSitemap(released) });
   return files;
@@ -222,7 +359,8 @@ if (typeof require !== 'undefined' && typeof module !== 'undefined' && require.m
 
   let files;
   try {
-    files = buildAll(loadCatalog(tracksSrc, releasesSrc).RELEASES, todayMs);
+    const catalog = loadCatalog(tracksSrc, releasesSrc);
+    files = buildAll(catalog.RELEASES, catalog.TRACKS, todayMs);
   } catch (e) {
     console.error(`Catalog data failed to parse: ${e.message}`);
     process.exit(1);
