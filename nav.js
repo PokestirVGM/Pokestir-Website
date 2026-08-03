@@ -333,6 +333,20 @@
     setOpen(!menu.classList.contains('is-open'));
   });
 
+  /* Close as soon as a destination is chosen, before the navigation starts.
+     The menu used to stay open until the next document replaced it, which is
+     invisible on most of the site because the old page is gone immediately.
+     The releases pages are the exception: they opt into a cross-document view
+     transition, and that holds the *outgoing* page opaque while the new one
+     fades in over it. So the snapshot taken on the way out still had the menu
+     open, and an open menu sat on screen through the whole transition before
+     the arriving page finally covered it. Choosing "Releases" while already on
+     Releases was the worst version, since the destination looks identical and
+     the lingering panel was the only thing that appeared to happen. */
+  menu.addEventListener('click', (e) => {
+    if (e.target.closest('a')) setOpen(false);
+  });
+
   // Close when clicking outside both the nav bar and the (possibly detached) menu.
   document.addEventListener('click', (e) => {
     if (menu.classList.contains('is-open') && !e.target.closest('.site-nav') && !menu.contains(e.target)) {

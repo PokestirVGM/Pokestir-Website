@@ -403,7 +403,31 @@
     return promise;
   }
 
-  function revealArt(layer, rel) {
+  /* `immediate` paints in the caller's own task instead of waiting on a decode,
+     and the detail hero needs it.
+
+     A generated release page ships its cover in the static HTML, already
+     carrying the url and is-loaded, so it is on screen the moment the document
+     paints. Rendering the detail view then replaces that whole subtree, and the
+     replacement started life empty: no url, no is-loaded, and .detail-art rests
+     at opacity 0. Because `decodedArt` is per-document and a navigation is
+     always a fresh document, nothing was ever recorded as decoded, so this took
+     the async branch every time, cached image or not. Measured on a warm load,
+     the cover sat visible at 42ms, blanked at 69ms, and only finished fading
+     back in around 250ms.
+
+     Under the cross-document view transition that gap is what gets captured as
+     ::view-transition-new(release-art). Catch it and the artwork flies to an
+     empty box, which reads as the animation being skipped and the cover
+     flashing. Whether it was caught depended on how long data.js took to parse
+     against how soon the new document painted, which is why it only happened
+     sometimes.
+
+     Painting synchronously is safe here for the same reason the static page can
+     inline it: the url comes from data.js, not from a fetch, and the image was
+     just on screen in the tile that was clicked. The grid keeps the decode
+     path, where hundreds of covers really are arriving for the first time. */
+  function revealArt(layer, rel, immediate) {
     if (!layer || !rel.artwork) return;
     const url = artAtSize(rel.artwork, 500);
     const wasDecoded = decodedArt.has(url);
@@ -414,7 +438,7 @@
       layer.classList.add('is-loaded');
     };
 
-    if (wasDecoded) paint(false);
+    if (immediate || wasDecoded) paint(false);
     else decodeArt(url).then((loaded) => { if (loaded) paint(true); });
   }
 
@@ -1090,7 +1114,9 @@
         </div>
       </div>`;
 
-    revealArt(detailView.querySelector('.detail-art'), rel);
+    // Same task as the innerHTML above, so no frame is ever rendered between
+    // the static cover being replaced and the new layer carrying it.
+    revealArt(detailView.querySelector('.detail-art'), rel, true);
     initPreviewPlayer(detailView);
   }
 
