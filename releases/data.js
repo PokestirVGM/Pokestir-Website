@@ -198,7 +198,7 @@ const RELEASES = [
       youtube: "", pandora: "", itunes: "", deezer: "",
       amazonMusic: "", tidal: "", qobuz: ""
     },
-    otherLinks: [],
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/zonessps" }],
     tracklist: [
       { trackId: "local:zoness-2026" },
     ]
