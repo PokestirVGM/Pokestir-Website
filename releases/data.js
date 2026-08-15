@@ -189,18 +189,26 @@ const RELEASES = [
     subtitle: "",
     type: "Single",
     releaseDate: "2026-08-14",
-    upc: "",
+    upc: "810179614096",
     description: "",
-    tags: [],
-    artwork: "",
+    tags: ["Classical"],
+    artwork: "https://cdn-images.dzcdn.net/images/cover/2172fc2a9d800d744558032491418e43/1000x1000-000000-80-0-0.jpg",
     links: {
-      bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "",
-      youtube: "", pandora: "", itunes: "", deezer: "",
-      amazonMusic: "", tidal: "", qobuz: ""
+      bandcamp: "https://pokestir.bandcamp.com/album/zoness-from-star-fox-64-arr-for-orchestra-by-pokestir",
+      spotify: "https://open.spotify.com/album/1zzYw0pt1EoDnFB2247Ng8",
+      appleMusic: "https://music.apple.com/us/album/zoness-from-star-fox-64-arr-for-orchestra-by-pokestir/6797727607?uo=4",
+      youtubeMusic: "https://music.youtube.com/watch?v=c-kzWisrkto",
+      youtube: "https://www.youtube.com/watch?v=WgF6ICqWoGM",
+      pandora: "https://www.pandora.com/AL:68730880",
+      itunes: "https://music.apple.com/us/album/zoness-from-star-fox-64-arr-for-orchestra-by-pokestir/6797727607?app=itunes",
+      deezer: "https://www.deezer.com/album/1045415932",
+      amazonMusic: "https://music.amazon.com/albums/B0HCRS66XD",
+      tidal: "https://tidal.com/album/548945597",
+      qobuz: "https://open.qobuz.com/album/khxk564dgy1xw"
     },
     otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/zonessps" }],
     tracklist: [
-      { trackId: "local:zoness-2026" },
+      { trackId: "isrc:QZ6K42601359" },
     ]
   },
   {
@@ -209,18 +217,26 @@ const RELEASES = [
     subtitle: "",
     type: "Single",
     releaseDate: "2026-08-07",
-    upc: "",
+    upc: "810179614072",
     description: "",
-    tags: [],
-    artwork: "",
+    tags: ["Electro"],
+    artwork: "https://cdn-images.dzcdn.net/images/cover/010a20f7ed026a0a39197e00a00e1451/1000x1000-000000-80-0-0.jpg",
     links: {
-      bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "",
-      youtube: "", pandora: "", itunes: "", deezer: "",
-      amazonMusic: "", tidal: "", qobuz: ""
+      bandcamp: "https://pokestir.bandcamp.com/album/wedgehurst-from-pok-mon-sword-shield",
+      spotify: "https://open.spotify.com/album/6TxXB8mcTT5PmtNbhLyhE6",
+      appleMusic: "https://music.apple.com/us/album/wedgehurst-from-pok%C3%A9mon-sword-shield/6797551736?uo=4",
+      youtubeMusic: "https://music.youtube.com/watch?v=DreexeYtyCE",
+      youtube: "https://www.youtube.com/watch?v=yqqkbeJhSZ0",
+      pandora: "https://www.pandora.com/AL:68649119",
+      itunes: "https://music.apple.com/us/album/wedgehurst-from-pok%C3%A9mon-sword-shield/6797551736?app=itunes",
+      deezer: "https://www.deezer.com/album/1042819052",
+      amazonMusic: "https://music.amazon.com/albums/B0HC8RRW7L",
+      tidal: "https://tidal.com/album/547987471",
+      qobuz: "https://open.qobuz.com/album/v4zzai47cf22c"
     },
-    otherLinks: [],
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/wedgehurstps" }],
     tracklist: [
-      { trackId: "local:wedgehurst-2026" },
+      { trackId: "isrc:QZ6K42601345" },
     ]
   },
   {

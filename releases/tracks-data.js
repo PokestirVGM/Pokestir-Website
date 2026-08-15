@@ -2589,12 +2589,12 @@ const TRACKS = {
     spotifyTrackId: "16JdDzeOceFTuMkvmDdqUI",
     preview: "https://p.scdn.co/mp3-preview/2b4a201624fb379ad93d57b3101a16f83c779062"
   },
-  "local:wedgehurst-2026": {
+  "isrc:QZ6K42601345": {
     title: "Wedgehurst (From \"Pokémon Sword & Shield\")",
-    isrc: "",
-    duration: "",
-    spotifyTrackId: "",
-    preview: ""
+    isrc: "QZ6K42601345",
+    duration: "4:10",
+    spotifyTrackId: "1vGksU9eUmtNaFt7ReXSMM",
+    preview: "https://p.scdn.co/mp3-preview/7190fb10e4a56e8362b9184d7c10b502a653e1e3"
   },
   "isrc:QZ6K42501269": {
     title: "Wind Scene (600 A.D.) [From \"Chrono Trigger\"]",
@@ -2612,11 +2612,12 @@ const TRACKS = {
     spotifyTrackId: "2W7NVMsYz4LQcUilmdo2jf",
     preview: "https://p.scdn.co/mp3-preview/e8c6663a746d8a1c660438b4a79aa69804f5206b"
   },
-  "local:zoness-2026": {
+  "isrc:QZ6K42601359": {
     title: "Zoness (From \"Star Fox 64\") [Arr. for Orchestra by Pokestir]",
-    isrc: "",
-    duration: "",
-    spotifyTrackId: "",
-    preview: ""
+    isrc: "QZ6K42601359",
+    artists: ["Hajime Wakai", "Pokestir"],
+    duration: "4:20",
+    spotifyTrackId: "6863OpMJheWqTpIuXDOttj",
+    preview: "https://p.scdn.co/mp3-preview/bd8d3d7d9ceddd9ab44b44aab43e107925b654e4"
   },
 };
