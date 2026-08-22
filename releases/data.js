@@ -184,6 +184,34 @@ const RELEASES = [
     ]
   },
   {
+    slug: "meteor-falls",
+    title: "Meteor Falls (From \"Pokémon Ruby & Sapphire\") [Arr. for Orchestra by Pokestir]",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-08-21",
+    upc: "810179614119",
+    description: "",
+    tags: ["Classical"],
+    artwork: "https://cdn-images.dzcdn.net/images/cover/817277aa0c6a0eef53fa6b81f6c74782/1000x1000-000000-80-0-0.jpg",
+    links: {
+      bandcamp: "https://pokestir.bandcamp.com/album/meteor-falls-from-pok-mon-ruby-sapphire-arr-for-orchestra-by-pokestir",
+      spotify: "https://open.spotify.com/album/3wD8rtxoWMN7TySKpZ2CmF",
+      appleMusic: "https://music.apple.com/us/album/meteor-falls-from-pok%C3%A9mon-ruby-sapphire-arr-for-orchestra/6798941176?uo=4",
+      youtubeMusic: "https://music.youtube.com/watch?v=BNK1hxpQ3Yc",
+      youtube: "https://www.youtube.com/watch?v=NG3vE1gJeHA",
+      pandora: "https://www.pandora.com/AL:68812306",
+      itunes: "https://music.apple.com/us/album/meteor-falls-from-pok%C3%A9mon-ruby-sapphire-arr-for-orchestra/6798941176?app=itunes",
+      deezer: "https://www.deezer.com/album/1047980452",
+      amazonMusic: "https://music.amazon.com/albums/B0HD9SNL9K",
+      tidal: "https://tidal.com/album/549877437",
+      qobuz: "https://open.qobuz.com/album/flueyhhw7i0tv"
+    },
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/meteorfallsPSBC" }],
+    tracklist: [
+      { trackId: "isrc:QZ6K42601360" },
+    ]
+  },
+  {
     slug: "zoness",
     title: "Zoness (From \"Star Fox 64\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
