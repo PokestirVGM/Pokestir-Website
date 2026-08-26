@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1Z4061KGM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-J1Z4061KGM');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Juicy16: a free 16-channel multitimbral DLS and SoundFont player for macOS, in AU and VST3.">
+  <meta name="theme-color" content="#0b0f19">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pokestir">
+  <meta property="og:title" content="Juicy16 - 16-channel SoundFont player">
+  <meta property="og:description" content="Juicy16: a free 16-channel multitimbral DLS and SoundFont player for macOS, in AU and VST3.">
+  <meta property="og:url" content="https://pokestir.com/juicy16/">
+  <meta property="og:image" content="https://pokestir.com/images/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1200">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@pokestir">
+  <meta name="twitter:creator" content="@pokestir">
+  <link rel="canonical" href="https://pokestir.com/juicy16/">
+  <title>Pokestir - Juicy16</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="juicy16.css">
+  <link rel="icon" href="../images/icon.png">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+  <script src="../nav.js" defer></script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="site-nav__inner">
+      <a class="site-nav__brand" href="/"><img src="../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
+      <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
+      <div class="site-nav__links" id="site-nav-links">
+        <a href="/">Home</a>
+        <a href="../releases/">Releases</a>
+        <a href="../gear/">Software &amp; Gear</a>
+        <a href="../terms/">Usage Terms &amp; Claims</a>
+      </div>
+    </div>
+  </nav>
+  <main class="wrap" role="main" id="main">
+    <h1 class="sr-only">Juicy16</h1>
+
+    <header id="top">
+      <h2 class="page-title" id="top-title">Juicy16</h2>
+      <p class="lede"><span class="answer">A free 16-channel SoundFont and DLS player for macOS, in AU and VST3.</span> One instance plays a multichannel MIDI file out of a single bank, with each channel on the instrument the file asks for. I wrote it to play game music rips without setting patches by hand.</p>
+    </header>
+
+    <!-- The download is the reason anyone opens this page, so it is the first
+         thing under the lede, and the only card: it is the thing you act on.
+         The right column carries the facts that decide whether the button is
+         worth pressing. -->
+    <section class="card split" aria-labelledby="top-title">
+      <div class="split__col">
+        <h3 class="card-title">Download</h3>
+        <p class="lead">Beta 1. AU and VST3 in one archive, with an installer.</p>
+        <p>
+          <a class="btn btn--go" href="https://github.com/PokestirVGM/Juicy16/releases/download/v0.6.0-beta.1/Juicy16-0.6.0-beta.1-BC4-macos-arm64-ADHOC.zip">
+            <svg class="dl" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 19h16"/></svg>
+            Download for macOS
+          </a>
+        </p>
+        <p class="facts">Version 0.6.0-beta.1 &middot; 6.6 MB &middot; Apple Silicon</p>
+      </div>
+
+      <div class="split__col">
+        <h3 class="card-title">What you need</h3>
+        <ul class="list">
+          <li><b>macOS 11 or later</b> on an <b>Apple Silicon</b> Mac (Windows support very soon). Intel is not supported.</li>
+          <li>A host that loads <b>AU</b> or <b>VST3</b>.</li>
+        </ul>
+        <p class="caption caption--spaced">The installer is not signed, so macOS blocks it the first time. Right-click <code class="inl">install_macos.command</code>, choose Open, then Open again. Quit and reopen your DAW afterwards.</p>
+      </div>
+    </section>
+
+    <!-- The shot and the summary are one block: the picture is what the list
+         is describing, so it sits beside it rather than floating on its own
+         row between two sections. Its columns follow the card above, so its
+         edges land on the same grid. -->
+    <section class="showcase" aria-labelledby="what-title">
+      <figure class="shotblock">
+        <img class="shot" src="../images/juicy16-plugin.webp" width="1302" height="1158"
+             alt="The Juicy16 window: sixteen numbered channel rows, each with mute, solo, an instrument selector, a volume knob and a pan knob, with master trim, reverb controls and the loaded bank on the right, above a piano keyboard."
+             decoding="async">
+      </figure>
+
+      <div class="showcase__text">
+        <h2 class="page-title" id="what-title">What it does</h2>
+        <p class="lede">One instance handles all sixteen MIDI channels.</p>
+        <ul class="list">
+          <li>Sixteen channels, each with its own bank, preset, volume, pan, mute and solo, all visible at once.</li>
+          <li>Program Changes are followed as they arrive, mid-song ones included, so the file picks its own instruments. Channel 10 is GM percussion by default, melodic bank 0 elsewhere.</li>
+          <li>Every CC, 14-bit pitch bend, RPN bend range, pressure and pedals. Events are timed to the sample, not to the start of the audio block.</li>
+          <li>GM, GS and XG resets are recognised, and the channel setup comes back afterwards.</li>
+        </ul>
+      </div>
+    </section>
+
+    <header id="bugs">
+      <h2 class="page-title" id="bugs-title">Reporting a bug</h2>
+      <p class="lede">Per-channel Program Change works in FL Studio and Cubase, in both formats, and the Audio Unit passes Apple's validator. These are untested:</p>
+    </header>
+
+    <section class="block">
+      <ul class="list">
+        <li>macOS 11 itself. The binaries are built for it, but nothing has booted on it.</li>
+        <li>Logic Pro, or any AU host other than FL Studio.</li>
+        <li>Any VST3 host other than FL Studio and Cubase.</li>
+        <li>Installing on a Mac that is not mine.</li>
+      </ul>
+      <p class="btnrow">
+        <a class="btn btn--out" href="https://github.com/PokestirVGM/Juicy16" target="_blank" rel="noopener">Source on GitHub<svg class="ext" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </p>
+    </section>
+
+    <!-- The report form, not instructions for writing one. The fields are the
+         things I would otherwise have to ask for, so the mail arrives with
+         them filled in and a fixed subject. Same FormSubmit endpoint and the
+         same field behaviour as the contact page, which carries its own copy
+         of these styles: edit both. -->
+    <section class="card bugcard" aria-labelledby="bugs-title">
+      <div class="cform-shell">
+        <div class="cform-sent" id="sentNote" role="status" hidden>
+          <p>Report sent. I&rsquo;ll follow up by email if I need more.</p>
+        </div>
+        <form class="cform bugform" action="https://formsubmit.co/contact@pokestir.com" method="POST">
+          <input type="hidden" name="_subject" value="Juicy16 bug report">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://pokestir.com/juicy16/?sent=1">
+          <input type="hidden" name="_autoresponse" value="Thanks, your Juicy16 report was delivered. I'll follow up by email if I need more.">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="cform-row">
+            <div class="cfield">
+              <label class="cfield__label" for="bf-email">Your email <span class="req" aria-hidden="true">*</span></label>
+              <input id="bf-email" type="email" name="email" required autocomplete="email">
+            </div>
+            <div class="cfield">
+              <label class="cfield__label" for="bf-host">Host and version <span class="req" aria-hidden="true">*</span></label>
+              <input id="bf-host" type="text" name="host" required placeholder="FL Studio 21.2">
+            </div>
+          </div>
+
+          <div class="cform-row cform-row--3">
+            <div class="cfield">
+              <label class="cfield__label" for="bf-format">Format <span class="req" aria-hidden="true">*</span></label>
+              <select id="bf-format" name="format" required>
+                <option value="" disabled selected>Choose</option>
+                <option>AU</option>
+                <option>VST3</option>
+                <option>Both</option>
+              </select>
+            </div>
+            <div class="cfield">
+              <label class="cfield__label" for="bf-macos">macOS version <span class="req" aria-hidden="true">*</span></label>
+              <input id="bf-macos" type="text" name="macos" required placeholder="14.5">
+            </div>
+            <div class="cfield">
+              <label class="cfield__label" for="bf-version">Juicy16 version <span class="req" aria-hidden="true">*</span></label>
+              <input id="bf-version" type="text" name="version" required value="0.6.0-beta.1">
+            </div>
+          </div>
+
+          <div class="cfield">
+            <label class="cfield__label" for="bf-message">What happened <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="bf-message" name="message" rows="6" required placeholder="What you did, what you expected, and what happened instead."></textarea>
+          </div>
+
+          <div class="cform-foot">
+            <p class="cform-req"><span class="req" aria-hidden="true">*</span> required</p>
+            <button class="btn btn-send submit-btn" type="submit">
+              <span class="submit-label mo-fade">Send report</span>
+              <span class="submit-pending mo-fade" aria-hidden="true">Sending&hellip;</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="site-footer" role="contentinfo">
+      <nav class="social-strip" aria-label="Social and support links">
+        <a href="https://www.youtube.com/pokestir" target="_blank" rel="noopener noreferrer" aria-label="YouTube — opens in a new tab" style="--icon:url(../images/icons/youtube.svg)"></a>
+        <a href="https://x.com/pokestir" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter — opens in a new tab" style="--icon:url(../images/icons/x.svg)"></a>
+        <a href="https://bsky.app/profile/pokestir.com" target="_blank" rel="noopener noreferrer" aria-label="Bluesky — opens in a new tab" style="--icon:url(../images/icons/bluesky.svg)"></a>
+        <a href="https://www.instagram.com/pokestir_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram — opens in a new tab" style="--icon:url(../images/icons/instagram.svg)"></a>
+        <a href="https://discord.com/invite/7CGg9Tk" target="_blank" rel="noopener noreferrer" aria-label="Discord — opens in a new tab" style="--icon:url(../images/icons/discord.svg)"></a>
+        <a href="https://www.patreon.com/c/pokestir" target="_blank" rel="noopener noreferrer" aria-label="Patreon — opens in a new tab" style="--icon:url(../images/icons/patreon.svg)"></a>
+        <a href="https://ko-fi.com/pokestir" target="_blank" rel="noopener noreferrer" aria-label="Ko&#8209;fi — opens in a new tab" style="--icon:url(../images/icons/kofi.svg)"></a>
+      </nav>
+      <p>Copyright &copy; 2026 Pokestir. All rights reserved. <a class="all-links" href="../links/">All links</a> &middot; <a class="all-links" href="../contact/">Contact me</a></p>
+    </footer>
+  </main>
+  <script>
+    /* Same three jobs as the contact form, without its height animation: mark
+       the form once the browser has complained, hold the button while the
+       navigation to FormSubmit is in flight, and swap in the note when
+       _next brings the visitor back with ?sent=1. */
+    const bugForm = document.querySelector('.bugform');
+    const sentNote = document.getElementById('sentNote');
+    const submitButton = bugForm.querySelector('.submit-btn');
+    const submitLabel = submitButton.querySelector('.submit-label');
+    const submitPending = submitButton.querySelector('.submit-pending');
+
+    function resetSubmitState() {
+      bugForm.classList.remove('is-submitting');
+      bugForm.removeAttribute('aria-busy');
+      submitButton.disabled = false;
+      submitLabel.setAttribute('aria-hidden', 'false');
+      submitPending.setAttribute('aria-hidden', 'true');
+    }
+
+    bugForm.addEventListener('invalid', () => {
+      bugForm.classList.add('was-validated');
+    }, true);
+
+    /* If that navigation is slow, refused, or cancelled, nothing else hands the
+       button back: it would sit disabled reading "Sending…" until a reload.
+       `pageshow` covers coming back through history, the timer covers staying
+       put. */
+    let submitTimer = 0;
+    bugForm.addEventListener('submit', () => {
+      bugForm.classList.add('is-submitting');
+      bugForm.setAttribute('aria-busy', 'true');
+      submitButton.disabled = true;
+      submitLabel.setAttribute('aria-hidden', 'true');
+      submitPending.setAttribute('aria-hidden', 'false');
+      clearTimeout(submitTimer);
+      submitTimer = setTimeout(resetSubmitState, 12000);
+    });
+
+    addEventListener('pageshow', () => {
+      clearTimeout(submitTimer);
+      resetSubmitState();
+    });
+
+    if (new URLSearchParams(location.search).get('sent') === '1') {
+      bugForm.hidden = true;
+      sentNote.hidden = false;
+      sentNote.classList.add('is-visible');
+      sentNote.scrollIntoView({ block: 'center' });
+    }
+  </script>
+</body>
+</html>

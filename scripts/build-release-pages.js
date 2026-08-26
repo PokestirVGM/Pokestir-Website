@@ -33,7 +33,7 @@
 const ORIGIN = 'https://pokestir.com';
 
 /* Pages hand-listed in the sitemap before releases were added to it. */
-const STATIC_PAGES = ['/', '/releases/', '/gear/', '/terms/', '/links/', '/contact/'];
+const STATIC_PAGES = ['/', '/releases/', '/gear/', '/terms/', '/links/', '/contact/', '/juicy16/'];
 
 /* Same keys as PLATFORMS in releases/releases.js; used for the sameAs list
    in the structured data below. check-catalog.js rejects any other key. */
