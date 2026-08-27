@@ -272,8 +272,11 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   border: 1px solid var(--line-bright);
   pointer-events: none;
   overflow: hidden;
-  /* Only for the first appearance and for a group emptying out. Journeys set
-     opacity outright and animate position instead. */
+  /* Only for a group emptying out and refilling. Journeys set opacity outright
+     and animate position instead, and the first appearance is committed opaque
+     by nav.js: fading it up there would leave the selected item unmarked for
+     the length of this transition, since `has-pill` hands the highlight over on
+     the frame the pill is placed. */
   transition: opacity var(--mo-quick) var(--mo-out);
 }
 .mo-pill--round { border-radius: 999px; }

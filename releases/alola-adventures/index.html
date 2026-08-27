@@ -201,6 +201,13 @@
   ]
 }
   </script>
+  <!-- The display face, ahead of the stylesheet that references it. Without
+       this it is only discovered once style.css has downloaded and parsed, a
+       second round trip: on a slow connection every .page-title and .card-title
+       renders in system-ui first and then reflows when Lato lands. Only the
+       latin subset is listed; nothing in the catalog needs latin-ext, so
+       preloading that one too would spend a request on a file no page uses. -->
+  <link rel="preload" as="font" type="font/woff2" href="../../fonts/lato-700-latin.woff2" crossorigin>
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../releases.css">
   <link rel="icon" href="../../images/icon.png">

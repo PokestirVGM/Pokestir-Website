@@ -43,7 +43,17 @@
       { x: to.x - ux * over * .32, y: to.y - uy * over * .32, w: to.w, h: to.h, offset: .82, easing: 'cubic-bezier(.4,0,.3,1)' },
       { x: to.x, y: to.y, w: to.w, h: to.h }
     ];
-    return { path, duration, dist };
+    /* `path` is the ready-made keyframe list for callers that move a box, which
+       is the pill itself. The grids cannot use it: they animate `transform` on
+       a tile that is already in its final place, so they need the shape of the
+       journey rather than its coordinates, and they rebuild their own keyframes
+       from the unit vector and the overshoot. Both of them were already written
+       against `over`, `ux` and `uy` and had been reading them as `undefined`,
+       which put `translate(NaNpx, NaNpx)` into the two middle keyframes; the
+       browser drops a keyframe whose value does not parse, so every surviving
+       tile on the releases archive and the gear grid slid straight to its
+       destination with the commit and the counter-swing silently missing. */
+    return { path, duration, dist, over, ux, uy };
   }
 
   function travellingPill(container, opts) {
@@ -75,6 +85,26 @@
       pill.setAttribute('aria-hidden', 'true');
       pill.appendChild(clone);
       ink = clone;
+      /* Opaque from the moment it exists, so the very first placement does not
+         fade. The group's own highlight (the nav's blue chip, the active tab,
+         the selected filter) is handed over in the same frame the pill is
+         positioned, by `has-pill`. If the pill had to fade up from the CSS
+         `opacity: 0` while that handover happened, the two would not overlap:
+         the old highlight is gone instantly and the new one takes --mo-quick to
+         arrive, so the selected item is left unmarked for that whole window.
+
+         On a warm load none of this is visible, because the script runs before
+         first paint. On a slow connection it is: measured against a simulated
+         3G load, the page had been on screen for 1.2 seconds before this ran,
+         and the highlight blinked out and came back a second after the visitor
+         started reading. Setting the inline value here rather than after
+         insertion is what skips the transition: a newly inserted element has no
+         before-change style, so its first computed opacity is simply 1.
+
+         The CSS transition is left in place for the case it was written for, a
+         group emptying out and refilling: `hide()` sets opacity back to 0 on an
+         element that is already laid out, and that one does fade. */
+      pill.style.opacity = '1';
       container.prepend(pill);
     }
 
@@ -255,15 +285,12 @@
      page, so that item's geometry here is the geometry it had there. The index
      is what is stored rather than the href, because hrefs are relative and
      differ by page depth while the nav order is the same everywhere. */
-  /* Ceilings for the arrival travel: how long after navigation start it is
-     still worth playing, and how late a frame may run before the main thread
-     is judged too busy to carry it. Both are deliberately generous. The point
-     is to catch a page that is visibly struggling, not to police milliseconds:
-     on a warm load the two frames below land about 16ms apart and nothing here
-     ever triggers. */
-  const ARRIVAL_DEADLINE = 1500;
-  const ARRIVAL_FRAME_BUDGET = 50;
-  const ARRIVAL_SAMPLE_FRAMES = 3;
+  /* How long to wait for a free main thread before giving up on the arrival
+     travel. It doubles as the ceiling on how late the travel may start: the
+     journey either begins within this long of the nav becoming live, or it does
+     not happen, so it can never slide across a nav the visitor has finished
+     reading. */
+  const ARRIVAL_IDLE_TIMEOUT = 400;
 
   function arrive() {
     let from = -1;
@@ -291,30 +318,43 @@
        being built. The slide loses most of its frames and jerks across the nav,
        which reads far worse than a pill that was simply already in place.
 
-       So it watches a few frames go by first and only commits if they are
-       arriving on time. Frame health is the real question, not how long the
-       document took: a page that spent two seconds on the network but is idle
-       by the time it paints can carry the animation perfectly well, while one
-       that downloaded instantly and is now building a catalog cannot. The
-       wall-clock deadline is only a backstop for the other half of the
-       problem, which is taste rather than performance. Past a certain point
-       the visitor is already reading the page, and a pill that suddenly slides
-       across a nav they have finished looking at is just a distraction.
+       Frame health is the real question, not how long the document took: a
+       page that spent two seconds on the network but is idle by the time it
+       paints can carry the animation perfectly well, while one that downloaded
+       instantly and is now building a catalog cannot.
+
+       So the test is simply whether the main thread goes free, asked of the
+       browser directly. An idle callback that runs because there was idle time
+       is the thread reporting it has room; one that runs because its timeout
+       expired is the thread reporting it never did, and that is the case worth
+       skipping.
+
+       This used to watch three animation frames go by and commit only if all
+       three arrived within 50ms of each other, with a second ceiling on
+       `performance.now()`. Both parts misfired on exactly the connection this
+       is meant to serve. The ceiling counted from navigation start rather than
+       from anything to do with the thread, so any load slower than 1.5s failed
+       it outright no matter how idle the page was by then, which is the case
+       the paragraph above says should play. And sampling three consecutive
+       frames during the load samples the noisiest moment there is: one late
+       frame anywhere in the window abandoned the whole thing, so on a marginal
+       connection the same page could travel or not travel from one visit to
+       the next. Unpredictable is worse than either answer consistently, since
+       a flourish that fires at random reads as a bug rather than as motion.
 
        Skipping loses a flourish, and nothing else: the pill was already put in
        its correct place above, so the failure mode is simply that it was
        always there. Playing it on a stalled thread loses the illusion. */
-    let seen = 0;
-    let last = performance.now();
-    (function sample() {
-      requestAnimationFrame(() => {
-        const now = performance.now();
-        if (now - last > ARRIVAL_FRAME_BUDGET || now > ARRIVAL_DEADLINE) return;
-        last = now;
-        if (++seen < ARRIVAL_SAMPLE_FRAMES) return sample();
-        pill.update({ from });
-      });
-    }());
+    const commit = () => pill.update({ from });
+    if (typeof requestIdleCallback === 'function') {
+      requestIdleCallback((deadline) => {
+        if (deadline.didTimeout) return;
+        commit();
+      }, { timeout: ARRIVAL_IDLE_TIMEOUT });
+    } else {
+      // Safari before 16.4. One frame is enough to clear the current task.
+      requestAnimationFrame(commit);
+    }
   }
 
   placeMenu();
