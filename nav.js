@@ -62,6 +62,9 @@
     let ink = null;
     let lastIndex = -1;
     let placed = false;
+    // The pair of animations of the journey currently in flight, so a
+    // repositioning that lands mid-journey can call it off. See `update`.
+    let travelling = [];
 
     function build() {
       // Clone before the pill is inserted, or the copy contains a copy.
@@ -115,8 +118,23 @@
       ink.style.translate = (-x) + 'px ' + (-y) + 'px';
     }
 
+    /* A running animation overrides the inline geometry underneath it, and these
+       are declared `fill: 'backwards'` only, so the override lifts the instant
+       the journey ends. Anything that repositions the pill mid-journey without
+       calling it off therefore has no visible effect until that moment and then
+       all of it at once, as a snap. The repositioning callers are exactly the
+       ones that fire at unpredictable times: the ResizeObserver on the group,
+       which both the web font landing and a scrollbar appearing trip, and the
+       viewport crossing the mobile breakpoint. */
+    function stopTravel() {
+      if (!travelling.length) return;
+      travelling.forEach((a) => a.cancel());
+      travelling = [];
+    }
+
     function hide() {
       if (!pill) return;
+      stopTravel();
       pill.style.opacity = '0';
       container.classList.remove('has-pill');
       placed = false;
@@ -164,6 +182,10 @@
         ? null
         : items[fromIndex];
       const move = source && source !== target ? travelPath(box(source), to) : null;
+      // Every path below writes the pill's geometry, so the journey in flight
+      // is over either way. Measuring first is safe: the boxes come from the
+      // group's own items, which no pill animation touches.
+      stopTravel();
 
       /* Commit the starting pose before anything else when there is a journey
          to make. Setting the destination first and only then starting an
@@ -184,7 +206,7 @@
       if (!move) return;
 
       const timing = { duration: move.duration, fill: 'backwards' };
-      pill.animate(move.path.map((k) => ({
+      const pillAnim = pill.animate(move.path.map((k) => ({
         translate: k.x + 'px ' + k.y + 'px',
         width: k.w + 'px',
         height: k.h + 'px',
@@ -196,16 +218,21 @@
          labels in page space while the pill slides across underneath it. Same
          timing and same easing per segment, or the two drift and the dark text
          smears off its own letters. */
-      ink.animate(move.path.map((k) => ({
+      const inkAnim = ink.animate(move.path.map((k) => ({
         translate: (-k.x) + 'px ' + (-k.y) + 'px',
         offset: k.offset,
         easing: k.easing
       })), timing);
+
+      travelling = [pillAnim, inkAnim];
+      const settle = () => { if (travelling[0] === pillAnim) travelling = []; };
+      pillAnim.finished.then(settle, settle);
     }
 
     // For groups whose items are re-rendered rather than restyled: the clone is
     // a snapshot, so it has to be retaken when the originals change.
     function rebuild() {
+      stopTravel();
       if (pill) pill.remove();
       pill = null;
       ink = null;
@@ -285,12 +312,77 @@
      page, so that item's geometry here is the geometry it had there. The index
      is what is stored rather than the href, because hrefs are relative and
      differ by page depth while the nav order is the same everywhere. */
-  /* How long to wait for a free main thread before giving up on the arrival
-     travel. It doubles as the ceiling on how late the travel may start: the
-     journey either begins within this long of the nav becoming live, or it does
-     not happen, so it can never slide across a nav the visitor has finished
-     reading. */
-  const ARRIVAL_IDLE_TIMEOUT = 400;
+  /* How long to keep waiting for a thread that can carry the travel, counted
+     from the first contentful paint. It doubles as the ceiling on how late the
+     journey may start: it either begins within this long of the page appearing
+     or it does not happen, so it can never slide across a nav the visitor has
+     finished reading.
+
+     Counted from the paint rather than from here because "here" is the wrong
+     clock. Deferred scripts run before the browser has drawn anything, so a
+     deadline started at this line is spent almost entirely on the load. */
+  const ARRIVAL_DEADLINE = 600;
+  // Two 60Hz frames. A pair of gaps under this is the thread saying it is
+  // rendering at a real cadence rather than crawling between long tasks.
+  const STEADY_FRAME = 34;
+
+  /* Hand back the frame after the page's first contentful paint.
+
+     Nothing before that paint is a safe place to start this animation, and the
+     paint frame itself is the worst one there is: it is where the whole
+     document rasterizes for the first time and where the sticky nav's
+     backdrop-filter is composited over a backdrop that has only just arrived.
+     Measured on the releases and gear pages under a throttled load, the travel
+     was being started 8ms *before* first paint, every single time, so all 400ms
+     of it were spent on frames the browser had no room to draw. That is the
+     stutter, and it is also why it looked random: whether any given frame
+     survived depended on how the paint and the catalog build happened to
+     interleave that visit. */
+  function afterFirstPaint(run) {
+    // One more frame past the paint, since the entry is delivered inside the
+    // frame that did the work and that is the frame being stepped over.
+    const go = () => requestAnimationFrame(() => requestAnimationFrame(run));
+    const types = (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes) || [];
+    /* No paint timing to wait on, so take the two frames and let `whenSteady`
+       be the whole test. Deliberately not a timeout alongside the observer: a
+       fallback clock short enough to be useful would fire before the paint on
+       exactly the slow load this is here to protect, which is the failure it is
+       meant to prevent. Either the browser can tell us when it painted or it
+       cannot. */
+    if (types.indexOf('paint') < 0) return go();
+    const po = new PerformanceObserver((list) => {
+      if (!list.getEntries().some((e) => e.name === 'first-contentful-paint')) return;
+      po.disconnect();
+      go();
+    });
+    // `buffered` covers the paint that already happened: on a warm load this
+    // script can run after it, and without this the entry is gone.
+    po.observe({ type: 'paint', buffered: true });
+  }
+
+  /* Then wait for the thread to prove it can draw, and give up if it cannot.
+
+     This asks the question by watching real frames rather than by asking
+     requestIdleCallback, which had been answering it backwards. An idle
+     callback scheduled before first paint fires during the lull while the main
+     thread waits on the compositor, reports the thread free, and commits the
+     animation into the storm that lands a millisecond later.
+
+     A single late frame no longer abandons the attempt: it keeps sampling until
+     a good pair arrives or the deadline passes. An earlier version bailed on
+     the first bad gap, which on a marginal connection made the same page travel
+     or not travel from one visit to the next, and a flourish that fires at
+     random reads as a bug rather than as motion. */
+  function whenSteady(run, deadline) {
+    const start = performance.now();
+    let prev = null;
+    requestAnimationFrame(function frame(ts) {
+      if (prev !== null && ts - prev <= STEADY_FRAME) return run();
+      if (performance.now() - start > deadline) return;
+      prev = ts;
+      requestAnimationFrame(frame);
+    });
+  }
 
   function arrive() {
     let from = -1;
@@ -323,38 +415,15 @@
        paints can carry the animation perfectly well, while one that downloaded
        instantly and is now building a catalog cannot.
 
-       So the test is simply whether the main thread goes free, asked of the
-       browser directly. An idle callback that runs because there was idle time
-       is the thread reporting it has room; one that runs because its timeout
-       expired is the thread reporting it never did, and that is the case worth
-       skipping.
-
-       This used to watch three animation frames go by and commit only if all
-       three arrived within 50ms of each other, with a second ceiling on
-       `performance.now()`. Both parts misfired on exactly the connection this
-       is meant to serve. The ceiling counted from navigation start rather than
-       from anything to do with the thread, so any load slower than 1.5s failed
-       it outright no matter how idle the page was by then, which is the case
-       the paragraph above says should play. And sampling three consecutive
-       frames during the load samples the noisiest moment there is: one late
-       frame anywhere in the window abandoned the whole thing, so on a marginal
-       connection the same page could travel or not travel from one visit to
-       the next. Unpredictable is worse than either answer consistently, since
-       a flourish that fires at random reads as a bug rather than as motion.
+       So the journey waits for the page to be on screen, and then for the
+       thread to prove it can draw, and gives up if it never does. Both halves
+       are in `afterFirstPaint` and `whenSteady` above, which is also where the
+       reasoning for each lives.
 
        Skipping loses a flourish, and nothing else: the pill was already put in
        its correct place above, so the failure mode is simply that it was
        always there. Playing it on a stalled thread loses the illusion. */
-    const commit = () => pill.update({ from });
-    if (typeof requestIdleCallback === 'function') {
-      requestIdleCallback((deadline) => {
-        if (deadline.didTimeout) return;
-        commit();
-      }, { timeout: ARRIVAL_IDLE_TIMEOUT });
-    } else {
-      // Safari before 16.4. One frame is enough to clear the current task.
-      requestAnimationFrame(commit);
-    }
+    afterFirstPaint(() => whenSteady(() => pill.update({ from }), ARRIVAL_DEADLINE));
   }
 
   placeMenu();
