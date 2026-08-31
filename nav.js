@@ -58,6 +58,23 @@
 
   function travellingPill(container, opts) {
     const enabled = opts.enabled || (() => true);
+    /* Where the pill actually lives. Normally that is the group itself, which
+       is the simplest thing that works and is what the in-page groups use.
+
+       The nav passes a `layer` instead, because its group sits inside
+       `.site-nav`, which carries `backdrop-filter: blur(32px) saturate(180%)`.
+       The pill animates width and height, so it repaints every frame, and a
+       repaint inside a backdrop-filtered element drags the filtered region
+       along with it: the most expensive surface on the site was being redrawn
+       sixty times a second for the length of every journey. Hosting the pill in
+       a layer that overlays the nav from outside keeps the per-frame damage to
+       the pill's own box, and changes nothing about how it looks -- it painted
+       above the links before and it paints above them now.
+
+       This is why the About/Commissions tabs and the gear filter never felt
+       heavy on the same code: they sit in ordinary flow with no glass over
+       them, so they pass no layer and nothing here changes for them. */
+    const host = opts.layer || container;
     let pill = null;
     let ink = null;
     let lastIndex = -1;
@@ -65,6 +82,9 @@
     // The pair of animations of the journey currently in flight, so a
     // repositioning that lands mid-journey can call it off. See `update`.
     let travelling = [];
+    // Where that journey is heading. A reposition that agrees with it must
+    // leave it alone rather than cancel it. See `update`.
+    let travelTo = null;
 
     function build() {
       // Clone before the pill is inserted, or the copy contains a copy.
@@ -108,14 +128,30 @@
          group emptying out and refilling: `hide()` sets opacity back to 0 on an
          element that is already laid out, and that one does fade. */
       pill.style.opacity = '1';
-      container.prepend(pill);
+      // Prepended within a group so it sits under the real labels in source
+       // order; appended to a layer, which holds nothing else.
+      if (opts.layer) host.appendChild(pill);
+      else container.prepend(pill);
     }
 
+    /* The ink copy has to sit exactly where the container sits, whatever the
+       pill is doing, so its offset is measured from the container's origin
+       rather than from zero. With no layer the container *is* the host, that
+       origin is (0,0), and this reduces to the inverse of the pill's own
+       offset, which is what it was before. */
+    /* Position is carried by `left`/`top`, not by a transform, and that is a
+       correctness requirement rather than a style choice. See the note on the
+       keyframes in `update` for what a transform did here. The ink's own
+       `-1px` CSS offset, which backs out the pill's border, is folded into the
+       value because an inline `left` overrides it. */
     function set(x, y, w, h) {
-      pill.style.translate = x + 'px ' + y + 'px';
+      const o = containerOrigin();
+      pill.style.left = x + 'px';
+      pill.style.top = y + 'px';
       pill.style.width = w + 'px';
       pill.style.height = h + 'px';
-      ink.style.translate = (-x) + 'px ' + (-y) + 'px';
+      ink.style.left = (o.x - x - 1) + 'px';
+      ink.style.top = (o.y - y - 1) + 'px';
     }
 
     /* A running animation overrides the inline geometry underneath it, and these
@@ -127,6 +163,7 @@
        which both the web font landing and a scrollbar appearing trip, and the
        viewport crossing the mobile breakpoint. */
     function stopTravel() {
+      travelTo = null;
       if (!travelling.length) return;
       travelling.forEach((a) => a.cancel());
       travelling = [];
@@ -149,8 +186,25 @@
        container's own rect, so the container must have no border or padding of
        its own, matching where an absolutely positioned child starts. */
     function box(el) {
-      const base = container.getBoundingClientRect();
+      const base = host.getBoundingClientRect();
       const r = el.getBoundingClientRect();
+      return { x: r.left - base.left, y: r.top - base.top, w: r.width, h: r.height };
+    }
+
+    // The container's own origin in host coordinates: (0,0) when there is no
+    // layer, and where the nav's links begin when there is.
+    function containerOrigin() {
+      if (host === container) return { x: 0, y: 0 };
+      const base = host.getBoundingClientRect();
+      const c = container.getBoundingClientRect();
+      return { x: c.left - base.left, y: c.top - base.top };
+    }
+
+    // The pill's live on-screen box, including whatever an animation in flight
+    // is currently doing to it. Used to re-aim a journey without snapping.
+    function liveBox() {
+      const base = host.getBoundingClientRect();
+      const r = pill.getBoundingClientRect();
       return { x: r.left - base.left, y: r.top - base.top, w: r.width, h: r.height };
     }
 
@@ -181,7 +235,39 @@
       const source = options.travel === false || reduced.matches || !placed
         ? null
         : items[fromIndex];
-      const move = source && source !== target ? travelPath(box(source), to) : null;
+      let move = source && source !== target ? travelPath(box(source), to) : null;
+
+      /* A reposition that lands mid-journey used to cancel it unconditionally,
+         which snapped the pill the rest of the way. The repositioning callers
+         are the ones that fire at unpredictable times, and the group's own
+         ResizeObserver is tripped by the web font landing: Lato is
+         `font-display: swap`, so the swap relays out every link in the group,
+         and it lands in exactly the window the cross-page travel starts in.
+         A journey killed a third of the way across and finished as a jump is
+         what "the animation plays wrong" was.
+
+         So only interrupt a journey that no longer agrees with where the group
+         has ended up. One that is still heading for the same box is left to
+         finish; the geometry it was given is still correct. */
+      const settled = travelTo && !move && travelling.length &&
+        Math.abs(travelTo.x - to.x) < .5 && Math.abs(travelTo.y - to.y) < .5 &&
+        Math.abs(travelTo.w - to.w) < .5 && Math.abs(travelTo.h - to.h) < .5;
+      if (settled) {
+        container.classList.add('has-pill');
+        placed = true;
+        lastIndex = index;
+        return;
+      }
+      /* The group moved under a journey that is still running, and it moved
+         somewhere new: a late catalog reflowing the page, a scrollbar
+         appearing, the viewport changing. Cancelling here is what made the
+         travel "half play and then cut off", because the pill was dropped
+         wherever it happened to be and the corrected geometry took over as a
+         jump. Re-aim from where the pill actually is instead, so the journey
+         bends towards the new destination and still arrives as one movement. */
+      if (!move && travelling.length && !reduced.matches) {
+        move = travelPath(liveBox(), to);
+      }
       // Every path below writes the pill's geometry, so the journey in flight
       // is over either way. Measuring first is safe: the boxes come from the
       // group's own items, which no pill animation touches.
@@ -206,8 +292,32 @@
       if (!move) return;
 
       const timing = { duration: move.duration, fill: 'backwards' };
+      /* Both halves move on `left`/`top`, and neither may use a transform.
+
+         The pill animates width and height, which the compositor cannot do, so
+         its animation always runs on the main thread. The ink copy used to
+         animate `translate` alone, which the compositor *can* do, so Chrome
+         promoted it and ran it on the compositor thread: two halves of one
+         movement, on two threads.
+
+         While both keep up, nothing shows. The moment the main thread stalls --
+         a heavy page still building, a slow load, anything -- the compositor
+         carries on sliding the ink while the pill sits frozen, and the dark
+         label walks straight off the blue and comes to rest beside the real
+         label it is meant to be covering. That is the "it freezes, then jumps
+         and plays half the animation" that this chased for a long time, and it
+         is why frame sampling never found it: rAF and long-task timing only see
+         the main thread, and the fault is *between* the threads.
+
+         Naming a non-compositable property alongside the transform is not
+         enough -- a value that never changes is not treated as animated, and
+         the promotion happens anyway. Moving on `left`/`top` is what actually
+         settles it: neither animation can be promoted, so the two cannot come
+         apart, and the pill was already paying for layout every frame because
+         of width and height. */
       const pillAnim = pill.animate(move.path.map((k) => ({
-        translate: k.x + 'px ' + k.y + 'px',
+        left: k.x + 'px',
+        top: k.y + 'px',
         width: k.w + 'px',
         height: k.h + 'px',
         offset: k.offset,
@@ -218,14 +328,21 @@
          labels in page space while the pill slides across underneath it. Same
          timing and same easing per segment, or the two drift and the dark text
          smears off its own letters. */
+      const origin = containerOrigin();
       const inkAnim = ink.animate(move.path.map((k) => ({
-        translate: (-k.x) + 'px ' + (-k.y) + 'px',
+        left: (origin.x - k.x - 1) + 'px',
+        top: (origin.y - k.y - 1) + 'px',
         offset: k.offset,
         easing: k.easing
       })), timing);
 
       travelling = [pillAnim, inkAnim];
-      const settle = () => { if (travelling[0] === pillAnim) travelling = []; };
+      travelTo = to;
+      const settle = () => {
+        if (travelling[0] !== pillAnim) return;
+        travelling = [];
+        travelTo = null;
+      };
       pillAnim.finished.then(settle, settle);
     }
 
@@ -301,11 +418,23 @@
   const navLinks = () => Array.from(menu.querySelectorAll('a:not([tabindex="-1"])'));
   const activeIndex = () => navLinks().findIndex((a) => a.hasAttribute('aria-current'));
 
+  /* The pill's own layer, outside the nav so its per-frame repaint does not
+     drag the nav's backdrop-filter along with it. Fixed at the top of the
+     viewport, which is where the nav always is: it is the first thing in the
+     body apart from the fixed skip link, and it is `position: sticky; top: 0`,
+     so it neither moves on scroll nor starts anywhere else. Item boxes are
+     measured live against this layer on every placement, so the pill still
+     lands wherever the nav actually is rather than trusting that assumption. */
+  const pillLayer = document.createElement('div');
+  pillLayer.className = 'site-nav__pill-layer';
+  document.body.appendChild(pillLayer);
+
   const pill = window.PokestirMotion.travellingPill(menu, {
     items: navLinks,
     active: activeIndex,
     enabled: () => !mobile.matches,
-    pillClass: 'site-nav__pill'
+    pillClass: 'site-nav__pill',
+    layer: pillLayer
   });
 
   /* Where the pill sat on the page we came from. The nav is identical on every
@@ -321,10 +450,11 @@
      Counted from the paint rather than from here because "here" is the wrong
      clock. Deferred scripts run before the browser has drawn anything, so a
      deadline started at this line is spent almost entirely on the load. */
-  const ARRIVAL_DEADLINE = 600;
-  // Two 60Hz frames. A pair of gaps under this is the thread saying it is
-  // rendering at a real cadence rather than crawling between long tasks.
-  const STEADY_FRAME = 34;
+  const ARRIVAL_DEADLINE = 1200;
+  // Backstop for a web font that never resolves, so the journey is not held
+  // hostage to it. Comfortably longer than a swap on a slow connection, since
+  // firing early is the failure it exists to avoid.
+  const FONT_BACKSTOP = 800;
 
   /* Hand back the frame after the page's first contentful paint.
 
@@ -343,8 +473,9 @@
     // frame that did the work and that is the frame being stepped over.
     const go = () => requestAnimationFrame(() => requestAnimationFrame(run));
     const types = (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes) || [];
-    /* No paint timing to wait on, so take the two frames and let `whenSteady`
-       be the whole test. Deliberately not a timeout alongside the observer: a
+    /* No paint timing to wait on, so take the two frames and let
+       `whenNavSettled` be the whole test. Deliberately not a timeout alongside
+       the observer: a
        fallback clock short enough to be useful would fire before the paint on
        exactly the slow load this is here to protect, which is the failure it is
        meant to prevent. Either the browser can tell us when it painted or it
@@ -360,28 +491,43 @@
     po.observe({ type: 'paint', buffered: true });
   }
 
-  /* Then wait for the thread to prove it can draw, and give up if it cannot.
+  /* Then wait until the nav has stopped changing shape, and draw.
 
-     This asks the question by watching real frames rather than by asking
-     requestIdleCallback, which had been answering it backwards. An idle
-     callback scheduled before first paint fires during the lull while the main
-     thread waits on the compositor, reports the thread free, and commits the
-     animation into the storm that lands a millisecond later.
+     What stood here asked whether the main thread *felt* fast: it sampled
+     frame gaps and played only after catching two consecutive ones under 34ms
+     within 600ms of the paint. That is a coin flip, and it is the reason the
+     travel "works half the time". The same page travelled or did not travel
+     from one visit to the next depending on how the load happened to
+     interleave that visit, and on a slow load it usually lost, so the flourish
+     went missing exactly where it was most wanted. Every version of this that
+     tuned the numbers kept the coin flip and only changed its bias.
 
-     A single late frame no longer abandons the attempt: it keeps sampling until
-     a good pair arrives or the deadline passes. An earlier version bailed on
-     the first bad gap, which on a marginal connection made the same page travel
-     or not travel from one visit to the next, and a flourish that fires at
-     random reads as a bug rather than as motion. */
-  function whenSteady(run, deadline) {
-    const start = performance.now();
-    let prev = null;
-    requestAnimationFrame(function frame(ts) {
-      if (prev !== null && ts - prev <= STEADY_FRAME) return run();
-      if (performance.now() - start > deadline) return;
-      prev = ts;
-      requestAnimationFrame(frame);
-    });
+     The question that actually decides whether the journey looks right is not
+     "is the thread fast" but "has the nav finished moving".
+     `document.fonts.ready` answers that one, and answers it definitively: Lato
+     is `font-display: swap`, so the swap relays out every link in the group,
+     and it lands in the same window the travel used to start in. Waiting for
+     it means the journey measures final geometry and the group's
+     ResizeObserver has already fired, which is the other half of why the
+     animation used to end as a snap.
+
+     The timeout is a backstop for a font that never arrives, not a race
+     against one. */
+  function whenNavSettled(run) {
+    let ran = false;
+    let timer = null;
+    const go = () => {
+      if (ran) return;
+      ran = true;
+      clearTimeout(timer);
+      run();
+    };
+    timer = setTimeout(go, FONT_BACKSTOP);
+    const fonts = document.fonts && document.fonts.ready;
+    if (!fonts) return;
+    // One frame past the swap, so the relayout it causes is already committed
+    // and the boxes this measures are the ones that will be on screen.
+    fonts.then(() => requestAnimationFrame(go), () => go());
   }
 
   function arrive() {
@@ -410,20 +556,29 @@
        being built. The slide loses most of its frames and jerks across the nav,
        which reads far worse than a pill that was simply already in place.
 
-       Frame health is the real question, not how long the document took: a
-       page that spent two seconds on the network but is idle by the time it
-       paints can carry the animation perfectly well, while one that downloaded
-       instantly and is now building a catalog cannot.
-
-       So the journey waits for the page to be on screen, and then for the
-       thread to prove it can draw, and gives up if it never does. Both halves
-       are in `afterFirstPaint` and `whenSteady` above, which is also where the
+       Frame health is *not* the question, though it was asked for a long
+       time. It cannot be sampled without guessing, and a flourish that fires
+       at random reads as a bug rather than as motion. What the journey needs
+       is that the page is on screen and that the nav has stopped changing
+       shape underneath it, and both of those can be observed exactly:
+       `afterFirstPaint` and `whenNavSettled` above, which is also where the
        reasoning for each lives.
 
        Skipping loses a flourish, and nothing else: the pill was already put in
        its correct place above, so the failure mode is simply that it was
-       always there. Playing it on a stalled thread loses the illusion. */
-    afterFirstPaint(() => whenSteady(() => pill.update({ from }), ARRIVAL_DEADLINE));
+       always there. */
+    /* On screen, then settled, then travel. Whether it plays is now decided by
+       how late we are, which is a property of the load, rather than by frame
+       jitter, which is a property of nothing. A given page on a given
+       connection behaves the same way every time.
+
+       Past the ceiling the pill is simply already in place, which is what it
+       was anyway whenever the old gate lost its coin flip. */
+    const askedAt = performance.now();
+    afterFirstPaint(() => whenNavSettled(() => {
+      if (performance.now() - askedAt > ARRIVAL_DEADLINE) return;
+      pill.update({ from });
+    }));
   }
 
   placeMenu();

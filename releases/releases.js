@@ -1,6 +1,41 @@
 (function () {
   'use strict';
 
+  /* ── Leave the view transition behind when leaving the section ──
+
+     `@view-transition { navigation: auto }` lives in releases.css, which is
+     loaded by the archive and by every generated release page. That opt-in
+     belongs to the *outgoing* document, so it fires on any navigation away
+     from here, not just on the archive/detail pair it was written for.
+
+     Every other page on the site opts out, so the browser cannot know whether
+     there is a transition to run until the new document has told it. Until
+     then it holds the new page off screen, and it only gives up on a timeout.
+     Measured in a DevTools trace: leaving a releases page for the nav bar drew
+     one frame and then froze for 491-503ms, every time, with the main thread
+     idle (73ms busy out of 500) and the renderer producing frames that were
+     painted and never committed -- 88 BeginMainThreadFrame and 118 Paint
+     against 3 Commit and 1 DrawFrame. Navigations that never touched a
+     releases page were smooth, which is what isolated this.
+
+     Anything animating on the arriving page runs invisibly inside that window
+     and is most of the way through by the time the screen catches up, so it
+     reads as a freeze and then a jump. The nav pill was the visible victim and
+     was blamed for a long time; it was never at fault.
+
+     So the transition is kept for the navigations it was designed for, which
+     are the ones that stay inside /releases/, and skipped for the rest. The
+     art morph between a tile and the detail hero is untouched. */
+  addEventListener('pageswap', (event) => {
+    if (!event.viewTransition) return;
+    const url = event.activation && event.activation.entry && event.activation.entry.url;
+    let staying = false;
+    try {
+      staying = new URL(url, location.href).pathname.startsWith('/releases/');
+    } catch (e) { /* no destination to read; treat as leaving */ }
+    if (!staying) event.viewTransition.skipTransition();
+  });
+
   /* Known platforms, in display order. Keys match the `links` object in
      data.js; icons live in ../images/icons/. */
   const PLATFORMS = [

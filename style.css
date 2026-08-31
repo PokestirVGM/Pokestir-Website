@@ -317,6 +317,32 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   animation: none !important;
 }
 
+/* ── The nav pill's own layer ──
+   The pill animates width and height, so it repaints on every frame of a
+   journey. Inside `.site-nav` that repaint sits within a
+   `backdrop-filter: blur(32px) saturate(180%)` element and drags the filtered
+   region with it, which made the one animation that runs during a page load
+   also the most expensive thing on the page to draw. This layer hosts it from
+   outside the nav instead. It looks identical: the pill painted above the links
+   before and it paints above them now.
+
+   Zero height on purpose. It is an anchor for an absolutely positioned child
+   and nothing else, so it can never cover the nav or intercept anything; the
+   pill's coordinates are measured against this box's top-left, which is the
+   top-left of the viewport. Above `.site-nav`'s z-index 100, and below nothing.
+
+   nav.js builds it, and only on pages that have a nav. */
+.site-nav__pill-layer {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 0;
+  z-index: 101;
+  pointer-events: none;
+}
+/* Mobile keeps the highlight on the link itself, so the layer holds nothing. */
+@media (max-width: 640px) {
+  .site-nav__pill-layer { display: none; }
+}
+
 /* ── Active-page pill (desktop) ──
    Mobile keeps the background on the link itself: the menu is a dropdown column
    there, so there is nothing to travel along. */
