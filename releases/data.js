@@ -184,6 +184,26 @@ const RELEASES = [
     ]
   },
   {
+    slug: "accumula-town",
+    title: "Accumula Town (From \"Pokémon Black & White\") [Arr. for Orchestra by Pokestir]",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-09-10",
+    upc: "",
+    description: "",
+    tags: [],
+    artwork: "",
+    links: {
+      bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "",
+      youtube: "", pandora: "", itunes: "", deezer: "",
+      amazonMusic: "", tidal: "", qobuz: ""
+    },
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/accumuluaPS" }],
+    tracklist: [
+      { trackId: "local:accumula-town-2026" },
+    ]
+  },
+  {
     slug: "meteor-falls",
     title: "Meteor Falls (From \"Pokémon Ruby & Sapphire\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
