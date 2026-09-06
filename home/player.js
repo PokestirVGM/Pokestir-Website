@@ -45,6 +45,8 @@
       tabComms.classList.toggle('active', !isAbout);
       tabAbout.setAttribute('aria-selected', String(isAbout));
       tabComms.setAttribute('aria-selected', String(!isAbout));
+      tabAbout.tabIndex = isAbout ? 0 : -1;
+      tabComms.tabIndex = isAbout ? -1 : 0;
       if (tabPill) tabPill.update();
     }
     if (bioView) bioView.hidden = !isAbout;
@@ -65,8 +67,12 @@
 
   document.addEventListener('keydown', (e) => {
     if (e.target === tabAbout || e.target === tabComms) {
-      if (e.key === 'ArrowRight') { e.preventDefault(); setTab('comms'); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); setTab('about'); }
+      if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(e.key)) return;
+      e.preventDefault();
+      const next = e.key === 'Home' ? tabAbout : e.key === 'End' ? tabComms
+        : e.target === tabAbout ? tabComms : tabAbout;
+      setTab(next === tabAbout ? 'about' : 'comms');
+      next.focus();
     }
   });
 
@@ -127,16 +133,28 @@
     }
 
     function renderChips() {
+      // Updating the existing buttons preserves keyboard focus and their fade.
+      if (chipsEl.children.length) {
+        for (const btn of chipsEl.children) {
+          const active = btn.dataset.tag ? selectedTags.has(btn.dataset.tag) : selectedTags.size === 0;
+          btn.classList.toggle('active', active);
+          btn.setAttribute('aria-pressed', String(active));
+        }
+        return;
+      }
       chipsEl.innerHTML = '';
       const allBtn = document.createElement('button');
       allBtn.className = 'pill' + (selectedTags.size === 0 ? ' active' : '');
       allBtn.textContent = 'All';
+      allBtn.setAttribute('aria-pressed', 'true');
       allBtn.addEventListener('click', () => { selectedTags.clear(); applyFilter(); });
       chipsEl.appendChild(allBtn);
       allTags.forEach((tag) => {
         const btn = document.createElement('button');
         btn.className = 'pill' + (selectedTags.has(tag) ? ' active' : '');
         btn.textContent = tag;
+        btn.dataset.tag = tag;
+        btn.setAttribute('aria-pressed', 'false');
         btn.addEventListener('click', () => {
           if (selectedTags.has(tag)) selectedTags.delete(tag);
           else selectedTags.add(tag);

@@ -12,7 +12,7 @@
 
 .wrap { display: grid; gap: 26px; }
 
-#top, #what-title, #bugs { scroll-margin-top: 80px; }
+#top, #what-title, #bugs, #setup { scroll-margin-top: 80px; }
 .page-title { margin: 4px 2px 6px; }
 
 /* The answer, then the qualifications. Same as the terms page: white against
@@ -39,6 +39,7 @@
 .lead:last-child { margin-bottom: 0; }
 .caption { color: var(--muted); font-size: 14px; line-height: 1.65; margin: 0; }
 .caption--spaced { margin-top: 16px; }
+.caption a { white-space: nowrap; }
 
 .list {
   margin: 12px 0 0 20px; padding: 0;
@@ -85,18 +86,9 @@
    moment you are deciding whether to press the button above them. */
 .facts { color: var(--muted); font-size: 13.5px; margin: 12px 0 0; }
 
-/* ── Product shot ──
-   Paired with the summary rather than centred on a row of its own, where it
-   read as an unplaced object with nothing lining up beside it. Same column
-   ratio as the card above, so its left edge sits on the page column and its
-   right edge meets the card's divider. Vertically centred against the text:
-   the window is nearly square and always the taller of the two.
-
-   The frame is on the figure, not the image, so the radius clips the
-   screenshot's square corners. The hairline and the site shadow sit it on the
-   page instead of letting its own dark chrome bleed into the background. */
+/* Current development window, with its release status kept beside it. */
 .showcase {
-  display: grid; grid-template-columns: 51% 1fr;
+  display: grid; grid-template-columns: 58% 1fr;
   column-gap: 24px; align-items: center; margin: 2px 2px 0;
 }
 .showcase__text { min-width: 0; }
@@ -105,11 +97,13 @@
 
 .shotblock {
   margin: 0; min-width: 0;
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow);
 }
+.shot-link { display: block; border: 1px solid var(--line-soft); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow); }
+.shotblock figcaption { margin-top: 12px; }
+.shotblock figcaption b { font-weight: 400; color: var(--text); }
+.reading { margin: 0 2px; max-width: 78ch; }
+.reading .lede { max-width: none; }
+.steps li { padding-left: 6px; margin-block: 14px; }
 .shot { display: block; width: 100%; height: auto; }
 
 .btnrow { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
@@ -287,7 +281,7 @@
   /* Stacked, the shot goes back to a capped block above the text it
      illustrates, rather than stretching to the full reading width. */
   .showcase { grid-template-columns: 1fr; row-gap: 22px; }
-  .shotblock { max-width: 620px; margin-inline: auto; }
+  .shotblock { max-width: 760px; margin-inline: auto; }
   .split__col + .split__col {
     border-left: 0;
     border-top: 1px solid var(--line-soft);

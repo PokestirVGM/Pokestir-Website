@@ -252,66 +252,58 @@
     return rect.bottom >= 0 && rect.top <= window.innerHeight;
   }
 
-  /* ── Grid motion ──────────────────────────────────────────────────────────
-     The same deal the gear grid uses, and for the same reason: tiles are placed
-     rather than faded in, arriving from slightly above and slightly larger than
-     final, in reading order rather than all on one frame. Twenty-four tiles
-     starting together read as a single crossfade of the archive instead of a
-     list rearranging.
+  /* Keep the reading-order entrance, with a short stagger and no artwork
+     scaling. Read tokens before starting animations so each tile does not
+     force a fresh style calculation after the previous tile's write. */
+  const DEAL_STEP = 12;
+  const DEAL_WINDOW = 84;
 
-     Kept as a local copy rather than shared with gear.js. The two grids hold
-     different things at different sizes and will diverge before they converge,
-     and this file already keeps its own copies of the motion helpers by choice.
-     What is genuinely shared is `travelPath`, because a card crossing a grid
-     must move on the same law as everything else on the site. */
-  const DEAL_STEP = 22;     // ms between consecutive arrivals
-  const DEAL_WINDOW = 240;  // ms; every arrival has begun by here
+  function gridTiming() {
+    const style = getComputedStyle(document.documentElement);
+    const token = (name) => style.getPropertyValue(name).trim();
+    const ms = (name) => {
+      const value = token(name);
+      return parseFloat(value) * (value.endsWith('ms') ? 1 : 1000);
+    };
+    return {
+      duration: ms('--mo-base'),
+      exitDuration: ms('--mo-instant'),
+      easing: token('--mo-out'),
+      travel: parseFloat(token('--mo-travel')) || 0
+    };
+  }
 
   function dealDelay(index) {
     return Math.min(index * DEAL_STEP, DEAL_WINDOW);
   }
 
-  function dealIn(el, index) {
-    const travel = parseFloat(motionToken('--mo-travel')) || 0;
+  function dealIn(el, index, timing) {
     return el.animate([
-      { opacity: 0, transform: `translateY(${-6 * travel}px) scale(1.04)` },
-      { opacity: 1, transform: 'translateY(0) scale(1)' }
+      { opacity: 0, transform: `translateY(${-4 * timing.travel}px)` },
+      { opacity: 1, transform: 'translateY(0)' }
     ], {
-      duration: 260,
-      easing: motionToken('--mo-snap'),
+      duration: timing.duration,
+      easing: timing.easing,
       delay: dealDelay(index),
       fill: 'backwards'
     });
   }
 
-  /* Survivors of a search or a sort travel on `travelPath`, so a tile crossing
-     the archive takes longer than one shifting a column, and both land with the
-     commit and settle the nav pill uses. */
-  function moveSurvivor(el, dx, dy, fromOpacity) {
-    const MO = window.PokestirMotion;
-    const move = MO && MO.travelPath({ x: dx, y: dy }, { x: 0, y: 0 });
-    if (!move) {
-      return el.animate([
-        { opacity: fromOpacity, transform: `translate(${dx}px, ${dy}px)` },
-        { opacity: 1, transform: 'translate(0, 0)' }
-      ], { duration: motionDuration('--mo-base'), easing: motionToken('--mo-out') });
-    }
-    const over = move.over;
+  /* Existing tiles move directly to their new positions. Album typography
+     stays at its final size, and rapid searches do not stack spring rebounds. */
+  function moveSurvivor(el, dx, dy, fromOpacity, timing) {
     return el.animate([
-      { opacity: fromOpacity, transform: `translate(${dx}px, ${dy}px)`, easing: 'cubic-bezier(.7,0,.35,1)' },
-      { transform: `translate(${move.ux * over}px, ${move.uy * over}px)`, offset: .6, easing: 'cubic-bezier(.4,0,.3,1)' },
-      { transform: `translate(${-move.ux * over * .32}px, ${-move.uy * over * .32}px)`, offset: .82, easing: 'cubic-bezier(.4,0,.3,1)' },
+      { opacity: fromOpacity, transform: `translate(${dx}px, ${dy}px)` },
       { opacity: 1, transform: 'translate(0, 0)' }
-    ], { duration: move.duration, fill: 'backwards' });
+    ], { duration: timing.duration, easing: timing.easing, fill: 'backwards' });
   }
 
   function cancelRailMotion() {
     if (activeRailMotion) activeRailMotion.cancel();
   }
 
-  /* Native smooth scrolling owns its curve, so it cannot share the motion
-     language used everywhere around it. A hidden WAAPI driver supplies the
-     tokenized easing while rAF applies that eased progress to scrollLeft. */
+  /* A targetless Web Animation supplies the shared easing without inserting a
+     hidden element or reading computed CSS on every scroll frame. */
   /* One tile's worth of horizontal distance, measured live: the rail's column
      width is 280px on desktop and `min(240px, 68vw)` on mobile, so it cannot be
      assumed. Every snap point is a multiple of this. */
@@ -341,7 +333,7 @@
     const stride = railStride(rail);
     const end = Math.max(0, Math.min(max, Math.round((start + distance) / stride) * stride));
     if (start === end) return;
-    if (REDUCED.matches || typeof rail.animate !== 'function') {
+    if (REDUCED.matches || typeof KeyframeEffect !== 'function' || typeof Animation !== 'function') {
       rail.scrollLeft = end;
       return;
     }
@@ -353,10 +345,6 @@
     const snapType = rail.style.scrollSnapType;
     rail.style.scrollSnapType = 'none';
 
-    const driver = document.createElement('span');
-    driver.className = 'rail-motion-driver';
-    driver.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(driver);
     /* Distance-scaled on the same law as the nav pill and the gear grid, rather
        than a flat --mo-comp for every hop. A scroll does not get the pill's
        overshoot, though: content that sails past its stop and comes back is
@@ -364,11 +352,12 @@
        correct all over again. Only the duration is shared. */
     const MO = window.PokestirMotion;
     const move = MO && MO.travelPath({ x: 0, y: 0 }, { x: Math.abs(end - start), y: 0 });
-    const animation = driver.animate([{ opacity: 0 }, { opacity: 1 }], {
-      duration: move ? move.duration : motionDuration('--mo-comp'),
+    const effect = new KeyframeEffect(null, [], {
+      duration: Math.min(move ? move.duration : motionDuration('--mo-comp'), motionDuration('--mo-comp')),
       easing: motionToken('--mo-inout'),
       fill: 'both'
     });
+    const animation = new Animation(effect, document.timeline);
     let frame = 0;
     let stopped = false;
 
@@ -379,19 +368,19 @@
       cancelAnimationFrame(frame);
       if (land) rail.scrollLeft = end;
       rail.style.scrollSnapType = snapType;
-      driver.remove();
       if (activeRailMotion && activeRailMotion.animation === animation) activeRailMotion = null;
     }
 
     function step() {
       if (stopped) return;
-      const progress = parseFloat(getComputedStyle(driver).opacity) || 0;
+      const progress = effect.getComputedTiming().progress || 0;
       rail.scrollLeft = start + (end - start) * progress;
       frame = requestAnimationFrame(step);
     }
 
     activeRailMotion = { animation, cancel: () => stop(false, true) };
     animation.finished.then(() => stop(true, false), () => stop(false, false));
+    animation.play();
     step();
   }
 
@@ -621,8 +610,9 @@
     return Array.from(grid.querySelectorAll('.rgrid:not(.rgrid--rail) .release-tile'));
   }
 
-  function addExitClone(tile, rect, opacity, index) {
+  function addExitClone(tile, rect, opacity, timing) {
     const clone = tile.cloneNode(true);
+    clone.querySelectorAll('.is-transition-art').forEach((cover) => cover.classList.remove('is-transition-art'));
     clone.classList.add('release-motion-clone');
     clone.setAttribute('aria-hidden', 'true');
     clone.inert = true;
@@ -638,16 +628,13 @@
     });
     document.body.appendChild(clone);
 
-    /* Departures shrink slightly and go, with no travel: a tile that is leaving
-       is not the thing being looked at, so it clears the way rather than taking
-       a journey of its own. Same ordering as the arrivals. */
+    /* Clear departing artwork promptly so it does not cover the new results. */
     const animation = clone.animate([
-      { opacity, transform: 'scale(1)' },
-      { opacity: 0, transform: 'scale(.98)' }
+      { opacity },
+      { opacity: 0 }
     ], {
-      duration: 110,
-      easing: motionToken('--mo-in'),
-      delay: dealDelay(index),
+      duration: timing.exitDuration,
+      easing: timing.easing,
       fill: 'both'
     });
     trackGridMotion(animation, () => clone.remove());
@@ -655,27 +642,30 @@
 
   function captureGridMotion(nextKeys) {
     const oldRects = new Map();
-    const visible = primaryTiles().map((tile) => ({
-      tile,
-      rect: tile.getBoundingClientRect(),
-      opacity: getComputedStyle(tile).opacity
-    }))
-      .filter(({ rect }) => nearViewport(rect))
-      .slice(0, MAX_MOTION_TILES);
+    const visible = [];
+    if (hasRendered && !REDUCED.matches) {
+      for (const tile of primaryTiles()) {
+        const rect = tile.getBoundingClientRect();
+        if (!nearViewport(rect)) continue;
+        visible.push({ tile, rect, opacity: getComputedStyle(tile).opacity });
+        if (visible.length === MAX_MOTION_TILES) break;
+      }
+    }
     clearGridMotions();
     if (!hasRendered || REDUCED.matches) return oldRects;
 
-    let leaving = 0;
+    const timing = gridTiming();
     for (const { tile, rect, opacity } of visible) {
       const key = tile.dataset.motionKey;
       oldRects.set(key, { rect, opacity });
-      if (!nextKeys.has(key)) addExitClone(tile, rect, opacity, leaving++);
+      if (!nextKeys.has(key)) addExitClone(tile, rect, opacity, timing);
     }
     return oldRects;
   }
 
   function animateGridIn(oldRects) {
     if (!hasRendered || REDUCED.matches) return;
+    const timing = gridTiming();
     const visible = primaryTiles().map((tile) => ({ tile, rect: tile.getBoundingClientRect() }))
       .filter(({ rect }) => nearViewport(rect))
       .slice(0, MAX_MOTION_TILES);
@@ -686,12 +676,20 @@
     for (const { tile, rect } of visible) {
       const old = oldRects.get(tile.dataset.motionKey);
       if (!old) {
-        trackGridMotion(dealIn(tile, arriving++), () => {});
+        trackGridMotion(dealIn(tile, arriving++, timing), () => {});
         continue;
       }
       if (old.opacity === '1' && old.rect.left === rect.left && old.rect.top === rect.top) continue;
+      const dx = old.rect.left - rect.left;
+      const dy = old.rect.top - rect.top;
+      // Long sorting paths cross other covers and their captions. Keep the
+      // slide for neighbors; larger reorders settle into place with the deal.
+      if (Math.abs(dx) > rect.width * 1.2 || Math.abs(dy) > rect.height * .5) {
+        trackGridMotion(dealIn(tile, arriving++, timing), () => {});
+        continue;
+      }
       trackGridMotion(
-        moveSurvivor(tile, old.rect.left - rect.left, old.rect.top - rect.top, old.opacity),
+        moveSurvivor(tile, dx, dy, old.opacity, timing),
         () => {}
       );
     }
@@ -764,17 +762,8 @@
      via the nav ignore the stash and start at the top. */
   const LIST_STATE_KEY = 'pokestir-releases-list-state';
 
-  /* The view transition snapshots `.tile-cover` at the moment the navigation
-     starts, which is the moment the pointer comes up: measured there, the cover
-     is translated 2px, scaled to .985, and running three animations at once (a
-     transition plus tile-rise and tile-unsquash). So the artwork begins its
-     flight from a slightly different position and size on every single click,
-     depending only on how fast the click was released. That is why the same
-     navigation never quite looks the same twice.
-
-     Put the cover back in its resting pose and flush that before the navigation
-     proceeds, so the flight always starts from the tile as drawn. The class
-     only ever lands on a document that is about to be replaced. */
+  /* Capture the cover at rest, independent of hover/press timing. The pose is
+     released on arrival and on renewed interaction if navigation was cancelled. */
   function stillTransitionArt(tile) {
     const cover = tile.querySelector('.tile-cover');
     if (!cover) return;
@@ -840,7 +829,13 @@
       const target = Array.from(grid.querySelectorAll('.release-tile')).find((tile) =>
         tile.dataset.motionKey === saved.artSlug &&
         Boolean(tile.closest('.rgrid--rail')) === Boolean(saved.artRail));
-      if (target && nearViewport(target.getBoundingClientRect())) markTransitionArt(target);
+      if (target && nearViewport(target.getBoundingClientRect())) {
+        // The return snapshot is taken before lazy-image observers run. Paint
+        // the selected cover now, using the same URL as the detail page.
+        const rel = VISIBLE_DB.find((r) => r.slug === saved.artSlug);
+        if (rel) revealArt(target.querySelector('.tile-art'), rel, true);
+        markTransitionArt(target);
+      }
     }
     // Layout finishes after this frame; scroll once the page has its height.
     // 'instant' bypasses the site-wide `scroll-behavior: smooth`, which would
@@ -863,6 +858,20 @@
   }
 
   function initList() {
+    const releaseSnapshotPose = () => {
+      grid.querySelectorAll('.is-transition-still').forEach((cover) => cover.classList.remove('is-transition-still'));
+    };
+    // A cached archive retains the snapshot-only class from the click that
+    // left it. Release that pose after arrival so hover works on browser Back.
+    addEventListener('pagereveal', (event) => {
+      if (event.viewTransition) event.viewTransition.finished.then(releaseSnapshotPose, releaseSnapshotPose);
+      else releaseSnapshotPose();
+    });
+    addEventListener('pageshow', releaseSnapshotPose);
+    // Also release a pose if a navigation was cancelled or opened elsewhere.
+    grid.addEventListener('pointerover', releaseSnapshotPose);
+    grid.addEventListener('focusin', releaseSnapshotPose);
+
     grid.addEventListener('click', (e) => {
       const tile = e.target.closest('.release-tile');
       if (!tile) return;
@@ -988,11 +997,11 @@
       row.style.setProperty('--pct', pct);
     }
 
-    function setRow(row, playing) {
+    function setRow(row, playing, reset = true) {
       row.classList.toggle('is-playing', playing);
       row.setAttribute('aria-label',
         (playing ? 'Pause preview: ' : 'Play preview: ') + (row.dataset.title || ''));
-      if (!playing) setPct(row, '0%', false);
+      if (!playing && reset) setPct(row, '0%', false);
     }
 
     function toggle(row) {
@@ -1016,7 +1025,7 @@
     }
 
     audio.addEventListener('play', () => { if (current) setRow(current, true); });
-    audio.addEventListener('pause', () => { if (current) setRow(current, false); });
+    audio.addEventListener('pause', () => { if (current) setRow(current, false, false); });
     audio.addEventListener('ended', () => {
       if (current) { setRow(current, false); current = null; }
     });

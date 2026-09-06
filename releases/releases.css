@@ -23,7 +23,7 @@
   animation: mo-vt-fade-in var(--mo-base) var(--mo-out) both;
 }
 ::view-transition-group(release-art) {
-  animation-duration: var(--mo-view);
+  animation-duration: var(--mo-comp);
   animation-timing-function: var(--mo-inout);
 }
 /* It is the same artwork at both ends, so crossfading it against itself only
@@ -42,6 +42,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  mix-blend-mode: normal;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -127,11 +128,6 @@ select {
 }
 .rgrid--rail::-webkit-scrollbar { display: none; }
 .rgrid--rail .release-tile { scroll-snap-align: start; }
-.rail-motion-driver {
-  position: fixed; width: 0; height: 0; overflow: hidden;
-  pointer-events: none; opacity: 0;
-}
-
 .rail-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .rail-head .grid-section-title { margin: 0 2px; }
 .rgrid + .rail-head { margin-top: 26px; }
@@ -201,9 +197,11 @@ select {
   aspect-ratio: 1 / 1; border-radius: var(--radius-md);
   border: 1px solid var(--line);
   background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 100%), hsl(220 25% 14%);
+  translate: 0;
   scale: 1;
-  transition: scale var(--mo-base) var(--mo-in),
-              border-color var(--mo-quick) var(--mo-in);
+  transition: translate var(--mo-quick) var(--mo-out),
+              scale var(--mo-quick) var(--mo-out),
+              border-color var(--mo-quick) var(--mo-out);
 }
 .tile-cover.is-transition-art,
 .detail-head .art { view-transition-name: release-art; }
@@ -232,35 +230,16 @@ select {
 .release-tile:focus-visible .tile-cover {
   translate: 0 calc(-4px * var(--mo-travel));
   border-color: var(--line-bright);
-  transition: translate var(--mo-base) var(--mo-snap),
-              border-color var(--mo-instant) var(--mo-out);
+  transition-duration: var(--mo-quick), var(--mo-quick), var(--mo-instant);
 }
-/* The shadow is cast on the page, not carried by the tile: it holds position as
-   the cover rises rather than travelling up glued to it. */
-.release-tile:hover::before,
-.release-tile:focus-visible::before {
-  opacity: 1;
-  translate: 0 calc(2px * var(--mo-travel));
-  transition: opacity var(--mo-quick) var(--mo-out),
-              translate var(--mo-base) var(--mo-out);
-}
-/* Press and release, driven by nav.js. Separate properties so the recoil and
-   the rise can run at different lengths, same as every other control. */
+/* One transition owns each property through hover, press and release. This
+   also gives hover-out a translate transition, instead of snapping to zero. */
 .release-tile.is-pressed .tile-cover {
   translate: 0 calc(2px * var(--mo-travel));
   scale: .985;
   transition-duration: 70ms;
   transition-timing-function: var(--mo-in);
 }
-.release-tile.is-pressed::before { opacity: .35; translate: 0 0; transition-duration: 70ms; }
-.release-tile.is-released .tile-cover {
-  animation: tile-rise 170ms var(--mo-out), tile-unsquash 260ms var(--mo-snap);
-}
-@keyframes tile-rise {
-  from { translate: 0 calc(2px * var(--mo-travel)); }
-  to { translate: 0 calc(-4px * var(--mo-travel)); }
-}
-@keyframes tile-unsquash { from { scale: .985; } to { scale: 1; } }
 /* Handed to the view transition: the cover has to be in its resting pose when
    the snapshot is taken, or the artwork starts its flight from wherever the
    press rebound happened to be. Placed after the hover, press and release rules
@@ -428,7 +407,7 @@ select {
   background-color: rgba(255,255,255,.05);
   transition-duration: var(--mo-instant), var(--mo-glide);
 }
-.track-row--jump { transition: none; }
+.track-row.has-preview.track-row--jump { transition: none; }
 .track-row.has-preview:focus-visible { outline-offset: -2px; }
 
 /* While a preview plays: blue selection tint that fills left-to-right as
@@ -491,6 +470,7 @@ select {
   .release-tile--album .rname { font-size: 15px; }
   .release-tile--album .rsub, .release-tile--album .rmeta, .release-tile--album .rcomp { font-size: 12px; }
   .detail-head { flex-direction: column; align-items: center; text-align: center; padding: 18px; }
+  .detail-head .art { align-self: center; }
   .detail-head .info { align-items: center; }
   .plat-links { justify-content: center; width: 100%; }
   .track-row { padding: 10px 16px; }
