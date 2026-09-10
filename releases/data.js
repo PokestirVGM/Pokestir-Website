@@ -194,9 +194,17 @@ const RELEASES = [
     tags: [],
     artwork: "",
     links: {
-      bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "",
-      youtube: "", pandora: "", itunes: "", deezer: "",
-      amazonMusic: "", tidal: "", qobuz: ""
+      bandcamp: "https://pokestir.bandcamp.com/album/accumula-town-from-pokemon-black-white-arrangement",
+      spotify: "https://open.spotify.com/album/3HSxaQ1CORZ17ush5XfsSv",
+      appleMusic: "https://music.apple.com/us/album/6810314755?uo=4",
+      youtubeMusic: "",
+      youtube: "https://www.youtube.com/watch?v=O_ZEhOEdY0Q",
+      pandora: "https://www.pandora.com/AL:17341796",
+      itunes: "https://music.apple.com/us/album/6810314755?app=itunes",
+      deezer: "https://www.deezer.com/album/1071223862",
+      amazonMusic: "https://music.amazon.com/albums/B0HHTB9JRG",
+      tidal: "https://tidal.com/album/558559127",
+      qobuz: "https://open.qobuz.com/album/n23cez0j9bypm"
     },
     otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/accumuluaPS" }],
     tracklist: [
