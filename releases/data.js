@@ -192,7 +192,7 @@ const RELEASES = [
     upc: "",
     description: "",
     tags: [],
-    artwork: "",
+    artwork: "https://cdn-images.dzcdn.net/images/cover/336457121e5d6482e2d061a3028f0f24/1000x1000-000000-80-0-0.jpg",
     links: {
       bandcamp: "https://pokestir.bandcamp.com/album/accumula-town-from-pokemon-black-white-arrangement",
       spotify: "https://open.spotify.com/album/3HSxaQ1CORZ17ush5XfsSv",
