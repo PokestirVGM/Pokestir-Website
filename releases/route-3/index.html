@@ -68,12 +68,12 @@
        latin subset is listed; nothing in the catalog needs latin-ext, so
        preloading that one too would spend a request on a file no page uses. -->
   <link rel="preload" as="font" type="font/woff2" href="../../fonts/lato-700-latin.woff2" crossorigin>
+  <link rel="preload" as="image" href="https://cdn-images.dzcdn.net/images/cover/57189cdf7c10ab002068fb513f138ea5/500x500-000000-80-0-0.jpg">
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../releases.css">
-  <link rel="icon" href="../../images/icon.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="../../images/favicon.png">
   <link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
-  <script src="../tracks-data.js" defer></script>
-  <script src="../data.js" defer></script>
+  <script type="application/json" id="release-catalog">{"tracks":{"isrc:QZ6K42600795":{"title":"Route 3 (From \"Pokémon Red & Blue\") (Arr. for Orchestra by Pokestir)","isrc":"QZ6K42600795","artists":["Junichi Masuda","Pokestir"],"duration":"3:42","spotifyTrackId":"420jh49y4CkKdng2nIQLXC","preview":"https://p.scdn.co/mp3-preview/d2c6971d4aa50ee5a117f4718d080efed4239167"}},"releases":[{"slug":"route-3","title":"Route 3 (From \"Pokémon Red & Blue\") (Arr. for Orchestra by Pokestir)","subtitle":"","type":"Single","releaseDate":"2026-06-05","upc":"810179613532","description":"","tags":["Classical"],"artwork":"https://cdn-images.dzcdn.net/images/cover/57189cdf7c10ab002068fb513f138ea5/1000x1000-000000-80-0-0.jpg","links":{"bandcamp":"https://pokestir.bandcamp.com/album/route-3-from-pok-mon-red-blue-arr-for-orchestra-by-pokestir","spotify":"https://open.spotify.com/album/2CL25Nbk3Qywb96hWrembe","appleMusic":"https://music.apple.com/us/album/route-3-from-pok%C3%A9mon-red-blue-arr-for-orchestra-by/6776508821","youtubeMusic":"https://music.youtube.com/watch?v=X4AL3LuuJao","youtube":"https://www.youtube.com/watch?v=X4AL3LuuJao","pandora":"https://www.pandora.com/artist/pokestir/route-3-from-pokemon-red-and-blue-arr-for-orchestra-by-pokestir/AL9Kmt5n6w9VhhK","itunes":"https://music.apple.com/us/album/route-3-from-pok%C3%A9mon-red-blue-arr-for-orchestra-by/6776508821?app=itunes","deezer":"https://www.deezer.com/album/996690101","amazonMusic":"","tidal":"https://tidal.com/album/530202336","qobuz":"https://open.qobuz.com/album/jlw77mj24hyux"},"otherLinks":[{"label":"Listen Everywhere","url":"https://materia.to/psroute3"}],"tracklist":[{"trackId":"isrc:QZ6K42600795"}]}]}</script>
   <script src="../releases.js" defer blocking="render"></script>
   <script src="../../nav.js" defer></script>
 </head>
@@ -81,7 +81,7 @@
   <a href="#main" class="skip-link">Skip to content</a>
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
-      <a class="site-nav__brand" href="/"><img src="../../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
+      <a class="site-nav__brand" href="/"><img src="../../images/icon.webp" alt="Pokestir" width="1000" height="1000" class="site-nav__logo"></a>
       <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>

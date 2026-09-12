@@ -111,7 +111,7 @@
      playback: track changes and user scrubs. */
   transition: --pct var(--mo-glide) linear;
 }
-.mw-seek--jump { transition: none; }
+.mw-seek--jump, .mw-seek.is-scrubbing { transition: none; }
 /* The thumb had no hover, press, or drag state at all: the one control on the
    page you hold onto gave nothing back while you held it. It grows on approach
    and again while dragging, with a soft halo that only exists mid-gesture. */

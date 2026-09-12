@@ -273,6 +273,12 @@
     let scrubbing = false;
 
     function setPct(pct, glide) {
+      // Dragging already disables the transition for the whole gesture, so
+      // each pointer event can write directly without a synchronous reflow.
+      if (scrubbing) {
+        seekEl.style.setProperty('--pct', pct);
+        return;
+      }
       if (!glide) {
         seekEl.classList.add('mw-seek--jump');
         seekEl.style.setProperty('--pct', pct);
@@ -337,6 +343,7 @@
     });
     seekEl.addEventListener('change', endScrub);
     document.addEventListener('pointerup', endScrub);
+    document.addEventListener('pointercancel', endScrub);
 
     seekEl.addEventListener('input', () => {
       const total = audio.duration;

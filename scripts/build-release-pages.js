@@ -211,7 +211,24 @@ function jsonLd(data) {
   return JSON.stringify(data, null, 2).replace(/<\//g, '<\\/');
 }
 
-function renderReleasePage(rel, TRACKS) {
+/* A detail page needs its own recordings and any containing compilations,
+   not the entire archive. Include future compilations too: the browser still
+   decides which are released using the visitor's local calendar date. */
+function detailCatalog(rel, TRACKS, RELEASES) {
+  const ids = new Set((rel.tracklist || []).map((ref) => ref.trackId));
+  const releases = [rel, ...RELEASES.filter((other) => {
+    if (other === rel || !ids.size || other.tracklist.length <= rel.tracklist.length) return false;
+    const otherIds = new Set(other.tracklist.map((ref) => ref.trackId));
+    return [...ids].every((id) => otherIds.has(id));
+  })];
+  const tracks = {};
+  for (const release of releases) {
+    for (const ref of release.tracklist) tracks[ref.trackId] = TRACKS[ref.trackId];
+  }
+  return { tracks, releases };
+}
+
+function renderReleasePage(rel, TRACKS, RELEASES) {
   const url = `${ORIGIN}/releases/${rel.slug}/`;
   const title = `Pokestir - ${rel.title}`;
   const desc = metaDescription(rel);
@@ -267,12 +284,12 @@ ${schema}
        latin subset is listed; nothing in the catalog needs latin-ext, so
        preloading that one too would spend a request on a file no page uses. -->
   <link rel="preload" as="font" type="font/woff2" href="../../fonts/lato-700-latin.woff2" crossorigin>
+  ${rel.artwork ? `<link rel="preload" as="image" href="${escapeHTML(artAtSize(rel.artwork, 500))}">` : ''}
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../releases.css">
-  <link rel="icon" href="../../images/icon.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="../../images/favicon.png">
   <link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
-  <script src="../tracks-data.js" defer></script>
-  <script src="../data.js" defer></script>
+  <script type="application/json" id="release-catalog">${JSON.stringify(detailCatalog(rel, TRACKS, RELEASES)).replace(/</g, '\\u003c')}</script>
   <script src="../releases.js" defer blocking="render"></script>
   <script src="../../nav.js" defer></script>
 </head>
@@ -280,7 +297,7 @@ ${schema}
   <a href="#main" class="skip-link">Skip to content</a>
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
-      <a class="site-nav__brand" href="/"><img src="../../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
+      <a class="site-nav__brand" href="/"><img src="../../images/icon.webp" alt="Pokestir" width="1000" height="1000" class="site-nav__logo"></a>
       <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>
@@ -346,7 +363,7 @@ function buildAll(RELEASES, TRACKS, todayMs) {
 
   const files = released.map((rel) => ({
     path: `releases/${rel.slug}/index.html`,
-    content: renderReleasePage(rel, TRACKS)
+    content: renderReleasePage(rel, TRACKS, RELEASES)
   }));
   files.push({ path: 'sitemap.xml', content: renderSitemap(released) });
   return files;

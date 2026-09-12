@@ -68,12 +68,12 @@
        latin subset is listed; nothing in the catalog needs latin-ext, so
        preloading that one too would spend a request on a file no page uses. -->
   <link rel="preload" as="font" type="font/woff2" href="../../fonts/lato-700-latin.woff2" crossorigin>
+  <link rel="preload" as="image" href="https://cdn-images.dzcdn.net/images/cover/82d40fa072d12f45454201638143e18c/500x500-000000-80-0-0.jpg">
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../releases.css">
-  <link rel="icon" href="../../images/icon.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="../../images/favicon.png">
   <link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
-  <script src="../tracks-data.js" defer></script>
-  <script src="../data.js" defer></script>
+  <script type="application/json" id="release-catalog">{"tracks":{"isrc:QZZEB2566742":{"title":"Power Surge","isrc":"QZZEB2566742","duration":"2:16","spotifyTrackId":"","preview":""}},"releases":[{"slug":"power-surge","title":"Power Surge","subtitle":"","type":"Single","releaseDate":"2026-01-02","upc":"199891283330","description":"","tags":["Electro","Dance"],"artwork":"https://cdn-images.dzcdn.net/images/cover/82d40fa072d12f45454201638143e18c/1000x1000-000000-80-0-0.jpg","links":{"bandcamp":"https://pokestir.bandcamp.com/track/power-surge","spotify":"","appleMusic":"https://music.apple.com/us/album/power-surge-single/1867827046?uo=4","youtubeMusic":"https://music.youtube.com/watch?v=2I1XiLEW2NI","youtube":"https://www.youtube.com/watch?v=2I1XiLEW2NI","pandora":"https://www.pandora.com/AL:59386997","itunes":"https://music.apple.com/us/album/power-surge-single/1867827046?app=itunes","deezer":"https://www.deezer.com/album/894311892","amazonMusic":"https://music.amazon.com/albums/B0GFY8B1ZZ","tidal":"https://listen.tidal.com/track/488474645","qobuz":"https://www.qobuz.com/us-en/album/power-surge-pokestir/jnsfyetl9vrbj"},"otherLinks":[],"tracklist":[{"trackId":"isrc:QZZEB2566742"}]}]}</script>
   <script src="../releases.js" defer blocking="render"></script>
   <script src="../../nav.js" defer></script>
 </head>
@@ -81,7 +81,7 @@
   <a href="#main" class="skip-link">Skip to content</a>
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
-      <a class="site-nav__brand" href="/"><img src="../../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
+      <a class="site-nav__brand" href="/"><img src="../../images/icon.webp" alt="Pokestir" width="1000" height="1000" class="site-nav__logo"></a>
       <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>

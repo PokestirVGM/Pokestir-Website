@@ -37,15 +37,19 @@
   /* First-paint guard: initial cards do not get a load entrance. */
   let hasRendered = false;
 
-  function motionToken(name) {
-    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-  }
-
-  function motionDuration(name) {
-    const value = motionToken(name);
-    if (value.endsWith('ms')) return parseFloat(value);
-    if (value.endsWith('s')) return parseFloat(value) * 1000;
-    return 0;
+  // Snapshot every token before writing animation styles. Reading them for
+  // each card otherwise flushes the preceding card's pending style changes.
+  function gridTiming() {
+    const style = getComputedStyle(document.documentElement);
+    const token = (name) => style.getPropertyValue(name).trim();
+    const duration = token('--mo-base');
+    return {
+      duration: parseFloat(duration) * (duration.endsWith('ms') ? 1 : 1000),
+      travel: parseFloat(token('--mo-travel')) || 0,
+      snap: token('--mo-snap'),
+      out: token('--mo-out'),
+      exit: token('--mo-in')
+    };
   }
 
   function trackGridMotion(animation, cleanup) {
@@ -87,14 +91,14 @@
     return Math.min(index * DEAL_STEP, DEAL_WINDOW);
   }
 
-  function dealIn(el, index) {
-    const travel = parseFloat(motionToken('--mo-travel')) || 0;
+  function dealIn(el, index, timing) {
+    const travel = timing.travel;
     return el.animate([
       { opacity: 0, transform: `translateY(${-6 * travel}px) scale(1.04)` },
       { opacity: 1, transform: 'translateY(0) scale(1)' }
     ], {
       duration: 260,
-      easing: motionToken('--mo-snap'),
+      easing: timing.snap,
       delay: dealDelay(index),
       fill: 'backwards'
     });
@@ -106,14 +110,14 @@
      counter-swing and rests. A card crossing the grid and a card nudging one
      column over should not share a number. Falls back to the old flat timing
      when nav.js has not defined the primitive. */
-  function moveSurvivor(el, dx, dy, fromOpacity) {
+  function moveSurvivor(el, dx, dy, fromOpacity, timing) {
     const MO = window.PokestirMotion;
     const move = MO && MO.travelPath({ x: dx, y: dy }, { x: 0, y: 0 });
     if (!move) {
       return el.animate([
         { opacity: fromOpacity, transform: `translate(${dx}px, ${dy}px)` },
         { opacity: 1, transform: 'translate(0, 0)' }
-      ], { duration: motionDuration('--mo-base'), easing: motionToken('--mo-out') });
+      ], { duration: timing.duration, easing: timing.out });
     }
     const over = move.over;
     return el.animate([
@@ -456,12 +460,13 @@
 
   function animateAppended(cards) {
     if (REDUCED.matches) return;
+    const timing = gridTiming();
     const visible = cards.map((el) => ({ el, rect: el.getBoundingClientRect() }))
       .filter(({ rect }) => nearViewport(rect, 320))
       .slice(0, MAX_MOTION_CARDS);
     // The next page of results is dealt exactly like a filter change, so
     // scrolling for more and filtering feel like the same grid.
-    visible.forEach(({ el }, i) => trackGridMotion(dealIn(el, i), () => {}));
+    visible.forEach(({ el }, i) => trackGridMotion(dealIn(el, i, timing), () => {}));
   }
 
   function appendPage() {
@@ -496,7 +501,7 @@
     return cards;
   }
 
-  function addExitClone(el, rect, opacity, index) {
+  function addExitClone(el, rect, opacity, index, timing) {
     const clone = el.cloneNode(true);
     clone.classList.add('mo-grid-clone', 'gear-card-clone');
     clone.setAttribute('aria-hidden', 'true');
@@ -522,7 +527,7 @@
       { opacity: 0, transform: 'scale(.98)' }
     ], {
       duration: 110,
-      easing: motionToken('--mo-in'),
+      easing: timing.exit,
       delay: dealDelay(index),
       fill: 'both'
     });
@@ -531,6 +536,10 @@
 
   function captureGridMotion(nextKeys) {
     const oldRects = new Map();
+    if (!hasRendered || REDUCED.matches) {
+      clearGridMotions();
+      return oldRects;
+    }
     const visible = Array.from(grid.querySelectorAll(':scope > .card'))
       .map((el) => ({
         el,
@@ -540,18 +549,19 @@
       .filter(({ rect }) => nearViewport(rect, 0))
       .slice(0, MAX_MOTION_CARDS);
     clearGridMotions();
-    if (!hasRendered || REDUCED.matches) return oldRects;
+    const timing = gridTiming();
     let leaving = 0;
     for (const { el, rect, opacity } of visible) {
       const key = el.dataset.motionKey;
       oldRects.set(key, { rect, opacity });
-      if (!nextKeys.has(key)) addExitClone(el, rect, opacity, leaving++);
+      if (!nextKeys.has(key)) addExitClone(el, rect, opacity, leaving++, timing);
     }
     return oldRects;
   }
 
   function animateFilteredGrid(oldRects) {
     if (!hasRendered || REDUCED.matches) return;
+    const timing = gridTiming();
     const visible = Array.from(grid.querySelectorAll(':scope > .card'))
       .map((el) => ({ el, rect: el.getBoundingClientRect() }))
       .filter(({ rect }) => nearViewport(rect, 0))
@@ -563,12 +573,12 @@
     for (const { el, rect } of visible) {
       const old = oldRects.get(el.dataset.motionKey);
       if (!old) {
-        trackGridMotion(dealIn(el, arriving++), () => {});
+        trackGridMotion(dealIn(el, arriving++, timing), () => {});
         continue;
       }
       if (old.opacity === '1' && old.rect.left === rect.left && old.rect.top === rect.top) continue;
       trackGridMotion(
-        moveSurvivor(el, old.rect.left - rect.left, old.rect.top - rect.top, old.opacity),
+        moveSurvivor(el, old.rect.left - rect.left, old.rect.top - rect.top, old.opacity, timing),
         () => {}
       );
     }

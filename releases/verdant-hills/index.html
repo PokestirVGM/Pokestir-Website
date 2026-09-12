@@ -60,12 +60,12 @@
        latin subset is listed; nothing in the catalog needs latin-ext, so
        preloading that one too would spend a request on a file no page uses. -->
   <link rel="preload" as="font" type="font/woff2" href="../../fonts/lato-700-latin.woff2" crossorigin>
+  <link rel="preload" as="image" href="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/4c/db/d9/4cdbd994-c000-575d-f120-cee22ec41e31/198001408649.png/500x500bb.jpg">
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../releases.css">
-  <link rel="icon" href="../../images/icon.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="../../images/favicon.png">
   <link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
-  <script src="../tracks-data.js" defer></script>
-  <script src="../data.js" defer></script>
+  <script type="application/json" id="release-catalog">{"tracks":{"local:verdant-hills-2021":{"title":"Verdant Hills","isrc":"","duration":"5:34","spotifyTrackId":"","preview":""}},"releases":[{"slug":"verdant-hills","title":"Verdant Hills","subtitle":"","type":"Single","releaseDate":"2021-08-10","upc":"198001408649","description":"","tags":["Soundtrack"],"artwork":"https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/4c/db/d9/4cdbd994-c000-575d-f120-cee22ec41e31/198001408649.png/1000x1000bb.jpg","links":{"bandcamp":"","spotify":"","appleMusic":"https://music.apple.com/us/album/verdant-hills-single/1580644877?uo=4","youtubeMusic":"https://music.youtube.com/watch?v=3ZLhNX7sXxA","youtube":"https://www.youtube.com/watch?v=3ZLhNX7sXxA","pandora":"","itunes":"https://music.apple.com/us/album/verdant-hills-single/1580644877?app=itunes","deezer":"","amazonMusic":"","tidal":"","qobuz":""},"otherLinks":[],"tracklist":[{"trackId":"local:verdant-hills-2021"}]}]}</script>
   <script src="../releases.js" defer blocking="render"></script>
   <script src="../../nav.js" defer></script>
 </head>
@@ -73,7 +73,7 @@
   <a href="#main" class="skip-link">Skip to content</a>
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
-      <a class="site-nav__brand" href="/"><img src="../../images/icon.png" alt="Pokestir" class="site-nav__logo"></a>
+      <a class="site-nav__brand" href="/"><img src="../../images/icon.webp" alt="Pokestir" width="1000" height="1000" class="site-nav__logo"></a>
       <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>

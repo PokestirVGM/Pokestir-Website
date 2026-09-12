@@ -118,8 +118,12 @@
     return { ...rel, dateMs: relDateMs, isReleased: relDateMs <= TODAY_MS, searchHaystack: haystack };
   }
 
-  const TRACK_CATALOG = typeof TRACKS !== 'undefined' && TRACKS ? TRACKS : {};
-  const RELEASE_CATALOG = typeof RELEASES !== 'undefined' && RELEASES ? RELEASES : [];
+  // Generated details carry just the relevant catalog in their HTML. The
+  // archive keeps the complete data for search, suggestions and filtering.
+  const embeddedCatalog = document.getElementById('release-catalog');
+  const pageCatalog = embeddedCatalog ? JSON.parse(embeddedCatalog.textContent) : null;
+  const TRACK_CATALOG = pageCatalog ? pageCatalog.tracks : (typeof TRACKS !== 'undefined' && TRACKS ? TRACKS : {});
+  const RELEASE_CATALOG = pageCatalog ? pageCatalog.releases : (typeof RELEASES !== 'undefined' && RELEASES ? RELEASES : []);
   const catalogErrors = [];
 
   for (const [trackId, track] of Object.entries(TRACK_CATALOG)) {
@@ -195,11 +199,19 @@
      another when every one of its tracks appears there and the
      other release has more tracks (the pointer only goes single -> album,
      never sideways between equal releases or back down). */
+  const releasesByTrack = new Map();
   for (const rel of DB) {
     rel.trackIdSet = new Set(rel.trackIds);
+    for (const id of rel.trackIdSet) {
+      if (!releasesByTrack.has(id)) releasesByTrack.set(id, []);
+      releasesByTrack.get(id).push(rel);
+    }
   }
   for (const rel of DB) {
-    rel.includedIn = !rel.trackIdSet.size ? [] : DB.filter((other) =>
+    // A containing compilation must share the first recording. Starting from
+    // that short list avoids comparing every release against the whole archive.
+    const candidates = releasesByTrack.get(rel.trackIds[0]) || [];
+    rel.includedIn = candidates.filter((other) =>
       other !== rel && other.isReleased &&
       (other.tracks || []).length > (rel.tracks || []).length &&
       [...rel.trackIdSet].every((trackId) => other.trackIdSet.has(trackId))
@@ -400,6 +412,27 @@
 
   const decodedArt = new Set();
   const pendingArt = new Map();
+  const artReveals = new Map();
+  let artRevealFrame = 0;
+
+  function queueArtReveal(layer, url) {
+    artReveals.set(layer, url);
+    if (artRevealFrame) return;
+    artRevealFrame = requestAnimationFrame(() => {
+      artRevealFrame = 0;
+      const layers = [];
+      for (const [target, source] of artReveals) {
+        if (!target.isConnected) continue;
+        target.style.setProperty('--art-url', `url(${JSON.stringify(source)})`);
+        layers.push(target);
+      }
+      artReveals.clear();
+      // Commit the hidden pose once for the whole batch, then start all fades.
+      // Interleaving this read with each cover's writes forces N style passes.
+      if (layers.length) void getComputedStyle(layers[0]).opacity;
+      for (const target of layers) target.classList.add('is-loaded');
+    });
+  }
 
   function decodeArt(url) {
     if (decodedArt.has(url)) return Promise.resolve();
@@ -455,15 +488,16 @@
     if (!layer || !rel.artwork) return;
     const url = artAtSize(rel.artwork, 500);
     const wasDecoded = decodedArt.has(url);
-    const paint = (animate) => {
+    const paint = () => {
       if (!layer.isConnected) return;
       layer.style.setProperty('--art-url', `url(${JSON.stringify(url)})`);
-      if (animate) void getComputedStyle(layer).opacity;
       layer.classList.add('is-loaded');
     };
 
-    if (immediate || wasDecoded) paint(false);
-    else decodeArt(url).then((loaded) => { if (loaded) paint(true); });
+    if (immediate || wasDecoded) paint();
+    else decodeArt(url).then((loaded) => {
+      if (loaded && layer.isConnected) queueArtReveal(layer, url);
+    });
   }
 
   /* The list view can hold hundreds of tiles; setting every background image
@@ -598,8 +632,8 @@
     // render() runs again on every search keystroke and throws the old rail
     // away; tie the window listener to the rail's lifetime so the discarded
     // ones don't pile up holding detached nodes alive.
-    const ro = new ResizeObserver(sync);
-    ro.observe(rail);
+    railObserver = new ResizeObserver(sync);
+    railObserver.observe(rail);
     // Layout isn't done during render; measure once the frame settles.
     requestAnimationFrame(sync);
 
@@ -699,9 +733,11 @@
      may perform its one decode fade, but tiles never stack a load entrance on
      top of it. Only later filter and sort renders enter this motion path. */
   let hasRendered = false;
+  let railObserver = null;
 
   function render() {
     cancelRailMotion();
+    if (railObserver) { railObserver.disconnect(); railObserver = null; }
     const sorter = SORTERS[state.sort] || SORTERS.newest;
     const list = VISIBLE_DB.filter(match).sort(sorter);
     const nextKeys = new Set(list.map((rel) => rel.slug));
