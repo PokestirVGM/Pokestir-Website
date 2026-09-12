@@ -46,19 +46,21 @@
 .tabs.has-pill .btn.is-pressed { scale: 1; }
 .tabs.has-pill .btn.is-released { animation: none; }
 
-.comm { display: grid; gap: 16px; color: var(--text); }
-.comm .note { font-size: 14px; color: var(--muted); }
+.comm { display: grid; gap: 20px; color: var(--text); }
+.comm .note { font-size: 14px; line-height: 1.6; color: var(--muted); }
 .comm .note a, .comm .note a:visited { color: var(--white); text-decoration: underline; }
-.contact-lines { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; }
+.comm .note a { text-underline-offset: 3px; text-decoration-color: var(--line-bright); }
+.comm .note a:hover { text-decoration-color: currentColor; }
+.contact-lines { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 4px; }
 
 .packs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
 /* No hover lift. These are plain divs describing the commission tiers, with
    nothing to click, and a lift is an affordance: movement under the pointer
    promises the thing is interactive. Release tiles and buttons keep theirs
    because they actually go somewhere. */
-.pack { padding: 14px; }
-.pack h3 { margin: 0 0 6px; color: var(--white); font-size: 15px; letter-spacing: .2px; text-transform: uppercase; }
-.pack .desc { font-size: 14px; color: var(--text); }
+.pack { padding: 16px; border-radius: var(--radius-md); }
+.pack h3 { margin: 0 0 8px; color: var(--white); font-size: 15px; line-height: 1.4; letter-spacing: .2px; text-transform: uppercase; }
+.pack .desc { font-size: 14px; line-height: 1.55; color: var(--text); }
 
 .portrait { align-self: center; justify-self: center; width: 100%; max-width: 380px; }
 .frame {
@@ -68,21 +70,24 @@
 }
 .frame img { display: block; width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1/1; filter: saturate(1.05) contrast(1.02); }
 
-.termswrap { align-self: stretch; padding: 18px; color: var(--text); }
-.terms h3 { margin: 0 0 10px; color: var(--white); font-size: 14px; letter-spacing: .2px; text-transform: uppercase; }
-.terms ul { margin: 10px 0 0 18px; padding: 0; }
-.terms li { margin: 6px 0; }
+.termswrap { align-self: stretch; padding: 20px; color: var(--text); }
+.terms h3 { margin: 0 0 14px; color: var(--white); font-size: 14px; line-height: 1.45; letter-spacing: .2px; text-transform: uppercase; text-wrap: pretty; }
+.terms ul { margin: 0 0 0 18px; padding: 0; }
+.terms li { margin: 7px 0; padding-left: 2px; line-height: 1.5; }
+.terms li::marker { color: var(--muted); }
+.terms li:first-child { margin-top: 0; }
+.terms li:last-child { margin-bottom: 0; }
 
 /* =========================
    MY WORK PLAYER
    ========================= */
-.mw-player { display: flex; align-items: flex-start; gap: 16px; padding: 18px 18px 14px; }
+.mw-player { display: flex; align-items: flex-start; gap: 16px; padding: 20px 18px 16px; }
 .mw-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 .mw-title {
   font-family: var(--font-display); font-weight: 800; font-size: 16px; color: var(--white);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  line-height: 1.4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.mw-ptags { display: flex; flex-wrap: wrap; gap: 5px; min-height: 18px; }
+.mw-ptags { display: flex; flex-wrap: wrap; gap: 0; min-height: 18px; margin-top: -4px; }
 .mw-title,
 .mw-ptags {
   opacity: 1;
@@ -95,16 +100,18 @@
   transition-timing-function: var(--mo-in);
 }
 .mw-ptag {
-  font-size: 11px; padding: 2px 8px; border-radius: 999px;
-  background: rgba(255,255,255,.05); border: 1px solid var(--line); color: var(--muted);
+  font-size: 12px; line-height: 1.5; color: var(--muted);
 }
-.mw-scrubber { display: flex; align-items: center; gap: 8px; }
-.mw-time { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* Track metadata is descriptive; only the filter row uses button shapes. */
+.mw-ptag + .mw-ptag::before { content: "·"; margin: 0 6px; }
+.mw-scrubber { display: flex; align-items: center; gap: 12px; min-height: 24px; }
+.mw-time { min-width: 4ch; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mw-time:last-child { text-align: right; }
 .mw-seek {
   flex: 1; -webkit-appearance: none; appearance: none;
-  height: 4px; border-radius: 999px; cursor: pointer;
+  min-width: 0; margin: 0; height: 24px; border-radius: 999px; cursor: pointer;
   --pct: 0%;
-  background: linear-gradient(to right, var(--ring) var(--pct), rgba(255,255,255,.15) var(--pct));
+  background: linear-gradient(to right, var(--ring) var(--pct), var(--line) var(--pct)) center / 100% 4px no-repeat;
   /* Glides between the ~4Hz timeupdate events. Slightly longer than the gap
      between them, so the fill is still moving when the next value lands and
      never visibly stalls. Player.js suppresses this for jumps that aren't
@@ -136,9 +143,10 @@
   box-shadow: 0 1px 4px rgba(0,0,0,.4), 0 0 0 7px rgba(16,177,255,.16);
 }
 .mw-seek:focus-visible { outline-offset: 3px; border-radius: 2px; }
-.mw-controls { display: flex; gap: 12px; align-items: center; }
+.mw-controls { display: flex; gap: 8px; align-items: center; }
 .mw-btn {
   appearance: none; cursor: pointer; background: none; border: none; padding: 4px;
+  width: 44px; height: 44px; border-radius: 50%; flex: 0 0 auto;
   display: inline-flex; align-items: center; justify-content: center;
   color: var(--white); opacity: .80;
   /* Hover in fast, out slower, so sweeping across the transport row doesn't
@@ -164,7 +172,9 @@
    Beats, as with the nav icon: the leading half moves first and the trailing
    half follows, and the order reverses between the two directions so pausing is
    not just playing run backwards. */
-.mw-btn--play { display: grid; place-items: center; }
+.mw-btn--play { display: grid; place-items: center; opacity: 1; }
+.mw-btn svg { display: block; }
+.mw-btn--play .mw-ic { width: 30px; height: 30px; }
 .mw-ic { grid-area: 1 / 1; display: inline-flex; line-height: 0; }
 
 /* Both halves move together on one curve. The staggered version needed the
@@ -174,11 +184,10 @@
 .mw-ic-a, .mw-ic-b {
   transition: d var(--mo-base) var(--mo-snap);
 }
-/* Play (paused state): two halves of one triangle. The right half carries a
-   doubled point at the apex, which is what the pause bar's outer edge folds
-   into. */
-.mw-btn--play .mw-ic-a { d: path("M7 4.5L13 8.25L13 15.75L7 19.5Z"); }
-.mw-btn--play .mw-ic-b { d: path("M13 8.25L19 12L19 12L13 15.75Z"); }
+/* A small overlap avoids an antialiased hairline between the triangle halves.
+   Their outer points remain on the same edges; pause still separates them. */
+.mw-btn--play .mw-ic-a { d: path("M7 4.5L13.1 8.3125L13.1 15.6875L7 19.5Z"); }
+.mw-btn--play .mw-ic-b { d: path("M12.9 8.1875L19 12L19 12L12.9 15.8125Z"); }
 
 /* Pause (playing state): the halves separate into two upright bars. */
 .mw-btn--play.is-playing .mw-ic-a { d: path("M6 5L10 5L10 19L6 19Z"); }
@@ -190,9 +199,23 @@
   .mw-ic-a, .mw-ic-b { transition: none; }
 }
 .mw-chips {
-  display: flex; flex-wrap: wrap; gap: 8px;
-  border-top: 1px solid var(--line-soft); padding: 12px 18px 14px;
+  display: flex; flex-wrap: wrap; gap: 0 8px;
+  border-top: 1px solid var(--line-soft); padding: 6px 18px;
 }
+/* Paint a compact pill inside a full-height target, so touch support doesn't
+   make the filters compete with the transport controls. */
+.mw-chips .pill {
+  position: relative; isolation: isolate; min-height: 44px;
+  padding: 0 12px; border: 0; background: none; font-size: 13px;
+}
+.mw-chips .pill::before {
+  content: ""; position: absolute; inset: 7px 0; z-index: -1;
+  border: 1px solid var(--line); border-radius: inherit;
+  background: rgba(255,255,255,.05); pointer-events: none;
+  transition: background-color var(--mo-quick) var(--mo-out), border-color var(--mo-quick) var(--mo-out);
+}
+.mw-chips .pill:hover::before { background: rgba(255,255,255,.10); }
+.mw-chips .pill.active::before { background: var(--ring); border-color: var(--line-bright); }
 .mw-list {
   list-style: none; margin: 0; padding: 0 0 6px;
   border-top: 1px solid var(--line-soft);
@@ -208,7 +231,7 @@
 .mw-list::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.42); }
 .mw-list li {
   display: flex; align-items: center; gap: 12px;
-  padding: 10px 18px; cursor: pointer;
+  padding: 12px 18px; cursor: pointer;
   border-bottom: 1px solid rgba(255,255,255,.06);
   /* Now that player.js moves the selected attribute instead of rebuilding the
      list, this transition actually runs: the highlight fades from the old row
@@ -242,7 +265,7 @@
   font-weight: 700; font-size: 14px; color: var(--text);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.mw-item-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.mw-item-meta { font-size: 12px; line-height: 1.5; color: var(--muted); margin-top: 3px; }
 .mw-item-dur { font-size: 12px; color: var(--muted); white-space: nowrap; }
 
 /* ── Responsive ── */
@@ -257,9 +280,10 @@
   /* My Work player: bigger touch targets */
   .mw-player { gap: 12px; padding: 16px 14px 12px; }
   .mw-btn { padding: 10px; }
-  .mw-seek { height: 6px; }
+  .mw-seek { background-size: 100% 6px; }
   .mw-seek::-webkit-slider-thumb { width: 18px; height: 18px; }
   .mw-seek::-moz-range-thumb { width: 18px; height: 18px; }
-  .mw-chips { gap: 8px; padding: 12px 14px; }
+  .mw-chips { gap: 0 6px; padding: 6px 14px; }
+  .mw-chips .pill { padding-inline: 10px; }
   .mw-list li { padding: 10px 14px; }
 }

@@ -27,12 +27,13 @@
 /* ── Split card ── */
 .split { display: grid; grid-template-columns: 1.02fr .98fr; }
 .split__col { padding: 24px; min-width: 0; }
+.split__col .card-title { font-size: 21px; line-height: 1.35; margin-bottom: 14px; text-wrap: pretty; }
 .split__col + .split__col { border-left: 1px solid var(--line-soft); }
 
 /* ── Reading text ── */
 .lead { color: var(--text); font-size: 16px; line-height: 1.7; margin: 0 0 12px; }
 .lead:last-child { margin-bottom: 0; }
-.caption { color: var(--muted); font-size: 14px; margin: 0; }
+.caption { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 0; }
 .caption--spaced { margin-top: 16px; }
 /* Marks the load-bearing phrase in a paragraph, so a skim lands on it. Four on
    the page including the two ledes: past that, bold stops meaning anything. */
@@ -43,6 +44,8 @@
   color: var(--text); font-size: 16px; line-height: 1.7;
 }
 .list li { margin: 10px 0; padding-left: 2px; }
+.list li:first-child { margin-top: 0; }
+.list li:last-child { margin-bottom: 0; }
 .list li::marker { color: var(--muted); }
 .list b { color: var(--white); font-weight: 700; }
 
@@ -53,13 +56,14 @@
    is a quiet word at the end of the line instead, and the code stays
    selectable for anyone who would rather drag over it. */
 .codebox {
-  display: flex; align-items: baseline; gap: 14px; width: 100%;
-  margin: 8px 0 0; padding: 13px 14px; text-align: left;
+  display: flex; align-items: center; gap: 16px; width: 100%;
+  margin: 10px 0 0; padding: 14px 16px; text-align: left;
   border-radius: var(--radius-md); font: inherit; cursor: pointer;
-  transition: background-color var(--mo-quick) var(--mo-out);
+  transition: background-color var(--mo-quick) var(--mo-out), border-color var(--mo-quick) var(--mo-out);
 }
 .codebox:hover {
   background-color: rgba(255,255,255,.05);
+  border-color: var(--line-strong);
   transition-duration: var(--mo-instant);
 }
 /* `:active` is unreliable on touch, so nav.js drives the class as well. No
@@ -115,7 +119,7 @@
 .btn--out::before { content: none; }
 .btn--out:hover { background: rgba(255,255,255,.10); color: var(--white); }
 .btn--out .ext {
-  flex: 0 0 auto; opacity: .55;
+  display: block; width: 14px; height: 14px; flex: 0 0 auto; opacity: .65;
   transition: opacity var(--mo-quick) var(--mo-out), translate var(--mo-quick) var(--mo-out);
 }
 .btn--out:hover .ext {
@@ -151,4 +155,7 @@
 }
 @media (max-width: 640px) {
   .split__col { padding: 18px; }
+  /* Give the statement the full line before its copy hint on narrow cards. */
+  .codebox { display: grid; gap: 8px; }
+  .copyhint { justify-self: end; }
 }

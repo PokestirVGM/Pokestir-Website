@@ -14,15 +14,17 @@
 /* Every control in this row is the same height, font, and border weight, so
    the bar reads as one set: inputs don't inherit type by default, hence the
    explicit `font` here. */
-.search { position: relative; }
+.search { position: relative; min-width: 0; }
 .search input {
-  width: 100%; padding: 11px 14px 11px 40px; border-radius: var(--radius-md);
-  background: var(--surface);
-  color: var(--text); font: inherit; font-size: 14px; border: 1px solid var(--line);
+  width: 100%; min-height: 44px; padding: 11px 14px 11px 40px; border-radius: var(--radius-md);
+  background: var(--control-surface);
+  color: var(--text); font: inherit; font-size: 14px; line-height: 20px; border: 1px solid var(--line);
   transition: border-color var(--mo-quick) var(--mo-out),
               box-shadow var(--mo-quick) var(--mo-out);
 }
-.search input::placeholder { color: var(--muted); }
+.search input::placeholder { color: var(--muted); opacity: 1; }
+.search input:hover:not(:focus),
+.controls select:hover:not(:focus) { border-color: var(--line-strong); }
 
 /* Form fields signal focus with a brightened border and the soft halo, not the
    outline ring — the same pair the contact fields use, so focus looks the same
@@ -34,21 +36,21 @@
   box-shadow: var(--focus-halo);
   transition-duration: var(--mo-instant);
 }
-.search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+.search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
 
 select {
   appearance: none; -webkit-appearance: none;
-  padding: 11px 36px 11px 16px; border-radius: var(--radius-md);
-  color: var(--text); font: inherit; font-size: 14px; font-weight: 600; border: 1px solid var(--line);
+  min-height: 44px; padding: 11px 42px 11px 16px; border-radius: var(--radius-md);
+  color: var(--text); font: inherit; font-size: 14px; line-height: 20px; font-weight: 600; border: 1px solid var(--line);
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") right 12px center / 14px 14px no-repeat,
-    var(--surface);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5 9 12 16 19 9'/%3E%3C/svg%3E") right 14px center / 16px 16px no-repeat,
+    var(--control-surface);
   transition: border-color var(--mo-quick) var(--mo-out),
               box-shadow var(--mo-quick) var(--mo-out);
 }
 /* Row buttons match the inputs' border and weight; Clear stays quieter through
    its muted label and transparent fill, not a fainter outline. */
-.controls .btn { font-weight: 600; border-color: var(--line); }
+.controls .btn { min-height: 44px; justify-content: center; font-weight: 600; line-height: 20px; border-color: var(--line); }
 .btn-clear { background: transparent; color: var(--muted); }
 
 /* ── Filter pills (.pill base from style.css) ── */

@@ -372,7 +372,8 @@
 
     nextBtn.addEventListener('click', () => {
       const i = filteredPos();
-      if (i >= 0 && i + 1 < filtered.length) play(TRACKS.indexOf(filtered[i + 1]));
+      // If a filter hides the current track, Next starts the visible list.
+      if (i + 1 < filtered.length) play(TRACKS.indexOf(filtered[i + 1]));
     });
 
     renderChips();
