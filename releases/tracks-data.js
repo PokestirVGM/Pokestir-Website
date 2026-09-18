@@ -923,6 +923,13 @@ const TRACKS = {
     spotifyTrackId: "3ciGtM19bZxitM4RCPWI6i",
     preview: "https://p.scdn.co/mp3-preview/3b4722c2f650bf0745c431685090bbe36d138d0f"
   },
+  "isrc:QZ6K42601674": {
+    title: "Floaroma Town (From \"Pokémon Diamond & Pearl\") - Arrangement",
+    isrc: "QZ6K42601674",
+    duration: "4:44",
+    spotifyTrackId: "2urk7tQbShEw1UV8klnQpO",
+    preview: "https://p.scdn.co/mp3-preview/31679c47b078180b007cd668ca5f1938bf0848ab"
+  },
   "isrc:QZPJ32127948": {
     title: "Floccesy Town (From \"Pokémon Black 2 & White 2\") [Arrangement]",
     isrc: "QZPJ32127948",

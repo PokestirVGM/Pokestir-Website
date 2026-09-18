@@ -184,6 +184,34 @@ const RELEASES = [
     ]
   },
   {
+    slug: "floaroma-town",
+    title: "Floaroma Town (From \"Pokémon Diamond & Pearl\") - Arrangement",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-09-18",
+    upc: "810179614355",
+    description: "",
+    tags: ["Electro"],
+    artwork: "https://cdn-images.dzcdn.net/images/cover/8d8205739e8a19ededf914f53ba67994/1000x1000-000000-80-0-0.jpg",
+    links: {
+      bandcamp: "https://pokestir.bandcamp.com/album/floaroma-town-from-pok-mon-diamond-pearl-arrangement",
+      spotify: "https://open.spotify.com/album/3HwQHC3OCjqkIh6vXrT17q",
+      appleMusic: "https://music.apple.com/us/album/floaroma-town-from-pok%C3%A9mon-diamond-pearl-arrangement/6812916119?uo=4",
+      youtubeMusic: "https://music.youtube.com/watch?v=0IMGtDDznVc",
+      youtube: "https://www.youtube.com/watch?v=cXE94NpLIOI",
+      pandora: "https://www.pandora.com/AL:69669129",
+      itunes: "https://music.apple.com/us/album/floaroma-town-from-pok%C3%A9mon-diamond-pearl-arrangement/6812916119?app=itunes",
+      deezer: "https://www.deezer.com/album/1074836322",
+      amazonMusic: "https://music.amazon.com/albums/B0HJ9C37RY",
+      tidal: "https://tidal.com/album/559771088",
+      qobuz: "https://open.qobuz.com/album/ou1217yxszj42"
+    },
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/floaromaPSBC" }],
+    tracklist: [
+      { trackId: "isrc:QZ6K42601674" },
+    ]
+  },
+  {
     slug: "accumula-town",
     title: "Accumula Town (From \"Pokémon Black & White\") [Arr. for Orchestra by Pokestir]",
     subtitle: "",
