@@ -184,6 +184,34 @@ const RELEASES = [
     ]
   },
   {
+    slug: "night-of-fate",
+    title: "Night of Fate (From \"Kingdom Hearts\") [Arrangement]",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-09-25",
+    upc: "",
+    description: "",
+    tags: [],
+    artwork: "",
+    links: {
+      bandcamp: "https://pokestir.bandcamp.com/album/night-of-fate-from-kingdom-hearts-arrangement",
+      spotify: "https://open.spotify.com/album/6X2kbKEgimWaxzpU5baK4l",
+      appleMusic: "https://music.apple.com/us/album/6812839146",
+      youtubeMusic: "",
+      youtube: "https://www.youtube.com/watch?v=u-8c1P9XoM4",
+      pandora: "https://www.pandora.com/artist/pokestir/night-of-fate-from-kingdom-hearts-arrangement/ALpxlvjKgnpJcZX",
+      itunes: "https://music.apple.com/us/album/6812839146?app=itunes",
+      deezer: "https://www.deezer.com/album/1081833742",
+      amazonMusic: "https://music.amazon.com/albums/B0HJXPFD8G",
+      tidal: "https://tidal.com/album/561473252",
+      qobuz: "https://open.qobuz.com/album/c4tr9qsft5gf3"
+    },
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/NightofFatePS" }],
+    tracklist: [
+      { trackId: "local:night-of-fate-2026" },
+    ]
+  },
+  {
     slug: "floaroma-town",
     title: "Floaroma Town (From \"Pokémon Diamond & Pearl\") - Arrangement",
     subtitle: "",

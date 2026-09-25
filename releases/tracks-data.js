@@ -1463,6 +1463,13 @@ const TRACKS = {
     spotifyTrackId: "5bNZreg9BJL8zjegEtdGWm",
     preview: "https://p.scdn.co/mp3-preview/54c11732c92641360970f7a7ce621d5ac5cb467d"
   },
+  "local:night-of-fate-2026": {
+    title: "Night of Fate (From \"Kingdom Hearts\") [Arrangement]",
+    isrc: "",
+    duration: "",
+    spotifyTrackId: "",
+    preview: ""
+  },
   "isrc:QZPJ32114841": {
     title: "Nimbasa City (From \"Pokémon Black & White\") [Arrangement]",
     isrc: "QZPJ32114841",
