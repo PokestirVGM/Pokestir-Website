@@ -99,8 +99,7 @@ select {
 
 /* Favorites wears the chip vocabulary of the row it now sits on, not the
    control bar's .btn. The star keeps the orange that marks a favorite card, so
-   the filter and the thing it filters read as one idea; lit, it drops to the
-   label colour rather than fighting the blue underneath it. */
+   the filter and the thing it filters read as one idea. */
 .fav-pill {
   display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
 }
@@ -111,12 +110,11 @@ select {
 /* The state is aria-pressed, not .active — .active belongs to the category
    group and is what the travelling pill reads. Keeping them distinct is what
    stops Favorites from ever being mistaken for a fifth category. */
+/* On, it is warm rather than blue: orange is what marks a favorite on every
+   card, and the star keeps that colour instead of going dark on a blue fill,
+   where full-strength orange and blue vibrate against each other. */
 .fav-pill[aria-pressed="true"] {
-  background: var(--ring); color: var(--on-ring); border-color: var(--line-bright);
-  transition-duration: var(--mo-instant);
-}
-.fav-pill[aria-pressed="true"] .fav-ic {
-  color: currentColor;
+  background: rgba(255,131,39,.14); color: #ffd2b0; border-color: rgba(255,131,39,.55);
   transition-duration: var(--mo-instant);
 }
 /* Categories are single-select, so the row carries the shared travelling pill.
@@ -125,6 +123,10 @@ select {
    multi-select and keep their own backgrounds, since one element cannot mark
    three selections at once. */
 .pillbar .pill { position: relative; z-index: 1; }
+/* The category pill is a filter state, so it travels as the ring tint, not the
+   solid blue the nav's copy of the same element wears. */
+.pillbar .mo-pill { background: var(--ring-tint); border-color: var(--ring-tint-line); }
+.pillbar .mo-pill__ink { color: var(--on-ring-tint); }
 .pillbar.has-pill .pill.active {
   background: rgba(255,255,255,.05);
   color: var(--muted);

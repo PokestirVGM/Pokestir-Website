@@ -85,6 +85,11 @@
     // Where that journey is heading. A reposition that agrees with it must
     // leave it alone rather than cancel it. See `update`.
     let travelTo = null;
+    // A pose the pill has been deliberately left at, away from the selected
+    // item, in container coordinates: where it was on the page we just left,
+    // held until the arrival journey takes it the rest of the way. Relayouts
+    // before then re-place it there rather than snapping it to the target.
+    let parkedAt = null;
 
     function build() {
       // Clone before the pill is inserted, or the copy contains a copy.
@@ -208,6 +213,23 @@
       return { x: r.left - base.left, y: r.top - base.top, w: r.width, h: r.height };
     }
 
+    /* Poses that cross a page boundary are kept relative to the container,
+       not the host: the nav is the same on every page, but a scrollbar or a
+       different page width can move where the container starts. */
+    function fromContainer(b) {
+      const o = containerOrigin();
+      return { x: b.x + o.x, y: b.y + o.y, w: b.w, h: b.h };
+    }
+
+    // Where the pill is on screen right now, mid-journey included, in
+    // container coordinates. Null when it is not showing.
+    function pose() {
+      if (!pill || !placed || pill.hidden) return null;
+      const o = containerOrigin();
+      const b = liveBox();
+      return { x: b.x - o.x, y: b.y - o.y, w: b.w, h: b.h };
+    }
+
     function update(o) {
       const options = o || {};
       if (!enabled()) {
@@ -231,11 +253,33 @@
       if (!target || !target.offsetWidth) return hide();
 
       const to = box(target);
+
+      /* Park: sit at a given pose rather than on the target. Also where a
+         plain reposition lands while parked, so a relayout during the wait
+         (the font swap trips the ResizeObserver) moves the parked pill with
+         the nav instead of snapping it to its destination early. */
+      if (options.unpark) parkedAt = null;
+      const at = options.at || (parkedAt && !options.fromBox && options.travel === false ? parkedAt : null);
+      if (at) {
+        stopTravel();
+        parkedAt = at;
+        const p = fromContainer(at);
+        pill.style.opacity = '1';
+        set(p.x, p.y, p.w, p.h);
+        container.classList.add('has-pill');
+        placed = true;
+        lastIndex = index;
+        return;
+      }
+      if (options.fromBox) parkedAt = null;
+
       const fromIndex = 'from' in options ? options.from : lastIndex;
       const source = options.travel === false || reduced.matches || !placed
         ? null
         : items[fromIndex];
       let move = source && source !== target ? travelPath(box(source), to) : null;
+      // Resuming a journey from where the previous page left the pill.
+      if (options.fromBox && !reduced.matches) move = travelPath(fromContainer(options.fromBox), to);
 
       /* A reposition that lands mid-journey used to cancel it unconditionally,
          which snapped the pill the rest of the way. The repositioning callers
@@ -356,7 +400,7 @@
       update({ travel: false });
     }
 
-    return { update, rebuild, hide };
+    return { update, rebuild, hide, pose };
   }
 
   window.PokestirMotion = { reduced, travelPath, travellingPill };
@@ -368,9 +412,12 @@
   // Highlight the current page in the nav. Every page is either the root
   // index.html or a <section>/index.html folder page, so the location and
   // each nav href both reduce to a section name ('home' for the root).
+  // The 404 page opts out: Pages serves it at whatever address was missed, and
+  // a missed root-level file such as /foo.html would otherwise reduce to
+  // 'home' and claim the visitor is on the home page.
   const parts = window.location.pathname.split('/').filter(Boolean);
   const section = parts.find((p) => !p.endsWith('.html')) || 'home';
-  document.querySelectorAll('.site-nav__links a').forEach((a) => {
+  if (document.body.dataset.navCurrent !== 'none') document.querySelectorAll('.site-nav__links a').forEach((a) => {
     const m = a.getAttribute('href').match(/(?:^|\/)([^/.]+)\/$/);
     if ((m ? m[1] : 'home') === section) a.setAttribute('aria-current', 'page');
   });
@@ -414,9 +461,15 @@
      hrefs are relative and differ by page depth, while the nav order is
      identical everywhere. */
   const PILL_KEY = 'pokestir:nav-pill';
+  // Where the pill was on screen when the last page was left, mid-journey
+  // included, so the next page can carry on from exactly there.
+  const POSE_KEY = 'pokestir:nav-pill-pose';
 
   const navLinks = () => Array.from(menu.querySelectorAll('a:not([tabindex="-1"])'));
   const activeIndex = () => navLinks().findIndex((a) => a.hasAttribute('aria-current'));
+  // The item a click has sent the pill towards while this page is still up.
+  // The pill aims there, so a relayout mid-journey keeps heading for it.
+  let pendingIndex = -1;
 
   /* The pill's own layer, outside the nav so its per-frame repaint does not
      drag the nav's backdrop-filter along with it. Fixed at the top of the
@@ -431,7 +484,7 @@
 
   const pill = window.PokestirMotion.travellingPill(menu, {
     items: navLinks,
-    active: activeIndex,
+    active: () => (pendingIndex >= 0 ? pendingIndex : activeIndex()),
     enabled: () => !mobile.matches,
     pillClass: 'site-nav__pill',
     layer: pillLayer
@@ -471,7 +524,7 @@
   function afterFirstPaint(run) {
     // One more frame past the paint, since the entry is delivered inside the
     // frame that did the work and that is the frame being stepped over.
-    const go = () => requestAnimationFrame(() => requestAnimationFrame(run));
+    const go = (paintedAt) => requestAnimationFrame(() => requestAnimationFrame(() => run(paintedAt)));
     const types = (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes) || [];
     /* No paint timing to wait on, so take the two frames and let
        `whenNavSettled` be the whole test. Deliberately not a timeout alongside
@@ -480,11 +533,12 @@
        exactly the slow load this is here to protect, which is the failure it is
        meant to prevent. Either the browser can tell us when it painted or it
        cannot. */
-    if (types.indexOf('paint') < 0) return go();
+    if (types.indexOf('paint') < 0) return go(performance.now());
     const po = new PerformanceObserver((list) => {
-      if (!list.getEntries().some((e) => e.name === 'first-contentful-paint')) return;
+      const fcp = list.getEntries().find((e) => e.name === 'first-contentful-paint');
+      if (!fcp) return;
       po.disconnect();
-      go();
+      go(fcp.startTime);
     });
     // `buffered` covers the paint that already happened: on a warm load this
     // script can run after it, and without this the entry is gone.
@@ -532,54 +586,104 @@
 
   function arrive() {
     let from = -1;
+    let pose = null;
     const current = activeIndex();
     try {
       const prev = parseInt(sessionStorage.getItem(PILL_KEY), 10);
       if (prev >= 0 && prev !== current) from = prev;
       sessionStorage.setItem(PILL_KEY, String(current));
+      pose = JSON.parse(sessionStorage.getItem(POSE_KEY) || 'null');
+      sessionStorage.removeItem(POSE_KEY);
     } catch (e) { /* storage unavailable (private mode); no travel, just place */ }
-    // A cross-page arrival is the one case with no previous on-page position to
-    // travel from, so the source index is passed in explicitly.
-    pill.update({ travel: false });
-    if (from < 0) return;
 
-    /* Then decide whether the journey is affordable, because this one is not
-       cheap: it animates width and height, so every frame runs layout on the
-       main thread and there is no compositor to fall back on. That is the
-       price of the ink copy staying welded to the real labels, and it is worth
-       paying on a page that is ready to draw it.
+    /* Where the pill starts on this page is where it was when the last one
+       was left. The journey now begins on the click, on the page being left
+       (see the click handler below), so by the time this page exists the pill
+       is somewhere along it, or already at its destination if the network was
+       slow enough for the whole slide to play during the wait.
 
-       It is not worth paying during the load. Deferred scripts run while the
-       page is still being assembled, so starting here drops a 400ms
-       layout-bound animation onto the busiest moment there is: on the heavier
-       pages that is a few hundred KB of catalog and several hundred tiles
-       being built. The slide loses most of its frames and jerks across the nav,
-       which reads far worse than a pill that was simply already in place.
+       It is placed there before first paint, so the first frame of this page
+       matches the last frame of the old one. Placing it on the target first
+       and only then jumping back to the source, which is what used to happen,
+       flashed the destination for a frame before the slide. */
+    const items = navLinks();
+    const start = from < 0 ? null
+      : (pose && pose.w > 0 ? pose : (items[from] ? itemPose(items[from]) : null));
+    const target = items[current];
+    const there = start && target && samePose(start, itemPose(target));
+    if (!start || there || window.PokestirMotion.reduced.matches || mobile.matches) { pill.update({ travel: false }); return; }
+    pill.update({ travel: false, at: start });
 
-       Frame health is *not* the question, though it was asked for a long
-       time. It cannot be sampled without guessing, and a flourish that fires
-       at random reads as a bug rather than as motion. What the journey needs
-       is that the page is on screen and that the nav has stopped changing
-       shape underneath it, and both of those can be observed exactly:
-       `afterFirstPaint` and `whenNavSettled` above, which is also where the
-       reasoning for each lives.
-
-       Skipping loses a flourish, and nothing else: the pill was already put in
-       its correct place above, so the failure mode is simply that it was
-       always there. */
-    /* On screen, then settled, then travel. Whether it plays is now decided by
-       how late we are, which is a property of the load, rather than by frame
-       jitter, which is a property of nothing. A given page on a given
-       connection behaves the same way every time.
-
-       Past the ceiling the pill is simply already in place, which is what it
-       was anyway whenever the old gate lost its coin flip. */
-    const askedAt = performance.now();
-    afterFirstPaint(() => whenNavSettled(() => {
-      if (performance.now() - askedAt > ARRIVAL_DEADLINE) return;
-      pill.update({ from });
+    /* The rest of the journey is layout-bound (it animates width and height,
+       so every frame runs on the main thread), so it waits for the page to be
+       on screen and for the nav to stop changing shape: `afterFirstPaint` and
+       `whenNavSettled` above, which is also where the reasoning lives. The
+       ceiling is counted from the paint, as its comment says; it was counted
+       from this line, which runs before the paint, so on a slow load the
+       budget was spent before the page even appeared and the pill was left to
+       jump. Past the ceiling it goes straight to its place. */
+    afterFirstPaint((paintedAt) => whenNavSettled(() => {
+      if (performance.now() - paintedAt > ARRIVAL_DEADLINE) {
+        pill.update({ travel: false, unpark: true });
+        return;
+      }
+      pill.update({ fromBox: start });
     }));
   }
+
+  // An item's box in container coordinates, the same space `pose()` uses.
+  function itemPose(el) {
+    const c = menu.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    return { x: r.left - c.left, y: r.top - c.top, w: r.width, h: r.height };
+  }
+  function samePose(a, b) {
+    return Math.abs(a.x - b.x) < 1 && Math.abs(a.y - b.y) < 1 &&
+      Math.abs(a.w - b.w) < 1 && Math.abs(a.h - b.h) < 1;
+  }
+
+  /* Start the journey on the click, on the page being left.
+
+     Waiting for the next page made the slide's start depend on the network:
+     nothing moved for as long as the next page took to arrive, then the slide
+     played late, and the slower the connection the longer the dead time
+     after the click. Starting here, the pill answers the click on the next
+     frame and travels while the network works. Whatever part of the journey
+     is left when this page goes away is finished by the next one, from the
+     pose saved on `pagehide`. Only plain left clicks that will actually
+     replace this page qualify. */
+  menu.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]');
+    if (!a || e.defaultPrevented || e.button !== 0) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (a.target && a.target !== '_self') return;
+    if (mobile.matches || a.hasAttribute('aria-current')) return;
+    const to = navLinks().indexOf(a);
+    const current = activeIndex();
+    if (to < 0) return;
+    pendingIndex = to;
+    pill.update(current >= 0 ? { from: current } : { travel: false });
+  });
+
+  addEventListener('pagehide', () => {
+    try {
+      const p = pill.pose();
+      if (p) sessionStorage.setItem(POSE_KEY, JSON.stringify(p));
+    } catch (e) { /* storage unavailable; the next page travels from the item */ }
+  });
+
+  /* Back/forward cache: the page comes back exactly as it was left, which can
+     be with the pill partway to an item that is not this page's. Put it back
+     on this page's own item, and record that as where the pill now is. */
+  addEventListener('pageshow', (e) => {
+    if (!e.persisted) return;
+    try {
+      sessionStorage.setItem(PILL_KEY, String(activeIndex()));
+      sessionStorage.removeItem(POSE_KEY);
+    } catch (err) { /* nothing to record */ }
+    pendingIndex = -1;
+    pill.update({ travel: false, unpark: true });
+  });
 
   placeMenu();
   arrive();

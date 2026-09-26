@@ -80,78 +80,143 @@
   </nav>
 
   <main class="wrap" role="main" id="main">
-    <!-- ABOUT / COMMISSIONS -->
-    <header id="about">
-      <h1 class="page-title">Pokestir</h1>
-      <p class="section-sub">Music Composer, Arranger &amp; Producer</p>
-      <nav class="social-strip" aria-label="Social links">
-        <a href="https://www.youtube.com/pokestir" target="_blank" rel="noopener noreferrer" aria-label="YouTube — opens in a new tab" style="--icon:url(images/icons/youtube.svg)"></a>
-        <a href="https://x.com/pokestir" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter — opens in a new tab" style="--icon:url(images/icons/x.svg)"></a>
-        <a href="https://bsky.app/profile/pokestir.com" target="_blank" rel="noopener noreferrer" aria-label="Bluesky — opens in a new tab" style="--icon:url(images/icons/bluesky.svg)"></a>
-        <a href="https://www.instagram.com/pokestir_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram — opens in a new tab" style="--icon:url(images/icons/instagram.svg)"></a>
-        <a href="https://discord.com/invite/7CGg9Tk" target="_blank" rel="noopener noreferrer" aria-label="Discord — opens in a new tab" style="--icon:url(images/icons/discord.svg)"></a>
-      </nav>
-    </header>
-
-    <section class="card" aria-label="About / Commissions">
-      <div class="agrid">
-        <!-- Left column -->
-        <div>
-          <div class="tabs" role="tablist" aria-label="About and Commissions">
-            <button id="tabAbout" class="btn active" role="tab" aria-selected="true" aria-controls="bioView" type="button">About</button>
-            <button id="tabComms" class="btn" role="tab" aria-selected="false" aria-controls="commView" type="button">Commissions</button>
-          </div>
-
-          <div id="bioView" role="tabpanel" aria-labelledby="tabAbout">
-            <p class="lead">
-              I&rsquo;m Nicholas, better known as Pokestir, a New York-based composer and arranger specializing in video game music. I&rsquo;ve been producing music for the past eight years, creating arrangements that I share on YouTube and streaming platforms.
-            </p>
-            <p class="lead">
-              My goal is to give familiar game soundtracks a fresh perspective while staying true to what made the original music memorable. Alongside arrangements, I compose original music for games, animation, videos, and other creative projects.
-            </p>
-            <p class="lead">
-              I&rsquo;m always interested in collaborating with musicians, developers, animators, and content creators. If you&rsquo;re looking for original music, an arrangement or production work, feel free to get in touch.
-            </p>
-          </div>
-
-          <div id="commView" role="tabpanel" aria-labelledby="tabComms" hidden>
-            <div class="comm">
-              <div class="note">
-                <div>You can reach me for commissions through any of the following methods:</div>
-                <ul class="contact-lines">
-                  <li>Discord: <span>pokestir</span></li>
-                  <li>Twitter/X: <a href="https://x.com/pokestir" target="_blank" rel="noopener">@pokestir</a></li>
-                  <li>Email: <span>contact@pokestir.com</span></li>
-                  <li>Or use the <a href="contact/">contact form</a></li>
-                </ul>
+    <!-- HERO + ABOUT -->
+    <header id="about" class="hero">
+      <h1 class="hero-name">Pokestir</h1>
+      <p class="hero-role">Music Composer, Arranger &amp; Producer</p>
+      <div class="hero-actions">
+        <button class="btn hero-btn" id="aboutToggle" type="button" aria-expanded="false" aria-controls="aboutPanel">About me <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <a class="btn hero-btn" href="#commissions" id="commJump">Commissions <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+        <span class="hero-rule" aria-hidden="true"></span>
+        <nav class="social-strip" aria-label="Social links">
+          <a href="https://www.youtube.com/pokestir" target="_blank" rel="noopener noreferrer" aria-label="YouTube — opens in a new tab" style="--icon:url(images/icons/youtube.svg)"></a>
+          <a href="https://x.com/pokestir" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter — opens in a new tab" style="--icon:url(images/icons/x.svg)"></a>
+          <a href="https://bsky.app/profile/pokestir.com" target="_blank" rel="noopener noreferrer" aria-label="Bluesky — opens in a new tab" style="--icon:url(images/icons/bluesky.svg)"></a>
+          <a href="https://www.instagram.com/pokestir_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram — opens in a new tab" style="--icon:url(images/icons/instagram.svg)"></a>
+          <a href="https://discord.com/invite/7CGg9Tk" target="_blank" rel="noopener noreferrer" aria-label="Discord — opens in a new tab" style="--icon:url(images/icons/discord.svg)"></a>
+        </nav>
+      </div>
+      <div class="reveal" id="aboutPanel" inert>
+        <div class="reveal-inner">
+          <section class="card about-card" aria-label="About">
+            <div class="agrid">
+              <div>
+                <p class="lead">
+                  I&rsquo;m Nicholas, better known as Pokestir, a New York-based composer and arranger specializing in video game music. I&rsquo;ve been producing music for the past eight years, creating arrangements that I share on YouTube and streaming platforms.
+                </p>
+                <p class="lead">
+                  My goal is to give familiar game soundtracks a fresh perspective while staying true to what made the original music memorable. Alongside arrangements, I compose original music for games, animation, videos, and other creative projects.
+                </p>
+                <p class="lead">
+                  I&rsquo;m always interested in collaborating with musicians, developers, animators, and content creators. If you&rsquo;re looking for original music, an arrangement or production work, feel free to get in touch.
+                </p>
               </div>
-
-              <div class="packs">
-                <div class="pack card-inset" data-pack="standard">
-                  <h3>STANDARD</h3>
-                  <div class="desc">Original music for games, videos &amp; streams<br>Music arrangement</div>
-                </div>
-
-                <div class="pack card-inset" data-pack="short">
-                  <h3>SHORT &lt;30 Seconds</h3>
-                  <div class="desc">Intro music<br>Fanfares</div>
-                </div>
+              <div class="portrait">
+                <figure class="frame" aria-label="Artist portrait">
+                  <picture>
+                    <source type="image/webp" srcset="images/logo.webp 1x, images/logo@2x.webp 2x">
+                    <img src="images/logo-4k.png" alt="Portrait of Pokestir" width="600" height="600" decoding="async">
+                  </picture>
+                </figure>
               </div>
             </div>
+          </section>
+        </div>
+      </div>
+    </header>
+
+    <!-- LATEST RELEASES -->
+    <section class="block latest" id="latest" aria-labelledby="latest-title">
+      <div class="block-head">
+        <h2 class="block-title" id="latest-title">Latest Releases</h2>
+        <a class="block-link" href="releases/">View all releases <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="lt-grid">
+        <!-- latest-releases:start (generated by scripts/build-release-pages.js; do not edit) -->
+        <a class="lt" href="/releases/night-of-fate/">
+          <span class="lt-cover"><img src="https://cdn-images.dzcdn.net/images/cover/0ff6f49742091df2c803e42e72f73ce2/500x500-000000-80-0-0.jpg" alt="" width="500" height="500" decoding="async"></span>
+          <span class="lt-text">
+            <span class="lt-name">Night of Fate</span>
+            <span class="lt-game">Kingdom Hearts</span>
+            <span class="lt-date"><time datetime="2026-09-25">September 25, 2026</time></span>
+          </span>
+        </a>
+        <a class="lt" href="/releases/floaroma-town/">
+          <span class="lt-cover"><img src="https://cdn-images.dzcdn.net/images/cover/8d8205739e8a19ededf914f53ba67994/500x500-000000-80-0-0.jpg" alt="" width="500" height="500" decoding="async"></span>
+          <span class="lt-text">
+            <span class="lt-name">Floaroma Town</span>
+            <span class="lt-game">Pokémon Diamond &amp; Pearl</span>
+            <span class="lt-date"><time datetime="2026-09-18">September 18, 2026</time></span>
+          </span>
+        </a>
+        <a class="lt" href="/releases/accumula-town/">
+          <span class="lt-cover"><img src="https://cdn-images.dzcdn.net/images/cover/336457121e5d6482e2d061a3028f0f24/500x500-000000-80-0-0.jpg" alt="" width="500" height="500" decoding="async"></span>
+          <span class="lt-text">
+            <span class="lt-name">Accumula Town</span>
+            <span class="lt-game">Pokémon Black &amp; White</span>
+            <span class="lt-date"><time datetime="2026-09-10">September 10, 2026</time></span>
+          </span>
+        </a>
+        <a class="lt" href="/releases/meteor-falls/">
+          <span class="lt-cover"><img src="https://cdn-images.dzcdn.net/images/cover/817277aa0c6a0eef53fa6b81f6c74782/500x500-000000-80-0-0.jpg" alt="" width="500" height="500" decoding="async"></span>
+          <span class="lt-text">
+            <span class="lt-name">Meteor Falls</span>
+            <span class="lt-game">Pokémon Ruby &amp; Sapphire</span>
+            <span class="lt-date"><time datetime="2026-08-21">August 21, 2026</time></span>
+          </span>
+        </a>
+        <a class="lt" href="/releases/battle-themes-vol-3/">
+          <span class="lt-cover"><img src="https://cdn-images.dzcdn.net/images/cover/f7bd8eb34229954162e5a8e758e50383/500x500-000000-80-0-0.jpg" alt="" width="500" height="500" decoding="async"></span>
+          <span class="lt-text">
+            <span class="lt-name">Battle Themes Collection: Pokémon, Vol. III</span>
+            <span class="lt-date"><time datetime="2026-03">March 2026</time> · 15 tracks</span>
+          </span>
+        </a>
+        <a class="lt" href="/releases/hyrule-okeanos/">
+          <span class="lt-cover"><img src="https://cdn-images.dzcdn.net/images/cover/e594d55e972c431f88ec583ee137dca3/500x500-000000-80-0-0.jpg" alt="" width="500" height="500" decoding="async"></span>
+          <span class="lt-text">
+            <span class="lt-name">Hyrule Okeanos</span>
+            <span class="lt-game">The Legend of Zelda: The Wind Waker</span>
+            <span class="lt-date"><time datetime="2025-10">October 2025</time> · 12 tracks</span>
+          </span>
+        </a>
+        <!-- latest-releases:end -->
+      </div>
+    </section>
+
+    <!-- COMMISSIONS -->
+    <details class="card comm-card" id="commissions">
+      <summary>
+        <span class="comm-head">
+          <span class="comm-title">Commissions</span>
+          <span class="comm-sum">Original music, orchestral scores, arrangements, and more</span>
+        </span>
+        <span class="comm-toggle" aria-hidden="true"><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+      </summary>
+      <div class="agrid comm-body">
+        <div class="comm">
+          <div class="note">
+            <div>You can reach me for commissions through any of the following methods:</div>
+            <ul class="contact-lines">
+              <li>Discord: <span>pokestir</span></li>
+              <li>Twitter/X: <a href="https://x.com/pokestir" target="_blank" rel="noopener">@pokestir</a></li>
+              <li>Email: <a href="mailto:contact@pokestir.com">contact@pokestir.com</a></li>
+              <li>Or use the <a href="contact/">contact form</a></li>
+            </ul>
+          </div>
+
+          <div class="work card-inset">
+            <h3>What I make</h3>
+            <ul>
+              <li>Original music for games, videos, animation, and film</li>
+              <li>Orchestral scores</li>
+              <li>Music arrangements</li>
+              <li>Stream intros</li>
+              <li>And a lot more!</li>
+            </ul>
           </div>
         </div>
-
-        <!-- Right column: portrait on About, terms on Commissions -->
-        <div id="rightAbout" class="portrait">
-          <figure class="frame" aria-label="Artist portrait">
-            <picture>
-              <source type="image/webp" srcset="images/logo.webp 1x, images/logo@2x.webp 2x">
-              <img src="images/logo-4k.png" alt="Portrait of Pokestir" width="600" height="600" decoding="async">
-            </picture>
-          </figure>
-        </div>
-
-        <aside id="rightTerms" class="termswrap card-inset" hidden aria-label="Terms & Conditions">
+        <aside class="termswrap card-inset" aria-label="Terms &amp; Conditions">
           <div class="terms">
             <h3>TERMS &amp; CONDITIONS — By commissioning music, you agree to these terms.</h3>
             <ul>
@@ -166,11 +231,11 @@
           </div>
         </aside>
       </div>
-    </section>
+    </details>
 
-    <!-- MY WORK -->
-    <header id="mywork-header">
-      <h2 class="page-title">My Work</h2>
+    <!-- PORTFOLIO -->
+    <header id="mywork-header" class="block-head block-head--stack">
+      <h2 class="block-title">Portfolio</h2>
       <p class="section-sub">Click a track to play. The full catalog is on the <a href="releases/">Releases</a> page.</p>
     </header>
 
@@ -185,9 +250,9 @@
             <span class="mw-time" id="mwDur">0:00</span>
           </div>
           <div class="mw-controls">
-            <button class="mw-btn" id="mwPrev" aria-label="Previous"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg></button>
+            <button class="mw-btn" id="mwPrev" aria-label="Previous"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 20 9 12l10-8z"/><path d="M5 19V5"/></svg></button>
             <button class="mw-btn mw-btn--play" id="mwPlay" aria-label="Play"></button>
-            <button class="mw-btn" id="mwNext" aria-label="Next"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+            <button class="mw-btn" id="mwNext" aria-label="Next"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4l10 8-10 8z"/><path d="M19 5v14"/></svg></button>
           </div>
         </div>
       </div>

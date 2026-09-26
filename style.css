@@ -34,6 +34,16 @@
   --muted: #94a3b8;
   --ring: #10B1FF;
   --on-ring: #001827;                      /* text on --ring backgrounds */
+  /* Solid --ring means "you are here" (nav) or "the main action" (primary
+     buttons). A selected filter is quieter state, so it wears a tint of the
+     same hue instead: a ring-coloured plate and edge with a light-blue label,
+     8.0:1 on the plate. */
+  --ring-tint: rgba(16,177,255,.16);
+  --ring-tint-line: rgba(16,177,255,.5);
+  --on-ring-tint: #96d7ff;
+  /* Inline links in running text: white like the text around them, marked by
+     an accent underline so they never read as white bold emphasis. */
+  --link-line: rgba(16,177,255,.7);
   --line-soft: rgba(255,255,255,.10);      /* hairlines, row dividers */
   --line: rgba(255,255,255,.16);           /* default borders */
   --line-strong: rgba(255,255,255,.22);    /* interactive-control borders */
@@ -130,8 +140,17 @@ body {
   margin: 0;
   color: var(--text);
   background: var(--bg);
-  background-image: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
-  background-attachment: fixed;
+  /* Ambient light: the brand blue falling faintly from the top of the page,
+     with the logo's orange fainter still at the top right. It lifts the top of
+     the page about 3% and never forms a visible shape; it is there so the navy
+     reads as lit rather than flat. The glows scroll away with the page; the
+     original full-height sheen stays fixed. */
+  background-image:
+    radial-gradient(1500px 760px at 50% -260px, rgba(16,177,255,.13), rgba(16,177,255,0) 72%),
+    radial-gradient(900px 520px at 100% -180px, rgba(255,131,39,.07), rgba(255,131,39,0) 70%),
+    linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+  background-repeat: no-repeat;
+  background-attachment: scroll, scroll, fixed;
   font-family: var(--font);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -754,7 +773,7 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   transition-duration: var(--mo-instant);
 }
 .pill.active {
-  background: var(--ring); color: var(--on-ring); border-color: var(--line-bright);
+  background: var(--ring-tint); color: var(--on-ring-tint); border-color: var(--ring-tint-line);
   transition-duration: var(--mo-instant);
 }
 @media (max-width: 640px) {

@@ -192,7 +192,7 @@ const RELEASES = [
     upc: "",
     description: "",
     tags: [],
-    artwork: "",
+    artwork: "https://cdn-images.dzcdn.net/images/cover/0ff6f49742091df2c803e42e72f73ce2/1000x1000-000000-80-0-0.jpg",
     links: {
       bandcamp: "https://pokestir.bandcamp.com/album/night-of-fate-from-kingdom-hearts-arrangement",
       spotify: "https://open.spotify.com/album/6X2kbKEgimWaxzpU5baK4l",

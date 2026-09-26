@@ -374,18 +374,18 @@ select {
    own cyan/white rings instead of framing them. */
 .plat-linkfire     { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 100%), rgba(45,195,230,.14); border-color: rgba(45,195,230,.35); }
 
-/* ── Track list — header + bare rows straight on the page background with
-      hairline dividers (no card box), same header construction as the home
-      page player section (page-title + section-sub) ── */
+/* ── Track list — header + bare rows straight on the page background, no
+      dividers and no card box; spacing and the hover wash separate the rows.
+      Same header construction as the home page player section
+      (page-title + section-sub) ── */
 .section-sub { color: var(--muted); font-size: 14px; margin: 2px 2px 8px; }
 .tracks-section .page-title { margin: 4px 2px 6px; }
 .tracks-list { margin-top: 4px; }
 
 .track-row {
   position: relative; isolation: isolate;
-  display: grid; grid-template-columns: 26px 1fr auto; gap: 14px;
+  display: grid; grid-template-columns: 30px 1fr auto; gap: 14px;
   align-items: center; padding: 10px 12px;
-  border-top: 1px solid var(--line-soft);
   border-radius: var(--radius-sm);
 }
 .track-row > * { position: relative; z-index: 1; }
@@ -396,7 +396,6 @@ select {
   opacity: 0;
   transition: opacity var(--mo-quick) var(--mo-in);
 }
-.track-row:first-child { border-top: 0; }
 /* Hover in fast, out slower: quick enough to feel responsive, slow enough that
    sweeping the pointer down the list doesn't strobe. --pct glides the playing
    row's progress edge between timeupdate events (see @property in style.css). */
@@ -429,8 +428,9 @@ select {
    hover-flicker jitter. */
 .t-lead { display: grid; place-items: center; color: var(--muted); }
 .t-lead > * { grid-area: 1 / 1; }
-.t-num { font-size: 13px; font-variant-numeric: tabular-nums; line-height: 1.4; }
+.t-num { font-size: 15px; font-variant-numeric: tabular-nums; line-height: 1.4; }
 .t-ic-play, .t-ic-pause { color: var(--white); line-height: 0; }
+.t-ic-play svg, .t-ic-pause svg { width: 18px; height: 18px; }
 
 /* Crossfade rather than the old visibility toggle, which was a hard cut. The
    grid stack above keeps all three glyphs in one cell, so opacity and scale

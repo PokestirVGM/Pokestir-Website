@@ -11,75 +11,56 @@
      motion driven from script has to ask for itself. Queried live rather than
      cached at load, because the setting can change mid-session. Duplicated in
      releases.js and gear.js by choice: a one-line matchMedia is cheaper to copy
-     than to share. The travelling pill below is the opposite case, so nav.js is
-     loaded first and page scripts degrade gracefully if it is ever missing. */
+     than to share. */
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const scrollBehavior = () => (reducedMotion.matches ? 'auto' : 'smooth');
 
   /* =========================
-     ABOUT / COMMISSIONS TABS
+     ABOUT ME, COMMISSIONS, LATEST RELEASES
      ========================= */
-  const tabAbout = document.getElementById('tabAbout');
-  const tabComms = document.getElementById('tabComms');
-  const bioView = document.getElementById('bioView');
-  const commView = document.getElementById('commView');
-  const rightAbout = document.getElementById('rightAbout');
-  const rightTerms = document.getElementById('rightTerms');
+  const aboutToggle = document.getElementById('aboutToggle');
+  const aboutPanel = document.getElementById('aboutPanel');
+  const comm = document.getElementById('commissions');
 
-  /* The selected tab is marked by the shared travelling pill, the same element
-     and the same commit-and-settle curve the nav uses. The tabs are a
-     single-select group of two, which is exactly what the pill is for. */
-  const tablist = tabAbout && tabAbout.closest('.tabs');
-  const tabs = tablist ? [tabAbout, tabComms] : [];
-  const tabPill = tablist && window.PokestirMotion
-    ? window.PokestirMotion.travellingPill(tablist, {
-        items: () => tabs,
-        active: () => tabs.findIndex((t) => t.classList.contains('active'))
-      })
-    : null;
-
-  function setTab(which) {
-    const isAbout = which === 'about';
-    if (tabAbout && tabComms) {
-      tabAbout.classList.toggle('active', isAbout);
-      tabComms.classList.toggle('active', !isAbout);
-      tabAbout.setAttribute('aria-selected', String(isAbout));
-      tabComms.setAttribute('aria-selected', String(!isAbout));
-      tabAbout.tabIndex = isAbout ? 0 : -1;
-      tabComms.tabIndex = isAbout ? -1 : 0;
-      if (tabPill) tabPill.update();
-    }
-    if (bioView) bioView.hidden = !isAbout;
-    if (commView) commView.hidden = isAbout;
-    if (rightAbout) rightAbout.hidden = !isAbout;
-    if (rightTerms) rightTerms.hidden = isAbout;
+  // The bio stays closed on load so the latest releases are what the page
+  // leads with. Closed, the panel is inert as well as hidden from view.
+  function setAbout(open) {
+    aboutToggle.setAttribute('aria-expanded', String(open));
+    aboutPanel.classList.toggle('is-open', open);
+    aboutPanel.inert = !open;
+  }
+  if (aboutToggle && aboutPanel) {
+    aboutToggle.addEventListener('click', () => setAbout(aboutToggle.getAttribute('aria-expanded') !== 'true'));
   }
 
-  // Widths shift with the viewport, and the web font lands after first paint.
-  if (tablist) new ResizeObserver(() => tabPill && tabPill.update({ travel: false })).observe(tablist);
-
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('#tabAbout, #tabComms');
-    if (!btn) return;
-    e.preventDefault();
-    setTab(btn.id === 'tabAbout' ? 'about' : 'comms');
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.target === tabAbout || e.target === tabComms) {
-      if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(e.key)) return;
+  // The hero's Commissions button opens the card and brings it into view, and
+  // a shared /#commissions link arrives with it already open.
+  const jump = document.getElementById('commJump');
+  if (jump && comm) {
+    jump.addEventListener('click', (e) => {
       e.preventDefault();
-      const next = e.key === 'Home' ? tabAbout : e.key === 'End' ? tabComms
-        : e.target === tabAbout ? tabComms : tabAbout;
-      setTab(next === tabAbout ? 'about' : 'comms');
-      next.focus();
-    }
-  });
+      comm.open = true;
+      comm.scrollIntoView({ behavior: scrollBehavior(), block: 'start' });
+      comm.querySelector('summary').focus({ preventScroll: true });
+      history.replaceState(null, '', '#commissions');
+    });
+  }
+  if (comm && location.hash === '#commissions') comm.open = true;
 
-  setTab('about');
+  // Covers fade in as they load rather than popping in. Opted into here, so
+  // without the script they simply show.
+  const covers = document.querySelector('.lt-grid');
+  if (covers && !reducedMotion.matches) {
+    covers.classList.add('fade-in');
+    covers.querySelectorAll('.lt-cover img').forEach((img) => {
+      const done = () => img.classList.add('is-loaded');
+      if (img.complete) done();
+      else { img.addEventListener('load', done); img.addEventListener('error', done); }
+    });
+  }
 
   /* =========================
-     MY WORK PLAYER
+     PORTFOLIO PLAYER
      ========================= */
   (function () {
     if (typeof TRACKS === 'undefined' || !TRACKS.length) return;

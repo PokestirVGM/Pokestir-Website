@@ -1466,7 +1466,7 @@ const TRACKS = {
   "local:night-of-fate-2026": {
     title: "Night of Fate (From \"Kingdom Hearts\") [Arrangement]",
     isrc: "",
-    duration: "",
+    duration: "2:44",
     spotifyTrackId: "",
     preview: ""
   },

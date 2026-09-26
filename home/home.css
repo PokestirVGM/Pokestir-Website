@@ -1,66 +1,76 @@
-/* Home page — layout, About/Commissions, and My Work player */
+/* Home page — hero and bio, latest releases, commissions, portfolio player */
 
-.wrap { display: grid; gap: 28px; }
+/* Sections are spaced well apart; a heading sits close to its own content. */
+.wrap { display: grid; gap: 64px; }
 
 #about, #mywork-header { scroll-margin-top: 80px; }
 
-/* ── Section headers ── */
-.page-title { margin: 4px 2px 6px; }
-.section-sub { color: var(--muted); font-size: 14px; margin: 2px 2px 8px; }
-.section-sub a { color: var(--white); text-decoration: underline; }
-.section-sub a:hover { text-decoration: none; }
+/* ── Section heads ── */
+.block-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin: 0 2px 20px; }
+.block-head--stack { display: block; margin: 0 2px; }
+.block-title {
+  margin: 0; font-family: var(--font-display); font-weight: 800;
+  font-size: 28px; line-height: 1.15; letter-spacing: .1px; color: var(--white);
+}
+.section-sub { color: var(--muted); font-size: 14px; margin: 8px 0 0; }
+.section-sub a {
+  color: var(--white); text-decoration: underline;
+  text-underline-offset: 3px; text-decoration-thickness: 1.5px; text-decoration-color: var(--link-line);
+}
+.section-sub a:hover { text-decoration-color: var(--ring); }
+/* The Portfolio heading belongs to the player card below it, not to the gap. */
+#mywork-header { margin-bottom: -46px; }
 
-/* Hero social strip: negative left margin optically aligns the first glyph
-   (inset 9px inside its 36px hit target) with the text above it. */
-#about .social-strip { margin: 8px 0 0 -7px; }
+.block-link {
+  display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto;
+  margin: 0 -12px -6px 0; padding: 8px 12px; border-radius: var(--radius-sm);
+  color: var(--text); font-size: 14px; font-weight: 700; text-decoration: none;
+  transition: background-color var(--mo-quick) var(--mo-out), color var(--mo-quick) var(--mo-out);
+}
+.block-link svg { transition: translate var(--mo-quick) var(--mo-out); }
+.block-link:hover { background: rgba(255,255,255,.06); color: var(--white); transition-duration: var(--mo-instant); }
+.block-link:hover svg { translate: calc(3px * var(--mo-travel)) 0; }
 
 /* =========================
-   ABOUT / COMMISSIONS
+   HERO + ABOUT
    ========================= */
-.agrid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.25fr .95fr; gap: 28px; padding: 18px; }
-
-.lead { color: var(--text); font-size: 16px; line-height: 1.7; }
-
-/* About / Commissions is a two-item single-select group, so it gets the same
-   travelling pill as the nav rather than one blue background switching off and
-   another switching on. player.js drives it. */
-.tabs { position: relative; display: flex; gap: 10px; margin: 8px 0 14px; flex-wrap: wrap; }
-.btn { color: var(--white); font-size: 15px; }
-.tabs .btn { position: relative; z-index: 1; }
-/* The segments keep their own look until the pill is actually built and placed,
-   so the selected tab is never left unmarked if the script does not run. */
-.tabs.has-pill .btn.active {
-  color: var(--white);
-  border-color: var(--line-strong);
+.hero { padding-top: 20px; }
+.hero-name {
+  margin: 0 0 0 2px; font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(40px, 5.6vw, 58px); line-height: 1.02; letter-spacing: -.4px; color: var(--white);
 }
-.tabs.has-pill .btn.active::before { opacity: 0; }
-/* No lift and no press recoil once this is a segmented control. The pill sits
-   on top carrying a copy of both labels, and that copy cannot follow a segment
-   that is rising 3px or squashing under the pointer: the dark text would slide
-   off the white text underneath it. Real segmented controls do not lift their
-   segments either. The highlight arriving is the feedback, and it starts on
-   the same frame as the click. Hover keeps the brightness bump, which needs no
-   movement to read. */
-.tabs.has-pill .btn:hover,
-.tabs.has-pill .btn.is-pressed { translate: 0; }
-.tabs.has-pill .btn.is-pressed { scale: 1; }
-.tabs.has-pill .btn.is-released { animation: none; }
+.hero-role { margin: 12px 0 0 2px; font-size: 17px; line-height: 1.5; color: var(--muted); }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 26px; }
+.hero-btn { padding: 10px 15px; }
+.hero-btn svg { flex: 0 0 auto; }
+.hero-btn .chev { transition: rotate var(--mo-base) var(--mo-out); }
+/* Open, About me wears the selected look the old About tab had. */
+.hero-btn[aria-expanded="true"] { color: var(--on-ring); border-color: var(--line-bright); }
+.hero-btn[aria-expanded="true"]::before { opacity: 1; }
+.hero-btn[aria-expanded="true"] .chev { rotate: 180deg; }
+.hero-rule { width: 1px; height: 26px; margin: 0 8px; background: var(--line); }
+#about .hero-actions .social-strip { margin: 0; }
 
-.comm { display: grid; gap: 20px; color: var(--text); }
-.comm .note { font-size: 14px; line-height: 1.6; color: var(--muted); }
-.comm .note a, .comm .note a:visited { color: var(--white); text-decoration: underline; }
-.comm .note a { text-underline-offset: 3px; text-decoration-color: var(--line-bright); }
-.comm .note a:hover { text-decoration-color: currentColor; }
-.contact-lines { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 4px; }
+/* The bio opens in place: rows animate 0fr to 1fr so the card grows rather
+   than popping in, and the page below slides instead of jumping. Closed, the
+   panel is `inert` as well as invisible, so nothing inside takes focus. */
+.reveal {
+  display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden;
+  transition: grid-template-rows var(--mo-view) var(--mo-inout),
+              opacity var(--mo-base) var(--mo-out),
+              visibility 0s linear var(--mo-view);
+}
+.reveal.is-open {
+  grid-template-rows: 1fr; opacity: 1; visibility: visible;
+  transition: grid-template-rows var(--mo-view) var(--mo-inout),
+              opacity var(--mo-view) var(--mo-out),
+              visibility 0s;
+}
+.reveal-inner { min-height: 0; overflow: hidden; }
+.about-card { margin-top: 28px; }
 
-.packs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
-/* No hover lift. These are plain divs describing the commission tiers, with
-   nothing to click, and a lift is an affordance: movement under the pointer
-   promises the thing is interactive. Release tiles and buttons keep theirs
-   because they actually go somewhere. */
-.pack { padding: 16px; border-radius: var(--radius-md); }
-.pack h3 { margin: 0 0 8px; color: var(--white); font-size: 15px; line-height: 1.4; letter-spacing: .2px; text-transform: uppercase; }
-.pack .desc { font-size: 14px; line-height: 1.55; color: var(--text); }
+.agrid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.25fr .95fr; gap: 28px; padding: 18px; }
+.lead { color: var(--text); font-size: 16px; line-height: 1.7; }
 
 .portrait { align-self: center; justify-self: center; width: 100%; max-width: 380px; }
 .frame {
@@ -69,6 +79,83 @@
   border: 1px solid var(--line-strong); aspect-ratio: 1/1;
 }
 .frame img { display: block; width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1/1; filter: saturate(1.05) contrast(1.02); }
+
+/* =========================
+   LATEST RELEASES
+   ========================= */
+/* Six releases in one row, drawn identically; the block is generated by
+   scripts/build-release-pages.js from the catalog. */
+.lt-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px 16px; }
+.lt { display: flex; flex-direction: column; gap: 12px; min-width: 0; color: var(--text); text-decoration: none; }
+.lt-cover {
+  display: block; flex: 0 0 auto; overflow: hidden; aspect-ratio: 1; border-radius: var(--radius-md);
+  border: 1px solid var(--line); background: hsl(220 25% 14%);
+  box-shadow: 0 14px 32px -16px rgba(0,0,0,.8);
+  transition: translate var(--mo-quick) var(--mo-out), border-color var(--mo-quick) var(--mo-out);
+}
+.lt-cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* Covers fade in once loaded instead of popping in. player.js turns this on,
+   so without the script the covers simply show. */
+.lt-grid.fade-in .lt-cover img { opacity: 0; transition: opacity var(--mo-base) var(--mo-out); }
+.lt-grid.fade-in .lt-cover img.is-loaded { opacity: 1; }
+.lt:hover .lt-cover, .lt:focus-visible .lt-cover {
+  translate: 0 calc(-4px * var(--mo-travel)); border-color: var(--line-bright);
+  transition-duration: var(--mo-quick), var(--mo-instant);
+}
+.lt:focus-visible { outline: none; }
+.lt:focus-visible .lt-cover { outline: var(--focus-ring); outline-offset: 2px; }
+.lt-text { display: grid; gap: 3px; min-width: 0; padding: 0 2px; }
+.lt-name { font-weight: 800; font-size: 15px; line-height: 1.3; color: var(--white); }
+.lt-game, .lt-date { font-size: 12.5px; line-height: 1.45; color: var(--muted); }
+
+/* =========================
+   COMMISSIONS
+   ========================= */
+#commissions { scroll-margin-top: 92px; }
+.comm-card summary {
+  position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 22px 24px; cursor: pointer; list-style: none; border-radius: inherit;
+}
+.comm-card summary::-webkit-details-marker { display: none; }
+.comm-card summary:focus-visible { outline-offset: -4px; }
+.comm-title { display: block; font-family: var(--font-display); font-weight: 800; font-size: 24px; line-height: 1.2; color: var(--white); }
+.comm-sum { display: block; margin-top: 4px; font-size: 14px; color: var(--muted); }
+.comm-toggle {
+  display: inline-grid; place-items: center; flex: 0 0 auto; width: 44px; height: 44px;
+  border: 1px solid var(--line-strong); border-radius: 999px; background: rgba(255,255,255,.04);
+  color: var(--text);
+  transition: background-color var(--mo-quick) var(--mo-out), color var(--mo-quick) var(--mo-out);
+}
+.comm-toggle .chev { transition: rotate var(--mo-base) var(--mo-out); }
+.comm-card summary:hover .comm-toggle { background: rgba(255,255,255,.09); color: var(--white); transition-duration: var(--mo-instant); }
+.comm-card[open] .comm-toggle .chev { rotate: 180deg; }
+.comm-body { padding: 22px 24px 24px; border-top: 1px solid var(--line-soft); }
+/* Height animation where the browser can interpolate to `auto`; elsewhere the
+   card simply opens. */
+@supports (interpolate-size: allow-keywords) {
+  .comm-card { interpolate-size: allow-keywords; }
+  .comm-card::details-content {
+    height: 0; overflow: hidden; opacity: 0;
+    transition: height var(--mo-view) var(--mo-inout), opacity var(--mo-base) var(--mo-out),
+                content-visibility var(--mo-view) allow-discrete;
+  }
+  .comm-card[open]::details-content { height: auto; opacity: 1; }
+}
+
+.comm { display: grid; gap: 20px; color: var(--text); }
+.comm .note { font-size: 14px; line-height: 1.6; color: var(--muted); }
+.comm .note a, .comm .note a:visited { color: var(--white); text-decoration: underline; }
+.comm .note a { text-underline-offset: 3px; text-decoration-thickness: 1.5px; text-decoration-color: var(--link-line); }
+.comm .note a:hover { text-decoration-color: var(--ring); }
+.contact-lines { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 4px; }
+
+/* The kinds of work, as one plain list. No hover lift: it describes, it does
+   not go anywhere. */
+.work { padding: 16px 18px; border-radius: var(--radius-md); }
+.work h3 { margin: 0 0 10px; color: var(--white); font-size: 15px; line-height: 1.4; letter-spacing: .2px; text-transform: uppercase; }
+.work ul { margin: 0 0 0 18px; padding: 0; color: var(--text); font-size: 15px; }
+.work li { margin: 6px 0; line-height: 1.5; }
+.work li::marker { color: var(--muted); }
 
 .termswrap { align-self: stretch; padding: 20px; color: var(--text); }
 .terms h3 { margin: 0 0 14px; color: var(--white); font-size: 14px; line-height: 1.45; letter-spacing: .2px; text-transform: uppercase; text-wrap: pretty; }
@@ -79,7 +166,7 @@
 .terms li:last-child { margin-bottom: 0; }
 
 /* =========================
-   MY WORK PLAYER
+   PORTFOLIO PLAYER
    ========================= */
 .mw-player { display: flex; align-items: flex-start; gap: 16px; padding: 20px 18px 16px; }
 .mw-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
@@ -185,13 +272,15 @@
   transition: d var(--mo-base) var(--mo-snap);
 }
 /* A small overlap avoids an antialiased hairline between the triangle halves.
-   Their outer points remain on the same edges; pause still separates them. */
-.mw-btn--play .mw-ic-a { d: path("M7 4.5L13.1 8.3125L13.1 15.6875L7 19.5Z"); }
-.mw-btn--play .mw-ic-b { d: path("M12.9 8.1875L19 12L19 12L12.9 15.8125Z"); }
+   Their outer points remain on the same edges; pause still separates them.
+   The triangle spans the full 3-21 height, matching the outlined skip icons
+   beside it. */
+.mw-btn--play .mw-ic-a { d: path("M6 3L13.1 7.564L13.1 16.436L6 21Z"); }
+.mw-btn--play .mw-ic-b { d: path("M12.9 7.436L20 12L20 12L12.9 16.564Z"); }
 
 /* Pause (playing state): the halves separate into two upright bars. */
-.mw-btn--play.is-playing .mw-ic-a { d: path("M6 5L10 5L10 19L6 19Z"); }
-.mw-btn--play.is-playing .mw-ic-b { d: path("M14 5L18 5L18 19L14 19Z"); }
+.mw-btn--play.is-playing .mw-ic-a { d: path("M6 4L10 4L10 20L6 20Z"); }
+.mw-btn--play.is-playing .mw-ic-b { d: path("M14 4L18 4L18 20L14 20Z"); }
 
 /* Browsers that cannot interpolate `d` still get both shapes, just switched
    rather than morphed, which is what the crossfade amounted to anyway. */
@@ -215,7 +304,7 @@
   transition: background-color var(--mo-quick) var(--mo-out), border-color var(--mo-quick) var(--mo-out);
 }
 .mw-chips .pill:hover::before { background: rgba(255,255,255,.10); }
-.mw-chips .pill.active::before { background: var(--ring); border-color: var(--line-bright); }
+.mw-chips .pill.active::before { background: var(--ring-tint); border-color: var(--ring-tint-line); }
 .mw-list {
   list-style: none; margin: 0; padding: 0 0 6px;
   border-top: 1px solid var(--line-soft);
@@ -269,15 +358,57 @@
 .mw-item-dur { font-size: 12px; color: var(--muted); white-space: nowrap; }
 
 /* ── Responsive ── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.is-open, .comm-card::details-content { transition: none; }
+}
 @media (max-width: 900px) {
   .agrid { grid-template-columns: 1fr; padding: 16px; }
+  .lt-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lt-name { font-size: 16px; }
+  .lt-game, .lt-date { font-size: 13px; }
+}
+/* Tablet: keep the bio beside a smaller logo rather than stacking a 300px
+   circle under the text. */
+@media (min-width: 641px) and (max-width: 900px) {
+  .about-card .agrid { grid-template-columns: minmax(0, 1fr) 200px; align-items: center; }
 }
 @media (max-width: 640px) {
-  /* About / Commissions card: hide portrait on mobile, bio uses full width */
+  .wrap { gap: 48px; }
+  #mywork-header { margin-bottom: -32px; }
+  .block-title { font-size: 24px; }
+
+  .hero { padding-top: 8px; }
+  .hero-role { font-size: 16px; margin-top: 10px; }
+  .hero-actions { margin-top: 20px; }
+  .hero-rule { display: none; }
+  /* Own line, with the negative margin optically aligning the first glyph
+     (inset 9px inside its 36px hit target) with the text above it. */
+  #about .hero-actions .social-strip { flex-basis: 100%; margin: 4px 0 0 -7px; }
+  .about-card { margin-top: 22px; }
+
+  /* Bio card: hide the portrait, the text takes the full width. */
   .agrid { gap: 16px; }
   .portrait { display: none; }
 
-  /* My Work player: bigger touch targets */
+  /* Six covers in three rows pushed Commissions a screen and a half down. A
+     swipeable row keeps the section one tile tall; the next cover peeking in
+     at the edge says there is more. */
+  .lt-grid {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 42%;
+    gap: 12px; margin: 0 -14px; padding: 0 14px 4px; scroll-padding: 0 14px;
+    overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .lt-grid::-webkit-scrollbar { display: none; }
+  .lt { gap: 10px; scroll-snap-align: start; }
+  .lt-name { font-size: 15px; }
+  .lt-game, .lt-date { font-size: 12px; }
+
+  .comm-card summary { padding: 18px; }
+  .comm-title { font-size: 21px; }
+  .comm-body.agrid { padding: 18px 16px 16px; }
+
+  /* Player: bigger touch targets */
   .mw-player { gap: 12px; padding: 16px 14px 12px; }
   .mw-btn { padding: 10px; }
   .mw-seek { background-size: 100% 6px; }

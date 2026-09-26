@@ -39,6 +39,15 @@
 .lead:last-child { margin-bottom: 0; }
 .caption { color: var(--muted); font-size: 14px; line-height: 1.65; margin: 0; }
 .caption--spaced { margin-top: 16px; }
+/* Inline links follow the site's link style: white text, accent underline
+   that turns solid on hover. Without this they fell back to the browser's
+   default violet, the one hue on the site outside the palette. */
+.lead a, .list a, .caption a {
+  color: var(--white); text-decoration: underline;
+  text-underline-offset: 3px; text-decoration-thickness: 1.5px; text-decoration-color: var(--link-line);
+  transition: text-decoration-color var(--mo-quick) var(--mo-out);
+}
+.lead a:hover, .list a:hover, .caption a:hover { text-decoration-color: var(--ring); transition-duration: var(--mo-instant); }
 .caption a { white-space: nowrap; }
 
 .list {

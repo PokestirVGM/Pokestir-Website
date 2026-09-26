@@ -50,12 +50,13 @@
        rest, brightening on hover. It had no hover state at all. */
     .nf-card a {
       color: var(--white); text-decoration: underline;
-      transition: color var(--mo-quick) var(--mo-out);
+      text-underline-offset: 3px; text-decoration-thickness: 1.5px; text-decoration-color: var(--link-line);
+      transition: text-decoration-color var(--mo-quick) var(--mo-out);
     }
-    .nf-card a:hover { text-decoration: none; }
+    .nf-card a:hover { text-decoration-color: var(--ring); }
   </style>
 </head>
-<body>
+<body data-nav-current="none">
   <a href="#main" class="skip-link">Skip to content</a>
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
