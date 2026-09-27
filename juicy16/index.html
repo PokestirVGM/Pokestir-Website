@@ -11,12 +11,12 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Juicy16: a free 16-channel multitimbral DLS and SoundFont player for macOS, in AU and VST3.">
+  <meta name="description" content="Juicy16: a free 16-channel multitimbral DLS and SoundFont player for macOS (AU/VST3) and Windows (VST3).">
   <meta name="theme-color" content="#0b0f19">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pokestir">
   <meta property="og:title" content="Juicy16 - 16-channel SoundFont player">
-  <meta property="og:description" content="Juicy16: a free 16-channel multitimbral DLS and SoundFont player for macOS, in AU and VST3.">
+  <meta property="og:description" content="Juicy16: a free 16-channel multitimbral DLS and SoundFont player for macOS (AU/VST3) and Windows (VST3).">
   <meta property="og:url" content="https://pokestir.com/juicy16/">
   <meta property="og:image" content="https://pokestir.com/images/og.jpg">
   <meta property="og:image:width" content="1200">
@@ -56,34 +56,25 @@
   <main class="wrap" role="main" id="main">
     <header id="top">
       <h1 class="page-title" id="top-title">Juicy16</h1>
-      <p class="lede"><span class="answer">A free 16-channel SoundFont and DLS player for macOS, in AU and VST3.</span> I built it to play multichannel game MIDI in my DAW without setting every patch by hand. Load one sound bank, send it MIDI, and let the file choose the instruments.</p>
+      <p class="lede"><span class="answer">A free 16-channel SoundFont and DLS player for macOS (AU/VST3) and Windows (VST3).</span> I built it to play multichannel game MIDI in my DAW without setting every patch by hand. Load one sound bank, send it MIDI, and let the file choose the instruments.</p>
     </header>
 
-    <!-- The download is the reason anyone opens this page, so it is the first
-         thing under the lede, and the only card: it is the thing you act on.
-         The right column carries the facts that decide whether the button is
-         worth pressing. -->
     <section class="card split" aria-labelledby="download-title" id="download">
       <div class="split__col">
-        <h2 class="card-title" id="download-title">Download Beta 4</h2>
-        <p class="lead">Free. AU and VST3 in one archive, with an installer.</p>
-        <p>
-          <a class="btn btn--go" href="https://github.com/PokestirVGM/Juicy16/releases/download/v0.6.1-beta.4/Juicy16-0.6.1-beta.4-BC1-macos-arm64-ADHOC.zip">
-            <svg class="dl" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 19h16"/></svg>
-            Download for macOS
-          </a>
-        </p>
-        <p class="facts">0.6.1-beta.4 &middot; 6.7 MB &middot; September 6, 2026</p>
-        <p class="caption caption--spaced"><a href="https://github.com/PokestirVGM/Juicy16/releases/tag/v0.6.1-beta.4" target="_blank" rel="noopener">Release notes</a> &middot; <a href="#setup">Installation &amp; setup</a> &middot; <a href="#bugs">Report a bug</a></p>
+        <h2 class="card-title" id="download-title">Download 1.0.0-beta.1</h2>
+        <p class="lead"><b>macOS 11+</b> &middot; Apple Silicon &middot; AU and VST3</p>
+        <p><a class="btn btn--go" href="https://github.com/PokestirVGM/Juicy16/releases/download/v1.0.0-beta.1/Juicy16-1.0.0-beta.1-BC1-macos-arm64-ADHOC.zip">Download for macOS</a></p>
+        <p class="facts">6.6 MB &middot; Free beta &middot; September 27, 2026</p>
+        <p class="caption caption--spaced">Includes an installer. Ad-hoc signed, not notarized. Intel Macs are not supported.</p>
+        <p class="caption caption--spaced"><a href="https://github.com/PokestirVGM/Juicy16/releases/download/v1.0.0-beta.1/Juicy16-1.0.0-beta.1-BC1-macos-arm64-ADHOC.zip.sha256">SHA-256</a> &middot; <a href="https://github.com/PokestirVGM/Juicy16/releases/tag/v1.0.0-beta.1" target="_blank" rel="noopener">Release notes</a> &middot; <a href="#setup">Setup</a></p>
       </div>
-
       <div class="split__col">
-        <h3 class="card-title">What you need</h3>
-        <ul class="list">
-          <li><b>macOS 11 or later</b> on an <b>Apple Silicon</b> Mac with a native Apple Silicon host. Intel Macs are not supported.</li>
-          <li>A DAW that loads <b>AU</b> or <b>VST3</b>, plus your own <b>DLS, SF2 or SF3</b> bank.</li>
-        </ul>
-        <p class="caption caption--spaced">This beta is ad-hoc signed, not notarized. macOS may block the installer on first open. Windows is planned; there is no Windows download yet.</p>
+        <h3 class="card-title">Windows x64</h3>
+        <p class="lead"><b>Windows 10+</b> &middot; VST3 &middot; Optional standalone app</p>
+        <p><a class="btn btn--go" href="https://github.com/PokestirVGM/Juicy16/releases/download/v1.0.0-beta.1/Juicy16-1.0.0-beta.1-BC4-windows-x64-Setup.exe">Download Windows installer</a></p>
+        <p class="facts">7.6 MB &middot; Free beta &middot; No extra runtime needed</p>
+        <p class="caption caption--spaced">Unsigned. Windows 10 version 1607 or later intended; tested on Windows 11. Bring your own DLS, SF2 or SF3 bank.</p>
+        <p class="caption caption--spaced"><a href="https://github.com/PokestirVGM/Juicy16/releases/download/v1.0.0-beta.1/Juicy16-1.0.0-beta.1-BC4-windows-x64-Portable.zip">Portable ZIP</a> &middot; <a href="https://github.com/PokestirVGM/Juicy16/releases/download/v1.0.0-beta.1/Juicy16-1.0.0-beta.1-BC4-windows-x64-Source.zip">Matching source</a> &middot; <a href="https://github.com/PokestirVGM/Juicy16/releases/tag/v1.0.0-beta.1" target="_blank" rel="noopener">Checksums &amp; notes</a></p>
       </div>
     </section>
 
@@ -94,7 +85,7 @@
                alt="Juicy16 0.6.1-beta.4 with a DLS bank loaded: sixteen MIDI channels, instrument selectors, volume, pan, independent trim and signal meters, alongside master output, effects and channel details."
                decoding="async">
         </a>
-        <figcaption class="caption">Juicy16 0.6.1-beta.4 with a DLS bank loaded. <a href="../images/juicy16-development.jpg" target="_blank" rel="noopener">View full size</a>.</figcaption>
+        <figcaption class="caption">Earlier interface (0.6.1-beta.4) with a DLS bank loaded. <a href="../images/juicy16-development.jpg" target="_blank" rel="noopener">View full size</a>.</figcaption>
       </figure>
       <div class="showcase__text">
         <h2 class="page-title" id="what-title">One bank, sixteen channels</h2>
@@ -105,14 +96,14 @@
           <li><b>Hands-on control.</b> Instrument selection, volume, pan, mute, solo and independent trim for each channel, plus master trim, reverb and chorus.</li>
           <li><b>One stereo output.</b> Route the MIDI channels into one instance in your DAW. Juicy16 does not open or play MIDI files itself.</li>
         </ul>
-        <p class="caption caption--spaced">Beta 4 adds channel trim, signal meters, fallback-instrument details and per-channel vibrato strength in Settings &rarr; MIDI.</p>
+        <p class="caption caption--spaced">New in 1.0.0-beta.1: Linear interpolation by default, full-range stereo DLS pan, ignored Balance CC8/CC40, and a fix for silent channel 10 kits after Bank Select.</p>
       </div>
     </section>
 
     <section class="reading" id="setup" aria-labelledby="setup-title">
       <h2 class="page-title" id="setup-title">Get a MIDI playing</h2>
       <ol class="list steps">
-        <li><b>Install the plugin.</b> Unzip the download and open <code class="inl">install_macos.command</code>. Choose AU, VST3 or both, then restart your DAW and rescan. The <a href="https://github.com/PokestirVGM/Juicy16/blob/v0.6.1-beta.4/docs/BETA_TESTER_GUIDE.md" target="_blank" rel="noopener">installation guide</a> covers the macOS warning and manual setup.</li>
+        <li><b>Install the plugin.</b> On Windows, run the Setup EXE or extract the portable ZIP and copy the complete <code class="inl">Juicy16.vst3</code> folder into your DAW&rsquo;s VST3 folder. On macOS, unzip and right-click <code class="inl">install_macos.command</code> &rarr; Open, then choose AU, VST3 or both. Restart your DAW and rescan. See the <a href="https://github.com/PokestirVGM/Juicy16/blob/5752bf2a3e082a14e053280186d96f439f602d26/distribute/INSTALL-WINDOWS.txt" target="_blank" rel="noopener">Windows guide</a> or <a href="https://github.com/PokestirVGM/Juicy16/blob/v1.0.0-beta.1/docs/BETA_TESTER_GUIDE.md" target="_blank" rel="noopener">macOS guide</a>.</li>
         <li><b>Load the matching bank.</b> Insert Juicy16 as an instrument and choose your DLS, SF2 or SF3 file. The sound bank supplies the samples; the MIDI supplies the notes.</li>
         <li><b>Keep the MIDI channels intact.</b> Send channels 1&ndash;16 to that instance. If your DAW forces every part onto channel 1, the instruments will collide. Channel 10 defaults to GM percussion.</li>
         <li><b>Play from the beginning.</b> Keep the file&rsquo;s Bank Select, Program Change and controller events so its initial setup reaches the plugin.</li>
@@ -120,14 +111,14 @@
     </section>
 
     <section class="reading" aria-labelledby="beta-title">
-      <h2 class="page-title" id="beta-title">Where Beta 4 stands</h2>
-      <p class="lede">This is an experimental beta. The AU passes Apple&rsquo;s validator, but fresh FL Studio/Cubase playback and save/reopen checks are still pending. Logic, macOS 11 itself and installation on another Mac remain unverified.</p>
+      <h2 class="page-title" id="beta-title">About this beta</h2>
+      <p class="lede">The Windows build passed local automated checks and my testing. The Mac AU passes Apple&rsquo;s validator. Clean minimum-OS installs and a complete DAW compatibility matrix remain unverified; see the release notes for the testing limits.</p>
       <ul class="list">
         <li>Chorus is available and off by default. It follows the bank&rsquo;s routing and MIDI CC93.</li>
-        <li>Older plugin builds cannot open projects saved by Beta 4. Keep a separate project copy if you need to roll back.</li>
-        <li>Audio timing, memory-leak checks and hosted CI still have unresolved issues. The release notes cover these limits.</li>
+        <li>Older plugin builds cannot read the new project-state format. Keep a separate project copy if you need to roll back.</li>
+        <li>FluidSynth&rsquo;s internal timing delay and known small leaks remain. Keep a backup of important projects.</li>
       </ul>
-      <p class="caption caption--spaced">I recommend testing with a copy of your project. <a href="https://github.com/PokestirVGM/Juicy16/releases/tag/v0.6.1-beta.4" target="_blank" rel="noopener">Full release notes</a> &middot; <a href="https://github.com/PokestirVGM/Juicy16" target="_blank" rel="noopener">Source on GitHub</a></p>
+      <p class="caption caption--spaced">I recommend testing with a copy of your project. <a href="https://github.com/PokestirVGM/Juicy16/releases/tag/v1.0.0-beta.1" target="_blank" rel="noopener">Full release notes</a> &middot; <a href="https://github.com/PokestirVGM/Juicy16" target="_blank" rel="noopener">Source on GitHub</a></p>
     </section>
 
     <header id="bugs">
@@ -174,12 +165,12 @@
               </select>
             </div>
             <div class="cfield">
-              <label class="cfield__label" for="bf-macos">macOS version <span class="req" aria-hidden="true">*</span></label>
-              <input id="bf-macos" type="text" name="macos" required placeholder="14.5">
+              <label class="cfield__label" for="bf-os">Operating system &amp; version <span class="req" aria-hidden="true">*</span></label>
+              <input id="bf-os" type="text" name="os" required placeholder="Windows 11 or macOS 15.6">
             </div>
             <div class="cfield">
               <label class="cfield__label" for="bf-version">Juicy16 version <span class="req" aria-hidden="true">*</span></label>
-              <input id="bf-version" type="text" name="version" required value="0.6.1-beta.4">
+              <input id="bf-version" type="text" name="version" required value="1.0.0-beta.1">
             </div>
           </div>
 
