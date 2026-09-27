@@ -11,12 +11,12 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Juicy16: a free 16-channel multitimbral DLS and SoundFont player for macOS (AU/VST3) and Windows (VST3).">
+  <meta name="description" content="A free DLS and SoundFont plugin for playing game MIDI on Mac and Windows.">
   <meta name="theme-color" content="#0b0f19">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pokestir">
   <meta property="og:title" content="Juicy16 - 16-channel SoundFont player">
-  <meta property="og:description" content="Juicy16: a free 16-channel multitimbral DLS and SoundFont player for macOS (AU/VST3) and Windows (VST3).">
+  <meta property="og:description" content="A free DLS and SoundFont plugin for playing game MIDI on Mac and Windows.">
   <meta property="og:url" content="https://pokestir.com/juicy16/">
   <meta property="og:image" content="https://pokestir.com/images/og.jpg">
   <meta property="og:image:width" content="1200">
@@ -56,7 +56,7 @@
   <main class="wrap" role="main" id="main">
     <header id="top">
       <h1 class="page-title" id="top-title">Juicy16</h1>
-      <p class="lede"><span class="answer">A free 16-channel SoundFont and DLS player for macOS (AU/VST3) and Windows (VST3).</span> I built it to play multichannel game MIDI in my DAW without setting every patch by hand. Load one sound bank, send it MIDI, and let the file choose the instruments.</p>
+      <p class="lede"><span class="answer">A free DLS and SoundFont plugin for Mac and Windows.</span> I made Juicy16 to play game MIDI in my DAW, much like Fruity LSD. Load the sound bank that goes with your MIDI and each channel gets its own instrument.</p>
     </header>
 
     <section class="card split" aria-labelledby="download-title" id="download">
@@ -64,17 +64,17 @@
         <h2 class="card-title" id="download-title">Download 1.0.0-beta.1</h2>
         <p class="lead"><b>macOS 11+</b> &middot; Apple Silicon &middot; AU and VST3</p>
         <p><a class="btn btn--go" href="https://github.com/PokestirVGM/Juicy16/releases/download/v1.0.0-beta.1/Juicy16-1.0.0-beta.1-BC1-macos-arm64-ADHOC.zip">Download for macOS</a></p>
-        <p class="facts">6.6 MB &middot; Free beta &middot; September 27, 2026</p>
-        <p class="caption caption--spaced">Includes an installer. Ad-hoc signed, not notarized. Intel Macs are not supported.</p>
+        <p class="facts">1.0.0-beta.1 &middot; 6.6 MB</p>
+        <p class="caption caption--spaced">Apple Silicon only. If macOS blocks the installer, the <a href="https://github.com/PokestirVGM/Juicy16/blob/v1.0.0-beta.1/docs/BETA_TESTER_GUIDE.md" target="_blank" rel="noopener">setup guide</a> explains how to open it.</p>
         <p class="caption caption--spaced"><a href="https://github.com/PokestirVGM/Juicy16/releases/download/v1.0.0-beta.1/Juicy16-1.0.0-beta.1-BC1-macos-arm64-ADHOC.zip.sha256">SHA-256</a> &middot; <a href="https://github.com/PokestirVGM/Juicy16/releases/tag/v1.0.0-beta.1" target="_blank" rel="noopener">Release notes</a> &middot; <a href="#setup">Setup</a></p>
       </div>
       <div class="split__col">
         <h3 class="card-title">Windows x64</h3>
-        <p class="lead"><b>Windows 10+</b> &middot; VST3 &middot; Optional standalone app</p>
+        <p class="lead"><b>Windows 10+</b> &middot; 64-bit &middot; VST3</p>
         <p><a class="btn btn--go" href="https://github.com/PokestirVGM/Juicy16/releases/download/v1.0.0-beta.1/Juicy16-1.0.0-beta.1-BC4-windows-x64-Setup.exe">Download Windows installer</a></p>
-        <p class="facts">7.6 MB &middot; Free beta &middot; No extra runtime needed</p>
-        <p class="caption caption--spaced">Unsigned. Windows 10 version 1607 or later intended; tested on Windows 11. Bring your own DLS, SF2 or SF3 bank.</p>
-        <p class="caption caption--spaced"><a href="https://github.com/PokestirVGM/Juicy16/releases/download/v1.0.0-beta.1/Juicy16-1.0.0-beta.1-BC4-windows-x64-Portable.zip">Portable ZIP</a> &middot; <a href="https://github.com/PokestirVGM/Juicy16/releases/download/v1.0.0-beta.1/Juicy16-1.0.0-beta.1-BC4-windows-x64-Source.zip">Matching source</a> &middot; <a href="https://github.com/PokestirVGM/Juicy16/releases/tag/v1.0.0-beta.1" target="_blank" rel="noopener">Checksums &amp; notes</a></p>
+        <p class="facts">1.0.0-beta.1 &middot; 7.6 MB</p>
+        <p class="caption caption--spaced">The installer includes the plugin and a standalone player. Use the portable ZIP below if you prefer to install it yourself.</p>
+        <p class="caption caption--spaced"><a href="https://github.com/PokestirVGM/Juicy16/releases/download/v1.0.0-beta.1/Juicy16-1.0.0-beta.1-BC4-windows-x64-Portable.zip">Portable ZIP</a> &middot; <a href="https://github.com/PokestirVGM/Juicy16/releases/download/v1.0.0-beta.1/Juicy16-1.0.0-beta.1-BC4-windows-x64-Source.zip">Source code</a> &middot; <a href="https://github.com/PokestirVGM/Juicy16/releases/tag/v1.0.0-beta.1" target="_blank" rel="noopener">Checksums &amp; notes</a></p>
       </div>
     </section>
 
@@ -88,42 +88,32 @@
         <figcaption class="caption">Earlier interface (0.6.1-beta.4) with a DLS bank loaded. <a href="../images/juicy16-development.jpg" target="_blank" rel="noopener">View full size</a>.</figcaption>
       </figure>
       <div class="showcase__text">
-        <h2 class="page-title" id="what-title">One bank, sixteen channels</h2>
-        <p class="lede">The MIDI handles the patch changes. I can still adjust the mix.</p>
-        <ul class="list">
-          <li><b>DLS, SF2 and SF3.</b> One loaded file supplies the instruments for all sixteen channels.</li>
-          <li><b>Automatic patch changes.</b> Bank Select and Program Change messages choose each channel&rsquo;s instrument, including changes mid-song.</li>
-          <li><b>Hands-on control.</b> Instrument selection, volume, pan, mute, solo and independent trim for each channel, plus master trim, reverb and chorus.</li>
-          <li><b>One stereo output.</b> Route the MIDI channels into one instance in your DAW. Juicy16 does not open or play MIDI files itself.</li>
-        </ul>
-        <p class="caption caption--spaced">New in 1.0.0-beta.1: Linear interpolation by default, full-range stereo DLS pan, ignored Balance CC8/CC40, and a fix for silent channel 10 kits after Bank Select.</p>
+        <h2 class="page-title" id="what-title">How it works</h2>
+        <p class="lede">Juicy16 loads DLS, SF2 and SF3 banks. Your MIDI file picks the instruments for all 16 channels, and you can adjust their volume, pan, mute and solo in the plugin.</p>
+        <p class="lede">Everything comes out as one stereo mix, with reverb and chorus if you want them. You&rsquo;ll need your own sound banks and a DAW to play the MIDI.</p>
+        <p class="caption caption--spaced">This update improves stereo DLS panning and fixes some silent drum kits. There&rsquo;s also an interpolation setting for changing how samples sound when pitched up or down.</p>
       </div>
     </section>
 
     <section class="reading" id="setup" aria-labelledby="setup-title">
-      <h2 class="page-title" id="setup-title">Get a MIDI playing</h2>
+      <h2 class="page-title" id="setup-title">Getting started</h2>
       <ol class="list steps">
-        <li><b>Install the plugin.</b> On Windows, run the Setup EXE or extract the portable ZIP and copy the complete <code class="inl">Juicy16.vst3</code> folder into your DAW&rsquo;s VST3 folder. On macOS, unzip and right-click <code class="inl">install_macos.command</code> &rarr; Open, then choose AU, VST3 or both. Restart your DAW and rescan. See the <a href="https://github.com/PokestirVGM/Juicy16/blob/5752bf2a3e082a14e053280186d96f439f602d26/distribute/INSTALL-WINDOWS.txt" target="_blank" rel="noopener">Windows guide</a> or <a href="https://github.com/PokestirVGM/Juicy16/blob/v1.0.0-beta.1/docs/BETA_TESTER_GUIDE.md" target="_blank" rel="noopener">macOS guide</a>.</li>
-        <li><b>Load the matching bank.</b> Insert Juicy16 as an instrument and choose your DLS, SF2 or SF3 file. The sound bank supplies the samples; the MIDI supplies the notes.</li>
-        <li><b>Keep the MIDI channels intact.</b> Send channels 1&ndash;16 to that instance. If your DAW forces every part onto channel 1, the instruments will collide. Channel 10 defaults to GM percussion.</li>
-        <li><b>Play from the beginning.</b> Keep the file&rsquo;s Bank Select, Program Change and controller events so its initial setup reaches the plugin.</li>
+        <li>Run the Windows installer, or unzip the Mac download and open <code class="inl">install_macos.command</code>. Restart your DAW and rescan plugins if Juicy16 doesn&rsquo;t appear.</li>
+        <li>Add Juicy16 as an instrument and load your DLS, SF2 or SF3 bank.</li>
+        <li>Route your MIDI to it, keeping the original channels, and play from the beginning so the instrument changes are picked up.</li>
       </ol>
+      <p class="caption caption--spaced">Need help installing? <a href="https://github.com/PokestirVGM/Juicy16/blob/5752bf2a3e082a14e053280186d96f439f602d26/distribute/INSTALL-WINDOWS.txt" target="_blank" rel="noopener">Windows instructions</a> &middot; <a href="https://github.com/PokestirVGM/Juicy16/blob/v1.0.0-beta.1/docs/BETA_TESTER_GUIDE.md" target="_blank" rel="noopener">Mac instructions</a></p>
     </section>
 
     <section class="reading" aria-labelledby="beta-title">
-      <h2 class="page-title" id="beta-title">About this beta</h2>
-      <p class="lede">The Windows build passed local automated checks and my testing. The Mac AU passes Apple&rsquo;s validator. Clean minimum-OS installs and a complete DAW compatibility matrix remain unverified; see the release notes for the testing limits.</p>
-      <ul class="list">
-        <li>Chorus is available and off by default. It follows the bank&rsquo;s routing and MIDI CC93.</li>
-        <li>Older plugin builds cannot read the new project-state format. Keep a separate project copy if you need to roll back.</li>
-        <li>FluidSynth&rsquo;s internal timing delay and known small leaks remain. Keep a backup of important projects.</li>
-      </ul>
-      <p class="caption caption--spaced">I recommend testing with a copy of your project. <a href="https://github.com/PokestirVGM/Juicy16/releases/tag/v1.0.0-beta.1" target="_blank" rel="noopener">Full release notes</a> &middot; <a href="https://github.com/PokestirVGM/Juicy16" target="_blank" rel="noopener">Source on GitHub</a></p>
+      <h2 class="page-title" id="beta-title">Still in beta</h2>
+      <p class="lede">Keep a backup of your project while trying it out. Older versions of Juicy16 can&rsquo;t open projects saved with this version. If something goes wrong, let me know below.</p>
+      <p class="caption caption--spaced"><a href="https://github.com/PokestirVGM/Juicy16/releases/tag/v1.0.0-beta.1" target="_blank" rel="noopener">Release notes and known issues</a> &middot; <a href="https://github.com/PokestirVGM/Juicy16" target="_blank" rel="noopener">GitHub</a></p>
     </section>
 
     <header id="bugs">
-      <h2 class="page-title" id="bugs-title">Reporting a bug</h2>
-      <p class="lede">Tell me your setup and the steps that reproduce it. If an instrument sounds wrong, include the MIDI channel and requested bank/program.</p>
+      <h2 class="page-title" id="bugs-title">Found a bug?</h2>
+      <p class="lede">Tell me which DAW you&rsquo;re using, what happened and how I can try it myself.</p>
     </header>
 
     <!-- The report form, not instructions for writing one. The fields are the
