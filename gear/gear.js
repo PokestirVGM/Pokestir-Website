@@ -27,6 +27,8 @@
   const subtagsWrapEl = document.getElementById("subtagsWrap");
 
   let DB = [];
+  const cardCache = new Map();
+  const sortedLists = new Map();
 
   /* Web Animations are outside CSS's reduced-motion reach, so every scripted
      list change consults this guard. Durations and curves resolve from the
@@ -419,6 +421,7 @@
   }
 
   function card(item) {
+    if (cardCache.has(item.product)) return cardCache.get(item.product);
     const el = document.createElement("article");
     el.className = item.favorite ? "card is-favorite" : "card";
     el.setAttribute("role", "listitem");
@@ -447,6 +450,7 @@
         ${dateHTML}
       </div>`;
 
+    cardCache.set(item.product, el);
     return el;
   }
 
@@ -540,14 +544,7 @@
       clearGridMotions();
       return oldRects;
     }
-    const visible = Array.from(grid.querySelectorAll(':scope > .card'))
-      .map((el) => ({
-        el,
-        rect: el.getBoundingClientRect(),
-        opacity: getComputedStyle(el).opacity
-      }))
-      .filter(({ rect }) => nearViewport(rect, 0))
-      .slice(0, MAX_MOTION_CARDS);
+    const visible = visibleCards().map(({ el, rect }) => ({ el, rect, opacity: getComputedStyle(el).opacity }));
     clearGridMotions();
     const timing = gridTiming();
     let leaving = 0;
@@ -562,10 +559,7 @@
   function animateFilteredGrid(oldRects) {
     if (!hasRendered || REDUCED.matches) return;
     const timing = gridTiming();
-    const visible = Array.from(grid.querySelectorAll(':scope > .card'))
-      .map((el) => ({ el, rect: el.getBoundingClientRect() }))
-      .filter(({ rect }) => nearViewport(rect, 0))
-      .slice(0, MAX_MOTION_CARDS);
+    const visible = visibleCards();
     // Arrivals are counted separately from survivors, so the deal stays evenly
     // spaced however many cards happened to stay put between them. DOM order is
     // reading order, which is the order they land in.
@@ -584,15 +578,29 @@
     }
   }
 
+  function visibleCards() {
+    const visible = [];
+    for (const el of grid.children) {
+      if (!el.classList.contains('card')) continue;
+      const rect = el.getBoundingClientRect();
+      if (rect.top > window.innerHeight) break;
+      if (nearViewport(rect, 0)) visible.push({ el, rect });
+      if (visible.length === MAX_MOTION_CARDS) break;
+    }
+    return visible;
+  }
+
   function render() {
     const sorter = SORTERS[state.sort] || SORTERS.recent;
-    const nextList = DB.filter(match).sort(sorter);
+    if (!sortedLists.has(state.sort)) sortedLists.set(state.sort, DB.slice().sort(sorter));
+    const nextList = sortedLists.get(state.sort).filter(match);
     const nextKeys = new Set(nextList.slice(0, PAGE_SIZE).map((item) => item.product));
     const oldRects = captureGridMotion(nextKeys);
     currentList = nextList;
     currentPage = 0;
 
     countEl.textContent = `${currentList.length} items`;
+    grid.removeAttribute('aria-busy');
 
     grid.replaceChildren();
     sentinel.remove();
@@ -647,6 +655,7 @@
     try {
       csvText = await loadCSVText();
     } catch {
+      grid.removeAttribute('aria-busy');
       gridMessage('Unable to load gear data. Please check your connection and refresh the page.');
       countEl.textContent = '';
       return;
@@ -660,6 +669,7 @@
     });
 
     if (DB.length === 0) {
+      grid.removeAttribute('aria-busy');
       gridMessage('Unable to load gear data. Please check your connection and refresh the page.');
       countEl.textContent = '';
       return;

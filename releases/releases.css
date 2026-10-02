@@ -113,6 +113,7 @@ select {
       then singles in the standard one. Searching or filtering collapses to
       a single flat grid (renderInto in releases.js). ── */
 .rgrid { display: grid; gap: 18px 14px; grid-template-columns: repeat(auto-fill, minmax(196px, 1fr)); }
+#rgrid[aria-busy="true"] { display: flow-root; min-height: 100svh; }
 
 /* Album rail: same tiles, laid out as one horizontally scrolling row.
    The scrollbar is hidden (macOS overlay bars are invisible until you're
@@ -215,6 +216,7 @@ select {
   opacity: 0;
   transition: opacity var(--mo-base) var(--mo-out);
 }
+img.tile-art, img.detail-art { width: 100%; height: 100%; object-fit: cover; }
 .tile-art.is-loaded,
 .detail-art.is-loaded { opacity: 1; }
 

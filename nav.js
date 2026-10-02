@@ -844,6 +844,9 @@
   }
 
   function observeCard(card) {
+    // Catalog cards and their exit copies disable ambient borders in CSS.
+    // There is nothing to animate or observe on those hundreds of nodes.
+    if (card.closest('#grid') || card.classList.contains('gear-card-clone')) return;
     card.classList.remove('is-slidebar-active');
     if (reduced.matches) return;
     if (cardObserver) cardObserver.observe(card);
@@ -879,11 +882,14 @@
       record.addedNodes.forEach((node) => cardsWithin(node).forEach(observeCard));
     });
   });
-  cardMutations.observe(document.body, { childList: true, subtree: true });
+  cardMutations.observe(document.querySelector('main') || document.body, { childList: true, subtree: true });
 
   startCardObserver();
   reduced.addEventListener('change', () => {
     if (reduced.matches) stopCardObserver();
     else startCardObserver();
+  });
+  document.addEventListener('visibilitychange', () => {
+    document.documentElement.classList.toggle('is-page-hidden', document.hidden);
   });
 }());

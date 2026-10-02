@@ -7,7 +7,7 @@
 /* Four items, not five: Favorites moved down to the category row, which gives
    the search field the width the fifth control was taking. */
 .controls {
-  display: grid; grid-template-columns: 1fr auto auto auto; gap: 10px;
+  display: grid; grid-template-columns: 1fr 237px auto auto; gap: 10px;
   margin: 0 0 10px;
 }
 
@@ -135,6 +135,7 @@ select {
 
 /* ── Catalog grid ── */
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid[aria-busy="true"] { min-height: 100svh; align-content: start; }
 
 /* Catalog items are compact, repeated components — plain border, no gradient
    edge and no inner bleed. Single column: header, description, then tags + date

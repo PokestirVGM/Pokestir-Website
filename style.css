@@ -677,6 +677,8 @@ html { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.14) var(--bg); 
   .card.is-slidebar-active::after { animation-play-state: running; }
 }
 @keyframes slidebar { 0% { background-position: 0% 0; } 100% { background-position: 200% 0; } }
+.is-page-hidden .card::before,
+.is-page-hidden .card::after { animation-play-state: paused !important; }
 
 /* Inset panel (darker nested card, no gradient edge) */
 /* Same pixel anchoring as .card, and it matters more here: the FAQ panels are

@@ -24,7 +24,24 @@
 
   // The bio stays closed on load so the latest releases are what the page
   // leads with. Closed, the panel is inert as well as hidden from view.
+  const portraitVisible = matchMedia('(min-width: 641px)');
+  function loadPortrait() {
+    if (portraitVisible.matches) {
+      aboutPanel.querySelectorAll('source[data-srcset]').forEach((source) => {
+        source.srcset = source.dataset.srcset;
+        source.removeAttribute('data-srcset');
+      });
+      aboutPanel.querySelectorAll('img[data-src]').forEach((img) => {
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+      });
+    }
+  }
+  portraitVisible.addEventListener('change', () => {
+    if (aboutToggle && aboutToggle.getAttribute('aria-expanded') === 'true') loadPortrait();
+  });
   function setAbout(open) {
+    if (open) loadPortrait();
     aboutToggle.setAttribute('aria-expanded', String(open));
     aboutPanel.classList.toggle('is-open', open);
     aboutPanel.inert = !open;

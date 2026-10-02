@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1Z4061KGM"></script>
+  <script async fetchpriority="low" src="https://www.googletagmanager.com/gtag/js?id=G-J1Z4061KGM"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -11,6 +11,12 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    // A cancelled browser transition still completes the navigation.
+    addEventListener('pagereveal', (event) => {
+      if (event.viewTransition) event.viewTransition.ready.catch(() => {});
+    });
+  </script>
   <meta name="description" content="A searchable catalog of Pokestir's music gear, sample libraries, synths, and tools.">
   <meta name="theme-color" content="#0b0f19">
   <meta property="og:type" content="website">
@@ -33,8 +39,9 @@
        latin subset is listed; nothing in the catalog needs latin-ext, so
        preloading that one too would spend a request on a file no page uses. -->
   <link rel="preload" as="font" type="font/woff2" href="../fonts/lato-700-latin.woff2" crossorigin>
-  <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="gear.css">
+  <link rel="preload" as="fetch" href="gear-software.csv" crossorigin>
+  <link rel="stylesheet" href="../style.min.css">
+  <link rel="stylesheet" href="gear.min.css">
   <!-- The catalog is a serial dependency without this: the browser cannot know
        the CSV exists until it has downloaded and run gear.js, so the fetch only
        starts once the scripts have landed and the grid sits on "Loading" for a
@@ -49,14 +56,14 @@
   <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
   <!-- nav.js first: it defines the shared motion primitives the page scripts
        use. Deferred scripts run in document order, so this is the ordering. -->
-  <script src="../nav.js" defer></script>
-  <script src="gear.js" defer></script>
+  <script src="../nav.min.js" defer></script>
+  <script src="gear.min.js" defer></script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
   <nav class="site-nav" aria-label="Site navigation">
     <div class="site-nav__inner">
-      <a class="site-nav__brand" href="/"><img src="../images/icon.webp" alt="Pokestir" width="1000" height="1000" class="site-nav__logo"></a>
+      <a class="site-nav__brand" href="/"><img src="../images/icon-96.webp" srcset="../images/icon-48.webp 48w, ../images/icon-96.webp 96w, ../images/icon-192.webp 192w, ../images/icon.webp 1000w" sizes="48px" alt="Pokestir" width="1000" height="1000" class="site-nav__logo"></a>
       <button class="site-nav__toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-links"><span class="site-nav__burger" aria-hidden="true"></span></button>
       <div class="site-nav__links" id="site-nav-links">
         <a href="/">Home</a>
@@ -75,7 +82,7 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.6"/></svg>
         <input id="q" type="search" placeholder="Search products, vendors, notes&#8230;" aria-label="Search">
       </div>
-      <select id="vendor" aria-label="Vendor"></select>
+      <select id="vendor" aria-label="Vendor"><option value="">All Vendors</option></select>
       <select id="sortTop" aria-label="Sort by">
         <option value="recent" selected>Date Added (Newest)</option>
         <option value="oldest">Date Added (Oldest)</option>
@@ -103,7 +110,7 @@
       </div>
     </div>
 
-    <div class="grid" id="grid" role="list"></div>
+    <div class="grid" id="grid" aria-busy="true" role="list"></div>
 
     <div class="footer-note">Select a category to filter by specific tags.</div>
     <footer class="site-footer" role="contentinfo">

@@ -1,0 +1,11 @@
+{
+  "name": "pokestir-website",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-release-pages.js && node scripts/build-assets.js",
+    "check": "node scripts/check-catalog.js && node scripts/build-release-pages.js --check && node scripts/build-assets.js --check && node scripts/check-performance.js"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

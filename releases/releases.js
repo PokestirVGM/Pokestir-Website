@@ -28,6 +28,9 @@
      art morph between a tile and the detail hero is untouched. */
   addEventListener('pageswap', (event) => {
     if (!event.viewTransition) return;
+    // Skipping an unsupported destination rejects ready by design. Handle
+    // that expected cancellation instead of reporting an unhandled error.
+    event.viewTransition.ready.catch(() => {});
     const url = event.activation && event.activation.entry && event.activation.entry.url;
     let staying = false;
     try {
@@ -396,122 +399,72 @@
     step();
   }
 
-  /* Artwork URLs are stored directly in data.js rather than fetched live in
-     the browser — at catalog scale, hundreds of live lookups on page load
-     would be slow and unreliable. Elements without artwork keep the CSS
-     gradient placeholder. */
-
-  /* Every stored artwork URL is a 1000x1000 crop, because that is the size
-     link unfurlers want in og:image. Nothing on the page is anywhere near
-     that big: tiles are 196-280px and the detail hero is 172px, so a 1000px
-     cover is ~170KB to draw ~60KB worth of pixels even at 2x DPR. Both CDNs
-     in the catalog (Deezer and Apple) encode the size in the path, so ask
-     them for the 500x500 crop instead: same URL, about a third of the bytes,
-     still sharp on retina. og:image keeps the 1000 in the generated pages. */
+  // Use native responsive images for cache sharing and DPR-aware selection.
+  // Sources are assigned only near the viewport, so horizontal rails and long
+  // archives do not compete with visible covers on slow connections.
   const artAtSize = (url, px) => String(url).replace(/1000x1000/, `${px}x${px}`);
-
   const decodedArt = new Set();
-  const pendingArt = new Map();
-  const artReveals = new Map();
+  const artReveals = new Set();
   let artRevealFrame = 0;
 
-  function queueArtReveal(layer, url) {
-    artReveals.set(layer, url);
+  function queueArtReveal(layer) {
+    artReveals.add(layer);
     if (artRevealFrame) return;
     artRevealFrame = requestAnimationFrame(() => {
       artRevealFrame = 0;
-      const layers = [];
-      for (const [target, source] of artReveals) {
-        if (!target.isConnected) continue;
-        target.style.setProperty('--art-url', `url(${JSON.stringify(source)})`);
-        layers.push(target);
+      for (const image of artReveals) {
+        if (image.isConnected) image.classList.add('is-loaded');
       }
       artReveals.clear();
-      // Commit the hidden pose once for the whole batch, then start all fades.
-      // Interleaving this read with each cover's writes forces N style passes.
-      if (layers.length) void getComputedStyle(layers[0]).opacity;
-      for (const target of layers) target.classList.add('is-loaded');
     });
   }
 
-  function decodeArt(url) {
-    if (decodedArt.has(url)) return Promise.resolve();
-    if (pendingArt.has(url)) return pendingArt.get(url);
-
-    const image = new Image();
-    image.decoding = 'async';
-    const loaded = new Promise((resolve, reject) => {
-      image.onload = resolve;
-      image.onerror = reject;
-    });
-    image.src = url;
-
-    const promise = (typeof image.decode === 'function'
-      ? image.decode().catch(() => loaded)
-      : loaded).then(() => {
-        decodedArt.add(url);
-        pendingArt.delete(url);
-        return true;
-      }, () => {
-        pendingArt.delete(url);
-        return false;
-      });
-    pendingArt.set(url, promise);
-    return promise;
-  }
-
-  /* `immediate` paints in the caller's own task instead of waiting on a decode,
-     and the detail hero needs it.
-
-     A generated release page ships its cover in the static HTML, already
-     carrying the url and is-loaded, so it is on screen the moment the document
-     paints. Rendering the detail view then replaces that whole subtree, and the
-     replacement started life empty: no url, no is-loaded, and .detail-art rests
-     at opacity 0. Because `decodedArt` is per-document and a navigation is
-     always a fresh document, nothing was ever recorded as decoded, so this took
-     the async branch every time, cached image or not. Measured on a warm load,
-     the cover sat visible at 42ms, blanked at 69ms, and only finished fading
-     back in around 250ms.
-
-     Under the cross-document view transition that gap is what gets captured as
-     ::view-transition-new(release-art). Catch it and the artwork flies to an
-     empty box, which reads as the animation being skipped and the cover
-     flashing. Whether it was caught depended on how long data.js took to parse
-     against how soon the new document painted, which is why it only happened
-     sometimes.
-
-     Painting synchronously is safe here for the same reason the static page can
-     inline it: the url comes from data.js, not from a fetch, and the image was
-     just on screen in the tile that was clicked. The grid keeps the decode
-     path, where hundreds of covers really are arriving for the first time. */
   function revealArt(layer, rel, immediate) {
     if (!layer || !rel.artwork) return;
-    const url = artAtSize(rel.artwork, 500);
-    const wasDecoded = decodedArt.has(url);
-    const paint = () => {
-      if (!layer.isConnected) return;
-      layer.style.setProperty('--art-url', `url(${JSON.stringify(url)})`);
-      layer.classList.add('is-loaded');
+    if (layer.tagName !== 'IMG') {
+      const image = document.createElement('img');
+      image.className = layer.className;
+      image.alt = '';
+      image.width = image.height = 500;
+      image.decoding = 'async';
+      layer.replaceWith(image);
+      layer = image;
+    }
+    if (layer.hasAttribute('src')) {
+      if (immediate || (layer.complete && layer.naturalWidth)) layer.classList.add('is-loaded');
+      return;
+    }
+    const detail = layer.classList.contains('detail-art');
+    layer.sizes = detail ? '172px' : 'auto, 280px';
+    layer.loading = immediate ? 'eager' : 'lazy';
+    layer.onload = () => {
+      const source = layer.currentSrc || layer.src;
+      if (decodedArt.has(source) || immediate) {
+        if (layer.isConnected) layer.classList.add('is-loaded');
+        return;
+      }
+      const done = () => {
+        decodedArt.add(source);
+        queueArtReveal(layer);
+      };
+      if (layer.decode) layer.decode().then(done, done);
+      else done();
     };
-
-    if (immediate || wasDecoded) paint();
-    else decodeArt(url).then((loaded) => {
-      if (loaded && layer.isConnected) queueArtReveal(layer, url);
-    });
+    layer.srcset = [250, 500, 750, 1000].map((px) => `${artAtSize(rel.artwork, px)} ${px}w`).join(', ');
+    layer.src = artAtSize(rel.artwork, 500);
+    if (immediate) layer.classList.add('is-loaded');
   }
 
-  /* The list view can hold hundreds of tiles; setting every background image
-     immediately would fetch all of them on load. Defer each tile's image
-     until it's about to scroll into view (same IntersectionObserver pattern
-     gear.js uses for pagination). */
   let artObserver = null;
   function applyArtLazy(el, rel) {
     if (!rel.artwork) return;
-    const url = artAtSize(rel.artwork, 500);
-    if (decodedArt.has(url)) {
-      const layer = el.querySelector('.tile-art');
-      layer.style.setProperty('--art-url', `url(${JSON.stringify(url)})`);
-      layer.classList.add('is-loaded');
+    const layer = el.querySelector('.tile-art');
+    if (layer.hasAttribute('src')) {
+      if (layer.complete && layer.naturalWidth) layer.classList.add('is-loaded');
+      return;
+    }
+    if (!('IntersectionObserver' in window)) {
+      revealArt(layer, rel);
       return;
     }
     if (!artObserver) {
@@ -543,6 +496,9 @@
   const sortSel = document.getElementById('sortSel');
 
   const state = { q: '', sort: 'newest' };
+  const cardCache = new Map();
+  const sortedLists = new Map();
+  let renderedState = '';
 
   const compareByTitle = (a, b) => compareText(a.title, b.title);
   const SORTERS = {
@@ -556,7 +512,13 @@
     return true;
   }
 
-  function releaseCard(rel) {
+  function releaseCard(rel, variant) {
+    const key = `${variant || 'grid'}:${rel.slug}`;
+    const cached = cardCache.get(key);
+    if (cached) {
+      applyArtLazy(cached.querySelector('.tile-cover'), rel);
+      return cached;
+    }
     const a = document.createElement('a');
     a.className = 'release-tile' + (rel.type === 'Album' ? ' release-tile--album' : '');
     a.href = releaseHref(rel.slug);
@@ -576,13 +538,14 @@
       </div>`;
 
     applyArtLazy(a.querySelector('.tile-cover'), rel);
+    cardCache.set(key, a);
     return a;
   }
 
   function tileGrid(list, variant) {
     const g = document.createElement('div');
     g.className = 'rgrid' + (variant ? ` ${variant}` : '');
-    for (const rel of list) g.appendChild(releaseCard(rel));
+    for (const rel of list) g.appendChild(releaseCard(rel, variant));
     return g;
   }
 
@@ -644,6 +607,19 @@
     return Array.from(grid.querySelectorAll('.rgrid:not(.rgrid--rail) .release-tile'));
   }
 
+  function visiblePrimaryTiles() {
+    const visible = [];
+    for (const tile of primaryTiles()) {
+      const rect = tile.getBoundingClientRect();
+      // Grid rows are in document order. Stop once below the viewport instead
+      // of measuring every remaining cover in the archive.
+      if (rect.top > window.innerHeight + 80) break;
+      if (nearViewport(rect)) visible.push({ tile, rect });
+      if (visible.length === MAX_MOTION_TILES) break;
+    }
+    return visible;
+  }
+
   function addExitClone(tile, rect, opacity, timing) {
     const clone = tile.cloneNode(true);
     clone.querySelectorAll('.is-transition-art').forEach((cover) => cover.classList.remove('is-transition-art'));
@@ -678,9 +654,7 @@
     const oldRects = new Map();
     const visible = [];
     if (hasRendered && !REDUCED.matches) {
-      for (const tile of primaryTiles()) {
-        const rect = tile.getBoundingClientRect();
-        if (!nearViewport(rect)) continue;
+      for (const { tile, rect } of visiblePrimaryTiles()) {
         visible.push({ tile, rect, opacity: getComputedStyle(tile).opacity });
         if (visible.length === MAX_MOTION_TILES) break;
       }
@@ -700,9 +674,7 @@
   function animateGridIn(oldRects) {
     if (!hasRendered || REDUCED.matches) return;
     const timing = gridTiming();
-    const visible = primaryTiles().map((tile) => ({ tile, rect: tile.getBoundingClientRect() }))
-      .filter(({ rect }) => nearViewport(rect))
-      .slice(0, MAX_MOTION_TILES);
+    const visible = visiblePrimaryTiles();
 
     // Arrivals are counted separately from survivors, so the deal stays evenly
     // spaced however many tiles happened to stay put between them.
@@ -736,14 +708,19 @@
   let railObserver = null;
 
   function render() {
+    const signature = JSON.stringify([state.q, state.sort]);
+    if (signature === renderedState) return;
+    renderedState = signature;
     cancelRailMotion();
     if (railObserver) { railObserver.disconnect(); railObserver = null; }
     const sorter = SORTERS[state.sort] || SORTERS.newest;
-    const list = VISIBLE_DB.filter(match).sort(sorter);
+    if (!sortedLists.has(state.sort)) sortedLists.set(state.sort, VISIBLE_DB.slice().sort(sorter));
+    const list = sortedLists.get(state.sort).filter(match);
     const nextKeys = new Set(list.map((rel) => rel.slug));
     const oldRects = captureGridMotion(nextKeys);
 
     countEl.textContent = list.length === 1 ? '1 release' : `${list.length} releases`;
+    grid.removeAttribute('aria-busy');
 
     // Re-rendering (e.g. on every search keystroke) discards the old tiles;
     // drop the observer watching them so it doesn't keep growing forever.
@@ -1162,6 +1139,12 @@
       .filter(Boolean).map(escapeHTML).join(' &middot; ');
 
     const host = (rel.includedIn || [])[0] || null;
+    // Keep the generated links and tracks in place on ordinary loads. Rebuild
+    // only if a compilation has become available since the last generation.
+    if (detailView.dataset.rendered === rel.slug && detailView.dataset.host === (host ? host.slug : '')) {
+      initPreviewPlayer(detailView);
+      return;
+    }
     const fromAlbum = host ? `
       <div class="d-from">Included in <a href="${releaseHref(host.slug)}">${escapeHTML(host.title)}</a>
         <div class="d-from-note">The listening links below open the compilation.</div>
@@ -1213,11 +1196,44 @@
   const querySlug = params.get('r');
   const pathSlug = slugFromPath(window.location.pathname);
 
+  async function renderMissingDetail(slug) {
+    const rel = VISIBLE_DB.find((r) => r.slug === slug);
+    if (!rel) return renderDetail(slug);
+    listView.hidden = true;
+    detailView.hidden = false;
+    detailView.innerHTML = '<p class="grid-msg">Loading…</p>';
+    try {
+      const response = await fetch(`${LIST_URL}details.json`);
+      if (!response.ok) throw new Error('Detail data unavailable');
+      const catalog = await response.json();
+      const releases = new Map(catalog.releases.map((r) => [r.slug, r]));
+      const original = releases.get(slug);
+      if (!original) throw new Error('Release unavailable');
+      rel.links = original.links;
+      rel.otherLinks = original.otherLinks;
+      rel.tracks = original.tracklist.map((ref) => {
+        const canonical = catalog.tracks[ref.trackId];
+        return { ...canonical,
+          title: Object.prototype.hasOwnProperty.call(ref, 'title') ? ref.title : canonical.title,
+          duration: Object.prototype.hasOwnProperty.call(ref, 'duration') ? ref.duration : canonical.duration
+        };
+      });
+      for (const host of rel.includedIn) host.links = releases.get(host.slug).links;
+      renderDetail(slug);
+    } catch {
+      renderDetail(slug);
+      const notice = document.createElement('p');
+      notice.className = 'grid-msg';
+      notice.textContent = 'Unable to load listening links and previews. Please check your connection and refresh the page.';
+      detailView.appendChild(notice);
+    }
+  }
+
   if (querySlug) {
     if (!params.has('missing') && VISIBLE_DB.some((rel) => rel.slug === querySlug)) {
       window.location.replace(releaseHref(querySlug));
     } else {
-      renderDetail(querySlug);
+      renderMissingDetail(querySlug);
     }
   } else if (pathSlug) {
     renderDetail(pathSlug);

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1Z4061KGM"></script>
+  <script async fetchpriority="low" src="https://www.googletagmanager.com/gtag/js?id=G-J1Z4061KGM"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -11,6 +11,12 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    // A cancelled browser transition still completes the navigation.
+    addEventListener('pagereveal', (event) => {
+      if (event.viewTransition) event.viewTransition.ready.catch(() => {});
+    });
+  </script>
   <!-- GitHub Pages serves this file for every URL that doesn't exist, at any
        depth, so every asset path below must be root-absolute. -->
   <meta name="robots" content="noindex">
@@ -23,7 +29,7 @@
        latin subset is listed; nothing in the catalog needs latin-ext, so
        preloading that one too would spend a request on a file no page uses. -->
   <link rel="preload" as="font" type="font/woff2" href="/fonts/lato-700-latin.woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.min.css">
   <link rel="icon" href="/images/icon.png">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <script>
@@ -39,7 +45,7 @@
       }
     }());
   </script>
-  <script src="/nav.js" defer></script>
+  <script src="/nav.min.js" defer></script>
   <style>
     /* Section header (same pattern as the home page) */
     .page-title { margin: 4px 2px 6px; }
