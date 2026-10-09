@@ -2143,6 +2143,13 @@ const TRACKS = {
     spotifyTrackId: "5mfmKTb5PLg5GJVsAYmUNV",
     preview: "https://p.scdn.co/mp3-preview/7a4299cd50d3b07280bde5a911423e6937d1b209"
   },
+  "isrc:QZ6K42601682": {
+    title: "Slider (From \"Super Mario 64\")",
+    isrc: "QZ6K42601682",
+    duration: "4:53",
+    spotifyTrackId: "4oz2wn8Br5StXQUkwDsxMu",
+    preview: "https://p.scdn.co/mp3-preview/5047e91fae75cf8c38e684d09204d49f7caf1a46"
+  },
   "isrc:QZPJ32130394": {
     title: "Snow Mountain (From \"Super Mario 64\") [Arrangement]",
     isrc: "QZPJ32130394",

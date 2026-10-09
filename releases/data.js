@@ -184,6 +184,34 @@ const RELEASES = [
     ]
   },
   {
+    slug: "slider",
+    title: "Slider (From \"Super Mario 64\")",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-10-09",
+    upc: "810179614546",
+    description: "",
+    tags: ["Electro"],
+    artwork: "https://cdn-images.dzcdn.net/images/cover/24eef1db503baac16bf70a1378762567/1000x1000-000000-80-0-0.jpg",
+    links: {
+      bandcamp: "https://pokestir.bandcamp.com/album/slider-from-super-mario-64",
+      spotify: "https://open.spotify.com/album/1M26HYW01SlDvpJ5GanzVY",
+      appleMusic: "https://music.apple.com/us/album/6819835137",
+      youtubeMusic: "",
+      youtube: "https://www.youtube.com/watch?v=o6w9G8oYL3M",
+      pandora: "https://www.pandora.com/artist/pokestir/slider-from-super-mario-64/ALww4pfgccdJhqV",
+      itunes: "https://music.apple.com/us/album/6819835137?app=itunes",
+      deezer: "https://www.deezer.com/album/1115306812",
+      amazonMusic: "https://music.amazon.com/albums/B0HM5NGMQW",
+      tidal: "https://tidal.com/album/567698729",
+      qobuz: "https://open.qobuz.com/album/vzln3s59x7qhw"
+    },
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/SliderPS" }],
+    tracklist: [
+      { trackId: "isrc:QZ6K42601682" },
+    ]
+  },
+  {
     slug: "night-of-fate",
     title: "Night of Fate (From \"Kingdom Hearts\") [Arrangement]",
     subtitle: "",
