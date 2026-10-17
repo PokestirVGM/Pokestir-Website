@@ -184,6 +184,34 @@ const RELEASES = [
     ]
   },
   {
+    slug: "sandgem-town",
+    title: "Sandgem Town (From \"Pokémon Diamond & Pearl\")",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-10-16",
+    upc: "810179614652",
+    description: "",
+    tags: ["Electro"],
+    artwork: "https://cdn-images.dzcdn.net/images/cover/b0194dbebbd1af418293bb76086cbb26/1000x1000-000000-80-0-0.jpg",
+    links: {
+      bandcamp: "https://pokestir.bandcamp.com/album/sandgem-town-from-pok-mon-diamond-pearl",
+      spotify: "https://open.spotify.com/album/21WRY2aJdADQLODumnxjcr",
+      appleMusic: "https://music.apple.com/us/album/6822914502",
+      youtubeMusic: "https://music.youtube.com/watch?v=7gf6RdqA5IU",
+      youtube: "https://www.youtube.com/watch?v=MC9FBvd5cJI",
+      pandora: "https://www.pandora.com/artist/pokestir/sandgem-town-from-pokemon-diamond-and-pearl/ALd34ZVk6Pqlmzg",
+      itunes: "https://music.apple.com/us/album/6822914502?app=itunes",
+      deezer: "https://www.deezer.com/album/1121763422",
+      amazonMusic: "https://music.amazon.com/albums/B0HN3827G7",
+      tidal: "https://tidal.com/album/569953093",
+      qobuz: "https://open.qobuz.com/album/fk0o958250c7u"
+    },
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/SandgemTownPS" }],
+    tracklist: [
+      { trackId: "isrc:QZ6K42601956" },
+    ]
+  },
+  {
     slug: "slider",
     title: "Slider (From \"Super Mario 64\")",
     subtitle: "",

@@ -2032,6 +2032,13 @@ const TRACKS = {
     spotifyTrackId: "698M31MFjjFWvznvdUIDMn",
     preview: "https://p.scdn.co/mp3-preview/24cc606f619c5c324c917da029d1e6251e70dc34"
   },
+  "isrc:QZ6K42601956": {
+    title: "Sandgem Town (From \"Pokémon Diamond & Pearl\")",
+    isrc: "QZ6K42601956",
+    duration: "2:45",
+    spotifyTrackId: "1zg1IV5LSnhUBaS9W1Z62T",
+    preview: "https://p.scdn.co/mp3-preview/fb56bf5524e0579f3b5cf53c27742f9c490207a2"
+  },
   "isrc:QZGWX2245070": {
     title: "Sandgem Town (Day) (From \"Pokémon Diamond & Pearl\")",
     isrc: "QZGWX2245070",
