@@ -710,6 +710,13 @@ const TRACKS = {
     spotifyTrackId: "2Hr9yzq3DvNHG8RyWkN1Dh",
     preview: "https://p.scdn.co/mp3-preview/90440f7a17748bfa602a10e83374d74cf3fc2323"
   },
+  "local:crimson-mirelands-2-2026": {
+    title: "Crimson Mirelands 2 (From \"Pokémon Legends: Arceus\") [Jazz Arrangement]",
+    isrc: "",
+    duration: "",
+    spotifyTrackId: "",
+    preview: ""
+  },
   "isrc:QZPJ32469258": {
     title: "Cult of Despair",
     isrc: "QZPJ32469258",
@@ -1973,6 +1980,13 @@ const TRACKS = {
     duration: "2:51",
     spotifyTrackId: "0h1D8qJaquXCNzV5MtWxfE",
     preview: "https://p.scdn.co/mp3-preview/939d3c4907d37b73bfe4f3187a6cd81b4d15c8d0"
+  },
+  "local:route-47-dnb-2026": {
+    title: "Route 47 (From \"Pokémon HeartGold & SoulSilver\") [DnB Remix]",
+    isrc: "",
+    duration: "4:08",
+    spotifyTrackId: "",
+    preview: ""
   },
   "isrc:QZ6K42501086": {
     title: "Route 47 (From \"Pokémon HeartGold & SoulSilver\") [Arr. for Orchestra by Pokestir]",

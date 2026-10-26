@@ -184,6 +184,46 @@ const RELEASES = [
     ]
   },
   {
+    slug: "crimson-mirelands-2",
+    title: "Crimson Mirelands 2 (From \"Pokémon Legends: Arceus\") [Jazz Arrangement]",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-10-30",
+    upc: "",
+    description: "",
+    tags: [],
+    artwork: "",
+    links: { bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "", youtube: "", pandora: "", itunes: "", deezer: "", amazonMusic: "", tidal: "", qobuz: "" },
+    otherLinks: [],
+    tracklist: [{ trackId: "local:crimson-mirelands-2-2026" }]
+  },
+  {
+    slug: "route-47-dnb-remix",
+    title: "Route 47 (From \"Pokémon HeartGold & SoulSilver\") [DnB Remix]",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-10-23",
+    upc: "",
+    description: "",
+    tags: ["Electro"],
+    artwork: "https://linkstorage.linkfire.com/medialinks/images/ec01c010-c2e7-40a1-868e-f3cf60c9e90c/artwork-440x440.jpg",
+    links: {
+      bandcamp: "",
+      spotify: "https://open.spotify.com/album/1XGZ6t2fgVKoEfk6fdP5DQ",
+      appleMusic: "https://music.apple.com/us/album/6825028547",
+      youtubeMusic: "",
+      youtube: "https://www.youtube.com/watch?v=wlRmBHUoCrU",
+      pandora: "https://www.pandora.com/artist/pokestir/route-47-from-pokemon-heartgold-and-soulsilver-dnb-remix/ALcwc73222mxjxP",
+      itunes: "https://music.apple.com/us/album/6825028547?app=itunes",
+      deezer: "https://www.deezer.com/album/1126453131",
+      amazonMusic: "https://music.amazon.com/albums/B0HNQRLLXT",
+      tidal: "https://tidal.com/album/571609565",
+      qobuz: "https://open.qobuz.com/album/wiqd7xpgamwmd"
+    },
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/Route47PS" }],
+    tracklist: [{ trackId: "local:route-47-dnb-2026" }]
+  },
+  {
     slug: "sandgem-town",
     title: "Sandgem Town (From \"Pokémon Diamond & Pearl\")",
     subtitle: "",
