@@ -39,10 +39,16 @@ for (const rel of source.RELEASES) {
   const embedded = /<script type="application\/json" id="release-catalog">(.*?)<\/script>/s.exec(html);
   assert.ok(embedded, `Missing detail data: ${rel.slug}`);
   const catalog = JSON.parse(embedded[1]);
-  assert.deepEqual(catalog.releases[0], rel, `Changed detail release: ${rel.slug}`);
-  for (const ref of rel.tracklist) {
-    assert.deepEqual(catalog.tracks[ref.trackId], source.TRACKS[ref.trackId], `Lost detail track: ${ref.trackId}`);
-  }
+  const ids = new Set(rel.tracklist.map(ref => ref.trackId));
+  const hosts = source.RELEASES.filter(other => {
+    if (other === rel || !ids.size || other.tracklist.length <= rel.tracklist.length) return false;
+    const otherIds = new Set(other.tracklist.map(ref => ref.trackId));
+    return [...ids].every(id => otherIds.has(id));
+  });
+  const needed = ({ slug, title, type, releaseDate, links, otherLinks }) =>
+    Object.fromEntries(Object.entries({ slug, title, type, releaseDate, links, otherLinks })
+      .filter(([, value]) => value != null && value !== '' && (!Array.isArray(value) || value.length)));
+  assert.deepEqual(catalog, { releases: [rel, ...hosts].map(needed) }, `Changed detail link data: ${rel.slug}`);
   assert.equal((html.match(/class="track-row(?: has-preview)?"/g) || []).length, rel.tracklist.length, `Missing static tracks: ${rel.slug}`);
   assert.ok(!html.includes('src="../releases.min.js"'), `Detail page loads archive code: ${rel.slug}`);
   pages++;

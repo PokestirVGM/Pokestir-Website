@@ -103,3 +103,21 @@ Local benchmark and browser scripts/results remain in the Codex task workspace
 for inspection. Third-party artwork, Spotify previews, Analytics, and YouTube
 still depend on their providers and the visitor's network. Existing media,
 streaming destinations, forms, and analytics were retained.
+
+## October 26, 2026: detail-page payload
+
+Detail pages now embed only the release and compilation fields needed to
+refresh listening links. Their visible track rows and links were already in the
+HTML, so embedding the recording data again added bytes to every page load.
+The rare local-date fallback fetches the full catalog when it needs the archive
+router. Across 269 generated pages, the HTML dropped from 5,242,419 to
+4,147,730 bytes in total. For example, Azalea Town dropped from 20,426 to
+14,223 bytes (4,957 to 3,852 bytes with gzip). These are file-size comparisons,
+not measured production load times; each visitor downloads only the pages they
+visit.
+
+The shared card observer also skips gear-grid mutations, since those cards have
+no ambient border animation. Filtering still uses the same card and motion
+code. Generated page markup outside the embedded JSON remained identical;
+browser checks covered playback, compilation-link refresh, the earlier-date
+fallback, and gear filtering.

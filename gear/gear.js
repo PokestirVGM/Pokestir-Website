@@ -27,6 +27,7 @@
   const subtagsWrapEl = document.getElementById("subtagsWrap");
 
   let DB = [];
+  let catalogLoaded = false;
   const cardCache = new Map();
   const sortedLists = new Map();
 
@@ -591,6 +592,8 @@
   }
 
   function render() {
+    // Keep early filter choices, but wait for data before caching sorted lists.
+    if (!catalogLoaded) return;
     const sorter = SORTERS[state.sort] || SORTERS.recent;
     if (!sortedLists.has(state.sort)) sortedLists.set(state.sort, DB.slice().sort(sorter));
     const nextList = sortedLists.get(state.sort).filter(match);
@@ -675,6 +678,7 @@
       return;
     }
     buildVendorOptions();
+    catalogLoaded = true;
     render();
   }
 

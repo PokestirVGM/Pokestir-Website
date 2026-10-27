@@ -36,15 +36,25 @@
   };
   if (dateMs(rel.releaseDate) > today) {
     // Preserve the full router's handling of a future release in a visitor's
-    // local timezone; the normal detail page never needs archive code.
-    const script = document.createElement('script');
-    script.src = '/releases/releases.min.js';
+    // local timezone. Only this rare path needs the complete recording data.
     root.hidden = true;
-    script.onerror = () => {
+    const showLoadError = () => {
       root.hidden = false;
       root.innerHTML = '<a class="back-link" href="/releases/">All Releases</a><p class="grid-msg">Unable to load release data. Please check your connection and refresh the page.</p>';
     };
-    document.head.appendChild(script);
+    fetch('/releases/details.json').then((response) => {
+      if (!response.ok) throw new Error('Detail data unavailable');
+      return response.json();
+    }).then((full) => {
+      const releases = new Map(full.releases.map((release) => [release.slug, release]));
+      const originals = catalog.releases.map((release) => releases.get(release.slug));
+      if (originals.some((release) => !release)) throw new Error('Release unavailable');
+      embedded.textContent = JSON.stringify({ tracks: full.tracks, releases: originals });
+      const script = document.createElement('script');
+      script.src = '/releases/releases.min.js';
+      script.onerror = showLoadError;
+      document.head.appendChild(script);
+    }).catch(showLoadError);
     return;
   }
   const host = catalog.releases.slice(1).filter((r) => dateMs(r.releaseDate) <= today)
@@ -126,10 +136,12 @@
     const audio = new Audio();
     audio.preload = 'none';
     let current = null;
+    let playRequest = 0;
 
     function play(row) {
+      const request = ++playRequest;
       audio.play().catch(() => {
-        if (current !== row) return;
+        if (current !== row || request !== playRequest) return;
         setRow(row, false);
         current = null;
       });
@@ -160,7 +172,7 @@
     function toggle(row) {
       if (current === row) {
         if (audio.paused) play(row);
-        else audio.pause();
+        else { playRequest++; audio.pause(); }
         return;
       }
       if (current) setRow(current, false);
@@ -180,11 +192,13 @@
     audio.addEventListener('play', () => { if (current) setRow(current, true); });
     audio.addEventListener('pause', () => { if (current) setRow(current, false, false); });
     audio.addEventListener('ended', () => {
+      playRequest++;
       if (current) { setRow(current, false); current = null; }
     });
     // If a preview URL ever goes dead, reset the row instead of leaving it
     // stuck. The replacement can be edited directly in tracks-data.js.
     audio.addEventListener('error', () => {
+      playRequest++;
       if (current) { setRow(current, false); current = null; }
     });
     audio.addEventListener('timeupdate', () => {

@@ -986,10 +986,12 @@
     const audio = new Audio();
     audio.preload = 'none';
     let current = null;
+    let playRequest = 0;
 
     function play(row) {
+      const request = ++playRequest;
       audio.play().catch(() => {
-        if (current !== row) return;
+        if (current !== row || request !== playRequest) return;
         setRow(row, false);
         current = null;
       });
@@ -1020,7 +1022,7 @@
     function toggle(row) {
       if (current === row) {
         if (audio.paused) play(row);
-        else audio.pause();
+        else { playRequest++; audio.pause(); }
         return;
       }
       if (current) setRow(current, false);
@@ -1040,11 +1042,13 @@
     audio.addEventListener('play', () => { if (current) setRow(current, true); });
     audio.addEventListener('pause', () => { if (current) setRow(current, false, false); });
     audio.addEventListener('ended', () => {
+      playRequest++;
       if (current) { setRow(current, false); current = null; }
     });
     // If a preview URL ever goes dead, reset the row instead of leaving it
     // stuck. The replacement can be edited directly in tracks-data.js.
     audio.addEventListener('error', () => {
+      playRequest++;
       if (current) { setRow(current, false); current = null; }
     });
     audio.addEventListener('timeupdate', () => {

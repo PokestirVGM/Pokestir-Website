@@ -41,7 +41,9 @@
     (function () {
       var m = /^\/releases\/([^/]+)\/?$/.exec(window.location.pathname);
       if (m && !/\.html?$/i.test(m[1])) {
-        window.location.replace('/releases/?r=' + m[1] + '&missing=1');
+        var slug;
+        try { slug = decodeURIComponent(m[1]); } catch (e) { slug = m[1]; }
+        window.location.replace('/releases/?r=' + encodeURIComponent(slug) + '&missing=1');
       }
     }());
   </script>

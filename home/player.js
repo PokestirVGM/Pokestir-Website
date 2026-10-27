@@ -62,7 +62,11 @@
       history.replaceState(null, '', '#commissions');
     });
   }
-  if (comm && location.hash === '#commissions') comm.open = true;
+  function openLinkedCommissions() {
+    if (comm && location.hash === '#commissions') comm.open = true;
+  }
+  openLinkedCommissions();
+  addEventListener('hashchange', openLinkedCommissions);
 
   // Covers fade in as they load rather than popping in. Opted into here, so
   // without the script they simply show.
@@ -179,12 +183,13 @@
         listEl.appendChild(li);
         return;
       }
-      filtered.forEach((track) => {
+      const selectedVisible = filtered.some((track) => TRACKS.indexOf(track) === currentIdx);
+      filtered.forEach((track, position) => {
         const idx = TRACKS.indexOf(track);
         const li = document.createElement('li');
         li.setAttribute('role', 'option');
         li.setAttribute('aria-selected', String(idx === currentIdx));
-        li.setAttribute('tabindex', '0');
+        li.setAttribute('tabindex', (idx === currentIdx || (!selectedVisible && position === 0)) ? '0' : '-1');
         li.dataset.idx = String(idx);   // lets syncSelection find rows without a rebuild
         li.innerHTML = `
           <div class="mw-item-info">
@@ -196,6 +201,14 @@
         li.addEventListener('click', () => play(idx));
         li.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(idx); }
+          const target = e.key === 'ArrowDown' ? Math.min(position + 1, filtered.length - 1)
+            : e.key === 'ArrowUp' ? Math.max(position - 1, 0)
+            : e.key === 'Home' ? 0 : e.key === 'End' ? filtered.length - 1 : -1;
+          if (target < 0) return;
+          e.preventDefault();
+          li.tabIndex = -1;
+          listEl.children[target].tabIndex = 0;
+          listEl.children[target].focus();
         });
         listEl.appendChild(li);
       });
@@ -210,6 +223,7 @@
       for (const li of listEl.children) {
         if (li.dataset.idx === undefined) continue;   // the .mw-empty placeholder
         li.setAttribute('aria-selected', String(Number(li.dataset.idx) === currentIdx));
+        li.tabIndex = Number(li.dataset.idx) === currentIdx ? 0 : -1;
       }
     }
 
@@ -307,10 +321,11 @@
     audio.addEventListener('timeupdate', () => {
       const total = audio.duration;
       if (!isFinite(total) || total <= 0) return;
-      seekEl.value = audio.currentTime;
-      // Clamped: currentTime can sit a hair past a duration that was revised
-      // downward, which would otherwise push the fill past the end of its track.
-      setPct(Math.min(100, audio.currentTime / total * 100) + '%', !scrubbing);
+      if (!scrubbing) {
+        seekEl.value = audio.currentTime;
+        // A revised duration can leave currentTime slightly past the end.
+        setPct(Math.min(100, audio.currentTime / total * 100) + '%', true);
+      }
       curEl.textContent = fmt(audio.currentTime);
     });
 
@@ -334,6 +349,7 @@
       if (!scrubbing) return;
       scrubbing = false;
       seekEl.classList.remove('is-scrubbing');
+      seekEl.value = audio.currentTime;
     };
     seekEl.addEventListener('pointerdown', () => {
       scrubbing = true;

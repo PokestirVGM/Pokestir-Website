@@ -287,24 +287,26 @@ function jsonLd(data) {
   return JSON.stringify(data, null, 2).replace(/<\//g, '<\\/');
 }
 
-/* A detail page needs its own recordings and any containing compilations,
-   not the entire archive. Include future compilations too: the browser still
-   decides which are released using the visitor's local calendar date. */
-function detailCatalog(rel, TRACKS, RELEASES) {
+/* Include future compilations: the browser decides which are released using
+   the visitor's local calendar date. */
+function detailCatalog(rel, RELEASES) {
   const ids = new Set((rel.tracklist || []).map((ref) => ref.trackId));
   const releases = [rel, ...RELEASES.filter((other) => {
     if (other === rel || !ids.size || other.tracklist.length <= rel.tracklist.length) return false;
     const otherIds = new Set(other.tracklist.map((ref) => ref.trackId));
     return [...ids].every((id) => otherIds.has(id));
   })];
-  const tracks = {};
-  for (const release of releases) {
-    for (const ref of release.tracklist) {
-      const track = TRACKS[ref.trackId];
-      tracks[ref.trackId] = ids.has(ref.trackId) ? track : prune({ title: track.title, isrc: track.isrc });
-    }
-  }
-  return { tracks, releases };
+  return { releases };
+}
+
+// The visible tracks and links are already in the HTML. On ordinary visits,
+// details.js only needs these fields to update compilation links and return
+// navigation. The full catalog is fetched only for the future-date fallback.
+function clientDetailCatalog(catalog) {
+  return { releases: catalog.releases.map((rel) => prune({
+    slug: rel.slug, title: rel.title, type: rel.type, releaseDate: rel.releaseDate,
+    links: rel.links, otherLinks: rel.otherLinks
+  })) };
 }
 
 const PLATFORMS = [
@@ -351,7 +353,7 @@ function renderReleasePage(rel, TRACKS, RELEASES, todayMs) {
     : '';
 
   const schema = jsonLd(structuredData(rel, resolveTracks(rel, TRACKS)));
-  const catalog = detailCatalog(rel, TRACKS, RELEASES);
+  const catalog = detailCatalog(rel, RELEASES);
   const host = catalog.releases.slice(1).filter((other) => isReleased(other, todayMs))
     .sort((a, b) => dateMs(b.releaseDate) - dateMs(a.releaseDate))[0];
   const buttons = platformButtons(rel, host);
@@ -411,7 +413,7 @@ ${schema}
   <link rel="stylesheet" href="../releases.min.css">
   <link rel="icon" type="image/png" sizes="128x128" href="../../images/favicon.png">
   <link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
-  <script type="application/json" id="release-catalog">${JSON.stringify(catalog).replace(/</g, '\\u003c')}</script>
+  <script type="application/json" id="release-catalog">${JSON.stringify(clientDetailCatalog(catalog)).replace(/</g, '\\u003c')}</script>
   <script src="../../nav.min.js" defer></script>
   <script src="../details.min.js" defer blocking="render"></script>
 </head>

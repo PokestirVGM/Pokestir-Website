@@ -875,6 +875,10 @@
 
   const cardMutations = new MutationObserver((records) => {
     records.forEach((record) => {
+      // Gear cards have no ambient edge, including when a filter replaces a
+      // whole page of them. Skip their subtree rather than scanning every card
+      // and its descendants just to discard it in observeCard().
+      if (record.target instanceof Element && record.target.closest('#grid')) return;
       record.removedNodes.forEach((node) => {
         if (!cardObserver) return;
         cardsWithin(node).forEach((card) => cardObserver.unobserve(card));
