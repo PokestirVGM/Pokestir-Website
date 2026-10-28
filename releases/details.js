@@ -31,10 +31,18 @@
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
   const dateMs = (value) => {
-    const parts = String(value || '').split('-').map(Number);
-    return parts[0] ? new Date(parts[0], (parts[1] || 1) - 1, parts[2] || 1).getTime() : 0;
+    const match = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(String(value || ''));
+    if (!match) return null;
+    const year = Number(match[1]);
+    const month = Number(match[2]);
+    const day = match[3] ? Number(match[3]) : 1;
+    const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+    const daysInMonth = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    if (month < 1 || month > 12 || day < 1 || day > daysInMonth[month - 1]) return null;
+    return new Date(year, month - 1, day).getTime();
   };
-  if (dateMs(rel.releaseDate) > today) {
+  const releaseDateMs = dateMs(rel.releaseDate);
+  if (releaseDateMs === null || releaseDateMs > today) {
     // Preserve the full router's handling of a future release in a visitor's
     // local timezone. Only this rare path needs the complete recording data.
     root.hidden = true;
@@ -57,7 +65,10 @@
     }).catch(showLoadError);
     return;
   }
-  const host = catalog.releases.slice(1).filter((r) => dateMs(r.releaseDate) <= today)
+  const host = catalog.releases.slice(1).filter((r) => {
+    const releaseMs = dateMs(r.releaseDate);
+    return releaseMs !== null && releaseMs <= today;
+  })
     .sort((a, b) => dateMs(b.releaseDate) - dateMs(a.releaseDate))[0];
   if (root.dataset.host !== (host ? host.slug : '')) {
     root.querySelector('.d-from')?.remove();

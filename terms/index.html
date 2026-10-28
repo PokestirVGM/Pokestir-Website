@@ -172,8 +172,10 @@
       if (!box) return;
       const text = box.dataset.copy;
       if (!text) return;
+      let copied = false;
       try {
         await navigator.clipboard.writeText(text);
+        copied = true;
       } catch (err) {
         /* Clipboard API needs a secure context and permission; fall back to a
            throwaway textarea so the button still works over plain http and in
@@ -184,9 +186,12 @@
         scratch.style.cssText = 'position:fixed;top:-9999px;opacity:0';
         document.body.appendChild(scratch);
         scratch.select();
-        try { document.execCommand('copy'); } catch (e2) { /* nothing left to try */ }
+        try { copied = document.execCommand('copy'); } catch (e2) { /* nothing left to try */ }
         scratch.remove();
       }
+      // execCommand can return false without throwing. Keep the control at
+      // Copy in that case instead of claiming the clipboard changed.
+      if (!copied) return;
       box.classList.add('is-done');
       clearTimeout(box._copyReset);
       box._copyReset = setTimeout(() => box.classList.remove('is-done'), 1600);

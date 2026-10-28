@@ -82,9 +82,15 @@
 
   /* Accepts "YYYY-MM-DD" or "YYYY-MM". */
   function parseReleaseDate(s) {
-    const parts = String(s || '').split('-').map((p) => parseInt(p, 10));
-    if (!parts.length || Number.isNaN(parts[0])) return null;
-    return { y: parts[0], m: parts[1] || 1, d: parts[2] || null };
+    const match = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(String(s || ''));
+    if (!match) return null;
+    const y = Number(match[1]);
+    const m = Number(match[2]);
+    const d = match[3] ? Number(match[3]) : null;
+    const leap = y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0);
+    const daysInMonth = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    if (m < 1 || m > 12 || (d !== null && (d < 1 || d > daysInMonth[m - 1]))) return null;
+    return { y, m, d };
   }
 
   function dateMs(s) {
@@ -117,8 +123,14 @@
       (rel.tracks || []).map((t) =>
         t.title + ' ' + (t.isrc || '') + ' ' + (t.artists || []).join(' ')).join(' ')
     ].join(' ').toLowerCase();
-    const relDateMs = dateMs(rel.releaseDate);
-    return { ...rel, dateMs: relDateMs, isReleased: relDateMs <= TODAY_MS, searchHaystack: haystack };
+    const parsedDate = parseReleaseDate(rel.releaseDate);
+    const relDateMs = parsedDate ? dateMs(rel.releaseDate) : 0;
+    return {
+      ...rel,
+      dateMs: relDateMs,
+      isReleased: Boolean(parsedDate) && relDateMs <= TODAY_MS,
+      searchHaystack: haystack
+    };
   }
 
   // Generated details carry just the relevant catalog in their HTML. The
@@ -136,6 +148,9 @@
     }
     if (trackId.startsWith('isrc:') && trackId !== `isrc:${track.isrc || ''}`) {
       catalogErrors.push(`Track ${trackId} does not match its stored ISRC.`);
+    }
+    if (track.duration && !/^\d+:[0-5]\d$/.test(track.duration)) {
+      catalogErrors.push(`Track ${trackId} has invalid duration "${track.duration}".`);
     }
   }
 
@@ -164,6 +179,9 @@
       catalogErrors.push('A release is missing its slug.');
       return [];
     }
+    if (!parseReleaseDate(rel.releaseDate)) {
+      catalogErrors.push(`Release ${rel.slug} has invalid releaseDate "${rel.releaseDate}".`);
+    }
     if (seenSlugs.has(rel.slug)) {
       catalogErrors.push(`Duplicate release slug ${rel.slug}; the later entry was ignored.`);
       return [];
@@ -177,6 +195,9 @@
     const seenTrackIds = new Set();
     const tracks = [];
     for (const ref of refs) {
+      if (ref && ref.duration && !/^\d+:[0-5]\d$/.test(ref.duration)) {
+        catalogErrors.push(`Release ${rel.slug} has invalid track duration override "${ref.duration}".`);
+      }
       if (ref && ref.trackId) {
         if (seenTrackIds.has(ref.trackId)) {
           catalogErrors.push(`Release ${rel.slug} contains duplicate track ${ref.trackId}.`);

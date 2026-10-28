@@ -24,6 +24,7 @@ RANGE_RE = re.compile(r"bytes=(\d*)-(\d*)")
 
 class RangeHandler(http.server.SimpleHTTPRequestHandler):
     def send_head(self):
+        self._range_length = None
         header = self.headers.get("Range")
         if not header:
             return super().send_head()
@@ -38,12 +39,18 @@ class RangeHandler(http.server.SimpleHTTPRequestHandler):
             return None
 
         size = os.fstat(f.fileno()).st_size
-        match = RANGE_RE.match(header)
+        # This server handles one range at a time. A malformed or multiple
+        # range request is ignored and served normally instead of silently
+        # treating its first prefix as the complete request.
+        match = RANGE_RE.fullmatch(header)
         if not match:
             f.close()
             return super().send_head()
 
         start_raw, end_raw = match.group(1), match.group(2)
+        if not start_raw and not end_raw:
+            f.close()
+            return super().send_head()
         if start_raw:
             start = int(start_raw)
             end = int(end_raw) if end_raw else size - 1
@@ -68,21 +75,24 @@ class RangeHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Content-Length", str(end - start + 1))
         self.send_header("Accept-Ranges", "bytes")
         self.end_headers()
-
         f.seek(start)
-        remaining = end - start + 1
+        self._range_length = end - start + 1
+        return f
+
+    def copyfile(self, source, outputfile):
+        remaining = self._range_length
+        if remaining is None:
+            return super().copyfile(source, outputfile)
         while remaining > 0:
-            chunk = f.read(min(64 * 1024, remaining))
+            chunk = source.read(min(64 * 1024, remaining))
             if not chunk:
                 break
             try:
-                self.wfile.write(chunk)
+                outputfile.write(chunk)
             except (BrokenPipeError, ConnectionResetError):
                 # Media elements routinely abandon a range mid-flight.
                 break
             remaining -= len(chunk)
-        f.close()
-        return None
 
     def end_headers(self):
         # Advertised on every response so the browser knows it can seek at all,

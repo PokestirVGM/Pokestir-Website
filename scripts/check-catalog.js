@@ -24,7 +24,7 @@ function validateCatalog(TRACKS, RELEASES) {
 
   const ISRC_RE = /^[A-Z]{2}[A-Z0-9]{3}\d{7}$/;
   const SPOTIFY_PREVIEW_RE = /^https:\/\/p\.scdn\.co\//;
-  const DURATION_RE = /^\d+:\d{2}$/;
+  const DURATION_RE = /^\d+:[0-5]\d$/;
   const SLUG_RE = /^[a-z0-9-]+$/;
   const DATE_RE = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/;
   const KNOWN_TYPES = ['Single', 'Album'];
@@ -88,7 +88,10 @@ function validateCatalog(TRACKS, RELEASES) {
     } else {
       const month = parseInt(dm[2], 10);
       const day = dm[3] ? parseInt(dm[3], 10) : 1;
-      if (month < 1 || month > 12 || day < 1 || day > 31) {
+      const year = parseInt(dm[1], 10);
+      const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+      const daysInMonth = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      if (month < 1 || month > 12 || day < 1 || day > (daysInMonth[month - 1] || 0)) {
         errors.push(`${label}: releaseDate "${rel.releaseDate}" has an impossible month or day.`);
       }
     }
