@@ -191,10 +191,22 @@ const RELEASES = [
     releaseDate: "2026-10-30",
     upc: "",
     description: "",
-    tags: [],
-    artwork: "",
-    links: { bandcamp: "", spotify: "", appleMusic: "", youtubeMusic: "", youtube: "", pandora: "", itunes: "", deezer: "", amazonMusic: "", tidal: "", qobuz: "" },
-    otherLinks: [],
+    tags: ["Pokémon", "Arrangement", "Electronic"],
+    artwork: "https://i.scdn.co/image/ab67616d0000e1a32278c8039435cf58c35c41f4",
+    links: {
+      bandcamp: "https://pokestir.bandcamp.com/album/crimson-mirelands-2-from-pok-mon-legends-arceus-jazz-arrangement",
+      spotify: "https://open.spotify.com/album/0VYKDbZU2r0TssxWj2IEOM",
+      appleMusic: "https://music.apple.com/us/album/6827273397",
+      youtubeMusic: "https://music.youtube.com/watch?v=BC4dTwePSuY",
+      youtube: "https://www.youtube.com/watch?v=N2LqQXsd1yo",
+      pandora: "https://www.pandora.com/AL:70638050",
+      itunes: "https://music.apple.com/us/album/6827273397?app=itunes",
+      deezer: "",
+      amazonMusic: "https://music.amazon.com/albums/B0HPCC29D2",
+      tidal: "https://tidal.com/album/573347946",
+      qobuz: "https://open.qobuz.com/album/o0v8gme1o2m4e"
+    },
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/crimsonmirelandsPS" }],
     tracklist: [{ trackId: "local:crimson-mirelands-2-2026" }]
   },
   {

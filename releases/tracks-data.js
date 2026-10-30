@@ -713,8 +713,8 @@ const TRACKS = {
   "local:crimson-mirelands-2-2026": {
     title: "Crimson Mirelands 2 (From \"Pokémon Legends: Arceus\") [Jazz Arrangement]",
     isrc: "",
-    duration: "",
-    spotifyTrackId: "",
+    duration: "3:03",
+    spotifyTrackId: "35hwgMiHnwHRohsMxpKSZk",
     preview: ""
   },
   "isrc:QZPJ32469258": {
