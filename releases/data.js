@@ -184,6 +184,32 @@ const RELEASES = [
     ]
   },
   {
+    slug: "cherrygrove-city",
+    title: "Cherrygrove City (From \"Pokémon HeartGold & SoulSilver\")",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-11-06",
+    upc: "",
+    description: "",
+    tags: ["Pokémon", "Arrangement", "Electronic"],
+    artwork: "https://cdn-images.dzcdn.net/images/cover/5afe094ca089e2f5f6ccea2d178e995f/500x500-000000-80-0-0.jpg",
+    links: {
+      bandcamp: "https://pokestir.bandcamp.com/album/cherrygrove-city-from-pok-mon-heartgold-soulsilver",
+      spotify: "https://open.spotify.com/album/4zsAIdpfkMulmUWsLtaXJe",
+      appleMusic: "https://music.apple.com/us/album/6829014936",
+      youtubeMusic: "",
+      youtube: "",
+      pandora: "https://www.pandora.com/artist/pokestir/cherrygrove-city-from-pokemon-heartgold-and-soulsilver/ALd7gph52jZZ5zk",
+      itunes: "https://music.apple.com/us/album/6829014936?app=itunes",
+      deezer: "https://www.deezer.com/album/1135052891",
+      amazonMusic: "https://music.amazon.com/albums/B0HPWQ36MC",
+      tidal: "https://tidal.com/album/574763364",
+      qobuz: "https://open.qobuz.com/album/ez63mkpgksjl6"
+    },
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/cherrygrovecityPS" }],
+    tracklist: [{ trackId: "local:cherrygrove-city-2026" }]
+  },
+  {
     slug: "crimson-mirelands-2",
     title: "Crimson Mirelands 2 (From \"Pokémon Legends: Arceus\") [Jazz Arrangement]",
     subtitle: "",

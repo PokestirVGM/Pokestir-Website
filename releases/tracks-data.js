@@ -650,6 +650,13 @@ const TRACKS = {
     spotifyTrackId: "6iMz0ESszyNKCEVAJUveuY",
     preview: "https://p.scdn.co/mp3-preview/bcfb572fd9d07b21bbdc14bdfa079bdf8d7fdb7f"
   },
+  "local:cherrygrove-city-2026": {
+    title: "Cherrygrove City (From \"Pokémon HeartGold & SoulSilver\")",
+    isrc: "",
+    duration: "3:23",
+    spotifyTrackId: "0ngcjMjWWkLUraqZVVAZxc",
+    preview: ""
+  },
   "isrc:QZPJ32328390": {
     title: "Chocobo Jam (From \"Final Fantasy X\") [Arrangement]",
     isrc: "QZPJ32328390",
