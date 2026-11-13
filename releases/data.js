@@ -184,6 +184,32 @@ const RELEASES = [
     ]
   },
   {
+    slug: "ecruteak-city",
+    title: "Ecruteak City (From \"Pokémon HeartGold & SoulSilver\")",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-11-13",
+    upc: "810179614867",
+    description: "",
+    tags: ["Pokémon", "Arrangement", "Electronic"],
+    artwork: "https://cdn-images.dzcdn.net/images/cover/d811deedcf79aaec37e940c52fa61d6f/500x500-000000-80-0-0.jpg",
+    links: {
+      bandcamp: "https://pokestir.bandcamp.com/album/ecruteak-city-from-pok-mon-heartgold-soulsilver",
+      spotify: "https://open.spotify.com/album/2Z1h8QIY4zID1PwgbFUZ7S",
+      appleMusic: "https://music.apple.com/us/album/6830833808",
+      youtubeMusic: "https://music.youtube.com/watch?v=NpKcQzRW6wE",
+      youtube: "https://www.youtube.com/watch?v=QfKh2OI9QNI",
+      pandora: "https://www.pandora.com/artist/pokestir/ecruteak-city-from-pokemon-heartgold-and-soulsilver/AL93wKbttxpn6wV",
+      itunes: "https://music.apple.com/us/album/6830833808?app=itunes",
+      deezer: "https://www.deezer.com/album/1138832951",
+      amazonMusic: "https://music.amazon.com/albums/B0HQF76TY8",
+      tidal: "https://tidal.com/album/576043407",
+      qobuz: "https://www.qobuz.com/us-en/album/ecruteak-city-from-pokemon-heartgold-soulsilver-pokestir/rbfic7amnb389"
+    },
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/EcruteakCityPS" }],
+    tracklist: [{ trackId: "local:ecruteak-city-2026" }]
+  },
+  {
     slug: "cherrygrove-city",
     title: "Cherrygrove City (From \"Pokémon HeartGold & SoulSilver\")",
     subtitle: "",
@@ -198,7 +224,7 @@ const RELEASES = [
       spotify: "https://open.spotify.com/album/4zsAIdpfkMulmUWsLtaXJe",
       appleMusic: "https://music.apple.com/us/album/6829014936",
       youtubeMusic: "",
-      youtube: "",
+      youtube: "https://www.youtube.com/watch?v=bDkHdET6XpU",
       pandora: "https://www.pandora.com/artist/pokestir/cherrygrove-city-from-pokemon-heartgold-and-soulsilver/ALd7gph52jZZ5zk",
       itunes: "https://music.apple.com/us/album/6829014936?app=itunes",
       deezer: "https://www.deezer.com/album/1135052891",

@@ -864,6 +864,13 @@ const TRACKS = {
     spotifyTrackId: "",
     preview: ""
   },
+  "local:ecruteak-city-2026": {
+    title: "Ecruteak City (From \"Pokémon HeartGold & SoulSilver\")",
+    isrc: "",
+    duration: "5:09",
+    spotifyTrackId: "5ImAVx1FOoMvPCeUmzYuZo",
+    preview: ""
+  },
   "isrc:QZPJ32168957": {
     title: "Embracing One's Duty (From \"Pokémon Black & White\")",
     isrc: "QZPJ32168957",
