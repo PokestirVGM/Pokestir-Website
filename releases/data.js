@@ -184,6 +184,32 @@ const RELEASES = [
     ]
   },
   {
+    slug: "radio-tower-occupied",
+    title: "Radio Tower Occupied! (From \"Pokémon HeartGold & SoulSilver\")",
+    subtitle: "",
+    type: "Single",
+    releaseDate: "2026-11-20",
+    upc: "810179614973",
+    description: "",
+    tags: ["Pokémon", "Arrangement"],
+    artwork: "https://linkstorage.linkfire.com/medialinks/images/eedaddf2-a062-42d8-b91a-f68d4d6b314e/artwork-440x440.jpg",
+    links: {
+      bandcamp: "https://pokestir.bandcamp.com/album/radio-tower-occupied-from-pok-mon-heartgold-soulsilver",
+      spotify: "https://open.spotify.com/album/4OaPKwIodnYqXdVs8c5wo8",
+      appleMusic: "https://music.apple.com/us/album/6836002937",
+      youtubeMusic: "https://music.youtube.com/playlist?list=OLAK5uy_nio5W7jwKdmXEBSsl92ekVnhRsc_PzdLQ",
+      youtube: "https://www.youtube.com/watch?v=55MGvRstaLs",
+      pandora: "https://www.pandora.com/artist/pokestir/radio-tower-occupied-from-pokemon-heartgold-and-soulsilver/ALk7hbXm2ZPXn3K",
+      itunes: "",
+      deezer: "https://www.deezer.com/us/album/1149278551",
+      amazonMusic: "https://music.amazon.com/albums/B0HS2C9XKP",
+      tidal: "https://tidal.com/album/radio-tower-occupied-from-pok%C3%A9mon-heartgold-soulsilver/580030934",
+      qobuz: ""
+    },
+    otherLinks: [{ label: "Listen Everywhere", url: "https://materia.to/RadioTowerPS" }],
+    tracklist: [{ trackId: "local:radio-tower-occupied-2026" }]
+  },
+  {
     slug: "ecruteak-city",
     title: "Ecruteak City (From \"Pokémon HeartGold & SoulSilver\")",
     subtitle: "",

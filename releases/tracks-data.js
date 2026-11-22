@@ -1700,6 +1700,13 @@ const TRACKS = {
     spotifyTrackId: "",
     preview: ""
   },
+  "local:radio-tower-occupied-2026": {
+    title: "Radio Tower Occupied! (From \"Pokémon HeartGold & SoulSilver\")",
+    isrc: "",
+    duration: "2:37",
+    spotifyTrackId: "",
+    preview: ""
+  },
   "isrc:QZGWX2245189": {
     title: "Relic Castle (From “Pokémon Black & White”) - Arrangement",
     isrc: "QZGWX2245189",
